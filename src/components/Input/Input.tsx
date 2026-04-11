@@ -5,7 +5,7 @@ import './Input.css'
 export type InputFieldStyle = 'outline' | 'fill'
 export type InputSize = 'sm' | 'md' | 'lg'
 
-export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size'> {
+export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'size' | 'prefix' | 'suffix'> {
   label?: string
   hint?: string
   error?: string
