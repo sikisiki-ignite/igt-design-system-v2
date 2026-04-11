@@ -1,0 +1,103 @@
+/* ============================================
+   IGT Table Component
+   ============================================ */
+
+.igt-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--table-border);
+  background-color: var(--table-bg);
+}
+
+.igt-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: var(--font-size-sm);
+}
+
+/* Head */
+.igt-table__head {
+  background-color: var(--table-header-bg);
+}
+
+.igt-table[data-sticky-header] .igt-table__head {
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+.igt-table__th {
+  padding: var(--spacing-3) var(--spacing-4);
+  font-weight: var(--font-weight-medium);
+  color: var(--table-header-text);
+  border-bottom: 1px solid var(--table-border);
+  white-space: nowrap;
+  user-select: none;
+}
+
+.igt-table__th--sortable {
+  cursor: pointer;
+}
+.igt-table__th--sortable:hover {
+  color: var(--table-sort-hover-text);
+}
+
+.igt-table__th-inner {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--spacing-1);
+}
+
+.igt-table__sort-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--table-sort-icon-color);
+}
+
+/* Body */
+.igt-table__td {
+  padding: var(--spacing-3) var(--spacing-4);
+  color: var(--table-cell-text);
+  border-bottom: 1px solid var(--table-row-border);
+  vertical-align: middle;
+}
+
+.igt-table__row:last-child .igt-table__td {
+  border-bottom: none;
+}
+
+.igt-table__row--striped {
+  background-color: var(--table-stripe-bg);
+}
+
+.igt-table__row--clickable {
+  cursor: pointer;
+}
+.igt-table__row--clickable:hover {
+  background-color: var(--table-row-hover-bg);
+}
+
+/* Loading */
+.igt-table__loading-cell {
+  padding: var(--spacing-8);
+  text-align: center;
+}
+
+.igt-table__spinner {
+  display: inline-block;
+  width: 24px;
+  height: 24px;
+  border: 2px solid var(--table-spinner-color);
+  border-top-color: transparent;
+  border-radius: 50%;
+  animation: igt-spin 0.6s linear infinite;
+}
+
+/* Empty */
+.igt-table__empty-cell {
+  padding: var(--spacing-8);
+  text-align: center;
+  color: var(--table-empty-text);
+  font-size: var(--font-size-sm);
+}

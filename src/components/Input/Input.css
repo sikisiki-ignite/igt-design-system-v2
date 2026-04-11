@@ -1,0 +1,133 @@
+/* ============================================
+   IGT Input / Field Component
+   ============================================ */
+
+.igt-field {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--spacing-1);
+}
+
+.igt-field[data-full-width] {
+  width: 100%;
+}
+
+/* Label */
+.igt-field__label {
+  font-size: var(--font-size-sm);
+  font-weight: var(--font-weight-medium);
+  line-height: var(--line-height-sm);
+  color: var(--field-label-color);
+}
+
+/* Wrapper */
+.igt-field__input-wrap {
+  display: flex;
+  align-items: center;
+  border-radius: var(--radius-md);
+  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
+  overflow: hidden;
+}
+
+/* ---- Outline style ---- */
+.igt-field[data-style='outline'] .igt-field__input-wrap {
+  background-color: var(--field-outline-bg);
+  border: 1px solid var(--field-outline-border);
+}
+.igt-field[data-style='outline'] .igt-field__input-wrap:focus-within {
+  border-color: var(--field-outline-focus-border);
+  box-shadow: 0 0 0 3px var(--field-outline-focus-ring);
+}
+.igt-field[data-style='outline'][data-state='error'] .igt-field__input-wrap {
+  border-color: var(--field-outline-error-border);
+}
+.igt-field[data-style='outline'][data-state='error'] .igt-field__input-wrap:focus-within {
+  box-shadow: 0 0 0 3px var(--field-outline-error-ring);
+}
+
+/* ---- Fill style ---- */
+.igt-field[data-style='fill'] .igt-field__input-wrap {
+  background-color: var(--field-fill-bg);
+  border: 1px solid transparent;
+  border-bottom-color: var(--field-fill-border-bottom);
+  border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+.igt-field[data-style='fill'] .igt-field__input-wrap:focus-within {
+  border-bottom-color: var(--field-fill-focus-border-bottom);
+}
+.igt-field[data-style='fill'][data-state='error'] .igt-field__input-wrap {
+  border-bottom-color: var(--field-fill-error-border-bottom);
+}
+
+/* ---- Disabled ---- */
+.igt-field[data-disabled] .igt-field__input-wrap {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+.igt-field[data-disabled] .igt-field__input {
+  cursor: not-allowed;
+}
+
+/* ---- Size ---- */
+.igt-field[data-size='sm'] .igt-field__input-wrap {
+  height: var(--comp-height-sm);
+  padding: 0 var(--comp-padding-sm);
+}
+.igt-field[data-size='md'] .igt-field__input-wrap {
+  height: var(--comp-height-md);
+  padding: 0 var(--comp-padding-md);
+}
+.igt-field[data-size='lg'] .igt-field__input-wrap {
+  height: var(--comp-height-lg);
+  padding: 0 var(--comp-padding-lg);
+}
+
+/* Input element */
+.igt-field__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--field-text-color);
+  font-size: var(--font-size-md);
+  font-family: inherit;
+  line-height: var(--line-height-md);
+}
+
+.igt-field[data-size='sm'] .igt-field__input {
+  font-size: var(--font-size-sm);
+}
+
+.igt-field__input::placeholder {
+  color: var(--field-placeholder-color);
+}
+
+/* Prefix / Suffix */
+.igt-field__prefix,
+.igt-field__suffix {
+  display: inline-flex;
+  align-items: center;
+  color: var(--field-adornment-color);
+  font-size: var(--comp-icon-md);
+  flex-shrink: 0;
+}
+.igt-field__prefix {
+  margin-right: var(--spacing-2);
+}
+.igt-field__suffix {
+  margin-left: var(--spacing-2);
+}
+
+/* Hint / Error */
+.igt-field__hint {
+  font-size: var(--font-size-sm);
+  color: var(--field-hint-color);
+  line-height: var(--line-height-sm);
+}
+
+.igt-field__error {
+  font-size: var(--font-size-sm);
+  color: var(--field-error-color);
+  line-height: var(--line-height-sm);
+}
