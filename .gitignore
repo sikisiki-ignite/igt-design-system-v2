@@ -2,3 +2,6 @@ node_modules
 dist
 .DS_Store
 *.local
+
+# Claude Code 로컬 설정 (토큰 포함 가능)
+.claude/settings.json
