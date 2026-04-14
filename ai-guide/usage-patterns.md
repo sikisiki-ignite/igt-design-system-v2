@@ -9,12 +9,41 @@
 ## 목차
 
 1. [검색 필터 바](#1-검색-필터-바)
+0. [페이지 배경 & 카드 섹션](#0-페이지-배경--카드-섹션)
 2. [데이터 테이블 페이지](#2-데이터-테이블-페이지)
 3. [편집 폼](#3-편집-폼)
 4. [확인 모달](#4-확인-모달)
 5. [알림 피드백](#5-알림-피드백)
 6. [로딩 상태](#6-로딩-상태)
 7. [사용자 정보 표시](#7-사용자-정보-표시)
+
+---
+
+## 0. 페이지 배경 & 카드 섹션
+
+**규칙**:
+- 콘텐츠 영역 기본 배경: `AppLayout`이 `--sys-background-base` 자동 적용
+- 카드/섹션 배경이 필요한 경우: `--sys-background-subtle`
+
+```tsx
+// 기본 페이지 — 배경 별도 지정 불필요 (AppLayout이 처리)
+<AppLayout topNav={...} sideNav={...}>
+  <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+    {/* 콘텐츠 */}
+  </div>
+</AppLayout>
+
+// 카드 섹션이 필요한 경우
+<div style={{
+  background: 'var(--sys-background-subtle)',
+  borderRadius: 'var(--radius-md)',
+  padding: '24px',
+}}>
+  {/* 카드 내용 */}
+</div>
+```
+
+**주의**: 콘텐츠 영역에 별도로 `background: var(--sys-background-base)` 지정 금지 — AppLayout이 이미 처리함.
 
 ---
 

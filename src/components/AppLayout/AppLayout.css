@@ -31,6 +31,6 @@
 .igt-app-layout__content {
   flex: 1;
   padding: 50px;
-  background-color: var(--sys-surface-subtle);
+  background-color: var(--sys-background-base);
   min-width: 0;
 }
