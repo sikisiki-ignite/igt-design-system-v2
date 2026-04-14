@@ -21,6 +21,7 @@ import { Icon } from '../src/components/Icon'
 import type { IconName } from '../src/components/Icon'
 import { ChoiceChip, ChoiceChipGroup, ChoiceChipGroupItem } from '../src/components/ChoiceChip'
 import { AppLayout } from '../src/components/AppLayout'
+import { SideNavigation, SideNavigationList, NavItem, NavSectionHeader } from '../src/components/SideNavigation'
 
 /* ---- 아이콘 ---- */
 const SearchIcon = () => (
@@ -98,6 +99,7 @@ const NAV_ITEMS = [
   { id: 'toast', label: 'Toast' },
   { id: 'tooltip', label: 'Tooltip' },
   { id: 'applayout', label: 'AppLayout' },
+  { id: 'sidenavigation', label: 'SideNavigation' },
 ]
 
 /* ---- Color Token Swatch ---- */
@@ -1292,6 +1294,67 @@ export default function App() {
             </AppLayout>
           </div>
           <p style={{ marginTop: 8, fontSize: 12, color: 'var(--sys-content-neutral-muted)' }}>* 우측 하단 드래그로 width 변경 가능</p>
+        </section>
+
+        {/* ── SideNavigation ─────────────────────────────────── */}
+        <section className="sc-section" id="sidenavigation">
+          <h2 className="sc-section__title">SideNavigation</h2>
+          <p className="sc-section__desc">사이드 네비게이션. tone(neutral/accent) × size(md/sm) × depth(1/2/3) 조합.</p>
+
+          {/* Tone × Size 그리드 */}
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, auto)', gap: 32, alignItems: 'start' }}>
+            {(['neutral', 'accent'] as const).map(tone =>
+              (['md', 'sm'] as const).map(size => (
+                <div key={`${tone}-${size}`}>
+                  <p style={{ marginBottom: 8, fontSize: 12, color: 'var(--sys-content-neutral-muted)' }}>
+                    tone={tone} / size={size}
+                  </p>
+                  <SideNavigation tone={tone} size={size} style={{ width: 200 }}>
+                    <NavSectionHeader>섹션 헤더</NavSectionHeader>
+                    <SideNavigationList>
+                      <li><NavItem tone={tone} size={size} depth={1} current as="button">현재 메뉴</NavItem></li>
+                      <li><NavItem tone={tone} size={size} depth={1} as="button">일반 메뉴</NavItem></li>
+                      <li><NavItem tone={tone} size={size} depth={2} as="button">하위 메뉴 1</NavItem></li>
+                      <li><NavItem tone={tone} size={size} depth={2} as="button">하위 메뉴 2</NavItem></li>
+                      <li><NavItem tone={tone} size={size} depth={3} as="button">3단계 메뉴</NavItem></li>
+                      <li><NavItem tone={tone} size={size} depth={1} disabled as="button">비활성 메뉴</NavItem></li>
+                    </SideNavigationList>
+                  </SideNavigation>
+                </div>
+              ))
+            )}
+          </div>
+
+          {/* 아이콘 포함 예시 */}
+          <div style={{ marginTop: 32 }}>
+            <p style={{ marginBottom: 8, fontSize: 12, color: 'var(--sys-content-neutral-muted)' }}>Leading Icon 포함</p>
+            <SideNavigation tone="neutral" size="md" style={{ width: 220 }}>
+              <NavSectionHeader>메뉴</NavSectionHeader>
+              <SideNavigationList>
+                <li>
+                  <NavItem tone="neutral" size="md" current as="button"
+                    leadingIcon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><rect x="2" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.5"/><rect x="9" y="2" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.5"/><rect x="2" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.5"/><rect x="9" y="9" width="5" height="5" rx="1" stroke="currentColor" strokeWidth="1.5"/></svg>}
+                  >대시보드</NavItem>
+                </li>
+                <li>
+                  <NavItem tone="neutral" size="md" as="button"
+                    leadingIcon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M8 2L10.5 5H13.5L11.5 7.5L12.5 11L8 9L3.5 11L4.5 7.5L2.5 5H5.5L8 2Z" stroke="currentColor" strokeWidth="1.5" strokeLinejoin="round"/></svg>}
+                  >회사 관리</NavItem>
+                </li>
+                <li>
+                  <NavItem tone="neutral" size="md" depth={2} as="button">계약 목록</NavItem>
+                </li>
+                <li>
+                  <NavItem tone="neutral" size="md" depth={2} as="button">계약 등록</NavItem>
+                </li>
+                <li>
+                  <NavItem tone="neutral" size="md" disabled as="button"
+                    leadingIcon={<svg width="16" height="16" viewBox="0 0 16 16" fill="none"><circle cx="8" cy="8" r="5.5" stroke="currentColor" strokeWidth="1.5"/><path d="M8 5v3l2 1.5" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round"/></svg>}
+                  >비활성 메뉴</NavItem>
+                </li>
+              </SideNavigationList>
+            </SideNavigation>
+          </div>
         </section>
 
       </main>

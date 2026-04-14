@@ -240,6 +240,58 @@ font-family: 'IGTSans', sans-serif;  /* 단일 폰트 사용 */
 
 ---
 
+## SideNavigation 컴포넌트 토큰
+
+| 토큰 | 용도 |
+|------|------|
+| `--nav-item-bg-hover` | NavItem hover 배경 |
+| `--nav-item-bg-pressed` | NavItem active/pressed 배경 |
+| `--nav-item-bg-current-neutral` | neutral tone 현재 메뉴 배경 |
+| `--nav-item-bg-current-accent` | accent tone 현재 메뉴 배경 (brand 파란색) |
+| `--nav-item-text-normal` | NavItem 기본 텍스트 |
+| `--nav-item-text-current-neutral` | neutral 현재 메뉴 텍스트 |
+| `--nav-item-text-current-accent` | accent 현재 메뉴 텍스트 (brand) |
+| `--nav-item-text-disabled` | 비활성 NavItem 텍스트 |
+| `--nav-section-header-text` | NavSectionHeader 텍스트 |
+
+---
+
+## Typography Scale
+
+> 텍스트 크기/굵기/줄높이는 아래 토큰 조합을 사용. `--ref-font-size-*` 대신 가능하면 scale 토큰 사용.
+
+| 토큰 그룹 | size | weight | line-height | 용도 |
+|-----------|------|--------|-------------|------|
+| `--text-display-sm-*` | 32px | 600 | 40px | 대형 디스플레이 |
+| `--text-display-md-*` | 40px | 700 | 52px | |
+| `--text-display-lg-*` | 48px | 700 | 56px | |
+| `--text-heading-sm-*` | 18px | 600 | 26px | 섹션 제목 |
+| `--text-heading-md-*` | 20px | 600 | 28px | 페이지 제목 |
+| `--text-heading-lg-*` | 24px | 600 | 34px | |
+| `--text-body-xs-*` | 14px | 400 | 20px | 본문 소 |
+| `--text-body-sm-*` | 15px | 400 | 22px | 본문 |
+| `--text-body-md-*` | 16px | 400 | 24px | 본문 기본 |
+| `--text-label-xs-*` | 12px | 500 | 16px | 라벨 소 |
+| `--text-label-sm-*` | 14px | 500 | 20px | 라벨 |
+| `--text-label-md-*` | 15px | 500 | 22px | 라벨 기본 |
+| `--text-caption-sm-*` | 11px | 400 | 16px | 캡션 소 |
+| `--text-caption-md-*` | 12px | 400 | 16px | 캡션 |
+
+```css
+/* 사용 예: 페이지 제목 */
+h1 {
+  font-size: var(--text-heading-md-size);
+  font-weight: var(--text-heading-md-weight);
+  line-height: var(--text-heading-md-line-height);
+}
+```
+
+| 토큰 | 값 |
+|------|----|
+| `--font-family-base` | `'IGTSans', -apple-system, BlinkMacSystemFont, sans-serif` |
+
+---
+
 ## Elevation (그림자)
 
 | 토큰 | 용도 |

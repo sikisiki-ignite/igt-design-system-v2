@@ -704,6 +704,27 @@
 }
 
 /* -----------------------------------------------------------------------------
+   Component Tokens — SideNavigation / NavItem
+   ----------------------------------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  /* NavItem 배경 */
+  --nav-item-bg-hover: var(--sys-container-neutral-tint-default);
+  --nav-item-bg-pressed: var(--sys-container-neutral-tint-strong);
+  --nav-item-bg-current-neutral: var(--sys-container-neutral-tint-default);
+  --nav-item-bg-current-accent: var(--sys-container-brand-tint-default);
+
+  /* NavItem 텍스트 */
+  --nav-item-text-normal: var(--sys-content-neutral-default);
+  --nav-item-text-current-neutral: var(--sys-content-neutral-strong);
+  --nav-item-text-current-accent: var(--sys-content-brand-strong);
+  --nav-item-text-disabled: var(--sys-content-neutral-disabled);
+
+  /* NavSectionHeader 텍스트 */
+  --nav-section-header-text: var(--sys-content-neutral-subtle);
+}
+
+/* -----------------------------------------------------------------------------
    Elevation / Shadow
    ----------------------------------------------------------------------------- */
 :root {

@@ -12,7 +12,7 @@
 |---------|---------|
 | 입력 | [Button](#button), [Input](#input), [Select](#select), [Checkbox](#checkbox), [Radio / RadioGroup](#radio--radiogroup), [Switch / SwitchField](#switch--switchfield) |
 | 표시 | [Badge](#badge), [CountBadge](#countbadge), [DotBadge](#dotbadge), [Label](#label), [Avatar](#avatar), [Icon](#icon) |
-| 레이아웃 | [Divider](#divider), [Skeleton](#skeleton) |
+| 레이아웃 | [Divider](#divider), [Skeleton](#skeleton), [SideNavigation](#sidenavigation) |
 | 오버레이 | [Modal](#modal), [Tooltip](#tooltip), [Toast / ToastContainer](#toast--toastcontainer), [Backdrop](#backdrop) |
 | 피드백 | [Alert](#alert), [Table](#table) |
 
@@ -666,5 +666,90 @@ const columns = [
 
 ---
 
+---
+
+## SideNavigation
+
+**언제 쓰나**: LNB(좌측 네비게이션 바). `AppLayout`의 `sideNav` 슬롯에 배치. `SideNavigation` → `SideNavigationList` → `NavItem` / `NavSectionHeader` 조합으로 구성.
+
+### SideNavigation Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `tone` | `'neutral' \| 'accent'` | `'neutral'` | NavItem active 색상 의미 |
+| `size` | `'md' \| 'sm'` | `'md'` | NavItem 크기 |
+| `as` | `'nav' \| 'div' \| 'aside'` | `'nav'` | 컨테이너 태그 |
+
+### SideNavigationList Props
+
+`<ul role="list">` 래퍼. `HTMLUListElement` 속성 모두 허용.
+
+### NavItem Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `as` | `'a' \| 'button'` | `'a'` | 렌더 태그 |
+| `tone` | `'neutral' \| 'accent'` | `'neutral'` | 색상 의미 |
+| `depth` | `1 \| 2 \| 3` | `1` | 들여쓰기 깊이 |
+| `size` | `'md' \| 'sm'` | `'md'` | 크기 |
+| `current` | `boolean` | `false` | 현재 선택 상태 |
+| `disabled` | `boolean` | `false` | 비활성화 |
+| `leadingIcon` | `ReactNode` | — | 앞 아이콘 |
+| `children` | `ReactNode` | — | **(필수)** 레이블 |
+
+### NavSectionHeader Props
+
+섹션 구분 레이블. `HTMLDivElement` 속성 모두 허용.
+
+### 사용 예시
+
+```tsx
+import {
+  SideNavigation,
+  SideNavigationList,
+  NavItem,
+  NavSectionHeader,
+} from 'igt-design-system'
+
+// 기본 (accent tone — 현재 메뉴를 brand 색으로 강조)
+<SideNavigation tone="accent">
+  <SideNavigationList>
+    <NavItem
+      as="button"
+      tone="accent"
+      current
+      leadingIcon={<Icon name="person" size="sm" />}
+      onClick={() => navigate('/users')}
+    >
+      사용자 관리
+    </NavItem>
+    <NavItem
+      as="button"
+      leadingIcon={<Icon name="setting" size="sm" />}
+      onClick={() => navigate('/settings')}
+    >
+      설정
+    </NavItem>
+  </SideNavigationList>
+</SideNavigation>
+
+// 섹션 헤더 포함
+<SideNavigation>
+  <SideNavigationList>
+    <NavSectionHeader>시스템</NavSectionHeader>
+    <NavItem as="button" current leadingIcon={<Icon name="chart_bar" size="sm" />}>대시보드</NavItem>
+    <NavItem as="button" leadingIcon={<Icon name="person" size="sm" />}>사용자 관리</NavItem>
+    <NavSectionHeader>설정</NavSectionHeader>
+    <NavItem as="button" leadingIcon={<Icon name="setting" size="sm" />}>일반 설정</NavItem>
+  </SideNavigationList>
+</SideNavigation>
+
+// depth 2 — 하위 메뉴
+<NavItem as="button" depth={2} leadingIcon={<Icon name="person" size="sm" />}>역할 관리</NavItem>
+```
+
+---
+
 > **업데이트 기록**
 > - 2026-04-14: 초기 작성 (18개 컴포넌트 — Button, Input, Select, Checkbox, Radio, RadioGroup, Switch, SwitchField, Badge, CountBadge, DotBadge, Label, Avatar, Icon, Divider, Skeleton, Modal, Tooltip, Toast, Backdrop, Alert, Table)
+> - 2026-04-14: SideNavigation 추가 (SideNavigation, SideNavigationList, NavItem, NavSectionHeader)

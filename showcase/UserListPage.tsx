@@ -14,6 +14,7 @@ import { Alert } from '../src/components/Alert'
 import { Divider } from '../src/components/Divider'
 import { RadioGroup, RadioGroupItem } from '../src/components/Checkbox/RadioGroup'
 import { CountBadge } from '../src/components/Badge'
+import { SideNavigation, SideNavigationList, NavItem, NavSectionHeader } from '../src/components/SideNavigation'
 
 /* ============================================================
    타입
@@ -87,15 +88,6 @@ function useToast() {
     setToasts((p) => p.filter((t) => t.id !== id))
   return { toasts, show, remove }
 }
-
-/* ============================================================
-   LNB 메뉴 (목)
-   ============================================================ */
-const LNB_MENUS = [
-  { id: 'dashboard', label: '대시보드', icon: 'chart_bar' },
-  { id: 'users', label: '사용자 관리', icon: 'person', active: true },
-  { id: 'settings', label: '설정', icon: 'setting' },
-]
 
 /* ============================================================
    메인
@@ -304,40 +296,36 @@ export function UserListPage({ onBack }: UserListPageProps) {
 
   /* ---- Side Nav (LNB) ---- */
   const sideNav = (
-    <div style={{
-      display: 'flex',
-      flexDirection: 'column',
-      height: '100%',
-    }}>
-      {/* 메뉴 */}
-      <nav style={{ padding: '16px 8px', display: 'flex', flexDirection: 'column', gap: 2 }}>
-        {LNB_MENUS.map((menu) => (
-          <div
-            key={menu.id}
-            style={{
-              display: 'flex',
-              alignItems: 'center',
-              gap: 10,
-              padding: '10px 12px',
-              borderRadius: 'var(--radius-md)',
-              cursor: 'pointer',
-              background: menu.active ? 'var(--sys-container-brand-tint-default)' : 'transparent',
-              color: menu.active ? 'var(--sys-content-brand-default)' : 'var(--sys-content-neutral-default)',
-              fontWeight: menu.active ? 'var(--ref-font-weight-600)' : 'var(--ref-font-weight-400)',
-              fontSize: 'var(--ref-font-size-14)',
-            }}
+    <div style={{ display: 'flex', flexDirection: 'column', height: '100%', padding: '8px' }}>
+      <SideNavigation tone="accent" style={{ flex: 1 }}>
+        <SideNavigationList>
+          <NavItem
+            as="button"
+            tone="accent"
+            leadingIcon={<Icon name="chart_bar" size="sm" />}
           >
-            <Icon name={menu.icon as any} size="sm" />
-            {menu.label}
-          </div>
-        ))}
-      </nav>
+            대시보드
+          </NavItem>
+          <NavItem
+            as="button"
+            tone="accent"
+            current
+            leadingIcon={<Icon name="person" size="sm" />}
+          >
+            사용자 관리
+          </NavItem>
+          <NavItem
+            as="button"
+            tone="accent"
+            leadingIcon={<Icon name="setting" size="sm" />}
+          >
+            설정
+          </NavItem>
+        </SideNavigationList>
+      </SideNavigation>
 
-      <div style={{ flex: 1 }} />
-
-      {/* 하단 사용자 정보 */}
       <Divider />
-      <div style={{ padding: '16px 12px', display: 'flex', alignItems: 'center', gap: 10 }}>
+      <div style={{ padding: '12px 4px', display: 'flex', alignItems: 'center', gap: 10 }}>
         <Avatar fallback="관" size="sm" status="online" />
         <div>
           <div style={{ fontSize: 'var(--ref-font-size-13)', fontWeight: 'var(--ref-font-weight-500)', color: 'var(--sys-content-neutral-strong)' }}>

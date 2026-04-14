@@ -1,0 +1,169 @@
+/* ============================================================
+   IGT SideNavigation Component
+   피그마: 3 SideNavigation (234:50226)
+   NavItem × NavSectionHeader 조합
+   ============================================================ */
+
+/* ── SideNavigation (컨테이너) ────────────────────────────── */
+.igt-side-nav {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  width: 220px;
+}
+
+.igt-side-nav__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-4);
+}
+
+/* ── NavSectionHeader ─────────────────────────────────────── */
+.igt-nav-section-header {
+  display: flex;
+  align-items: flex-start;
+  overflow: hidden;
+  color: var(--nav-section-header-text);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* md size */
+.igt-side-nav[data-size='md'] .igt-nav-section-header {
+  padding: var(--ref-space-24) var(--ref-space-14) var(--ref-space-12);
+  font-size: var(--text-body-xs-size);  /* 14px */
+  font-weight: var(--ref-font-weight-400);
+  line-height: var(--text-body-xs-line-height);
+}
+
+/* sm size */
+.igt-side-nav[data-size='sm'] .igt-nav-section-header {
+  padding: var(--ref-space-16) var(--ref-space-10) var(--ref-space-8);
+  font-size: var(--text-caption-md-size);  /* 12px */
+  font-weight: var(--ref-font-weight-400);
+  line-height: var(--text-caption-md-line-height);
+}
+
+/* ── NavItem ──────────────────────────────────────────────── */
+.igt-nav-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  text-decoration: none;
+  color: var(--nav-item-text-normal);
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-600);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  transition: background-color 0.12s ease, color 0.12s ease;
+  border-radius: var(--ref-radius-8);
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+  user-select: none;
+  flex-shrink: 0;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+.igt-nav-item[data-size='md'] {
+  height: var(--size-comp-height-md);   /* 36px */
+  padding: var(--ref-space-8) var(--ref-space-12);
+  gap: var(--ref-space-6);
+  border-radius: var(--ref-radius-8);
+  font-size: var(--text-label-md-size);   /* 15px */
+  line-height: var(--text-label-md-line-height);
+}
+
+.igt-nav-item[data-size='sm'] {
+  height: var(--size-comp-height-sm);   /* 32px */
+  padding: var(--ref-space-6) var(--ref-space-8);
+  gap: var(--ref-space-4);
+  border-radius: var(--ref-radius-6);
+  font-size: var(--text-label-sm-size);   /* 14px */
+  line-height: var(--text-label-sm-line-height);
+}
+
+/* ── Depth 들여쓰기 (md) ───────────────────────────────────── */
+.igt-nav-item[data-size='md'][data-depth='2'] {
+  padding-left: calc(var(--ref-space-12) + var(--ref-space-16));
+}
+.igt-nav-item[data-size='md'][data-depth='3'] {
+  padding-left: calc(var(--ref-space-12) + var(--ref-space-16) * 2);
+}
+
+/* ── Depth 들여쓰기 (sm) ───────────────────────────────────── */
+.igt-nav-item[data-size='sm'][data-depth='2'] {
+  padding-left: calc(var(--ref-space-8) + var(--ref-space-16));
+}
+.igt-nav-item[data-size='sm'][data-depth='3'] {
+  padding-left: calc(var(--ref-space-8) + var(--ref-space-16) * 2);
+}
+
+/* ── Icon slot ────────────────────────────────────────────── */
+.igt-nav-item__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.igt-nav-item[data-size='md'] .igt-nav-item__icon {
+  width: var(--size-icon-sm);   /* 16px */
+  height: var(--size-icon-sm);
+}
+
+.igt-nav-item[data-size='sm'] .igt-nav-item__icon {
+  width: var(--size-icon-sm);   /* 16px */
+  height: var(--size-icon-sm);
+}
+
+/* ── Label ────────────────────────────────────────────────── */
+.igt-nav-item__label {
+  flex: 1 0 0;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding-inline: var(--ref-space-2);
+}
+
+/* ── States — neutral tone ────────────────────────────────── */
+.igt-nav-item[data-tone='neutral']:hover:not([data-disabled]):not([data-current]) {
+  background-color: var(--nav-item-bg-hover);
+}
+.igt-nav-item[data-tone='neutral']:active:not([data-disabled]):not([data-current]) {
+  background-color: var(--nav-item-bg-pressed);
+}
+.igt-nav-item[data-tone='neutral'][data-current] {
+  background-color: var(--nav-item-bg-current-neutral);
+  color: var(--nav-item-text-current-neutral);
+}
+
+/* ── States — accent tone ─────────────────────────────────── */
+.igt-nav-item[data-tone='accent']:hover:not([data-disabled]):not([data-current]) {
+  background-color: var(--nav-item-bg-hover);
+}
+.igt-nav-item[data-tone='accent']:active:not([data-disabled]):not([data-current]) {
+  background-color: var(--nav-item-bg-pressed);
+}
+.igt-nav-item[data-tone='accent'][data-current] {
+  background-color: var(--nav-item-bg-current-accent);
+  color: var(--nav-item-text-current-accent);
+}
+
+/* ── Disabled ─────────────────────────────────────────────── */
+.igt-nav-item[data-disabled] {
+  color: var(--nav-item-text-disabled);
+  cursor: not-allowed;
+  pointer-events: none;
+}
+
+/* ── Focus ────────────────────────────────────────────────── */
+.igt-nav-item:focus-visible {
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--sys-border-brand-default);
+}
