@@ -303,5 +303,63 @@
 
 ---
 
+## 9. 콘텐츠 영역 너비 임의 제한
+
+### ❌ 금지
+
+```tsx
+// 콘텐츠 wrapper에 maxWidth 지정
+<div style={{ maxWidth: 1100 }}>
+  <Table ... />
+</div>
+
+// 콘텐츠 wrapper에 고정 width 지정
+<div style={{ width: 900 }}>
+  ...
+</div>
+```
+
+### ✅ 올바른 방법
+
+```tsx
+// AppLayout의 content 영역(flex: 1)이 가변으로 채워지도록 wrapper 없이 사용
+<div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+  <Table ... />
+</div>
+```
+
+**규칙**:
+- 최소 지원 해상도: **1600px** — AppLayout `min-width: 1600px`으로 보장
+- 콘텐츠 영역은 `flex: 1`로 가변. 임의로 `maxWidth` / `width` 제한 금지
+- 콘텐츠가 넓게 보여야 하는 것이 기본값 (테이블, 폼 등 모두 전체 폭 사용)
+
+---
+
+## 10. 컴포넌트에 정의되지 않은 스타일 임의 추가
+
+### ❌ 금지
+
+```tsx
+// AppLayout top-nav에 border 없는데 임의로 추가
+<div style={{ borderBottom: '1px solid var(--sys-border-neutral-default)' }}>
+  {/* top nav 내용 */}
+</div>
+
+// LNB에 box-shadow 없는데 임의로 추가
+<div style={{ boxShadow: '2px 0 8px rgba(0,0,0,0.1)' }}>
+  {/* side nav 내용 */}
+</div>
+```
+
+### ✅ 올바른 방법
+
+- AppLayout의 `topNav`, `sideNav` 슬롯에는 **배경색과 내용만** 채운다
+- border, shadow 등 구조적 스타일은 AppLayout 컴포넌트 자체에서 정의
+- 디자인에 없는 스타일은 Figma 확인 후 컴포넌트에 반영 또는 사용자에게 확인
+
+---
+
 > **업데이트 기록**
 > - 2026-04-14: 초기 작성 (토큰, 재사용, 클래스, 컴포넌트 선택, 에러 처리, 로딩, 버튼, 접근성)
+> - 2026-04-14: #9 콘텐츠 영역 너비 제한 금지 추가 (검증 중 발견)
+> - 2026-04-14: #10 컴포넌트 미정의 스타일 임의 추가 금지 추가 (검증 중 발견)

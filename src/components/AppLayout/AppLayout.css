@@ -13,6 +13,7 @@
   width: 100%;
   height: 56px;
   flex-shrink: 0;
+  box-shadow: var(--elevation-subtle);
 }
 
 .igt-app-layout__body {

@@ -240,6 +240,17 @@ font-family: 'IGTSans', sans-serif;  /* 단일 폰트 사용 */
 
 ---
 
+## Elevation (그림자)
+
+| 토큰 | 용도 |
+|------|------|
+| `--elevation-subtle` | 카드, 상단 네비게이션 등 약한 그림자 |
+| `--elevation-floating` | 드롭다운, 팝오버 등 부유 요소 |
+| `--elevation-popover` | 툴팁, 컨텍스트 메뉴 |
+| `--elevation-dialog` | 모달, 대화상자 |
+
+---
+
 ## 사용 예시
 
 ```css

@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import { UserListPage } from './UserListPage'
 import { Button } from '../src/components/Button'
 import { Input } from '../src/components/Input'
 import { Select } from '../src/components/Select'
@@ -122,6 +123,18 @@ const SwatchRow = ({ tokens }: { tokens: Array<{ token: string; label?: string }
 )
 
 export default function App() {
+  // hash 기반 라우팅 — #userlist 이면 전체 화면 페이지
+  const [hash, setHash] = useState(window.location.hash)
+  React.useEffect(() => {
+    const onHash = () => setHash(window.location.hash)
+    window.addEventListener('hashchange', onHash)
+    return () => window.removeEventListener('hashchange', onHash)
+  }, [])
+
+  if (hash === '#userlist') {
+    return <UserListPage onBack={() => { window.location.hash = ''; setHash('') }} />
+  }
+
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [modalOpen, setModalOpen] = useState(false)
   const [toasts, setToasts] = useState<{ id: number; type: 'success' | 'error' | 'warning' | 'info'; message: string }[]>([])
@@ -198,6 +211,13 @@ export default function App() {
       <aside className="sc-sidebar">
         <div className="sc-sidebar__logo">IGT <span>DS</span> v2</div>
         <nav className="sc-sidebar__nav">
+          <a
+            href="#userlist"
+            className="sc-sidebar__link"
+            style={{ color: 'var(--sys-content-brand-default)', fontWeight: 'var(--ref-font-weight-600)', marginBottom: 8 }}
+          >
+            🧪 사용자 목록 검증
+          </a>
           {NAV_ITEMS.map((item) => (
             <a
               key={item.id}
