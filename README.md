@@ -1,13 +1,30 @@
 # IGT Design System v2
 
-Back office 서비스 전용 React 컴포넌트 라이브러리.
+IGT 백오피스 전용 React 컴포넌트 라이브러리.
 Figma 디자인 토큰을 CSS Variables로 직접 반영하여 일관된 UI를 보장합니다.
+
+---
 
 ## 설치
 
+### 1. 패키지 설치
+
 ```bash
-npm install igt-design-system
+npm install github:sikisiki-ignite/igt-design-system-v2
 ```
+
+> 설치 시 자동으로 빌드가 실행됩니다. 1~2분 소요될 수 있습니다.
+
+### 2. Claude Code AI 스킬 설치
+
+```bash
+npx igt-init
+```
+
+실행하면 현재 프로젝트의 `.claude/skills/backoffice-dev.md` 가 설치됩니다.
+설치 후 Claude Code에서 `/backoffice-dev` 로 호출하면 IGT 컴포넌트 규칙이 자동 적용됩니다.
+
+---
 
 ## 시작하기
 
@@ -45,47 +62,65 @@ export default function UserListPage() {
 
 ---
 
-## 컴포넌트
+## 컴포넌트 목록
 
 | 컴포넌트 | 설명 | 주요 props |
 |---------|------|-----------|
-| `Button` | 액션 버튼 | `variant`, `buttonStyle`, `size`, `loading`, `iconLeft`, `iconRight` |
-| `Input` | 텍스트 입력 필드 | `label`, `error`, `hint`, `prefix`, `suffix`, `fieldStyle` |
-| `Select` | 드롭다운 선택 | `options`, `label`, `error`, `placeholder`, `fieldStyle` |
-| `Checkbox` | 체크박스 (indeterminate 지원) | `label`, `error`, `indeterminate` |
-| `Radio` | 라디오 버튼 | `label`, `error` |
-| `Badge` | 상태 표시 뱃지 | `variant`, `badgeStyle`, `size`, `dot` |
-| `Table` | 데이터 테이블 | `columns`, `data`, `sortKey`, `onSort`, `loading`, `striped` |
-| `Modal` | 다이얼로그 모달 | `open`, `onClose`, `title`, `footer`, `size` |
-| `Toast` | 알림 메시지 | `type`, `title`, `message`, `duration`, `onClose` |
+| `Button` | 액션 버튼 | `tone`, `variant`, `size`, `loading`, `leadingIcon`, `trailingIcon`, `iconOnly` |
+| `Input` | 텍스트 입력 필드 | `label`, `error`, `hint`, `prefix`, `suffix`, `fieldStyle`, `size` |
+| `Select` | 드롭다운 선택 | `options`, `label`, `error`, `placeholder`, `fieldStyle`, `size` |
+| `Checkbox` | 체크박스 | `label`, `error`, `indeterminate`, `size` |
+| `Radio` | 라디오 버튼 | `label`, `description`, `error`, `size` |
+| `RadioGroup` | 라디오 그룹 | `label`, `value`, `onChange`, `size` |
+| `RadioGroupItem` | RadioGroup 항목 | `value`, `label`, `description` |
+| `Switch` | 토글 스위치 | `label`, `description`, `size` |
+| `SwitchField` | label 필수 스위치 | `label`, `description`, `size` |
+| `Badge` | 상태 텍스트 칩 | `variant`, `badgeStyle`, `size`, `dot` |
+| `CountBadge` | 숫자 카운트 뱃지 | `count`, `max`, `tone`, `size` |
+| `DotBadge` | 상태 점 뱃지 | `tone`, `size`, `aria-label` |
+| `Label` | 색상 강조 태그 | `color`, `tone`, `size`, `icon` |
+| `Avatar` | 프로필 이미지 | `src`, `fallback`, `size`, `shape`, `status` |
+| `Icon` | SVG 아이콘 | `name`, `variant`, `size`, `label` |
+| `Divider` | 구분선 | `orientation`, `tone`, `emphasis`, `lineStyle` |
+| `SkeletonText` | 텍스트 로딩 자리 | `size`, `width` |
+| `SkeletonRect` | 사각형 로딩 자리 | `size`, `radius`, `width`, `height` |
+| `SkeletonCircle` | 원형 로딩 자리 | `size` |
+| `Table` | 데이터 테이블 | `columns`, `data`, `loading`, `striped`, `onSort`, `onRowClick` |
+| `Modal` | 대화상자 | `open`, `onClose`, `title`, `footer`, `size` |
+| `Tooltip` | 툴팁 | `content`, `placement`, `delay`, `disabled` |
+| `Toast` | 일시적 알림 | `type`, `title`, `message`, `duration`, `onClose` |
 | `ToastContainer` | Toast 위치 컨테이너 | `position` |
-| `Tooltip` | 툴팁 | `content`, `placement`, `delay` |
+| `Alert` | 고정 알림 배너 | `type`, `title`, `description`, `dismissible`, `onDismiss` |
+| `Backdrop` | 배경 오버레이 | `tone`, `strength`, `visible` |
 
 ---
 
-## Button
+## 주요 컴포넌트 사용법
+
+### Button
 
 ```tsx
-// variant: 'primary' | 'secondary' | 'danger'
-// buttonStyle: 'fill' | 'soft' | 'outline' | 'ghost'
-// size: 'sm' | 'md' | 'lg'
+// tone: 'primary' | 'secondary' | 'danger'
+// variant: 'fill' | 'soft' | 'outline' | 'ghost'
+// size: 'xs' | 'sm' | 'md' | 'lg'
 
 <Button>저장</Button>
-<Button variant="secondary" buttonStyle="outline">취소</Button>
-<Button variant="danger" buttonStyle="soft" size="sm">삭제</Button>
+<Button tone="secondary" variant="outline">취소</Button>
+<Button tone="danger">삭제</Button>
 <Button loading>처리 중</Button>
-<Button iconLeft={<SearchIcon />}>검색</Button>
+<Button leadingIcon={<Icon name="plus" size="sm" />}>추가</Button>
+<Button iconOnly leadingIcon={<Icon name="search" size="sm" />} aria-label="검색" />
 ```
 
-## Input
+### Input
 
 ```tsx
 <Input label="이름" placeholder="이름을 입력하세요" />
 <Input label="이메일" type="email" error="올바른 이메일 형식이 아닙니다" />
-<Input label="검색" prefix={<SearchIcon />} hint="키워드로 검색하세요" fullWidth />
+<Input prefix={<Icon name="search" size="sm" />} placeholder="검색" fullWidth />
 ```
 
-## Select
+### Select
 
 ```tsx
 const options = [
@@ -94,19 +129,31 @@ const options = [
 ]
 
 <Select label="상태" options={options} placeholder="선택하세요" />
+<Select label="상태" options={options} value={status} onChange={(e) => setStatus(e.target.value)} error={errors.status} />
 ```
 
-## Badge
+### RadioGroup
+
+```tsx
+<RadioGroup label="결제 방법" value={payment} onChange={setPayment}>
+  <RadioGroupItem value="card" label="신용카드" />
+  <RadioGroupItem value="transfer" label="계좌이체" description="영업일 기준 1-3일 소요" />
+  <RadioGroupItem value="vbank" label="가상계좌" disabled />
+</RadioGroup>
+```
+
+### Badge
 
 ```tsx
 // variant: 'neutral' | 'info' | 'success' | 'warning' | 'danger'
+// badgeStyle: 'fill' | 'soft' | 'outline'
 
 <Badge variant="success">활성</Badge>
-<Badge variant="danger" badgeStyle="soft">비활성</Badge>
-<Badge variant="warning" dot>점검 중</Badge>
+<Badge variant="danger" badgeStyle="fill">긴급</Badge>
+<Badge variant="warning" dot>주의</Badge>
 ```
 
-## Table
+### Table
 
 ```tsx
 const columns = [
@@ -114,13 +161,25 @@ const columns = [
   {
     key: 'status',
     header: '상태',
-    render: (row) => <Badge variant={row.status === 'active' ? 'success' : 'danger'}>{row.statusLabel}</Badge>
+    render: (row) => (
+      <Badge variant={row.status === 'active' ? 'success' : 'danger'}>
+        {row.statusLabel}
+      </Badge>
+    ),
   },
   {
     key: 'actions',
     header: '',
-    width: 100,
-    render: (row) => <Button size="sm" buttonStyle="ghost" variant="secondary">상세보기</Button>
+    align: 'right',
+    render: (row) => (
+      <Tooltip content="수정">
+        <Button
+          tone="secondary" variant="ghost" size="sm"
+          iconOnly leadingIcon={<Icon name="edit" size="sm" />}
+          onClick={() => handleEdit(row)}
+        />
+      </Tooltip>
+    ),
   },
 ]
 
@@ -128,74 +187,55 @@ const columns = [
   columns={columns}
   data={users}
   rowKey="id"
+  loading={isLoading}
+  striped
   sortKey={sortKey}
   sortDirection={sortDir}
   onSort={handleSort}
-  loading={isLoading}
   emptyText="등록된 사용자가 없습니다."
-  striped
+  onRowClick={(row) => navigate(`/users/${row.id}`)}
 />
 ```
 
-## Modal
+### Modal
 
 ```tsx
-const [open, setOpen] = useState(false)
-
 <Modal
   open={open}
   onClose={() => setOpen(false)}
   title="사용자 수정"
+  size="md"
   footer={
-    <>
-      <Button variant="secondary" buttonStyle="outline" onClick={() => setOpen(false)}>취소</Button>
+    <div style={{ display: 'flex', gap: '8px', justifyContent: 'flex-end' }}>
+      <Button tone="secondary" variant="outline" onClick={() => setOpen(false)}>취소</Button>
       <Button onClick={handleSave}>저장</Button>
-    </>
+    </div>
   }
 >
   <Input label="이름" fullWidth />
 </Modal>
 ```
 
-## Toast
+### Toast
 
 ```tsx
 // App.tsx 최상위에 ToastContainer 배치
+// position: 'top-right' | 'top-left' | 'top-center' | 'bottom-right' | 'bottom-left' | 'bottom-center'
+
 <ToastContainer position="top-right">
   {toasts.map((t) => (
-    <Toast key={t.id} type={t.type} message={t.message} onClose={() => remove(t.id)} />
+    <Toast key={t.id} type={t.type} title={t.title} message={t.message} onClose={() => remove(t.id)} />
   ))}
 </ToastContainer>
 ```
 
----
+### Alert
 
-## Claude Code 스킬 연동
+```tsx
+// type: 'neutral' | 'info' | 'success' | 'warning' | 'danger'
 
-이 라이브러리는 Claude Code 스킬과 함께 사용하도록 설계되었습니다.
-
-### 스킬 파일 위치
-
-```
-.claude/skills/
-├── module-design.md    # 컴포넌트 API 레퍼런스 (디자인팀 참조용)
-└── spec-template.md    # 모듈 스펙 작성 템플릿 (기획팀 + 디자인팀 협업용)
-```
-
-### 워크플로우
-
-```
-Step 1 — 기획팀
-spec-template.md를 복사하여 [module]-spec.md 작성
-(화면 구성, 기능 정의, 데이터 스펙)
-
-Step 2 — 디자인팀
-같은 파일에 DS 스펙 추가
-module-design.md 참조하여 컴포넌트·variant·토큰 명시
-
-Step 3 — AI 구현
-완성된 [module]-spec.md 스킬 하나로
-IGT Design System이 일관되게 적용된 UI 생성
+<Alert type="warning" title="주의" description="저장하지 않은 변경사항이 있습니다." />
+<Alert type="danger" title="오류" description="서버와 연결할 수 없습니다." dismissible onDismiss={() => setShow(false)} />
 ```
 
 ---
@@ -205,11 +245,23 @@ IGT Design System이 일관되게 적용된 UI 생성
 ```
 Figma Primitive Tokens  →  --ref-blue-500, --ref-grey-100 ...
          ↓
-Figma Semantic Tokens   →  --sys-color-primary, --sys-bg-surface ...
+Figma Semantic Tokens   →  --sys-content-neutral-strong, --sys-surface-subtle ...
          ↓
 Component Tokens        →  --btn-primary-fill-bg, --field-outline-border ...
          ↓
-컴포넌트 CSS            →  .igt-btn[data-variant='primary'] { background: var(--btn-primary-fill-bg) }
+컴포넌트 CSS            →  .igt-btn[data-tone='primary'] { background: var(--btn-primary-fill-bg) }
+```
+
+컴포넌트 외부에서 스타일 지정 시 `--sys-*` 토큰 사용:
+
+```tsx
+// ✅
+style={{ color: 'var(--sys-content-neutral-strong)' }}
+style={{ background: 'var(--sys-surface-subtle)' }}
+
+// ❌
+style={{ color: '#191f28' }}
+style={{ background: '#f2f4f6' }}
 ```
 
 ---
@@ -225,6 +277,7 @@ npm run dev
 ```
 
 빌드 결과물:
+
 ```
 dist/
 ├── index.js          # ESM
@@ -232,4 +285,28 @@ dist/
 ├── index.d.ts        # TypeScript 타입
 └── styles/
     └── globals.css   # CSS Variables
+```
+
+---
+
+## AI 바이브 코딩
+
+이 라이브러리는 Claude Code와 함께 사용하도록 설계되었습니다.
+
+### 스킬
+
+```
+~/.claude/skills/backoffice-dev.md   ← 백오피스 화면 구현 전용 스킬
+```
+
+`/backoffice-dev` 스킬을 호출하면 이 라이브러리의 컴포넌트와 토큰 규칙을 자동 적용하여 백오피스 화면을 구현합니다.
+
+### AI 가이드 문서
+
+```
+ai-guide/
+├── design-tokens.md       ← 사용 가능한 색상/폰트/간격 토큰
+├── component-catalog.md   ← 전체 컴포넌트 props & 예시
+├── usage-patterns.md      ← 검색/테이블/폼/모달 등 조합 패턴
+└── anti-patterns.md       ← 하면 안 되는 패턴
 ```
