@@ -1,0 +1,61 @@
+/* ============================================================
+   IGT Divider Component
+   피그마: 7 Divider
+   orientation(horizontal/vertical) × tone × style × inset
+   ============================================================ */
+
+.igt-divider {
+  flex-shrink: 0;
+}
+
+/* ── Horizontal ───────────────────────────────────────────── */
+.igt-divider--horizontal {
+  display: block;
+  width: 100%;
+  height: 1px;
+  border: none;
+  background: transparent;
+  border-top-style: solid;
+  border-top-width: 1px;
+}
+
+/* Inset (horizontal → inline padding) */
+.igt-divider--horizontal[data-inset='sm']  { margin-left: var(--ref-space-8);  margin-right: var(--ref-space-8); }
+.igt-divider--horizontal[data-inset='md']  { margin-left: var(--ref-space-16); margin-right: var(--ref-space-16); }
+.igt-divider--horizontal[data-inset='lg']  { margin-left: var(--ref-space-24); margin-right: var(--ref-space-24); }
+
+/* ── Vertical ─────────────────────────────────────────────── */
+.igt-divider--vertical {
+  display: inline-block;
+  width: 1px;
+  height: 100%;
+  align-self: stretch;
+  border: none;
+  background: transparent;
+  border-left-style: solid;
+  border-left-width: 1px;
+}
+
+.igt-divider--vertical[data-inset='sm']  { margin-top: var(--ref-space-8);  margin-bottom: var(--ref-space-8); }
+.igt-divider--vertical[data-inset='md']  { margin-top: var(--ref-space-16); margin-bottom: var(--ref-space-16); }
+.igt-divider--vertical[data-inset='lg']  { margin-top: var(--ref-space-24); margin-bottom: var(--ref-space-24); }
+
+/* ── Dashed style ─────────────────────────────────────────── */
+.igt-divider--horizontal[data-style='dashed'] { border-top-style: dashed; }
+.igt-divider--vertical[data-style='dashed']   { border-left-style: dashed; }
+
+/* ── Tone × Emphasis color ────────────────────────────────── */
+/* neutral */
+.igt-divider[data-tone='neutral'][data-emphasis='weak']    { border-color: var(--sys-border-neutral-weak); }
+.igt-divider[data-tone='neutral'][data-emphasis='default'] { border-color: var(--sys-border-neutral-subtle); }
+.igt-divider[data-tone='neutral'][data-emphasis='strong']  { border-color: var(--sys-border-neutral-default); }
+
+/* accent (brand) */
+.igt-divider[data-tone='accent'][data-emphasis='weak']    { border-color: var(--sys-border-brand-subtle); }
+.igt-divider[data-tone='accent'][data-emphasis='default'] { border-color: var(--sys-border-brand-default); }
+.igt-divider[data-tone='accent'][data-emphasis='strong']  { border-color: var(--sys-border-brand-strong); }
+
+/* danger */
+.igt-divider[data-tone='danger'][data-emphasis='weak']    { border-color: var(--sys-border-danger-subtle); }
+.igt-divider[data-tone='danger'][data-emphasis='default'] { border-color: var(--sys-border-danger-default); }
+.igt-divider[data-tone='danger'][data-emphasis='strong']  { border-color: var(--sys-border-danger-strong); }

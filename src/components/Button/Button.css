@@ -1,240 +1,92 @@
-/* ============================================
+/* ============================================================
    IGT Button Component
-   ============================================ */
+   피그마: 1 Button (200:3668)
+   tone × variant × size × state 조합
+   ============================================================ */
 
 .igt-btn {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--spacing-2);
+  gap: 0;
   border: 1px solid transparent;
-  border-radius: var(--radius-md);
   font-family: inherit;
-  font-weight: var(--font-weight-medium);
+  font-weight: var(--ref-font-weight-600); /* 피그마: semibold */
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
-  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease, box-shadow 0.12s ease;
   position: relative;
   outline: none;
   user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
 }
 
 .igt-btn[data-full-width] {
   width: 100%;
 }
 
-/* --- Size --- */
+/* ── Size ──────────────────────────────────────────────────── */
+/* xs: h=24, px=8, icon=12, font=12, radius=6 */
+.igt-btn[data-size='xs'] {
+  height: var(--size-comp-height-xs);    /* 24px */
+  padding: 0 var(--size-comp-padding-xs); /* 0 8px */
+  font-size: var(--text-label-xs-size);
+  line-height: var(--text-label-xs-line-height);
+  border-radius: var(--radius-sm);        /* 6px */
+  gap: var(--ref-space-4);
+}
+
+/* sm: h=32, px=12, icon=16, font=13, radius=8 */
 .igt-btn[data-size='sm'] {
-  height: var(--comp-height-sm);
-  padding: 0 var(--comp-padding-sm);
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  height: var(--size-comp-height-sm);    /* 32px */
+  padding: 0 var(--size-comp-padding-sm); /* 0 12px */
+  font-size: var(--text-label-sm-size);
+  line-height: var(--text-label-sm-line-height);
+  border-radius: var(--radius-md);        /* 8px */
+  gap: var(--ref-space-4);
 }
 
+/* md: h=36, px=16, icon=16, font=15, radius=10 */
 .igt-btn[data-size='md'] {
-  height: var(--comp-height-md);
-  padding: 0 var(--comp-padding-md);
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-md);
+  height: var(--size-comp-height-md);    /* 36px */
+  padding: 0 var(--size-comp-padding-md); /* 0 16px */
+  font-size: var(--text-label-md-size);
+  line-height: var(--text-label-md-line-height);
+  border-radius: var(--radius-lg);        /* 10px */
+  gap: var(--ref-space-4);
 }
 
+/* lg: h=40, px=20, icon=16, font=15, radius=10 */
 .igt-btn[data-size='lg'] {
-  height: var(--comp-height-lg);
-  padding: 0 var(--comp-padding-lg);
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-md);
+  height: var(--size-comp-height-lg);    /* 40px */
+  padding: 0 var(--size-comp-padding-lg); /* 0 20px */
+  font-size: var(--text-label-md-size);
+  line-height: var(--text-label-md-line-height);
+  border-radius: var(--radius-lg);        /* 10px */
+  gap: var(--ref-space-4);
 }
 
-/* ============================================
-   PRIMARY FILL (default)
-   ============================================ */
-.igt-btn[data-variant='primary'][data-style='fill'] {
-  background-color: var(--btn-primary-fill-bg);
-  color: var(--btn-primary-fill-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='primary'][data-style='fill']:hover:not(:disabled) {
-  background-color: var(--btn-primary-fill-hover-bg);
-}
-.igt-btn[data-variant='primary'][data-style='fill']:active:not(:disabled) {
-  background-color: var(--btn-primary-fill-active-bg);
-}
-.igt-btn[data-variant='primary'][data-style='fill']:focus-visible {
-  box-shadow: 0 0 0 3px var(--btn-primary-fill-focus-ring);
+/* icon-only: padding 균등 적용 */
+.igt-btn[data-icon-only][data-size='xs'] { padding: 0; width: var(--size-comp-height-xs); }
+.igt-btn[data-icon-only][data-size='sm'] { padding: 0; width: var(--size-comp-height-sm); }
+.igt-btn[data-icon-only][data-size='md'] { padding: 0; width: var(--size-comp-height-md); }
+.igt-btn[data-icon-only][data-size='lg'] { padding: 0; width: var(--size-comp-height-lg); }
+
+/* ── Icon slots ──────────────────────────────────────────── */
+.igt-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
 }
 
-/* PRIMARY SOFT */
-.igt-btn[data-variant='primary'][data-style='soft'] {
-  background-color: var(--btn-primary-soft-bg);
-  color: var(--btn-primary-soft-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='primary'][data-style='soft']:hover:not(:disabled) {
-  background-color: var(--btn-primary-soft-hover-bg);
-}
-.igt-btn[data-variant='primary'][data-style='soft']:active:not(:disabled) {
-  background-color: var(--btn-primary-soft-active-bg);
-}
-.igt-btn[data-variant='primary'][data-style='soft']:focus-visible {
-  box-shadow: 0 0 0 3px var(--btn-primary-fill-focus-ring);
-}
+.igt-btn[data-size='xs'] .igt-btn__icon { width: var(--size-icon-xs); height: var(--size-icon-xs); }
+.igt-btn[data-size='sm'] .igt-btn__icon { width: var(--size-icon-sm); height: var(--size-icon-sm); }
+.igt-btn[data-size='md'] .igt-btn__icon { width: var(--size-icon-sm); height: var(--size-icon-sm); }
+.igt-btn[data-size='lg'] .igt-btn__icon { width: var(--size-icon-sm); height: var(--size-icon-sm); }
 
-/* PRIMARY OUTLINE */
-.igt-btn[data-variant='primary'][data-style='outline'] {
-  background-color: transparent;
-  color: var(--btn-primary-outline-text);
-  border-color: var(--btn-primary-outline-border);
-}
-.igt-btn[data-variant='primary'][data-style='outline']:hover:not(:disabled) {
-  background-color: var(--btn-primary-outline-hover-bg);
-}
-.igt-btn[data-variant='primary'][data-style='outline']:active:not(:disabled) {
-  background-color: var(--btn-primary-outline-active-bg);
-}
-.igt-btn[data-variant='primary'][data-style='outline']:focus-visible {
-  box-shadow: 0 0 0 3px var(--btn-primary-fill-focus-ring);
-}
-
-/* PRIMARY GHOST */
-.igt-btn[data-variant='primary'][data-style='ghost'] {
-  background-color: transparent;
-  color: var(--btn-primary-ghost-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='primary'][data-style='ghost']:hover:not(:disabled) {
-  background-color: var(--btn-primary-ghost-hover-bg);
-}
-.igt-btn[data-variant='primary'][data-style='ghost']:active:not(:disabled) {
-  background-color: var(--btn-primary-ghost-active-bg);
-}
-.igt-btn[data-variant='primary'][data-style='ghost']:focus-visible {
-  box-shadow: 0 0 0 3px var(--btn-primary-fill-focus-ring);
-}
-
-/* ============================================
-   SECONDARY
-   ============================================ */
-.igt-btn[data-variant='secondary'][data-style='fill'] {
-  background-color: var(--btn-secondary-fill-bg);
-  color: var(--btn-secondary-fill-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='secondary'][data-style='fill']:hover:not(:disabled) {
-  background-color: var(--btn-secondary-fill-hover-bg);
-}
-.igt-btn[data-variant='secondary'][data-style='fill']:active:not(:disabled) {
-  background-color: var(--btn-secondary-fill-active-bg);
-}
-.igt-btn[data-variant='secondary'][data-style='fill']:focus-visible {
-  box-shadow: 0 0 0 3px var(--btn-secondary-fill-focus-ring);
-}
-
-.igt-btn[data-variant='secondary'][data-style='soft'] {
-  background-color: var(--btn-secondary-soft-bg);
-  color: var(--btn-secondary-soft-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='secondary'][data-style='soft']:hover:not(:disabled) {
-  background-color: var(--btn-secondary-soft-hover-bg);
-}
-.igt-btn[data-variant='secondary'][data-style='soft']:active:not(:disabled) {
-  background-color: var(--btn-secondary-soft-active-bg);
-}
-
-.igt-btn[data-variant='secondary'][data-style='outline'] {
-  background-color: transparent;
-  color: var(--btn-secondary-outline-text);
-  border-color: var(--btn-secondary-outline-border);
-}
-.igt-btn[data-variant='secondary'][data-style='outline']:hover:not(:disabled) {
-  background-color: var(--btn-secondary-outline-hover-bg);
-}
-.igt-btn[data-variant='secondary'][data-style='outline']:active:not(:disabled) {
-  background-color: var(--btn-secondary-outline-active-bg);
-}
-
-.igt-btn[data-variant='secondary'][data-style='ghost'] {
-  background-color: transparent;
-  color: var(--btn-secondary-ghost-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='secondary'][data-style='ghost']:hover:not(:disabled) {
-  background-color: var(--btn-secondary-ghost-hover-bg);
-}
-.igt-btn[data-variant='secondary'][data-style='ghost']:active:not(:disabled) {
-  background-color: var(--btn-secondary-ghost-active-bg);
-}
-
-/* ============================================
-   DANGER
-   ============================================ */
-.igt-btn[data-variant='danger'][data-style='fill'] {
-  background-color: var(--btn-danger-fill-bg);
-  color: var(--btn-danger-fill-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='danger'][data-style='fill']:hover:not(:disabled) {
-  background-color: var(--btn-danger-fill-hover-bg);
-}
-.igt-btn[data-variant='danger'][data-style='fill']:active:not(:disabled) {
-  background-color: var(--btn-danger-fill-active-bg);
-}
-.igt-btn[data-variant='danger'][data-style='fill']:focus-visible {
-  box-shadow: 0 0 0 3px var(--btn-danger-fill-focus-ring);
-}
-
-.igt-btn[data-variant='danger'][data-style='soft'] {
-  background-color: var(--btn-danger-soft-bg);
-  color: var(--btn-danger-soft-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='danger'][data-style='soft']:hover:not(:disabled) {
-  background-color: var(--btn-danger-soft-hover-bg);
-}
-.igt-btn[data-variant='danger'][data-style='soft']:active:not(:disabled) {
-  background-color: var(--btn-danger-soft-active-bg);
-}
-
-.igt-btn[data-variant='danger'][data-style='outline'] {
-  background-color: transparent;
-  color: var(--btn-danger-outline-text);
-  border-color: var(--btn-danger-outline-border);
-}
-.igt-btn[data-variant='danger'][data-style='outline']:hover:not(:disabled) {
-  background-color: var(--btn-danger-outline-hover-bg);
-}
-.igt-btn[data-variant='danger'][data-style='outline']:active:not(:disabled) {
-  background-color: var(--btn-danger-outline-active-bg);
-}
-
-.igt-btn[data-variant='danger'][data-style='ghost'] {
-  background-color: transparent;
-  color: var(--btn-danger-ghost-text);
-  border-color: transparent;
-}
-.igt-btn[data-variant='danger'][data-style='ghost']:hover:not(:disabled) {
-  background-color: var(--btn-danger-ghost-hover-bg);
-}
-.igt-btn[data-variant='danger'][data-style='ghost']:active:not(:disabled) {
-  background-color: var(--btn-danger-ghost-active-bg);
-}
-
-/* ============================================
-   DISABLED & LOADING
-   ============================================ */
-.igt-btn:disabled,
-.igt-btn[data-loading] {
-  opacity: 0.4;
-  cursor: not-allowed;
-  pointer-events: none;
-}
-
-.igt-btn[data-loading] {
-  pointer-events: none;
-}
-
-/* Spinner */
+/* ── Spinner ─────────────────────────────────────────────── */
 .igt-btn__spinner {
   display: inline-block;
   width: 1em;
@@ -250,18 +102,192 @@
   to { transform: rotate(360deg); }
 }
 
-/* Icon slots */
-.igt-btn__icon {
-  display: inline-flex;
-  align-items: center;
-  flex-shrink: 0;
-  font-size: var(--comp-icon-md);
+/* ── Disabled & Loading ──────────────────────────────────── */
+.igt-btn:disabled,
+.igt-btn[data-loading] {
+  opacity: 0.4;
+  cursor: not-allowed;
+  pointer-events: none;
 }
 
-.igt-btn[data-size='sm'] .igt-btn__icon {
-  font-size: var(--comp-icon-sm);
+/* ── Focus Ring ──────────────────────────────────────────── */
+.igt-btn:focus-visible {
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--btn-focus-ring);
 }
 
-.igt-btn[data-size='lg'] .igt-btn__icon {
-  font-size: var(--comp-icon-lg);
+/* ============================================================
+   PRIMARY
+   ============================================================ */
+
+/* fill */
+.igt-btn[data-tone='primary'][data-variant='fill'] {
+  background-color: var(--btn-primary-fill-bg);
+  color: var(--btn-primary-fill-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-brand-default);
 }
+.igt-btn[data-tone='primary'][data-variant='fill']:hover:not(:disabled) {
+  background-color: var(--btn-primary-fill-bg-hover);
+}
+.igt-btn[data-tone='primary'][data-variant='fill']:active:not(:disabled) {
+  background-color: var(--btn-primary-fill-bg-hover);
+}
+
+/* soft */
+.igt-btn[data-tone='primary'][data-variant='soft'] {
+  background-color: var(--btn-primary-soft-bg);
+  color: var(--btn-primary-soft-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-brand-default);
+}
+.igt-btn[data-tone='primary'][data-variant='soft']:hover:not(:disabled) {
+  background-color: var(--btn-primary-soft-bg-hover);
+}
+.igt-btn[data-tone='primary'][data-variant='soft']:active:not(:disabled) {
+  background-color: var(--btn-primary-soft-bg-hover);
+}
+
+/* outline */
+.igt-btn[data-tone='primary'][data-variant='outline'] {
+  background-color: transparent;
+  color: var(--btn-primary-outline-text);
+  border-color: var(--btn-primary-outline-border);
+  --btn-focus-ring: var(--sys-border-brand-default);
+}
+.igt-btn[data-tone='primary'][data-variant='outline']:hover:not(:disabled) {
+  background-color: var(--btn-primary-outline-bg-hover);
+}
+.igt-btn[data-tone='primary'][data-variant='outline']:active:not(:disabled) {
+  background-color: var(--btn-primary-outline-bg-hover);
+}
+
+/* ghost */
+.igt-btn[data-tone='primary'][data-variant='ghost'] {
+  background-color: transparent;
+  color: var(--btn-primary-ghost-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-brand-default);
+}
+.igt-btn[data-tone='primary'][data-variant='ghost']:hover:not(:disabled) {
+  background-color: var(--btn-primary-ghost-bg-hover);
+}
+.igt-btn[data-tone='primary'][data-variant='ghost']:active:not(:disabled) {
+  background-color: var(--btn-primary-ghost-bg-hover);
+}
+
+/* ============================================================
+   SECONDARY
+   ============================================================ */
+
+.igt-btn[data-tone='secondary'][data-variant='fill'] {
+  background-color: var(--btn-secondary-fill-bg);
+  color: var(--btn-secondary-fill-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-neutral-default);
+}
+.igt-btn[data-tone='secondary'][data-variant='fill']:hover:not(:disabled) {
+  background-color: var(--btn-secondary-fill-bg-hover);
+}
+.igt-btn[data-tone='secondary'][data-variant='fill']:active:not(:disabled) {
+  background-color: var(--btn-secondary-fill-bg-hover);
+}
+
+.igt-btn[data-tone='secondary'][data-variant='soft'] {
+  background-color: var(--btn-secondary-soft-bg);
+  color: var(--btn-secondary-soft-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-neutral-default);
+}
+.igt-btn[data-tone='secondary'][data-variant='soft']:hover:not(:disabled) {
+  background-color: var(--btn-secondary-soft-bg-hover);
+}
+.igt-btn[data-tone='secondary'][data-variant='soft']:active:not(:disabled) {
+  background-color: var(--btn-secondary-soft-bg-hover);
+}
+
+.igt-btn[data-tone='secondary'][data-variant='outline'] {
+  background-color: transparent;
+  color: var(--btn-secondary-outline-text);
+  border-color: var(--btn-secondary-outline-border);
+  --btn-focus-ring: var(--sys-border-neutral-default);
+}
+.igt-btn[data-tone='secondary'][data-variant='outline']:hover:not(:disabled) {
+  background-color: var(--btn-secondary-ghost-bg-hover);
+  border-color: var(--btn-secondary-outline-border-hover);
+}
+.igt-btn[data-tone='secondary'][data-variant='outline']:active:not(:disabled) {
+  background-color: var(--btn-secondary-ghost-bg-hover);
+}
+
+.igt-btn[data-tone='secondary'][data-variant='ghost'] {
+  background-color: transparent;
+  color: var(--btn-secondary-ghost-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-neutral-default);
+}
+.igt-btn[data-tone='secondary'][data-variant='ghost']:hover:not(:disabled) {
+  background-color: var(--btn-secondary-ghost-bg-hover);
+}
+.igt-btn[data-tone='secondary'][data-variant='ghost']:active:not(:disabled) {
+  background-color: var(--btn-secondary-ghost-bg-hover);
+}
+
+/* ============================================================
+   DANGER
+   ============================================================ */
+
+.igt-btn[data-tone='danger'][data-variant='fill'] {
+  background-color: var(--btn-danger-fill-bg);
+  color: var(--btn-danger-fill-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-danger-default);
+}
+.igt-btn[data-tone='danger'][data-variant='fill']:hover:not(:disabled) {
+  background-color: var(--btn-danger-fill-bg-hover);
+}
+.igt-btn[data-tone='danger'][data-variant='fill']:active:not(:disabled) {
+  background-color: var(--btn-danger-fill-bg-hover);
+}
+
+.igt-btn[data-tone='danger'][data-variant='soft'] {
+  background-color: var(--btn-danger-soft-bg);
+  color: var(--btn-danger-soft-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-danger-default);
+}
+.igt-btn[data-tone='danger'][data-variant='soft']:hover:not(:disabled) {
+  background-color: var(--btn-danger-soft-bg-hover);
+}
+.igt-btn[data-tone='danger'][data-variant='soft']:active:not(:disabled) {
+  background-color: var(--btn-danger-soft-bg-hover);
+}
+
+.igt-btn[data-tone='danger'][data-variant='outline'] {
+  background-color: transparent;
+  color: var(--btn-danger-outline-text);
+  border-color: var(--btn-danger-outline-border);
+  --btn-focus-ring: var(--sys-border-danger-default);
+}
+.igt-btn[data-tone='danger'][data-variant='outline']:hover:not(:disabled) {
+  background-color: var(--btn-danger-ghost-bg-hover);
+}
+.igt-btn[data-tone='danger'][data-variant='outline']:active:not(:disabled) {
+  background-color: var(--btn-danger-ghost-bg-hover);
+}
+
+.igt-btn[data-tone='danger'][data-variant='ghost'] {
+  background-color: transparent;
+  color: var(--btn-danger-ghost-text);
+  border-color: transparent;
+  --btn-focus-ring: var(--sys-border-danger-default);
+}
+.igt-btn[data-tone='danger'][data-variant='ghost']:hover:not(:disabled) {
+  background-color: var(--btn-danger-ghost-bg-hover);
+}
+.igt-btn[data-tone='danger'][data-variant='ghost']:active:not(:disabled) {
+  background-color: var(--btn-danger-ghost-bg-hover);
+}
+
+/* ── Backward compat: data-variant (old prop name) ─────────── */
+/* showcase/App.tsx가 variant="secondary" 등 구 API 사용 시 fallback */
+.igt-btn[data-variant='primary']:not([data-tone]) { --_compat: 1; }

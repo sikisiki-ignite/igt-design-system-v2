@@ -4,7 +4,7 @@ import './Badge.css'
 
 export type BadgeVariant = 'neutral' | 'info' | 'success' | 'warning' | 'danger'
 export type BadgeStyle = 'fill' | 'soft' | 'outline'
-export type BadgeSize = 'sm' | 'md'
+export type BadgeSize = 'sm' | 'md' | 'lg'
 
 export interface BadgeProps {
   variant?: BadgeVariant

@@ -1,53 +1,79 @@
-/* ============================================
-   IGT Modal Component
-   ============================================ */
+/* ============================================================
+   IGT Modal / Dialog Component
+   피그마: 5 Dialog
+   size(sm/md/lg/xl)
+   ============================================================ */
 
 .igt-modal-overlay {
   position: fixed;
   inset: 0;
-  background-color: var(--modal-overlay-bg);
+  background-color: var(--modal-backdrop);
   display: flex;
   align-items: center;
   justify-content: center;
-  z-index: var(--z-modal, 1000);
-  padding: var(--spacing-4);
+  z-index: var(--z-modal);
+  padding: var(--ref-space-16);
 }
 
 .igt-modal {
   background-color: var(--modal-bg);
-  border-radius: var(--radius-lg);
-  box-shadow: var(--elevation-dialog);
+  border-radius: 20px; /* 피그마: radius 20px */
+  border: 1px solid rgba(0, 27, 55, 0.1); /* 피그마: overlaybase border */
+  box-shadow: var(--elevation-dialog); /* 0px 40px 120px rgba(2,32,71,0.08), ... */
   display: flex;
   flex-direction: column;
-  max-height: calc(100vh - var(--spacing-8));
+  max-height: calc(100vh - var(--ref-space-32));
   width: 100%;
   overflow: hidden;
 }
 
-/* Size */
-.igt-modal[data-size='sm'] { max-width: 400px; }
-.igt-modal[data-size='md'] { max-width: 560px; }
+/* ── Size ─────────────────────────────────────────────────── */
+/* 피그마: sm=320px, md=520px, lg=720px */
+.igt-modal[data-size='sm'] { max-width: 320px; }
+.igt-modal[data-size='md'] { max-width: 520px; }
 .igt-modal[data-size='lg'] { max-width: 720px; }
 .igt-modal[data-size='xl'] { max-width: 960px; }
 
-/* Header */
+/* ── Header ───────────────────────────────────────────────── */
 .igt-modal__header {
   display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: var(--spacing-5) var(--spacing-6);
-  border-bottom: 1px solid var(--modal-border);
+  align-items: flex-start;
+  padding-top: 20px;
+  padding-left: 24px;
+  padding-right: 16px;
+  padding-bottom: 0;
   flex-shrink: 0;
 }
 
-.igt-modal__title {
-  font-size: var(--font-size-lg);
-  font-weight: var(--font-weight-semibold);
-  color: var(--modal-title-text);
-  margin: 0;
-  line-height: var(--line-height-lg);
+.igt-modal__header-text {
+  flex: 1;
+  min-width: 0;
+  padding-right: var(--ref-space-8);
+  padding-bottom: var(--ref-space-8);
 }
 
+.igt-modal__title {
+  font-size: 20px; /* 피그마: heading/md/bold 20px */
+  font-weight: var(--ref-font-weight-700, 700);
+  color: var(--modal-title-text);
+  margin: 0 0 var(--ref-space-8);
+  line-height: 28px;
+}
+
+.igt-modal[data-size='sm'] .igt-modal__title {
+  font-size: 18px; /* 피그마: heading/sm/bold 18px */
+  line-height: 26px;
+}
+
+.igt-modal__subtitle {
+  margin: 0;
+  font-size: var(--text-body-sm-size, 15px);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--sys-content-neutral-muted);
+  line-height: 22px;
+}
+
+/* ── Close Button ─────────────────────────────────────────── */
 .igt-modal__close {
   display: inline-flex;
   align-items: center;
@@ -55,34 +81,34 @@
   width: 32px;
   height: 32px;
   border: none;
-  border-radius: var(--radius-md);
+  border-radius: var(--radius-md); /* 8px */
   background: transparent;
-  color: var(--modal-close-icon);
+  color: var(--sys-content-neutral-muted);
   cursor: pointer;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.12s ease;
   flex-shrink: 0;
+  margin-top: -4px; /* align with title top */
 }
 .igt-modal__close:hover {
-  background-color: var(--modal-close-hover-bg);
+  background-color: var(--sys-interactive-hover-overlay-neutral);
 }
 
-/* Body */
+/* ── Body ─────────────────────────────────────────────────── */
 .igt-modal__body {
-  padding: var(--spacing-6);
+  padding: 0 var(--ref-space-24) var(--ref-space-16);
   overflow-y: auto;
   flex: 1;
   color: var(--modal-body-text);
-  font-size: var(--font-size-md);
-  line-height: var(--line-height-md);
+  font-size: var(--text-body-sm-size, 15px);
+  line-height: 22px;
 }
 
-/* Footer */
+/* ── Footer ───────────────────────────────────────────────── */
 .igt-modal__footer {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--spacing-3);
-  padding: var(--spacing-4) var(--spacing-6);
-  border-top: 1px solid var(--modal-border);
+  gap: var(--ref-space-8); /* 피그마: gap 8px */
+  padding: var(--ref-space-16) 20px 20px; /* 피그마: pt=16, px=20, pb=20 */
   flex-shrink: 0;
 }

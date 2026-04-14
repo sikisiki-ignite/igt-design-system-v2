@@ -1,0 +1,882 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>IGT Typography Hierarchy — AI Reference</title>
+<style>
+  /* ── Font ── */
+  @font-face { font-family:'IGTSans'; src:url('../src/styles/fonts/IGT System Sans Light.otf') format('opentype'); font-weight:300; font-display:swap; }
+  @font-face { font-family:'IGTSans'; src:url('../src/styles/fonts/IGT System Sans Regular.otf') format('opentype'); font-weight:400; font-display:swap; }
+  @font-face { font-family:'IGTSans'; src:url('../src/styles/fonts/IGT System Sans Medium.otf') format('opentype'); font-weight:500; font-display:swap; }
+  @font-face { font-family:'IGTSans'; src:url('../src/styles/fonts/IGT System Sans Semibold.otf') format('opentype'); font-weight:600; font-display:swap; }
+  @font-face { font-family:'IGTSans'; src:url('../src/styles/fonts/IGT System Sans Bold.otf') format('opentype'); font-weight:700; font-display:swap; }
+
+  /* ── Typography Tokens ── */
+  :root {
+    --font-family-base: 'IGTSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+    /* Display */
+    --text-display-sm-size: 32px; --text-display-sm-weight: 600; --text-display-sm-line-height: 40px;
+    --text-display-md-size: 40px; --text-display-md-weight: 700; --text-display-md-line-height: 52px;
+    --text-display-lg-size: 48px; --text-display-lg-weight: 700; --text-display-lg-line-height: 56px;
+    /* Heading */
+    --text-heading-sm-size: 18px; --text-heading-sm-weight: 600; --text-heading-sm-line-height: 26px;
+    --text-heading-md-size: 20px; --text-heading-md-weight: 600; --text-heading-md-line-height: 28px;
+    --text-heading-lg-size: 24px; --text-heading-lg-weight: 600; --text-heading-lg-line-height: 34px;
+    /* Body */
+    --text-body-xs-size: 14px; --text-body-xs-weight: 400; --text-body-xs-line-height: 20px;
+    --text-body-sm-size: 15px; --text-body-sm-weight: 400; --text-body-sm-line-height: 22px;
+    --text-body-md-size: 16px; --text-body-md-weight: 400; --text-body-md-line-height: 24px;
+    /* Label */
+    --text-label-xs-size: 12px; --text-label-xs-weight: 500; --text-label-xs-line-height: 16px;
+    --text-label-sm-size: 14px; --text-label-sm-weight: 500; --text-label-sm-line-height: 20px;
+    --text-label-md-size: 15px; --text-label-md-weight: 500; --text-label-md-line-height: 22px;
+    /* Caption */
+    --text-caption-sm-size: 11px; --text-caption-sm-weight: 400; --text-caption-sm-line-height: 16px;
+    --text-caption-md-size: 12px; --text-caption-md-weight: 400; --text-caption-md-line-height: 16px;
+    /* Color */
+    --c-ink: #0f1923;
+    --c-ink-2: #3a4754;
+    --c-ink-3: #6b7785;
+    --c-ink-disabled: #b0b8c1;
+    --c-brand: #1a56db;
+    --c-surface: #ffffff;
+    --c-surface-2: #f4f6f8;
+    --c-surface-3: #e9ecf0;
+    --c-border: #dde1e7;
+    --c-danger: #d92d20;
+    --c-success: #027a48;
+    --c-warn: #b54708;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    font-family: var(--font-family-base);
+    font-size: var(--text-body-md-size);
+    line-height: var(--text-body-md-line-height);
+    color: var(--c-ink);
+    background: var(--c-surface-2);
+    -webkit-font-smoothing: antialiased;
+  }
+
+  .page { max-width: 1120px; margin: 0 auto; padding: 48px 24px; }
+
+  /* ── Back button ── */
+  .back-btn {
+    display: inline-flex; align-items: center; gap: 6px;
+    font-family: var(--font-family-base);
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    line-height: var(--text-label-sm-line-height);
+    color: var(--c-ink-3);
+    text-decoration: none;
+    padding: 6px 12px;
+    border: 1px solid var(--c-border);
+    border-radius: 6px;
+    background: var(--c-surface);
+    margin-bottom: 32px;
+    transition: color .15s, border-color .15s;
+  }
+  .back-btn:hover { color: var(--c-brand); border-color: var(--c-brand); }
+
+  /* ── Page header ── */
+  .page-title {
+    font-size: var(--text-display-sm-size);
+    font-weight: var(--text-display-sm-weight);
+    line-height: var(--text-display-sm-line-height);
+    color: var(--c-ink);
+    margin-bottom: 8px;
+  }
+  .page-subtitle {
+    font-size: var(--text-body-md-size);
+    font-weight: var(--text-body-md-weight);
+    line-height: var(--text-body-md-line-height);
+    color: var(--c-ink-3);
+    margin-bottom: 56px;
+  }
+
+  /* ── Section ── */
+  .section { margin-bottom: 64px; }
+  .section-label {
+    font-size: var(--text-label-xs-size);
+    font-weight: var(--text-label-xs-weight);
+    line-height: var(--text-label-xs-line-height);
+    color: var(--c-ink-3);
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    margin-bottom: 20px;
+    padding-bottom: 12px;
+    border-bottom: 1px solid var(--c-border);
+  }
+
+  /* ── Card ── */
+  .card {
+    background: var(--c-surface);
+    border: 1px solid var(--c-border);
+    border-radius: 12px;
+    padding: 32px;
+    margin-bottom: 12px;
+  }
+  .card-sm { padding: 24px; }
+
+  /* ── Scale table ── */
+  .scale-grid {
+    display: grid;
+    gap: 0;
+  }
+  .scale-row {
+    display: grid;
+    grid-template-columns: 160px 1fr 200px;
+    align-items: baseline;
+    gap: 24px;
+    padding: 20px 0;
+    border-bottom: 1px solid var(--c-surface-3);
+  }
+  .scale-row:last-child { border-bottom: none; }
+  .scale-meta {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+  }
+  .scale-name {
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    line-height: var(--text-label-sm-line-height);
+    color: var(--c-brand);
+    font-family: 'Menlo', 'Monaco', monospace;
+  }
+  .scale-spec {
+    font-size: var(--text-caption-md-size);
+    font-weight: var(--text-caption-md-weight);
+    line-height: var(--text-caption-md-line-height);
+    color: var(--c-ink-3);
+  }
+  .scale-usage {
+    font-size: var(--text-caption-md-size);
+    font-weight: var(--text-caption-md-weight);
+    line-height: var(--text-caption-md-line-height);
+    color: var(--c-ink-3);
+    text-align: right;
+    align-self: center;
+  }
+
+  /* ── Role badge ── */
+  .badge {
+    display: inline-block;
+    padding: 2px 8px;
+    border-radius: 4px;
+    font-size: var(--text-caption-md-size);
+    font-weight: 500;
+    line-height: 18px;
+  }
+  .badge-display  { background: #ede9fe; color: #5b21b6; }
+  .badge-heading  { background: #dbeafe; color: #1e40af; }
+  .badge-body     { background: #dcfce7; color: #166534; }
+  .badge-label    { background: #fef3c7; color: #92400e; }
+  .badge-caption  { background: #f1f5f9; color: var(--c-ink-3); }
+
+  /* ── Hierarchy map ── */
+  .hierarchy {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+  }
+  .h-row {
+    display: grid;
+    grid-template-columns: 24px 200px 1fr;
+    align-items: center;
+    gap: 16px;
+    padding: 10px 12px;
+    border-radius: 6px;
+    background: var(--c-surface-2);
+  }
+  .h-row:hover { background: var(--c-surface-3); }
+  .h-level {
+    font-size: var(--text-caption-sm-size);
+    font-weight: 600;
+    color: var(--c-ink-disabled);
+    text-align: center;
+  }
+  .h-token {
+    font-family: 'Menlo', 'Monaco', monospace;
+    font-size: var(--text-caption-md-size);
+    color: var(--c-brand);
+  }
+  .h-desc {
+    font-size: var(--text-body-xs-size);
+    font-weight: var(--text-body-xs-weight);
+    line-height: var(--text-body-xs-line-height);
+    color: var(--c-ink-2);
+  }
+
+  /* ── Context examples ── */
+  .examples-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+  @media (max-width: 720px) { .examples-grid { grid-template-columns: 1fr; } }
+
+  /* Example: Dashboard Card */
+  .ex-dash-kpi {
+    font-size: var(--text-display-md-size);
+    font-weight: var(--text-display-md-weight);
+    line-height: var(--text-display-md-line-height);
+    color: var(--c-ink);
+  }
+  .ex-dash-change {
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    line-height: var(--text-label-sm-line-height);
+    color: var(--c-success);
+  }
+  .ex-dash-caption {
+    font-size: var(--text-caption-md-size);
+    font-weight: var(--text-caption-md-weight);
+    line-height: var(--text-caption-md-line-height);
+    color: var(--c-ink-3);
+    margin-top: 4px;
+  }
+  .ex-card-title {
+    font-size: var(--text-heading-sm-size);
+    font-weight: var(--text-heading-sm-weight);
+    line-height: var(--text-heading-sm-line-height);
+    color: var(--c-ink);
+    margin-bottom: 4px;
+  }
+
+  /* Example: Article */
+  .ex-article-head {
+    font-size: var(--text-display-sm-size);
+    font-weight: var(--text-display-sm-weight);
+    line-height: var(--text-display-sm-line-height);
+    margin-bottom: 8px;
+  }
+  .ex-article-lead {
+    font-size: var(--text-body-md-size);
+    font-weight: var(--text-body-md-weight);
+    line-height: var(--text-body-md-line-height);
+    color: var(--c-ink-2);
+    margin-bottom: 16px;
+  }
+  .ex-article-h2 {
+    font-size: var(--text-heading-md-size);
+    font-weight: var(--text-heading-md-weight);
+    line-height: var(--text-heading-md-line-height);
+    margin-bottom: 6px;
+    margin-top: 20px;
+  }
+  .ex-article-body {
+    font-size: var(--text-body-sm-size);
+    font-weight: var(--text-body-sm-weight);
+    line-height: var(--text-body-sm-line-height);
+    color: var(--c-ink-2);
+  }
+
+  /* Example: Form */
+  .ex-form-section {
+    font-size: var(--text-heading-sm-size);
+    font-weight: var(--text-heading-sm-weight);
+    line-height: var(--text-heading-sm-line-height);
+    margin-bottom: 16px;
+  }
+  .ex-field { margin-bottom: 14px; }
+  .ex-label {
+    display: block;
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    line-height: var(--text-label-sm-line-height);
+    color: var(--c-ink);
+    margin-bottom: 4px;
+  }
+  .ex-input {
+    display: block; width: 100%;
+    font-family: var(--font-family-base);
+    font-size: var(--text-body-xs-size);
+    font-weight: var(--text-body-xs-weight);
+    line-height: var(--text-body-xs-line-height);
+    color: var(--c-ink);
+    border: 1px solid var(--c-border);
+    border-radius: 6px;
+    padding: 8px 12px;
+    background: var(--c-surface);
+    outline: none;
+  }
+  .ex-input:focus { border-color: var(--c-brand); }
+  .ex-help {
+    font-size: var(--text-caption-md-size);
+    font-weight: var(--text-caption-md-weight);
+    line-height: var(--text-caption-md-line-height);
+    color: var(--c-ink-3);
+    margin-top: 4px;
+  }
+  .ex-error {
+    font-size: var(--text-caption-md-size);
+    font-weight: var(--text-caption-md-weight);
+    line-height: var(--text-caption-md-line-height);
+    color: var(--c-danger);
+    margin-top: 4px;
+  }
+
+  /* Example: Table */
+  .ex-table { width: 100%; border-collapse: collapse; }
+  .ex-table th {
+    font-size: var(--text-label-xs-size);
+    font-weight: var(--text-label-xs-weight);
+    line-height: var(--text-label-xs-line-height);
+    color: var(--c-ink-3);
+    text-align: left;
+    padding: 8px 12px;
+    background: var(--c-surface-2);
+    border-bottom: 1px solid var(--c-border);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
+  .ex-table td {
+    font-size: var(--text-body-xs-size);
+    font-weight: var(--text-body-xs-weight);
+    line-height: var(--text-body-xs-line-height);
+    color: var(--c-ink);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--c-surface-3);
+  }
+  .ex-table td.muted {
+    font-size: var(--text-caption-md-size);
+    color: var(--c-ink-3);
+  }
+
+  /* Example: Modal */
+  .ex-modal-title {
+    font-size: var(--text-heading-lg-size);
+    font-weight: var(--text-heading-lg-weight);
+    line-height: var(--text-heading-lg-line-height);
+    margin-bottom: 8px;
+  }
+  .ex-modal-body {
+    font-size: var(--text-body-sm-size);
+    font-weight: var(--text-body-sm-weight);
+    line-height: var(--text-body-sm-line-height);
+    color: var(--c-ink-2);
+    margin-bottom: 24px;
+  }
+  .ex-btn {
+    display: inline-block;
+    font-family: var(--font-family-base);
+    font-size: var(--text-label-sm-size);
+    font-weight: var(--text-label-sm-weight);
+    line-height: var(--text-label-sm-line-height);
+    padding: 9px 20px;
+    border-radius: 6px;
+    border: none; cursor: pointer;
+  }
+  .ex-btn-primary { background: var(--c-brand); color: #fff; margin-right: 8px; }
+  .ex-btn-ghost { background: transparent; color: var(--c-ink-2); border: 1px solid var(--c-border); }
+
+  /* ── AI quick-ref table ── */
+  .ref-table { width: 100%; border-collapse: collapse; }
+  .ref-table th {
+    font-size: var(--text-label-xs-size);
+    font-weight: var(--text-label-xs-weight);
+    line-height: var(--text-label-xs-line-height);
+    color: var(--c-ink-3);
+    text-align: left;
+    padding: 8px 12px;
+    background: var(--c-surface-2);
+    border-bottom: 2px solid var(--c-border);
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+  }
+  .ref-table td {
+    font-size: var(--text-body-xs-size);
+    font-weight: var(--text-body-xs-weight);
+    line-height: var(--text-body-xs-line-height);
+    padding: 10px 12px;
+    border-bottom: 1px solid var(--c-surface-3);
+    vertical-align: top;
+  }
+  .ref-table tr:last-child td { border-bottom: none; }
+  .token-pill {
+    display: inline-block;
+    background: var(--c-surface-2);
+    border: 1px solid var(--c-border);
+    border-radius: 4px;
+    padding: 1px 6px;
+    font-family: 'Menlo', 'Monaco', monospace;
+    font-size: 12px;
+    color: var(--c-brand);
+    margin: 1px 2px;
+  }
+  .ref-yes { color: var(--c-success); font-weight: 600; }
+  .ref-no  { color: var(--c-ink-disabled); }
+
+  /* divider */
+  .divider { height: 1px; background: var(--c-border); margin: 8px 0 20px; }
+
+  /* inline code */
+  code { font-family:'Menlo','Monaco',monospace; font-size:0.85em; background:var(--c-surface-2); border:1px solid var(--c-border); border-radius:3px; padding:1px 5px; color:var(--c-brand); }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <!-- ── Back ── -->
+  <a class="back-btn" href="index.html">← 쇼케이스 홈</a>
+
+  <!-- ── Page Header ── -->
+  <h1 class="page-title">IGT Typography Hierarchy</h1>
+  <p class="page-subtitle">AI가 컴포넌트를 만들 때 참조하는 폰트 위계 레퍼런스 · globals.css 토큰 기준</p>
+
+  <!-- ────────────────────────────────────────────
+       SECTION 1: Full Scale
+  ──────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">01 · Full Scale — 모든 타입 스타일</div>
+    <div class="card">
+      <div class="scale-grid">
+
+        <!-- Display -->
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">display-lg</span>
+            <span class="scale-spec">48px · 700 · lh 56px</span>
+            <span class="badge badge-display" style="margin-top:4px">Display</span>
+          </div>
+          <div style="font-size:var(--text-display-lg-size);font-weight:var(--text-display-lg-weight);line-height:var(--text-display-lg-line-height);">Hero 타이틀</div>
+          <div class="scale-usage">랜딩 히어로, 빈 상태 대형 메시지</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">display-md</span>
+            <span class="scale-spec">40px · 700 · lh 52px</span>
+            <span class="badge badge-display" style="margin-top:4px">Display</span>
+          </div>
+          <div style="font-size:var(--text-display-md-size);font-weight:var(--text-display-md-weight);line-height:var(--text-display-md-line-height);">페이지 타이틀</div>
+          <div class="scale-usage">대시보드 KPI 숫자, 마케팅 섹션</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">display-sm</span>
+            <span class="scale-spec">32px · 600 · lh 40px</span>
+            <span class="badge badge-display" style="margin-top:4px">Display</span>
+          </div>
+          <div style="font-size:var(--text-display-sm-size);font-weight:var(--text-display-sm-weight);line-height:var(--text-display-sm-line-height);">섹션 타이틀</div>
+          <div class="scale-usage">페이지 최상단 제목, 설정 페이지 헤더</div>
+        </div>
+
+        <!-- Heading -->
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">heading-lg</span>
+            <span class="scale-spec">24px · 600 · lh 34px</span>
+            <span class="badge badge-heading" style="margin-top:4px">Heading</span>
+          </div>
+          <div style="font-size:var(--text-heading-lg-size);font-weight:var(--text-heading-lg-weight);line-height:var(--text-heading-lg-line-height);">모달 제목 / 패널 헤더</div>
+          <div class="scale-usage">Dialog title, Side panel header</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">heading-md</span>
+            <span class="scale-spec">20px · 600 · lh 28px</span>
+            <span class="badge badge-heading" style="margin-top:4px">Heading</span>
+          </div>
+          <div style="font-size:var(--text-heading-md-size);font-weight:var(--text-heading-md-weight);line-height:var(--text-heading-md-line-height);">섹션 소제목</div>
+          <div class="scale-usage">카드 그룹 제목, 폼 섹션 헤더</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">heading-sm</span>
+            <span class="scale-spec">18px · 600 · lh 26px</span>
+            <span class="badge badge-heading" style="margin-top:4px">Heading</span>
+          </div>
+          <div style="font-size:var(--text-heading-sm-size);font-weight:var(--text-heading-sm-weight);line-height:var(--text-heading-sm-line-height);">카드 제목</div>
+          <div class="scale-usage">Card title, Sidebar section, Table caption</div>
+        </div>
+
+        <!-- Body -->
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">body-md</span>
+            <span class="scale-spec">16px · 400 · lh 24px</span>
+            <span class="badge badge-body" style="margin-top:4px">Body</span>
+          </div>
+          <div style="font-size:var(--text-body-md-size);font-weight:var(--text-body-md-weight);line-height:var(--text-body-md-line-height);">기본 본문 텍스트 — body 기본값</div>
+          <div class="scale-usage">기본 body, 모달 본문, 설명글</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">body-sm</span>
+            <span class="scale-spec">15px · 400 · lh 22px</span>
+            <span class="badge badge-body" style="margin-top:4px">Body</span>
+          </div>
+          <div style="font-size:var(--text-body-sm-size);font-weight:var(--text-body-sm-weight);line-height:var(--text-body-sm-line-height);">보조 본문 — 카드 내 설명</div>
+          <div class="scale-usage">Card body, Article paragraph, Tooltip body</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">body-xs</span>
+            <span class="scale-spec">14px · 400 · lh 20px</span>
+            <span class="badge badge-body" style="margin-top:4px">Body</span>
+          </div>
+          <div style="font-size:var(--text-body-xs-size);font-weight:var(--text-body-xs-weight);line-height:var(--text-body-xs-line-height);">밀집 레이아웃용 본문 — 테이블 셀</div>
+          <div class="scale-usage">Table cell, List item, Input value</div>
+        </div>
+
+        <!-- Label -->
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">label-md</span>
+            <span class="scale-spec">15px · 500 · lh 22px</span>
+            <span class="badge badge-label" style="margin-top:4px">Label</span>
+          </div>
+          <div style="font-size:var(--text-label-md-size);font-weight:var(--text-label-md-weight);line-height:var(--text-label-md-line-height);">대형 버튼 레이블</div>
+          <div class="scale-usage">Button lg, Nav primary item</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">label-sm</span>
+            <span class="scale-spec">14px · 500 · lh 20px</span>
+            <span class="badge badge-label" style="margin-top:4px">Label</span>
+          </div>
+          <div style="font-size:var(--text-label-sm-size);font-weight:var(--text-label-sm-weight);line-height:var(--text-label-sm-line-height);">기본 버튼 / 폼 라벨</div>
+          <div class="scale-usage">Button md, Form label, Badge, Tab</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">label-xs</span>
+            <span class="scale-spec">12px · 500 · lh 16px</span>
+            <span class="badge badge-label" style="margin-top:4px">Label</span>
+          </div>
+          <div style="font-size:var(--text-label-xs-size);font-weight:var(--text-label-xs-weight);line-height:var(--text-label-xs-line-height);">소형 버튼 / 테이블 헤더</div>
+          <div class="scale-usage">Button sm, Table header, Tag</div>
+        </div>
+
+        <!-- Caption -->
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">caption-md</span>
+            <span class="scale-spec">12px · 400 · lh 16px</span>
+            <span class="badge badge-caption" style="margin-top:4px">Caption</span>
+          </div>
+          <div style="font-size:var(--text-caption-md-size);font-weight:var(--text-caption-md-weight);line-height:var(--text-caption-md-line-height);">도움말 텍스트, 에러 메시지, 타임스탬프</div>
+          <div class="scale-usage">Helper text, Error msg, Timestamp, Tooltip</div>
+        </div>
+        <div class="scale-row">
+          <div class="scale-meta">
+            <span class="scale-name">caption-sm</span>
+            <span class="scale-spec">11px · 400 · lh 16px</span>
+            <span class="badge badge-caption" style="margin-top:4px">Caption</span>
+          </div>
+          <div style="font-size:var(--text-caption-sm-size);font-weight:var(--text-caption-sm-weight);line-height:var(--text-caption-sm-line-height);">최소 보조 정보 — 뱃지 아이콘 옆 숫자</div>
+          <div class="scale-usage">Badge count, Footnote, Overline label</div>
+        </div>
+
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────
+       SECTION 2: Hierarchy Map
+  ──────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">02 · Hierarchy Map — AI 우선순위 기준</div>
+    <div class="card">
+      <div style="margin-bottom:12px;font-size:var(--text-body-xs-size);color:var(--c-ink-3);">
+        한 화면에서 사용 레벨이 높을수록 해당 토큰 사용 빈도는 낮아야 한다. 레벨이 낮은 토큰이 UI의 대부분을 채운다.
+      </div>
+      <div class="hierarchy">
+        <div class="h-row"><div class="h-level">1</div><div class="h-token">display-lg / md</div><div class="h-desc">Hero, 랜딩 최상단 — 한 페이지에 최대 1회. KPI 대형 숫자.</div></div>
+        <div class="h-row"><div class="h-level">2</div><div class="h-token">display-sm</div><div class="h-desc">페이지 제목 (h1 수준). 설정/대시보드 진입 섹션 헤더.</div></div>
+        <div class="h-row"><div class="h-level">3</div><div class="h-token">heading-lg</div><div class="h-desc">모달 제목, 사이드 패널 헤더, 탭 섹션 최상위 제목.</div></div>
+        <div class="h-row"><div class="h-level">4</div><div class="h-token">heading-md</div><div class="h-desc">카드 그룹 헤더, 폼 섹션 구분자 (h2 수준).</div></div>
+        <div class="h-row"><div class="h-level">5</div><div class="h-token">heading-sm</div><div class="h-desc">개별 카드 제목, 사이드바 섹션명, 테이블 캡션 (h3 수준).</div></div>
+        <div class="h-row" style="background:#f0fdf4"><div class="h-level" style="color:var(--c-success)">●</div><div class="h-token" style="color:var(--c-ink)">body-md</div><div class="h-desc"><strong>기본값.</strong> body 태그 전체. 모달 설명, 단락 텍스트.</div></div>
+        <div class="h-row"><div class="h-level">6</div><div class="h-token">body-sm</div><div class="h-desc">카드 내부 설명, 목록 항목, 툴팁 본문.</div></div>
+        <div class="h-row"><div class="h-level">7</div><div class="h-token">body-xs</div><div class="h-desc">테이블 셀, 인풋 값, 드롭다운 아이템 — 밀집 레이아웃.</div></div>
+        <div class="h-row"><div class="h-level">8</div><div class="h-token">label-md / sm / xs</div><div class="h-desc">버튼, 폼 라벨, 탭, 뱃지, 테이블 헤더 — 인터랙티브 요소.</div></div>
+        <div class="h-row"><div class="h-level">9</div><div class="h-token">caption-md / sm</div><div class="h-desc">도움말, 에러, 타임스탬프 — 화면 하단부 보조 정보.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────
+       SECTION 3: Context Examples
+  ──────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">03 · Context Examples — 실제 UI 패턴</div>
+    <div class="examples-grid">
+
+      <!-- Dashboard KPI Card -->
+      <div class="card card-sm">
+        <div style="margin-bottom:16px">
+          <span class="badge badge-display">display-md</span>
+          <span style="margin-left:6px" class="badge badge-label">label-sm</span>
+          <span style="margin-left:6px" class="badge badge-caption">caption-md</span>
+        </div>
+        <div style="font-size:var(--text-label-xs-size);font-weight:var(--text-label-xs-weight);color:var(--c-ink-3);text-transform:uppercase;letter-spacing:.08em;margin-bottom:8px">월간 매출</div>
+        <div class="ex-dash-kpi">₩ 48,320,000</div>
+        <div class="ex-dash-change">↑ 12.4% 전월 대비</div>
+        <div class="ex-dash-caption">2026년 3월 기준</div>
+      </div>
+
+      <!-- Modal -->
+      <div class="card card-sm" style="background:var(--c-surface);border-color:var(--c-border)">
+        <div style="margin-bottom:16px">
+          <span class="badge badge-heading">heading-lg</span>
+          <span style="margin-left:6px" class="badge badge-body">body-sm</span>
+          <span style="margin-left:6px" class="badge badge-label">label-sm</span>
+        </div>
+        <div class="ex-modal-title">프로젝트 삭제</div>
+        <div class="ex-modal-body">이 프로젝트를 삭제하면 모든 데이터와 멤버 접근권이 영구적으로 제거됩니다. 이 작업은 되돌릴 수 없습니다.</div>
+        <div>
+          <button class="ex-btn ex-btn-primary">삭제 확인</button>
+          <button class="ex-btn ex-btn-ghost">취소</button>
+        </div>
+      </div>
+
+      <!-- Form -->
+      <div class="card card-sm">
+        <div style="margin-bottom:16px">
+          <span class="badge badge-heading">heading-sm</span>
+          <span style="margin-left:6px" class="badge badge-label">label-sm</span>
+          <span style="margin-left:6px" class="badge badge-body">body-xs</span>
+          <span style="margin-left:6px" class="badge badge-caption">caption-md</span>
+        </div>
+        <div class="ex-form-section">계정 정보</div>
+        <div class="ex-field">
+          <label class="ex-label">이메일</label>
+          <input class="ex-input" type="email" placeholder="user@company.com" />
+          <div class="ex-help">로그인에 사용되는 이메일 주소입니다.</div>
+        </div>
+        <div class="ex-field">
+          <label class="ex-label">비밀번호</label>
+          <input class="ex-input" type="password" placeholder="8자리 이상" />
+          <div class="ex-error">비밀번호는 8자 이상이어야 합니다.</div>
+        </div>
+      </div>
+
+      <!-- Table -->
+      <div class="card card-sm">
+        <div style="margin-bottom:16px">
+          <span class="badge badge-heading">heading-sm</span>
+          <span style="margin-left:6px" class="badge badge-label">label-xs (th)</span>
+          <span style="margin-left:6px" class="badge badge-body">body-xs (td)</span>
+          <span style="margin-left:6px" class="badge badge-caption">caption-md</span>
+        </div>
+        <div class="ex-card-title">최근 거래</div>
+        <table class="ex-table">
+          <thead>
+            <tr>
+              <th>사용자</th>
+              <th>금액</th>
+              <th>상태</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>김민준</td>
+              <td>₩ 320,000</td>
+              <td><span class="badge" style="background:#dcfce7;color:#166534">완료</span></td>
+            </tr>
+            <tr>
+              <td>이서연</td>
+              <td>₩ 150,000</td>
+              <td><span class="badge" style="background:#fef3c7;color:#92400e">대기</span></td>
+            </tr>
+            <tr>
+              <td>박지우</td>
+              <td>₩ 88,000</td>
+              <td><span class="badge" style="background:#fee2e2;color:#991b1b">실패</span></td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────
+       SECTION 4: AI Quick Reference
+  ──────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">04 · AI Quick Reference — 컴포넌트별 토큰 매핑</div>
+    <div class="card">
+      <table class="ref-table">
+        <thead>
+          <tr>
+            <th>컴포넌트 / 요소</th>
+            <th>토큰</th>
+            <th>주의</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td><strong>Page title (h1)</strong></td>
+            <td><span class="token-pill">display-sm</span></td>
+            <td>대시보드·설정 최상단 1회만</td>
+          </tr>
+          <tr>
+            <td><strong>Modal / Drawer title</strong></td>
+            <td><span class="token-pill">heading-lg</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><strong>Card title</strong></td>
+            <td><span class="token-pill">heading-sm</span></td>
+            <td>카드 내부 h3 수준</td>
+          </tr>
+          <tr>
+            <td><strong>Section divider</strong></td>
+            <td><span class="token-pill">heading-md</span></td>
+            <td>폼 / 콘텐츠 그룹 구분</td>
+          </tr>
+          <tr>
+            <td><strong>Button (lg)</strong></td>
+            <td><span class="token-pill">label-md</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><strong>Button (md, 기본)</strong></td>
+            <td><span class="token-pill">label-sm</span></td>
+            <td>버튼 기본 크기</td>
+          </tr>
+          <tr>
+            <td><strong>Button (sm)</strong></td>
+            <td><span class="token-pill">label-xs</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><strong>Form label</strong></td>
+            <td><span class="token-pill">label-sm</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><strong>Input / Select value</strong></td>
+            <td><span class="token-pill">body-xs</span></td>
+            <td>placeholder 동일 토큰, 색상만 muted</td>
+          </tr>
+          <tr>
+            <td><strong>Helper / Error text</strong></td>
+            <td><span class="token-pill">caption-md</span></td>
+            <td>error: danger 색, helper: ink-3</td>
+          </tr>
+          <tr>
+            <td><strong>Table header (th)</strong></td>
+            <td><span class="token-pill">label-xs</span></td>
+            <td>uppercase + letter-spacing 권장</td>
+          </tr>
+          <tr>
+            <td><strong>Table cell (td)</strong></td>
+            <td><span class="token-pill">body-xs</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><strong>Tab label</strong></td>
+            <td><span class="token-pill">label-sm</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><strong>Badge / Tag</strong></td>
+            <td><span class="token-pill">label-xs</span> or <span class="token-pill">caption-md</span></td>
+            <td>label-xs: 인터랙티브, caption: 정적 정보</td>
+          </tr>
+          <tr>
+            <td><strong>Tooltip</strong></td>
+            <td><span class="token-pill">caption-md</span></td>
+            <td></td>
+          </tr>
+          <tr>
+            <td><strong>Toast message</strong></td>
+            <td><span class="token-pill">body-xs</span></td>
+            <td>제목 있으면 label-sm + body-xs</td>
+          </tr>
+          <tr>
+            <td><strong>KPI 대형 숫자</strong></td>
+            <td><span class="token-pill">display-md</span></td>
+            <td>단위/라벨은 label-xs 또는 caption-md</td>
+          </tr>
+          <tr>
+            <td><strong>Breadcrumb</strong></td>
+            <td><span class="token-pill">body-xs</span></td>
+            <td>current 페이지는 weight 500</td>
+          </tr>
+          <tr>
+            <td><strong>Sidebar nav item</strong></td>
+            <td><span class="token-pill">body-sm</span> or <span class="token-pill">label-sm</span></td>
+            <td>active: weight 600</td>
+          </tr>
+          <tr>
+            <td><strong>Empty state title</strong></td>
+            <td><span class="token-pill">heading-md</span></td>
+            <td>설명: body-sm</td>
+          </tr>
+          <tr>
+            <td><strong>Dropdown item</strong></td>
+            <td><span class="token-pill">body-xs</span></td>
+            <td></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+  <!-- ────────────────────────────────────────────
+       SECTION 5: Rules
+  ──────────────────────────────────────────── -->
+  <div class="section">
+    <div class="section-label">05 · AI 규칙 — 타이포그래피 사용 원칙</div>
+    <div class="card">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:24px;">
+        <div>
+          <div style="font-size:var(--text-label-sm-size);font-weight:var(--text-label-sm-weight);margin-bottom:12px;color:var(--c-ink)">DO ✓</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span class="ref-yes">✓</span> CSS에서 <code>--text-{role}-{size}-{prop}</code> 변수만 참조
+            </li>
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span class="ref-yes">✓</span> font-size, font-weight, line-height를 항상 3개 세트로 적용
+            </li>
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span class="ref-yes">✓</span> body 기본값은 body-md (16px/400/24px) — 이미 body에 설정됨
+            </li>
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span class="ref-yes">✓</span> label 계열은 인터랙티브 요소(버튼·탭·폼 라벨)에만 사용
+            </li>
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span class="ref-yes">✓</span> 한 컴포넌트에서 최대 2~3단계 위계만 사용
+            </li>
+          </ul>
+        </div>
+        <div>
+          <div style="font-size:var(--text-label-sm-size);font-weight:var(--text-label-sm-weight);margin-bottom:12px;color:var(--c-ink)">DON'T ✗</div>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px">
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span style="color:var(--c-danger);font-weight:600">✗</span> px/rem 하드코딩 — <code>font-size: 14px</code> 직접 사용 금지
+            </li>
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span style="color:var(--c-danger);font-weight:600">✗</span> <code>--ref-font-*</code> 프리미티브 토큰을 컴포넌트에서 직접 사용 금지
+            </li>
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span style="color:var(--c-danger);font-weight:600">✗</span> display 계열을 본문/카드/폼 내부에 사용 금지
+            </li>
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span style="color:var(--c-danger);font-weight:600">✗</span> font-weight만 임의로 바꿔 강조 — 토큰 role을 전환해야
+            </li>
+            <li style="font-size:var(--text-body-xs-size);line-height:var(--text-body-xs-line-height);color:var(--c-ink-2)">
+              <span style="color:var(--c-danger);font-weight:600">✗</span> 한 뷰에 display 3개 이상 중첩 사용 금지
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <div style="text-align:center;padding-top:16px;padding-bottom:32px">
+    <span style="font-size:var(--text-caption-md-size);color:var(--c-ink-disabled)">
+      IGT Design System · globals.css Typography Tokens · 2026
+    </span>
+  </div>
+
+</div>
+</body>
+</html>

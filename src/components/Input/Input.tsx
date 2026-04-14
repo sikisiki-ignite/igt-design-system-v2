@@ -14,6 +14,8 @@ export interface InputProps extends Omit<React.InputHTMLAttributes<HTMLInputElem
   prefix?: React.ReactNode
   suffix?: React.ReactNode
   fullWidth?: boolean
+  /** 읽기 전용 — 시각적으로 비활성화처럼 보이나 클릭 불가, 값 변경 없음 */
+  readOnly?: boolean
 }
 
 export const Input = React.forwardRef<HTMLInputElement, InputProps>(
@@ -28,6 +30,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
       suffix,
       fullWidth = false,
       disabled,
+      readOnly,
       className,
       id,
       ...props
@@ -43,6 +46,7 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
         data-size={size}
         data-state={error ? 'error' : undefined}
         data-disabled={disabled || undefined}
+        data-readonly={readOnly || undefined}
         data-full-width={fullWidth || undefined}
       >
         {label && (
@@ -57,6 +61,8 @@ export const Input = React.forwardRef<HTMLInputElement, InputProps>(
             id={inputId}
             className="igt-field__input"
             disabled={disabled}
+            readOnly={readOnly}
+            aria-readonly={readOnly}
             aria-invalid={!!error}
             aria-describedby={
               error ? `${inputId}-error` : hint ? `${inputId}-hint` : undefined

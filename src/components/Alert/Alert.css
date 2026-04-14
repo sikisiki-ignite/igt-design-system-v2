@@ -1,0 +1,96 @@
+/* ============================================================
+   IGT Alert Component
+   피그마: 4 Alert
+   type(neutral/info/success/warning/danger)
+   ============================================================ */
+
+.igt-alert {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 12px 12px 16px; /* py=12, pl=16, pr=12 */
+  border-radius: 12px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+/* ── Type backgrounds ─────────────────────────────────────── */
+.igt-alert[data-type='neutral'] { background-color: var(--sys-container-neutral-tint-default); }
+.igt-alert[data-type='info']    { background-color: var(--sys-container-brand-tint-default); }
+.igt-alert[data-type='success'] { background-color: var(--sys-container-success-tint-default); }
+.igt-alert[data-type='warning'] { background-color: var(--sys-container-warning-tint-default); }
+.igt-alert[data-type='danger']  { background-color: var(--sys-container-danger-tint-default); }
+
+/* ── Content area ─────────────────────────────────────────── */
+.igt-alert__content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  flex: 1;
+  min-width: 0;
+  padding: 4px 0;
+}
+
+/* ── Icon ─────────────────────────────────────────────────── */
+.igt-alert__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  width: 20px;
+  height: 20px;
+}
+
+.igt-alert[data-type='neutral'] .igt-alert__icon { color: var(--sys-content-neutral-subtle); }
+.igt-alert[data-type='info']    .igt-alert__icon { color: var(--sys-content-status-info-default); }
+.igt-alert[data-type='success'] .igt-alert__icon { color: var(--sys-content-status-success-default); }
+.igt-alert[data-type='warning'] .igt-alert__icon { color: var(--sys-content-status-warning-default); }
+.igt-alert[data-type='danger']  .igt-alert__icon { color: var(--sys-content-status-danger-default); }
+
+/* ── Text group ───────────────────────────────────────────── */
+.igt-alert__text {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  flex: 1;
+  min-width: 0;
+}
+
+.igt-alert__title {
+  font-size: 14px;
+  font-weight: var(--ref-font-weight-600);
+  line-height: 20px;
+  color: var(--sys-content-neutral-strong);
+}
+
+.igt-alert__description {
+  font-size: 12px;
+  font-weight: var(--ref-font-weight-400);
+  line-height: 16px;
+  color: var(--sys-content-neutral-muted);
+}
+
+/* ── Dismiss button ───────────────────────────────────────── */
+.igt-alert__dismiss {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+  border: none;
+  border-radius: 6px;
+  background: transparent;
+  color: var(--sys-content-neutral-subtle);
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+}
+
+.igt-alert__dismiss:hover {
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+}
+
+.igt-alert__dismiss svg {
+  width: 20px;
+  height: 20px;
+}

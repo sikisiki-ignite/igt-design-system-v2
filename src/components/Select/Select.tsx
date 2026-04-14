@@ -2,8 +2,8 @@ import React from 'react'
 import clsx from 'clsx'
 import './Select.css'
 
-export type SelectSize = 'sm' | 'md' | 'lg'
-export type SelectFieldStyle = 'outline' | 'fill'
+export type SelectSize = 'xs' | 'sm' | 'md' | 'lg'
+export type SelectFieldStyle = 'outline' | 'fill' | 'plain'
 
 export interface SelectOption {
   value: string

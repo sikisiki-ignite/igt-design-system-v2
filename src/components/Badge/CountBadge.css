@@ -1,0 +1,60 @@
+/* ============================================================
+   IGT CountBadge Component
+   피그마: CountBadge (649:256039)
+   tone(urgent/accent/neutral) × size(sm/md/lg)
+   ============================================================ */
+
+.igt-count-badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  font-weight: var(--ref-font-weight-600);
+  white-space: nowrap;
+  color: white;
+  line-height: 1;
+}
+
+/* ── Size ──────────────────────────────────────────────────── */
+/* sm: h=20, px=6, font=11 */
+.igt-count-badge[data-size='sm'] {
+  height: 20px;
+  min-width: 20px;
+  padding: 0 6px;
+  font-size: 11px;
+  line-height: 14px;
+}
+
+/* md: h=24, px=7, font=12 */
+.igt-count-badge[data-size='md'] {
+  height: 24px;
+  min-width: 24px;
+  padding: 0 7px;
+  font-size: var(--text-label-xs-size, 12px);
+  line-height: 16px;
+}
+
+/* lg: h=28, px=8, font=14 */
+.igt-count-badge[data-size='lg'] {
+  height: 28px;
+  min-width: 28px;
+  padding: 0 8px;
+  font-size: var(--text-label-sm-size, 14px);
+  line-height: 20px;
+}
+
+/* ── Tone ──────────────────────────────────────────────────── */
+.igt-count-badge[data-tone='urgent'] {
+  background-color: var(--sys-container-danger-solid-strong);
+  color: var(--sys-content-on-danger-solid);
+}
+
+.igt-count-badge[data-tone='accent'] {
+  background-color: var(--sys-container-brand-solid-strong);
+  color: var(--sys-content-on-brand-solid);
+}
+
+.igt-count-badge[data-tone='neutral'] {
+  background-color: var(--sys-container-neutral-solid-strong);
+  color: var(--sys-content-on-neutral-solid);
+}

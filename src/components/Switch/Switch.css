@@ -1,0 +1,142 @@
+/* ============================================================
+   IGT Switch Component
+   피그마: 2 Switch
+   size(sm/md) × checked × disabled
+   ============================================================ */
+
+/* ── Hit area wrapper ─────────────────────────────────────── */
+.igt-switch-field {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ref-space-8);
+  cursor: pointer;
+}
+.igt-switch-field[data-disabled] {
+  cursor: not-allowed;
+  opacity: 0.5;
+}
+
+/* ── Text group ───────────────────────────────────────────── */
+.igt-switch-field__text {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  flex: 1;
+  min-width: 0;
+}
+.igt-switch-field__label {
+  font-size: var(--text-body-xs-size);  /* 14px */
+  font-weight: var(--ref-font-weight-600);
+  line-height: var(--text-body-xs-line-height);
+  color: var(--sys-content-neutral-default);
+}
+.igt-switch-field[data-size='sm'] .igt-switch-field__label {
+  font-size: 13px;
+  line-height: 18px;
+}
+.igt-switch-field__description {
+  font-size: 12px;
+  font-weight: var(--ref-font-weight-400);
+  line-height: 16px;
+  color: var(--sys-content-neutral-muted);
+}
+
+/* ── Switch control ───────────────────────────────────────── */
+.igt-switch {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* md: hit area 40×24, track 34×20 */
+.igt-switch[data-size='md'] {
+  width: 40px;
+  height: 24px;
+}
+/* sm: hit area 28×20, track 26×16 */
+.igt-switch[data-size='sm'] {
+  width: 28px;
+  height: 20px;
+}
+
+/* Hidden native input */
+.igt-switch__input {
+  position: absolute;
+  opacity: 0;
+  width: 0;
+  height: 0;
+  margin: 0;
+  pointer-events: none;
+}
+
+/* ── Track ────────────────────────────────────────────────── */
+.igt-switch__track {
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  border-radius: 9999px;
+  background-color: var(--sys-container-neutral-solid-default);
+  transition: background-color 0.15s ease;
+}
+
+.igt-switch[data-size='md'] .igt-switch__track {
+  width: 34px;
+  height: 20px;
+}
+.igt-switch[data-size='sm'] .igt-switch__track {
+  width: 26px;
+  height: 16px;
+}
+
+/* Checked state */
+.igt-switch__input:checked ~ .igt-switch__track {
+  background-color: var(--sys-container-brand-solid-default);
+}
+
+/* Disabled */
+.igt-switch__input:disabled ~ .igt-switch__track {
+  background-color: var(--sys-container-neutral-solid-disabled);
+}
+
+/* ── Thumb ────────────────────────────────────────────────── */
+.igt-switch__thumb {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  border-radius: 9999px;
+  background-color: white;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+  transition: left 0.15s ease;
+}
+
+.igt-switch[data-size='md'] .igt-switch__thumb {
+  width: 16px;
+  height: 16px;
+  left: calc(50% - 17px + 2px); /* off: 2px from left of track */
+}
+.igt-switch[data-size='sm'] .igt-switch__thumb {
+  width: 12px;
+  height: 12px;
+  left: calc(50% - 13px + 2px);
+}
+
+/* Thumb on checked */
+.igt-switch[data-size='md'] .igt-switch__input:checked ~ .igt-switch__thumb {
+  left: calc(50% - 17px + 16px); /* 34 - 16 - 2 */
+}
+.igt-switch[data-size='sm'] .igt-switch__input:checked ~ .igt-switch__thumb {
+  left: calc(50% - 13px + 12px); /* 26 - 12 - 2 */
+}
+
+/* Focus ring */
+.igt-switch__input:focus-visible ~ .igt-switch__track {
+  outline: 2px solid var(--sys-border-brand-default);
+  outline-offset: 2px;
+}
+
+/* Hover */
+.igt-switch:not([data-disabled]):hover .igt-switch__input:not(:disabled) ~ .igt-switch__track {
+  opacity: 0.88;
+}

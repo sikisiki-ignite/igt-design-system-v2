@@ -1,0 +1,7 @@
+.igt-icon {
+  display: inline-block;
+  flex-shrink: 0;
+  vertical-align: middle;
+  color: currentColor;
+  /* size는 width/height로 인라인 제어 */
+}

@@ -1,0 +1,220 @@
+/* ============================================================
+   IGT RadioGroup Component
+   피그마: RadioGroup (2125:27146)
+   ============================================================ */
+
+/* ── Group wrapper ─────────────────────────────────────────── */
+.igt-radio-group {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-12);
+}
+
+/* ── Group Label ───────────────────────────────────────────── */
+.igt-radio-group__label {
+  font-size: var(--text-label-md-size, 15px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-label-md-line-height, 20px);
+  color: var(--field-text-label);
+}
+
+/* ── Option list ───────────────────────────────────────────── */
+.igt-radio-group__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-4);
+}
+
+/* ── Hint / Error ──────────────────────────────────────────── */
+.igt-radio-group__hint,
+.igt-radio-group__error {
+  font-size: var(--text-body-sm-size, 15px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: 22px;
+  color: var(--field-text-helper);
+}
+.igt-radio-group__error {
+  color: var(--field-text-helper-error);
+}
+
+/* ============================================================
+   RadioGroupItem
+   ============================================================ */
+
+.igt-radio-group-item {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--ref-space-4);
+  cursor: pointer;
+}
+
+/* ── Hit area (dot-wrap) ───────────────────────────────────── */
+.igt-radio-group-item__dot-wrap {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.igt-radio-group-item[data-size='md'] .igt-radio-group-item__dot-wrap,
+.igt-radio-group-item:not([data-size]) .igt-radio-group-item__dot-wrap {
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+}
+
+.igt-radio-group-item[data-size='sm'] .igt-radio-group-item__dot-wrap {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+}
+
+/* ── Native input ──────────────────────────────────────────── */
+.igt-radio-group-item__input {
+  position: absolute;
+  inset: 0;
+  opacity: 0;
+  width: 100%;
+  height: 100%;
+  cursor: pointer;
+  margin: 0;
+}
+
+/* ── Custom dot ────────────────────────────────────────────── */
+.igt-radio-group-item__dot {
+  border-radius: 50%;
+  border: 1.5px solid var(--checkbox-border-unselected);
+  background-color: var(--checkbox-bg-unselected);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: background-color 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
+  pointer-events: none;
+  flex-shrink: 0;
+}
+
+.igt-radio-group-item[data-size='md'] .igt-radio-group-item__dot,
+.igt-radio-group-item:not([data-size]) .igt-radio-group-item__dot {
+  width: 20px;
+  height: 20px;
+}
+
+.igt-radio-group-item[data-size='sm'] .igt-radio-group-item__dot {
+  width: 16px;
+  height: 16px;
+}
+
+.igt-radio-group-item__dot::after {
+  content: '';
+  display: block;
+  border-radius: 50%;
+  background-color: transparent;
+  transition: background-color 0.12s ease;
+}
+
+.igt-radio-group-item[data-size='md'] .igt-radio-group-item__dot::after,
+.igt-radio-group-item:not([data-size]) .igt-radio-group-item__dot::after {
+  width: 8px;
+  height: 8px;
+}
+
+.igt-radio-group-item[data-size='sm'] .igt-radio-group-item__dot::after {
+  width: 6px;
+  height: 6px;
+}
+
+/* ── Checked ───────────────────────────────────────────────── */
+.igt-radio-group-item__input:checked + .igt-radio-group-item__dot {
+  background-color: var(--checkbox-bg-selected);
+  border-color: transparent;
+}
+.igt-radio-group-item__input:checked + .igt-radio-group-item__dot::after {
+  background-color: var(--sys-content-on-brand-solid, white);
+}
+
+/* ── Hover ─────────────────────────────────────────────────── */
+.igt-radio-group-item__input:not(:disabled):hover + .igt-radio-group-item__dot {
+  border-color: var(--checkbox-border-unselected-hover);
+}
+.igt-radio-group-item__input:not(:disabled):checked:hover + .igt-radio-group-item__dot {
+  background-color: var(--checkbox-bg-selected-hover);
+}
+
+/* ── Focus ring ────────────────────────────────────────────── */
+.igt-radio-group-item__input:focus-visible + .igt-radio-group-item__dot {
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--sys-border-brand-default);
+}
+
+/* ── Disabled ──────────────────────────────────────────────── */
+.igt-radio-group-item[data-disabled] {
+  cursor: not-allowed;
+}
+.igt-radio-group-item[data-disabled] .igt-radio-group-item__input {
+  cursor: not-allowed;
+}
+.igt-radio-group-item[data-disabled] .igt-radio-group-item__dot {
+  opacity: 0.4;
+}
+.igt-radio-group-item[data-disabled] .igt-radio-group-item__label,
+.igt-radio-group-item[data-disabled] .igt-radio-group-item__description {
+  opacity: 0.4;
+}
+
+/* ── ReadOnly ──────────────────────────────────────────────── */
+.igt-radio-group-item[data-readonly] {
+  cursor: default;
+}
+.igt-radio-group-item[data-readonly] .igt-radio-group-item__input {
+  cursor: default;
+  pointer-events: none;
+}
+.igt-radio-group-item[data-readonly] .igt-radio-group-item__dot {
+  background-color: var(--checkbox-bg-unselected-readonly);
+  border-color: var(--checkbox-border-unselected-readonly);
+}
+.igt-radio-group-item[data-readonly] .igt-radio-group-item__input:checked + .igt-radio-group-item__dot {
+  background-color: var(--checkbox-bg-selected-readonly);
+  border-color: transparent;
+}
+
+/* ── Text (label + description) ────────────────────────────── */
+.igt-radio-group-item__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+.igt-radio-group-item__label {
+  font-size: var(--text-body-sm-size, 15px);
+  font-weight: var(--ref-font-weight-600);
+  line-height: 22px;
+  color: var(--sys-content-neutral-default);
+  cursor: pointer;
+  padding-top: calc((28px - 22px) / 2);
+}
+
+.igt-radio-group-item[data-size='sm'] .igt-radio-group-item__label {
+  font-size: var(--text-body-xs-size, 14px);
+  line-height: 20px;
+  padding-top: calc((24px - 20px) / 2);
+}
+
+.igt-radio-group-item[data-disabled] .igt-radio-group-item__label {
+  cursor: not-allowed;
+}
+.igt-radio-group-item[data-readonly] .igt-radio-group-item__label {
+  cursor: default;
+}
+
+.igt-radio-group-item__description {
+  font-size: var(--text-body-xs-size, 14px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: 20px;
+  color: var(--sys-content-neutral-muted);
+}
+
+.igt-radio-group-item[data-size='sm'] .igt-radio-group-item__description {
+  font-size: var(--ref-font-size-13, 13px);
+  line-height: 18px;
+}

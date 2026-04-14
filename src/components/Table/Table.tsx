@@ -25,6 +25,7 @@ export interface TableProps<T = Record<string, unknown>> {
   className?: string
   striped?: boolean
   stickyHeader?: boolean
+  bordered?: boolean
   onRowClick?: (row: T, index: number) => void
 }
 
@@ -40,6 +41,7 @@ export function Table<T = Record<string, unknown>>({
   className,
   striped = false,
   stickyHeader = false,
+  bordered = false,
   onRowClick,
 }: TableProps<T>) {
   const getRowKey = (row: T, index: number): string => {
@@ -59,7 +61,7 @@ export function Table<T = Record<string, unknown>>({
 
   return (
     <div
-      className={clsx('igt-table-wrap', className)}
+      className={clsx('igt-table-wrap', bordered && 'igt-table-wrap--bordered', className)}
       data-loading={loading || undefined}
       data-sticky-header={stickyHeader || undefined}
     >

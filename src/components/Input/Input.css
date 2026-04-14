@@ -1,133 +1,207 @@
-/* ============================================
-   IGT Input / Field Component
-   ============================================ */
+/* ============================================================
+   IGT Input / TextField Component
+   피그마: 2 TextField (234:49609)
+   variant(outline/fill) × size(sm/md/lg) × state
+   ============================================================ */
 
 .igt-field {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--ref-space-6); /* 피그마: gap-stack 6px */
 }
 
 .igt-field[data-full-width] {
   width: 100%;
 }
 
-/* Label */
+/* ── Label ────────────────────────────────────────────────── */
 .igt-field__label {
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-medium);
-  line-height: var(--line-height-sm);
-  color: var(--field-label-color);
+  font-size: var(--text-label-md-size);   /* 15px */
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-label-md-line-height);
+  color: var(--field-text-label);
 }
 
-/* Wrapper */
+/* ── Input Wrapper ────────────────────────────────────────── */
 .igt-field__input-wrap {
   display: flex;
   align-items: center;
-  border-radius: var(--radius-md);
-  transition: border-color 0.15s ease, background-color 0.15s ease, box-shadow 0.15s ease;
-  overflow: hidden;
+  gap: var(--ref-space-4);   /* 피그마: gapinline ≈ 5px → 4px */
+  transition: border-color 0.12s ease, background-color 0.12s ease, box-shadow 0.12s ease;
+  position: relative;
 }
 
-/* ---- Outline style ---- */
+/* ── Size ─────────────────────────────────────────────────── */
+/* sm: h=32, px=8, radius=8, font=13 */
+.igt-field[data-size='sm'] .igt-field__input-wrap {
+  height: var(--size-comp-height-sm);    /* 32px */
+  padding: 0 var(--size-comp-padding-xs); /* 0 8px */
+  border-radius: var(--radius-md);        /* 8px */
+}
+.igt-field[data-size='sm'] .igt-field__input {
+  font-size: var(--text-label-sm-size);  /* 13px */
+  line-height: var(--text-label-sm-line-height);
+}
+
+/* md: h=36, px=10, radius=10, font=15 */
+.igt-field[data-size='md'] .igt-field__input-wrap {
+  height: var(--size-comp-height-md);    /* 36px */
+  padding: 0 var(--ref-space-8);          /* 0 8px (피그마 10px 근접) */
+  border-radius: var(--radius-lg);        /* 10px */
+}
+.igt-field[data-size='md'] .igt-field__input {
+  font-size: var(--text-label-md-size);  /* 15px */
+  line-height: var(--text-label-md-line-height);
+}
+
+/* lg: h=40, px=10, radius=12, font=17 */
+.igt-field[data-size='lg'] .igt-field__input-wrap {
+  height: var(--size-comp-height-lg);    /* 40px */
+  padding: 0 var(--ref-space-8);          /* 0 8px */
+  border-radius: var(--radius-xl);        /* 12px */
+}
+.igt-field[data-size='lg'] .igt-field__input {
+  font-size: var(--text-body-sm-size);   /* 15px (피그마 body/lg=17px, 현재 토큰 없어 sm 사용) */
+  line-height: var(--text-body-sm-line-height);
+}
+
+/* ── Outline style ────────────────────────────────────────── */
 .igt-field[data-style='outline'] .igt-field__input-wrap {
   background-color: var(--field-outline-bg);
   border: 1px solid var(--field-outline-border);
 }
+.igt-field[data-style='outline']:not([data-disabled]) .igt-field__input-wrap:hover {
+  border-color: var(--field-outline-border-hover);
+}
 .igt-field[data-style='outline'] .igt-field__input-wrap:focus-within {
-  border-color: var(--field-outline-focus-border);
-  box-shadow: 0 0 0 3px var(--field-outline-focus-ring);
+  border-color: var(--field-outline-border-focus);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-focus);
 }
 .igt-field[data-style='outline'][data-state='error'] .igt-field__input-wrap {
-  border-color: var(--field-outline-error-border);
+  border-color: var(--field-outline-border-error);
 }
 .igt-field[data-style='outline'][data-state='error'] .igt-field__input-wrap:focus-within {
-  box-shadow: 0 0 0 3px var(--field-outline-error-ring);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-error);
 }
 
-/* ---- Fill style ---- */
+/* ── Fill style ───────────────────────────────────────────── */
 .igt-field[data-style='fill'] .igt-field__input-wrap {
   background-color: var(--field-fill-bg);
   border: 1px solid transparent;
-  border-bottom-color: var(--field-fill-border-bottom);
-  border-radius: var(--radius-md) var(--radius-md) 0 0;
+  border-bottom: 1px solid var(--sys-border-neutral-subtle);
+  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
+}
+.igt-field[data-size='lg'][data-style='fill'] .igt-field__input-wrap {
+  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
+}
+.igt-field[data-style='fill']:not([data-disabled]) .igt-field__input-wrap:hover {
+  border-bottom-color: var(--field-fill-border-hover);
 }
 .igt-field[data-style='fill'] .igt-field__input-wrap:focus-within {
-  border-bottom-color: var(--field-fill-focus-border-bottom);
+  border-bottom-color: var(--field-fill-border-focus);
+  border-bottom-width: 2px;
 }
 .igt-field[data-style='fill'][data-state='error'] .igt-field__input-wrap {
-  border-bottom-color: var(--field-fill-error-border-bottom);
+  border-bottom-color: var(--field-fill-border-error);
 }
 
-/* ---- Disabled ---- */
+/* ── Disabled ─────────────────────────────────────────────── */
 .igt-field[data-disabled] .igt-field__input-wrap {
-  opacity: 0.4;
+  background-color: var(--field-outline-bg-disabled);
+  border-color: var(--field-outline-border-disabled);
   cursor: not-allowed;
+}
+.igt-field[data-style='fill'][data-disabled] .igt-field__input-wrap {
+  border-bottom-color: var(--field-outline-border-disabled);
 }
 .igt-field[data-disabled] .igt-field__input {
   cursor: not-allowed;
 }
 
-/* ---- Size ---- */
-.igt-field[data-size='sm'] .igt-field__input-wrap {
-  height: var(--comp-height-sm);
-  padding: 0 var(--comp-padding-sm);
+/* ── ReadOnly ─────────────────────────────────────────────── */
+.igt-field[data-readonly] .igt-field__input-wrap {
+  background-color: var(--field-outline-bg-disabled);
+  border-color: var(--field-outline-border-disabled);
+  cursor: default;
 }
-.igt-field[data-size='md'] .igt-field__input-wrap {
-  height: var(--comp-height-md);
-  padding: 0 var(--comp-padding-md);
+.igt-field[data-style='fill'][data-readonly] .igt-field__input-wrap {
+  border-bottom-color: var(--field-outline-border-disabled);
 }
-.igt-field[data-size='lg'] .igt-field__input-wrap {
-  height: var(--comp-height-lg);
-  padding: 0 var(--comp-padding-lg);
+.igt-field[data-readonly] .igt-field__input {
+  cursor: default;
+  color: var(--field-text-value);
+}
+.igt-field[data-readonly] .igt-field__input-wrap:hover {
+  border-color: var(--field-outline-border-disabled);
+}
+.igt-field[data-readonly] .igt-field__input-wrap:focus-within {
+  box-shadow: none;
+  border-color: var(--field-outline-border-disabled);
 }
 
-/* Input element */
+/* ── Input element ────────────────────────────────────────── */
 .igt-field__input {
   flex: 1;
   min-width: 0;
   border: none;
   outline: none;
   background: transparent;
-  color: var(--field-text-color);
-  font-size: var(--font-size-md);
+  color: var(--field-text-value);
   font-family: inherit;
-  line-height: var(--line-height-md);
+  font-weight: var(--ref-font-weight-400);
 }
-
-.igt-field[data-size='sm'] .igt-field__input {
-  font-size: var(--font-size-sm);
-}
-
 .igt-field__input::placeholder {
-  color: var(--field-placeholder-color);
+  color: var(--field-text-placeholder);
+  font-weight: var(--ref-font-weight-400);
+}
+.igt-field[data-disabled] .igt-field__input {
+  color: var(--field-text-disabled);
 }
 
-/* Prefix / Suffix */
+/* ── Prefix / Suffix ──────────────────────────────────────── */
 .igt-field__prefix,
 .igt-field__suffix {
   display: inline-flex;
   align-items: center;
-  color: var(--field-adornment-color);
-  font-size: var(--comp-icon-md);
+  color: var(--field-icon);
   flex-shrink: 0;
+  line-height: 1;
 }
-.igt-field__prefix {
-  margin-right: var(--spacing-2);
+.igt-field[data-size='sm'] .igt-field__prefix,
+.igt-field[data-size='sm'] .igt-field__suffix {
+  width: var(--size-icon-sm); height: var(--size-icon-sm);
 }
-.igt-field__suffix {
-  margin-left: var(--spacing-2);
+.igt-field[data-size='md'] .igt-field__prefix,
+.igt-field[data-size='md'] .igt-field__suffix {
+  width: var(--size-icon-sm); height: var(--size-icon-sm);
+}
+.igt-field[data-size='lg'] .igt-field__prefix,
+.igt-field[data-size='lg'] .igt-field__suffix {
+  width: var(--size-icon-md); height: var(--size-icon-md);
+}
+.igt-field[data-disabled] .igt-field__prefix,
+.igt-field[data-disabled] .igt-field__suffix {
+  color: var(--field-icon-disabled);
 }
 
-/* Hint / Error */
+/* text prefix/suffix */
+.igt-field__prefix--text,
+.igt-field__suffix--text {
+  color: var(--field-text-value);
+  font-size: inherit;
+  white-space: nowrap;
+}
+
+/* ── Hint / Error ─────────────────────────────────────────── */
 .igt-field__hint {
-  font-size: var(--font-size-sm);
-  color: var(--field-hint-color);
-  line-height: var(--line-height-sm);
+  font-size: var(--text-body-sm-size);   /* 15px */
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper);
+  line-height: var(--text-body-sm-line-height);
 }
-
 .igt-field__error {
-  font-size: var(--font-size-sm);
-  color: var(--field-error-color);
-  line-height: var(--line-height-sm);
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper-error);
+  line-height: var(--text-body-sm-line-height);
 }

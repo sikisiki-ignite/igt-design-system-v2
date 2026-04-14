@@ -1,0 +1,110 @@
+/* ============================================================
+   IGT Label (StatusLabel) Component
+   피그마: 6 Label
+   tone(soft/fill) × color(info/warning/danger/success) × size(xs/sm/md/lg/xl)
+   ============================================================ */
+
+.igt-label {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  border: 1px solid transparent;
+  border-radius: 9999px;   /* pill */
+  white-space: nowrap;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+/* xs: h=16px, px=5px, gap=0, font=11px */
+.igt-label[data-size='xs'] {
+  height: 16px;
+  padding: 0 5px;
+  gap: 0;
+  font-size: 11px;
+  font-weight: var(--ref-font-weight-600);
+  line-height: 14px;
+}
+/* sm: h=20px, px=6px, gap=1px, font=11px */
+.igt-label[data-size='sm'] {
+  height: 20px;
+  padding: 0 6px;
+  gap: 1px;
+  font-size: 11px;
+  font-weight: var(--ref-font-weight-600);
+  line-height: 14px;
+}
+/* md: h=24px, px=7px, gap=1px, font=12px */
+.igt-label[data-size='md'] {
+  height: 24px;
+  padding: 0 7px;
+  gap: 1px;
+  font-size: 12px;
+  font-weight: var(--ref-font-weight-600);
+  line-height: 16px;
+}
+/* lg: h=28px, px=8px, gap=2px, font=13px */
+.igt-label[data-size='lg'] {
+  height: 28px;
+  padding: 0 8px;
+  gap: 2px;
+  font-size: 13px;
+  font-weight: var(--ref-font-weight-600);
+  line-height: 16px;
+}
+/* xl: h=32px, px=10px, gap=2px, font=14px */
+.igt-label[data-size='xl'] {
+  height: 32px;
+  padding: 0 10px;
+  gap: 2px;
+  font-size: 14px;
+  font-weight: var(--ref-font-weight-600);
+  line-height: 20px;
+}
+
+/* ── Icon ─────────────────────────────────────────────────── */
+.igt-label__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+.igt-label[data-size='xs'] .igt-label__icon,
+.igt-label[data-size='sm'] .igt-label__icon { width: 11px; height: 11px; }
+.igt-label[data-size='md'] .igt-label__icon { width: 12px; height: 12px; }
+.igt-label[data-size='lg'] .igt-label__icon { width: 13px; height: 13px; }
+.igt-label[data-size='xl'] .igt-label__icon { width: 14px; height: 14px; }
+
+/* ── Soft (tint) backgrounds ──────────────────────────────── */
+.igt-label[data-tone='soft'][data-color='info'] {
+  background-color: var(--sys-container-brand-tint-default);
+  color: var(--sys-content-status-info-strong);
+}
+.igt-label[data-tone='soft'][data-color='success'] {
+  background-color: var(--sys-container-success-tint-default);
+  color: var(--sys-content-status-success-strong);
+}
+.igt-label[data-tone='soft'][data-color='warning'] {
+  background-color: var(--sys-container-warning-tint-default);
+  color: var(--sys-content-status-warning-strong);
+}
+.igt-label[data-tone='soft'][data-color='danger'] {
+  background-color: var(--sys-container-danger-tint-default);
+  color: var(--sys-content-status-danger-strong);
+}
+
+/* ── Fill (solid) backgrounds ─────────────────────────────── */
+.igt-label[data-tone='fill'][data-color='info'] {
+  background-color: var(--sys-container-brand-solid-default);
+  color: var(--sys-content-on-brand-solid);
+}
+.igt-label[data-tone='fill'][data-color='success'] {
+  background-color: var(--sys-container-success-solid-default);
+  color: var(--sys-content-on-brand-solid);
+}
+.igt-label[data-tone='fill'][data-color='warning'] {
+  background-color: var(--sys-container-warning-solid-default);
+  color: var(--sys-content-status-warning-strong);
+}
+.igt-label[data-tone='fill'][data-color='danger'] {
+  background-color: var(--sys-container-danger-solid-default);
+  color: var(--sys-content-on-brand-solid);
+}

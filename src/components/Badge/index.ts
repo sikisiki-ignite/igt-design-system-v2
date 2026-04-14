@@ -1,2 +1,6 @@
 export { Badge } from './Badge'
 export type { BadgeProps, BadgeVariant, BadgeStyle, BadgeSize } from './Badge'
+export { CountBadge } from './CountBadge'
+export type { CountBadgeProps, CountBadgeTone, CountBadgeSize } from './CountBadge'
+export { DotBadge } from './DotBadge'
+export type { DotBadgeProps, DotBadgeTone, DotBadgeSize } from './DotBadge'

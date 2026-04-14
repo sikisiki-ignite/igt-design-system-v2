@@ -1,124 +1,142 @@
-/* ============================================
+/* ============================================================
    IGT Toast Component
-   ============================================ */
+   피그마: 4 Toast
+   type(neutral/info/success/warning/error) × dismissible
+   ============================================================ */
 
 .igt-toast {
   display: flex;
-  align-items: flex-start;
-  gap: var(--spacing-3);
-  padding: var(--spacing-3) var(--spacing-4);
-  border-radius: var(--radius-lg);
+  align-items: center;
+  gap: 6px; /* 피그마: gap 6px */
+  padding: 10px 14px; /* 피그마: py=10px, px=14px */
+  border-radius: 12px; /* 피그마: radius 12px */
   box-shadow: var(--elevation-floating);
-  min-width: 280px;
-  max-width: 420px;
-  border-left: 4px solid transparent;
+  background-color: var(--sys-surface-floating); /* 피그마: dark floating surface */
+  color: rgba(255, 255, 255, 0.9); /* --sys/contenton/dark/default */
+  width: 400px; /* 피그마: 고정 너비 */
+  max-width: 100%;
+  overflow: hidden;
 }
 
-.igt-toast[data-type='info'] {
-  background-color: var(--toast-info-bg);
-  color: var(--toast-info-text);
-  border-left-color: var(--toast-info-border);
-}
-.igt-toast[data-type='success'] {
-  background-color: var(--toast-success-bg);
-  color: var(--toast-success-text);
-  border-left-color: var(--toast-success-border);
-}
-.igt-toast[data-type='warning'] {
-  background-color: var(--toast-warning-bg);
-  color: var(--toast-warning-text);
-  border-left-color: var(--toast-warning-border);
-}
-.igt-toast[data-type='error'] {
-  background-color: var(--toast-error-bg);
-  color: var(--toast-error-text);
-  border-left-color: var(--toast-error-border);
-}
-
+/* ── Leading Icon ─────────────────────────────────────────── */
 .igt-toast__icon {
   display: inline-flex;
   align-items: center;
   flex-shrink: 0;
-  margin-top: 1px;
+  width: 20px;
+  height: 20px;
 }
 
+.igt-toast[data-type='info']    .igt-toast__icon { color: var(--toast-info-icon); }
+.igt-toast[data-type='success'] .igt-toast__icon { color: var(--toast-success-icon); }
+.igt-toast[data-type='warning'] .igt-toast__icon { color: var(--toast-warning-icon); }
+.igt-toast[data-type='error']   .igt-toast__icon { color: var(--toast-danger-icon); }
+
+/* ── Message ──────────────────────────────────────────────── */
 .igt-toast__content {
   flex: 1;
   min-width: 0;
-}
-
-.igt-toast__title {
-  margin: 0 0 var(--spacing-1);
-  font-size: var(--font-size-sm);
-  font-weight: var(--font-weight-semibold);
-  line-height: var(--line-height-sm);
+  padding: 0 4px; /* 피그마: labelPaddingX 4px */
 }
 
 .igt-toast__message {
   margin: 0;
-  font-size: var(--font-size-sm);
-  line-height: var(--line-height-sm);
+  font-size: var(--text-body-xs-size, 14px); /* body/xs/semibold 14px */
+  font-weight: var(--ref-font-weight-600);
+  line-height: 20px;
 }
 
+/* Title (optional, above message) */
+.igt-toast__title {
+  margin: 0 0 var(--ref-space-4);
+  font-size: var(--text-body-xs-size, 14px);
+  font-weight: var(--ref-font-weight-600);
+  line-height: 20px;
+}
+
+/* ── Action Button ────────────────────────────────────────── */
+.igt-toast__action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px; /* 피그마: actionPaddingX 4px */
+  flex-shrink: 0;
+  font-size: var(--text-body-xs-size, 14px);
+  font-weight: var(--ref-font-weight-600);
+  line-height: 20px;
+  white-space: nowrap;
+  color: rgba(255, 255, 255, 0.72); /* --sys/contenton/dark/subtle */
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  transition: color 0.12s ease;
+}
+.igt-toast__action:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── Dismiss Button ───────────────────────────────────────── */
 .igt-toast__close {
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  width: 24px;
-  height: 24px;
+  width: 20px;
+  height: 20px;
   border: none;
   background: transparent;
-  color: currentColor;
-  opacity: 0.6;
+  color: rgba(255, 255, 255, 0.72);
   cursor: pointer;
   border-radius: var(--radius-sm);
   flex-shrink: 0;
-  transition: opacity 0.15s ease;
+  padding: 0;
+  transition: color 0.12s ease;
 }
-.igt-toast__close:hover { opacity: 1; }
+.igt-toast__close:hover {
+  color: rgba(255, 255, 255, 0.9);
+}
 
-/* ---- Toast Container ---- */
+/* ── Toast Container ──────────────────────────────────────── */
 .igt-toast-container {
   position: fixed;
-  z-index: var(--z-toast, 1100);
+  z-index: var(--z-toast);
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-2);
+  gap: var(--ref-space-8);
   pointer-events: none;
 }
 
 .igt-toast-container > * { pointer-events: auto; }
 
 .igt-toast-container[data-position='top-right'] {
-  top: var(--spacing-4);
-  right: var(--spacing-4);
+  top: var(--ref-space-16);
+  right: var(--ref-space-16);
   align-items: flex-end;
 }
 .igt-toast-container[data-position='top-left'] {
-  top: var(--spacing-4);
-  left: var(--spacing-4);
+  top: var(--ref-space-16);
+  left: var(--ref-space-16);
   align-items: flex-start;
 }
 .igt-toast-container[data-position='top-center'] {
-  top: var(--spacing-4);
+  top: var(--ref-space-16);
   left: 50%;
   transform: translateX(-50%);
   align-items: center;
 }
 .igt-toast-container[data-position='bottom-right'] {
-  bottom: var(--spacing-4);
-  right: var(--spacing-4);
+  bottom: var(--ref-space-16);
+  right: var(--ref-space-16);
   align-items: flex-end;
   flex-direction: column-reverse;
 }
 .igt-toast-container[data-position='bottom-left'] {
-  bottom: var(--spacing-4);
-  left: var(--spacing-4);
+  bottom: var(--ref-space-16);
+  left: var(--ref-space-16);
   align-items: flex-start;
   flex-direction: column-reverse;
 }
 .igt-toast-container[data-position='bottom-center'] {
-  bottom: var(--spacing-4);
+  bottom: var(--ref-space-16);
   left: 50%;
   transform: translateX(-50%);
   align-items: center;

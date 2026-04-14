@@ -1,27 +1,47 @@
-/* ============================================
+/* ============================================================
    IGT Radio Component
-   ============================================ */
+   피그마: 2 Radio
+   size(sm/md) × state(selected/unselected) × states
+   ============================================================ */
 
 .igt-radio {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--ref-space-4);
 }
 
+/* ── Control Row ──────────────────────────────────────────── */
 .igt-radio__control-row {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
+  align-items: flex-start;
+  gap: var(--ref-space-4); /* 피그마: gap 4px */
 }
 
+/* ── Hit Area (dot-wrap) ──────────────────────────────────── */
 .igt-radio__dot-wrap {
   position: relative;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
 }
 
+/* md: hit area 28px */
+.igt-radio[data-size='md'] .igt-radio__dot-wrap,
+.igt-radio:not([data-size]) .igt-radio__dot-wrap {
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+}
+
+/* sm: hit area 24px */
+.igt-radio[data-size='sm'] .igt-radio__dot-wrap {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+}
+
+/* ── Native Input ─────────────────────────────────────────── */
 .igt-radio__input {
   position: absolute;
   inset: 0;
@@ -32,68 +52,166 @@
   margin: 0;
 }
 
+/* ── Custom Dot (circle control) ──────────────────────────── */
 .igt-radio__dot {
-  width: 18px;
-  height: 18px;
   border-radius: 50%;
-  border: 1.5px solid var(--cb-border);
-  background-color: var(--cb-bg);
+  border: 1.5px solid var(--checkbox-border-unselected);
+  background-color: var(--checkbox-bg-unselected);
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  transition: background-color 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
   pointer-events: none;
+  flex-shrink: 0;
 }
 
+/* md: control 20px */
+.igt-radio[data-size='md'] .igt-radio__dot,
+.igt-radio:not([data-size]) .igt-radio__dot {
+  width: 20px;
+  height: 20px;
+}
+
+/* sm: control 16px */
+.igt-radio[data-size='sm'] .igt-radio__dot {
+  width: 16px;
+  height: 16px;
+}
+
+/* Inner white dot via ::after */
 .igt-radio__dot::after {
   content: '';
   display: block;
-  width: 8px;
-  height: 8px;
   border-radius: 50%;
   background-color: transparent;
-  transition: background-color 0.15s ease;
+  transition: background-color 0.12s ease, width 0.12s ease, height 0.12s ease;
 }
 
+/* md inner dot: 8px (16px inner / 2px padding each side) */
+.igt-radio[data-size='md'] .igt-radio__dot::after,
+.igt-radio:not([data-size]) .igt-radio__dot::after {
+  width: 8px;
+  height: 8px;
+}
+
+/* sm inner dot: 6px */
+.igt-radio[data-size='sm'] .igt-radio__dot::after {
+  width: 6px;
+  height: 6px;
+}
+
+/* ── Selected (checked) ───────────────────────────────────── */
+/* 피그마: solid filled circle, white center dot */
 .igt-radio__input:checked + .igt-radio__dot {
-  border-color: var(--cb-checked-border);
-  background-color: var(--cb-bg);
+  background-color: var(--checkbox-bg-selected);
+  border-color: transparent;
+  border-width: 1px;
 }
-
 .igt-radio__input:checked + .igt-radio__dot::after {
-  background-color: var(--cb-checked-bg);
+  background-color: var(--sys-content-on-brand-solid, white);
 }
 
-.igt-radio__input:focus-visible + .igt-radio__dot {
-  box-shadow: 0 0 0 3px var(--cb-focus-ring);
-}
-
+/* ── Hover ────────────────────────────────────────────────── */
 .igt-radio__input:not(:disabled):hover + .igt-radio__dot {
-  border-color: var(--cb-hover-border);
+  border-color: var(--checkbox-border-unselected-hover);
+}
+.igt-radio__input:not(:disabled):checked:hover + .igt-radio__dot {
+  background-color: var(--checkbox-bg-selected-hover);
 }
 
-.igt-radio[data-disabled] .igt-radio__input { cursor: not-allowed; }
-.igt-radio[data-disabled] .igt-radio__dot { opacity: 0.4; }
-.igt-radio[data-state='error'] .igt-radio__dot { border-color: var(--cb-error-border); }
+/* ── Focus Ring ───────────────────────────────────────────── */
+.igt-radio__input:focus-visible + .igt-radio__dot {
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--sys-border-brand-default);
+}
 
+/* ── Disabled ─────────────────────────────────────────────── */
+.igt-radio[data-disabled] .igt-radio__input {
+  cursor: not-allowed;
+}
+.igt-radio[data-disabled] .igt-radio__dot {
+  opacity: 0.4;
+}
+
+/* ── ReadOnly ─────────────────────────────────────────────── */
+.igt-radio[data-readonly] .igt-radio__input {
+  cursor: default;
+  pointer-events: none;
+}
+.igt-radio[data-readonly] .igt-radio__dot {
+  background-color: var(--checkbox-bg-unselected-readonly);
+  border-color: var(--checkbox-border-unselected-readonly);
+}
+.igt-radio[data-readonly] .igt-radio__input:checked + .igt-radio__dot {
+  background-color: var(--checkbox-bg-selected-readonly);
+  border-color: transparent;
+}
+
+/* ── Error (invalid) ──────────────────────────────────────── */
+.igt-radio[data-state='error'] .igt-radio__dot {
+  border-color: var(--sys-border-danger-default);
+}
+
+/* ── Text (label + description wrapper) ──────────────────── */
+.igt-radio__text {
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+}
+
+/* ── Label ────────────────────────────────────────────────── */
 .igt-radio__label {
-  font-size: var(--font-size-md);
-  color: var(--field-label-color);
+  font-size: var(--text-body-sm-size);     /* 15px */
+  font-weight: var(--ref-font-weight-600); /* semibold */
+  line-height: var(--text-body-sm-line-height); /* 22px */
+  color: var(--field-text-label);
   cursor: pointer;
-  line-height: var(--line-height-md);
+  padding-top: calc((28px - var(--text-body-sm-line-height)) / 2);
 }
+.igt-radio[data-size='sm'] .igt-radio__label {
+  font-size: var(--text-body-xs-size, 14px);
+  line-height: 20px;
+  padding-top: calc((24px - 20px) / 2);
+}
+
 .igt-radio[data-disabled] .igt-radio__label {
   opacity: 0.4;
   cursor: not-allowed;
 }
+.igt-radio[data-readonly] .igt-radio__label {
+  cursor: default;
+}
+
+/* ── Description ─────────────────────────────────────────── */
+.igt-radio__description {
+  font-size: var(--text-body-xs-size, 14px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: 20px;
+  color: var(--sys-content-neutral-muted);
+}
+.igt-radio[data-size='sm'] .igt-radio__description {
+  font-size: var(--ref-font-size-13, 13px);
+  line-height: 18px;
+}
+.igt-radio[data-disabled] .igt-radio__description {
+  opacity: 0.4;
+}
+
+/* ── Hint / Error text ────────────────────────────────────── */
+.igt-radio__hint,
+.igt-radio__error {
+  font-size: var(--text-body-xs-size, 14px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: 20px;
+  margin-left: calc(28px + var(--ref-space-4));
+}
+.igt-radio[data-size='sm'] .igt-radio__hint,
+.igt-radio[data-size='sm'] .igt-radio__error {
+  margin-left: calc(24px + var(--ref-space-4));
+}
 
 .igt-radio__hint {
-  font-size: var(--font-size-sm);
-  color: var(--field-hint-color);
-  margin-left: 26px;
+  color: var(--field-text-helper);
 }
 .igt-radio__error {
-  font-size: var(--font-size-sm);
-  color: var(--field-error-color);
-  margin-left: 26px;
+  color: var(--field-text-helper-error);
 }

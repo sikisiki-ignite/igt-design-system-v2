@@ -1,7 +1,50 @@
 /* =============================================================================
    IGT Design System — Global CSS Variables
-   Generated from Figma Design Tokens (01 Primitives + 02 Semantic Light/Dark)
+   Generated from Figma Design Tokens (Primitives + Semantic Light/Dark)
    ============================================================================= */
+
+/* -----------------------------------------------------------------------------
+   Font — IGTSans
+   ----------------------------------------------------------------------------- */
+@font-face {
+  font-family: 'IGTSans';
+  src: url('/fonts/IGT System Sans Light.otf') format('opentype');
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IGTSans';
+  src: url('/fonts/IGT System Sans Regular.otf') format('opentype');
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IGTSans';
+  src: url('/fonts/IGT System Sans Medium.otf') format('opentype');
+  font-weight: 500;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IGTSans';
+  src: url('/fonts/IGT System Sans Semibold.otf') format('opentype');
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: 'IGTSans';
+  src: url('/fonts/IGT System Sans Bold.otf') format('opentype');
+  font-weight: 700;
+  font-style: normal;
+  font-display: swap;
+}
 
 /* -----------------------------------------------------------------------------
    Primitive Tokens (ref.*)
@@ -297,16 +340,23 @@
    Semantic Tokens — Dark Mode
    ----------------------------------------------------------------------------- */
 [data-theme="dark"] {
+
+  /* --- Surface --- */
   --sys-surface-base: #17171c;
   --sys-surface-subtle: #2c2c35;
+  --sys-surface-upper: #4d4d59;
   --sys-surface-overlay: #2c2c35;
   --sys-surface-raised: #1c1c22;
   --sys-surface-floating: #4d4d59;
   --sys-surface-grouped-default: #202027;
+  --sys-surface-grouped-alpha: #d9d9ff0d;
+
+  /* --- Background --- */
   --sys-background-base: #17171c;
   --sys-background-subtle: #101013;
   --sys-background-inverse: #ffffff;
 
+  /* --- Content (Text) --- */
   --sys-content-neutral-strong: #ffffff;
   --sys-content-neutral-default: #fdfdfee3;
   --sys-content-neutral-muted: #f8f8ffab;
@@ -318,19 +368,85 @@
 
   --sys-content-brand-strong: #449bff;
   --sys-content-brand-default: #3485fa;
+  --sys-content-brand-disabled: #3485fa54;
 
-  --sys-container-neutral-solid-strong: #62626d;
-  --sys-container-neutral-solid-default: #4d4d59;
+  --sys-content-status-danger-strong: #ff7a84;
+  --sys-content-status-danger-default: #f04251;
+  --sys-content-status-danger-disabled: #f0425154;
+  --sys-content-status-warning-strong: #ffc342;   /* yellowD.700 — Figma 확인 권장 */
+  --sys-content-status-warning-default: #ffb84a;  /* yellowD.600 — Figma 확인 권장 */
+  --sys-content-status-success-strong: #02c46e;   /* greenD.700 — Figma 확인 권장 */
+  --sys-content-status-success-default: #02a262;  /* greenD.600 — Figma 확인 권장 */
+  --sys-content-status-info-strong: #62b4ff;      /* blueD.700 — Figma 확인 권장 */
+  --sys-content-status-info-default: #3485fa;
+
+  /* --- Container --- */
+  --sys-container-neutral-solid-strong: #7e7e87;   /* Figma secondary/fill/hover 기준 */
+  --sys-container-neutral-solid-default: #62626d;  /* Figma secondary/fill/normal 기준 */
+  --sys-container-neutral-solid-disabled: #e0e0ff45;
+  --sys-container-neutral-tint-strong: #dedeff30;
   --sys-container-neutral-tint-default: #d9d9ff1c;
+  --sys-container-neutral-tint-disabled: #d9d9ff1c;
+
   --sys-container-brand-solid-strong: #449bff;
   --sys-container-brand-solid-default: #3485fa;
+  --sys-container-brand-solid-disabled: #3485fa73;
+  --sys-container-brand-tint-strong: #3485fa54;
   --sys-container-brand-tint-default: #3485fa33;
+  --sys-container-brand-tint-disabled: #3485fa33;
 
-  --sys-border-neutral-subtle: #dedeff30;
-  --sys-border-neutral-default: #e0e0ff45;
+  --sys-container-danger-solid-strong: #fa616d;
+  --sys-container-danger-solid-default: #f04251;
+  --sys-container-danger-solid-disabled: #f0425170;
+  --sys-container-danger-tint-strong: #f0425154;
+  --sys-container-danger-tint-default: #f0425133;
+  --sys-container-danger-tint-disabled: #f0425133;
+
+  --sys-container-warning-solid-default: #ffc342;  /* Figma 확인 권장 */
+  --sys-container-warning-tint-default: #ffc34226; /* Figma 확인 권장 */
+  --sys-container-success-solid-default: #03b26c;  /* Figma 확인 권장 */
+  --sys-container-success-tint-default: #03b26c26; /* Figma 확인 권장 */
+
+  /* --- Border --- */
+  --sys-border-none: transparent;
+  --sys-border-neutral-heavy: #fdfdfff0;
   --sys-border-neutral-strong: #e8e8fd5c;
+  --sys-border-neutral-default: #e0e0ff45;
+  --sys-border-neutral-subtle: #dedeff30;
+  --sys-border-neutral-weak: #d9d9ff1c;
+  --sys-border-neutral-disabled: #d1d1fd0d;  /* Figma outline/disabled/border 기준 */
+
+  --sys-border-brand-strong: #449bff;
   --sys-border-brand-default: #3485fa;
   --sys-border-brand-subtle: #3485fa73;
+  --sys-border-brand-disabled: #3485fa33;
+
+  --sys-border-danger-strong: #fa616d;
+  --sys-border-danger-default: #f04251;
+  --sys-border-danger-subtle: #f0425170;
+
+  --sys-border-warning-default: #ffc342;   /* Figma 확인 권장 */
+  --sys-border-success-default: #02a262;   /* Figma 확인 권장 */
+
+  /* --- ContentOn (colored bg 위의 텍스트) --- */
+  --sys-content-on-brand-solid: #ffffff;
+  --sys-content-on-brand-solid-disabled: #ffffff73;
+  --sys-content-on-brand-tint: #449bff;
+  --sys-content-on-brand-tint-disabled: #3485fa54;
+  --sys-content-on-neutral-solid: #ffffff;
+  --sys-content-on-neutral-solid-disabled: #ffffff33;
+  --sys-content-on-neutral-tint: #e4e4e5;  /* Figma secondary/soft/text 기준 */
+  --sys-content-on-danger-solid: #ffffff;
+  --sys-content-on-danger-solid-disabled: #ffffff33;
+  --sys-content-on-danger-tint: #fa616d;
+  --sys-content-on-danger-tint-disabled: #f0425170;
+
+  /* --- Interactive --- */
+  --sys-interactive-hover-overlay-neutral: #d9d9ff1c;
+  --sys-interactive-hover-overlay-accent: #3485fa33;
+  --sys-interactive-hover-overlay-danger: #f0425133;  /* 수정: 라이트 red-300 오사용 → dark danger */
+  --sys-interactive-focus-border-accent: #3485fa;
+  --sys-interactive-focus-border-danger: #f04251;
 }
 
 /* -----------------------------------------------------------------------------
@@ -354,6 +470,7 @@
   --size-icon-sm: 16px;
   --size-icon-md: 20px;
   --size-icon-lg: 24px;
+  --size-icon-xl: 28px;
 
   /* Border widths */
   --border-width-none: 0px;
@@ -427,6 +544,13 @@
   --btn-danger-fill-bg: var(--sys-container-danger-solid-default);
   --btn-danger-fill-bg-hover: var(--sys-container-danger-solid-strong);
   --btn-danger-fill-text: var(--sys-content-on-danger-solid);
+  --btn-danger-soft-bg: var(--sys-container-danger-tint-default);
+  --btn-danger-soft-bg-hover: var(--sys-container-danger-tint-strong);
+  --btn-danger-soft-text: var(--sys-content-on-danger-tint);
+  --btn-danger-outline-text: var(--sys-content-on-danger-tint);
+  --btn-danger-outline-border: var(--sys-border-danger-subtle);
+  --btn-danger-ghost-text: var(--sys-content-on-danger-tint);
+  --btn-danger-ghost-bg-hover: var(--sys-interactive-hover-overlay-danger);
 }
 
 /* -----------------------------------------------------------------------------
@@ -479,6 +603,10 @@
   --checkbox-border-selected: transparent;
   --checkbox-icon-selected: var(--sys-content-on-brand-solid);
   --checkbox-icon-selected-disabled: var(--sys-content-on-brand-solid-disabled);
+  /* readOnly 상태 — 피그마: container/unselected/readonly = #f2f4f6, selected/readonly = rgba(100,168,255,0.7) */
+  --checkbox-bg-unselected-readonly: var(--sys-surface-subtle);
+  --checkbox-border-unselected-readonly: var(--sys-border-neutral-weak);
+  --checkbox-bg-selected-readonly: var(--sys-container-brand-solid-disabled);
 }
 
 /* -----------------------------------------------------------------------------
@@ -499,6 +627,29 @@
 }
 
 /* -----------------------------------------------------------------------------
+   Component Tokens — ChoiceChip
+   피그마: ChoiceChip (2139:47039), ChoiceChipGroup (2141:23000)
+   ----------------------------------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  /* unselected */
+  --chip-bg: var(--btn-secondary-soft-bg);
+  --chip-bg-hover: var(--btn-secondary-soft-bg-hover);
+  --chip-text: var(--btn-secondary-soft-text);
+  --chip-border: transparent;
+
+  /* selected */
+  --chip-bg-selected: var(--btn-primary-soft-bg);
+  --chip-bg-selected-hover: var(--btn-primary-soft-bg-hover);
+  --chip-text-selected: var(--btn-primary-soft-text);
+  --chip-border-selected: var(--sys-border-brand-default);
+
+  /* disabled */
+  --chip-bg-disabled: var(--sys-container-neutral-tint-disabled);
+  --chip-text-disabled: var(--sys-content-neutral-disabled);
+}
+
+/* -----------------------------------------------------------------------------
    Component Tokens — Toast
    ----------------------------------------------------------------------------- */
 :root,
@@ -510,6 +661,20 @@
   --toast-success-icon: var(--ref-green-400);
   --toast-warning-icon: var(--ref-yellow-500);
   --toast-danger-icon: var(--ref-red-500);
+}
+
+/* -----------------------------------------------------------------------------
+   Component Tokens — Dark Mode Overrides
+   (ref.* 라이트 primitive를 직접 참조하는 토큰만 재정의)
+   ----------------------------------------------------------------------------- */
+[data-theme="dark"] {
+  --badge-warning-text: #ffc342;
+  --badge-success-text: #02a262;
+
+  --toast-info-icon: #3485fa;
+  --toast-success-icon: #15c47e;
+  --toast-warning-icon: #ffc342;
+  --toast-danger-icon: #f04251;
 }
 
 /* -----------------------------------------------------------------------------
@@ -531,9 +696,9 @@
 [data-theme="light"] {
   --table-bg: var(--sys-surface-base);
   --table-header-bg: var(--sys-surface-grouped-default);
-  --table-header-text: var(--sys-content-neutral-muted);
+  --table-header-text: var(--sys-content-neutral-default);
   --table-body-text: var(--sys-content-neutral-default);
-  --table-border: var(--sys-border-neutral-subtle);
+  --table-border: var(--sys-border-neutral-weak);
   --table-row-hover-bg: var(--sys-interactive-hover-overlay-neutral);
   --table-row-selected-bg: var(--sys-interactive-hover-overlay-accent);
 }
@@ -605,7 +770,18 @@
   --text-caption-md-line-height: 16px;
 
   /* Font family */
-  --font-family-base: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-family-base: 'IGTSans', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+}
+
+/* -----------------------------------------------------------------------------
+   Z-index (Layering)
+   ----------------------------------------------------------------------------- */
+:root {
+  --z-sticky: 100;
+  --z-dropdown: 200;
+  --z-modal: 1000;
+  --z-toast: 1100;
+  --z-tooltip: 1200;
 }
 
 /* -----------------------------------------------------------------------------

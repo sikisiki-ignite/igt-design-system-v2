@@ -1,0 +1,87 @@
+/* ============================================================
+   IGT Avatar Component
+   피그마: 6 Avatar
+   size(xs/sm/md/lg/xl) × shape(circle/rounded) × status
+   ============================================================ */
+
+.igt-avatar {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+.igt-avatar[data-size='xs'] { width: 24px;  height: 24px; }
+.igt-avatar[data-size='sm'] { width: 32px;  height: 32px; }
+.igt-avatar[data-size='md'] { width: 40px;  height: 40px; }
+.igt-avatar[data-size='lg'] { width: 48px;  height: 48px; }
+.igt-avatar[data-size='xl'] { width: 56px;  height: 56px; }
+
+/* ── Image container ──────────────────────────────────────── */
+.igt-avatar__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  border: 0.5px solid var(--sys-border-neutral-weak);
+}
+
+/* ── Shape ────────────────────────────────────────────────── */
+.igt-avatar[data-shape='circle'] .igt-avatar__img {
+  border-radius: 9999px;
+}
+.igt-avatar[data-size='xs'][data-shape='rounded'] .igt-avatar__img  { border-radius: 6px; }
+.igt-avatar[data-size='sm'][data-shape='rounded'] .igt-avatar__img  { border-radius: 8px; }
+.igt-avatar[data-size='md'][data-shape='rounded'] .igt-avatar__img  { border-radius: 12px; }
+.igt-avatar[data-size='lg'][data-shape='rounded'] .igt-avatar__img  { border-radius: 16px; }
+.igt-avatar[data-size='xl'][data-shape='rounded'] .igt-avatar__img  { border-radius: 20px; }
+
+/* ── Fallback (no src) ────────────────────────────────────── */
+.igt-avatar__fallback {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--sys-container-neutral-tint-default);
+  color: var(--sys-content-neutral-subtle);
+  font-size: 0.4em;
+  font-weight: var(--ref-font-weight-600);
+  border: 0.5px solid var(--sys-border-neutral-weak);
+  user-select: none;
+}
+.igt-avatar[data-shape='circle'] .igt-avatar__fallback {
+  border-radius: 9999px;
+}
+.igt-avatar[data-size='xs'][data-shape='rounded'] .igt-avatar__fallback  { border-radius: 6px; }
+.igt-avatar[data-size='sm'][data-shape='rounded'] .igt-avatar__fallback  { border-radius: 8px; }
+.igt-avatar[data-size='md'][data-shape='rounded'] .igt-avatar__fallback  { border-radius: 12px; }
+.igt-avatar[data-size='lg'][data-shape='rounded'] .igt-avatar__fallback  { border-radius: 16px; }
+.igt-avatar[data-size='xl'][data-shape='rounded'] .igt-avatar__fallback  { border-radius: 20px; }
+
+/* Fallback font size by avatar size */
+.igt-avatar[data-size='xs'] .igt-avatar__fallback { font-size: 10px; }
+.igt-avatar[data-size='sm'] .igt-avatar__fallback { font-size: 13px; }
+.igt-avatar[data-size='md'] .igt-avatar__fallback { font-size: 16px; }
+.igt-avatar[data-size='lg'] .igt-avatar__fallback { font-size: 18px; }
+.igt-avatar[data-size='xl'] .igt-avatar__fallback { font-size: 20px; }
+
+/* ── Status indicator ─────────────────────────────────────── */
+.igt-avatar__status {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  border-radius: 9999px;
+  border: 2px solid var(--sys-background-base, white);
+}
+
+.igt-avatar[data-size='xs'] .igt-avatar__status { width: 6px;  height: 6px; }
+.igt-avatar[data-size='sm'] .igt-avatar__status { width: 8px;  height: 8px; }
+.igt-avatar[data-size='md'] .igt-avatar__status { width: 10px; height: 10px; }
+.igt-avatar[data-size='lg'] .igt-avatar__status { width: 12px; height: 12px; }
+.igt-avatar[data-size='xl'] .igt-avatar__status { width: 14px; height: 14px; }
+
+.igt-avatar__status--online  { background-color: var(--sys-container-success-solid-default); }
+.igt-avatar__status--busy    { background-color: var(--sys-container-danger-solid-default); }
+.igt-avatar__status--away    { background-color: var(--sys-container-warning-solid-default); }
+.igt-avatar__status--offline { background-color: var(--sys-container-neutral-solid-disabled); }

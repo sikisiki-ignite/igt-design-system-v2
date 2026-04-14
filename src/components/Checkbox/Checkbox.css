@@ -1,28 +1,47 @@
-/* ============================================
+/* ============================================================
    IGT Checkbox Component
-   ============================================ */
+   피그마: 2 Checkbox
+   size(sm/md) × value(unchecked/checked/indeterminate) × state
+   ============================================================ */
 
 .igt-checkbox {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--spacing-1);
+  gap: var(--ref-space-4);
 }
 
+/* ── Control Row ──────────────────────────────────────────── */
 .igt-checkbox__control-row {
   display: flex;
-  align-items: center;
-  gap: var(--spacing-2);
+  align-items: flex-start;
+  gap: var(--ref-space-4); /* 피그마: gap 4px */
 }
 
-/* Box wrapper — visually hidden input + custom box */
+/* ── Hit Area (box-wrap) ──────────────────────────────────── */
 .igt-checkbox__box-wrap {
   position: relative;
   display: inline-flex;
+  align-items: center;
+  justify-content: center;
   flex-shrink: 0;
-  width: 18px;
-  height: 18px;
 }
 
+/* md: hit area 28px */
+.igt-checkbox[data-size='md'] .igt-checkbox__box-wrap,
+.igt-checkbox:not([data-size]) .igt-checkbox__box-wrap {
+  width: 28px;
+  height: 28px;
+  padding: 4px;
+}
+
+/* sm: hit area 24px */
+.igt-checkbox[data-size='sm'] .igt-checkbox__box-wrap {
+  width: 24px;
+  height: 24px;
+  padding: 4px;
+}
+
+/* ── Native Input ─────────────────────────────────────────── */
 .igt-checkbox__input {
   position: absolute;
   inset: 0;
@@ -33,57 +52,105 @@
   margin: 0;
 }
 
+/* ── Custom Box ───────────────────────────────────────────── */
 .igt-checkbox__box {
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 18px;
-  height: 18px;
-  border-radius: var(--radius-sm);
-  border: 1.5px solid var(--cb-border);
-  background-color: var(--cb-bg);
-  color: var(--cb-check-color);
-  transition: background-color 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
+  border: 1.5px solid var(--checkbox-border-unselected);
+  background-color: var(--checkbox-bg-unselected);
+  color: var(--checkbox-icon-selected);
+  transition: background-color 0.12s ease, border-color 0.12s ease, box-shadow 0.12s ease;
   pointer-events: none;
+  flex-shrink: 0;
 }
 
-/* Checked / indeterminate */
+/* md: box 20px, radius 6px */
+.igt-checkbox[data-size='md'] .igt-checkbox__box,
+.igt-checkbox:not([data-size]) .igt-checkbox__box {
+  width: 20px;
+  height: 20px;
+  border-radius: var(--radius-sm); /* 6px */
+}
+
+/* sm: box 16px, radius 4px */
+.igt-checkbox[data-size='sm'] .igt-checkbox__box {
+  width: 16px;
+  height: 16px;
+  border-radius: 4px;
+}
+
+/* ── Checked / Indeterminate ──────────────────────────────── */
 .igt-checkbox__input:checked + .igt-checkbox__box,
 .igt-checkbox__input:indeterminate + .igt-checkbox__box {
-  background-color: var(--cb-checked-bg);
-  border-color: var(--cb-checked-border);
-  color: var(--cb-checked-check-color);
+  background-color: var(--checkbox-bg-selected);
+  border-color: var(--checkbox-border-selected);
+  border-width: 1px;
 }
 
-/* Focus */
-.igt-checkbox__input:focus-visible + .igt-checkbox__box {
-  box-shadow: 0 0 0 3px var(--cb-focus-ring);
-}
-
-/* Hover */
+/* ── Hover ────────────────────────────────────────────────── */
 .igt-checkbox__input:not(:disabled):hover + .igt-checkbox__box {
-  border-color: var(--cb-hover-border);
+  border-color: var(--checkbox-border-unselected-hover);
+}
+.igt-checkbox__input:not(:disabled):checked:hover + .igt-checkbox__box,
+.igt-checkbox__input:not(:disabled):indeterminate:hover + .igt-checkbox__box {
+  background-color: var(--checkbox-bg-selected-hover);
 }
 
-/* Disabled */
+/* ── Focus Ring ───────────────────────────────────────────── */
+.igt-checkbox__input:focus-visible + .igt-checkbox__box {
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--sys-border-brand-default);
+}
+
+/* ── Disabled ─────────────────────────────────────────────── */
 .igt-checkbox[data-disabled] .igt-checkbox__input {
   cursor: not-allowed;
 }
 .igt-checkbox[data-disabled] .igt-checkbox__box {
   opacity: 0.4;
 }
-
-/* Error */
-.igt-checkbox[data-state='error'] .igt-checkbox__box {
-  border-color: var(--cb-error-border);
+.igt-checkbox[data-disabled] .igt-checkbox__input:checked + .igt-checkbox__box,
+.igt-checkbox[data-disabled] .igt-checkbox__input:indeterminate + .igt-checkbox__box {
+  background-color: var(--checkbox-bg-selected-disabled);
+  border-color: transparent;
+  opacity: 0.4;
 }
 
-/* Label */
+/* ── ReadOnly ─────────────────────────────────────────────── */
+.igt-checkbox[data-readonly] .igt-checkbox__input {
+  cursor: default;
+  pointer-events: none;
+}
+.igt-checkbox[data-readonly] .igt-checkbox__box {
+  background-color: var(--checkbox-bg-unselected-readonly);
+  border-color: var(--checkbox-border-unselected-readonly);
+}
+.igt-checkbox[data-readonly] .igt-checkbox__input:checked + .igt-checkbox__box,
+.igt-checkbox[data-readonly] .igt-checkbox__input:indeterminate + .igt-checkbox__box {
+  background-color: var(--checkbox-bg-selected-readonly);
+  border-color: transparent;
+}
+.igt-checkbox[data-readonly] .igt-checkbox__label {
+  cursor: default;
+}
+
+/* ── Error (invalid) ──────────────────────────────────────── */
+.igt-checkbox[data-state='error'] .igt-checkbox__box {
+  border-color: var(--sys-border-danger-default);
+}
+
+/* ── Label ────────────────────────────────────────────────── */
 .igt-checkbox__label {
-  font-size: var(--font-size-md);
-  color: var(--field-label-color);
+  font-size: var(--text-body-sm-size);     /* 15px */
+  font-weight: var(--ref-font-weight-600); /* semibold */
+  line-height: var(--text-body-sm-line-height); /* 22px */
+  color: var(--field-text-label);
   cursor: pointer;
-  line-height: var(--line-height-md);
+  /* vertical alignment: top of label should align with top of hit area */
+  padding-top: calc((28px - var(--text-body-sm-line-height)) / 2);
+}
+.igt-checkbox[data-size='sm'] .igt-checkbox__label {
+  padding-top: calc((24px - var(--text-body-sm-line-height)) / 2);
 }
 
 .igt-checkbox[data-disabled] .igt-checkbox__label {
@@ -91,14 +158,23 @@
   cursor: not-allowed;
 }
 
-/* Hint / Error text */
+/* ── Hint / Error text ────────────────────────────────────── */
+.igt-checkbox__hint,
+.igt-checkbox__error {
+  font-size: var(--text-body-xs-size, 14px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: 20px;
+  /* indent to align under label (hit area + gap) */
+  margin-left: calc(28px + var(--ref-space-4));
+}
+.igt-checkbox[data-size='sm'] .igt-checkbox__hint,
+.igt-checkbox[data-size='sm'] .igt-checkbox__error {
+  margin-left: calc(24px + var(--ref-space-4));
+}
+
 .igt-checkbox__hint {
-  font-size: var(--font-size-sm);
-  color: var(--field-hint-color);
-  margin-left: 26px;
+  color: var(--field-text-helper);
 }
 .igt-checkbox__error {
-  font-size: var(--font-size-sm);
-  color: var(--field-error-color);
-  margin-left: 26px;
+  color: var(--field-text-helper-error);
 }

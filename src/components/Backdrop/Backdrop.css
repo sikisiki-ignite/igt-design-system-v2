@@ -1,0 +1,27 @@
+/* ============================================================
+   IGT Backdrop Component
+   피그마: 5 Backdrop
+   tone(dark/light) × strength(default/strong)
+   ============================================================ */
+
+.igt-backdrop {
+  position: fixed;
+  inset: 0;
+  z-index: calc(var(--z-modal) - 1);
+}
+
+/* ── Dark ─────────────────────────────────────────────────── */
+.igt-backdrop[data-tone='dark'][data-strength='default'] {
+  background-color: var(--sys-overlay-backdrop-dark-default, rgba(0, 0, 0, 0.48));
+}
+.igt-backdrop[data-tone='dark'][data-strength='strong'] {
+  background-color: var(--sys-overlay-backdrop-dark-strong, rgba(0, 0, 0, 0.64));
+}
+
+/* ── Light ────────────────────────────────────────────────── */
+.igt-backdrop[data-tone='light'][data-strength='default'] {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+.igt-backdrop[data-tone='light'][data-strength='strong'] {
+  background-color: rgba(255, 255, 255, 0.6);
+}

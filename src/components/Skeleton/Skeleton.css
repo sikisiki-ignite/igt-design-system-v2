@@ -1,0 +1,65 @@
+/* ============================================================
+   IGT Skeleton Component
+   피그마: 4 Skeleton
+   ============================================================ */
+
+@keyframes igt-skeleton-shimmer {
+  0%   { background-position: -400px 0; }
+  100% { background-position: 400px 0; }
+}
+
+.igt-skeleton {
+  display: block;
+  background-color: var(--sys-container-neutral-tint-default);
+  background-image: linear-gradient(
+    90deg,
+    transparent 0%,
+    rgba(255, 255, 255, 0.08) 40%,
+    rgba(255, 255, 255, 0.16) 50%,
+    rgba(255, 255, 255, 0.08) 60%,
+    transparent 100%
+  );
+  background-size: 800px 100%;
+  background-repeat: no-repeat;
+  animation: igt-skeleton-shimmer 1.4s ease-in-out infinite;
+}
+
+/* ── SkeletonText ─────────────────────────────────────────── */
+.igt-skeleton--text {
+  width: 80px;
+  border-radius: 16px; /* full pill */
+}
+
+.igt-skeleton--text[data-size='xs'] { height: 12px; }
+.igt-skeleton--text[data-size='sm'] { height: 14px; }
+.igt-skeleton--text[data-size='md'] { height: 16px; }
+.igt-skeleton--text[data-size='lg'] { height: 20px; }
+
+/* ── SkeletonRect ─────────────────────────────────────────── */
+.igt-skeleton--rect {
+  width: 64px;
+}
+
+.igt-skeleton--rect[data-size='xs'] { height: 16px; }
+.igt-skeleton--rect[data-size='sm'] { height: 24px; }
+.igt-skeleton--rect[data-size='md'] { height: 32px; }
+.igt-skeleton--rect[data-size='lg'] { height: 40px; }
+.igt-skeleton--rect[data-size='xl'] { height: 48px; }
+
+.igt-skeleton--rect[data-radius='none'] { border-radius: 0; }
+.igt-skeleton--rect[data-radius='xs']   { border-radius: 4px; }
+.igt-skeleton--rect[data-radius='sm']   { border-radius: 8px; }
+.igt-skeleton--rect[data-radius='md']   { border-radius: 12px; }
+.igt-skeleton--rect[data-radius='lg']   { border-radius: 16px; }
+
+/* ── SkeletonCircle ───────────────────────────────────────── */
+.igt-skeleton--circle {
+  border-radius: 50%;
+  flex-shrink: 0;
+}
+
+.igt-skeleton--circle[data-size='xs'] { width: 16px; height: 16px; }
+.igt-skeleton--circle[data-size='sm'] { width: 24px; height: 24px; }
+.igt-skeleton--circle[data-size='md'] { width: 32px; height: 32px; }
+.igt-skeleton--circle[data-size='lg'] { width: 40px; height: 40px; }
+.igt-skeleton--circle[data-size='xl'] { width: 48px; height: 48px; }

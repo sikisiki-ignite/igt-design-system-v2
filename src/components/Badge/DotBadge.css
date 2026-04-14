@@ -1,0 +1,21 @@
+/* ============================================================
+   IGT DotBadge Component
+   피그마: DotBadge (2240:53824)
+   tone(urgent/accent/neutral) × size(sm/md/lg)
+   ============================================================ */
+
+.igt-dot-badge {
+  display: inline-block;
+  border-radius: 9999px;
+  flex-shrink: 0;
+}
+
+/* ── Size ──────────────────────────────────────────────────── */
+.igt-dot-badge[data-size='sm'] { width: 6px;  height: 6px; }
+.igt-dot-badge[data-size='md'] { width: 8px;  height: 8px; }
+.igt-dot-badge[data-size='lg'] { width: 10px; height: 10px; }
+
+/* ── Tone ──────────────────────────────────────────────────── */
+.igt-dot-badge[data-tone='urgent']  { background-color: var(--sys-container-danger-solid-strong); }
+.igt-dot-badge[data-tone='accent']  { background-color: var(--sys-container-brand-solid-strong); }
+.igt-dot-badge[data-tone='neutral'] { background-color: var(--sys-container-neutral-solid-strong); }

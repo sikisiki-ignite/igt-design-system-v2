@@ -1,0 +1,53 @@
+/* ============================================================
+   IGT ChoiceChipGroup Component
+   피그마: SelectionType=multiple/single (2141:23000)
+   layout(wrap/scroll) 지원
+   ============================================================ */
+
+.igt-chip-group {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+}
+
+/* ── Label ────────────────────────────────────────────────── */
+.igt-chip-group__label {
+  font-size: var(--text-label-md-size);
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-label-md-line-height);
+  color: var(--field-text-label);
+}
+
+/* ── Items container ──────────────────────────────────────── */
+.igt-chip-group__items {
+  display: flex;
+  gap: 8px;
+}
+
+.igt-chip-group__items[data-layout='wrap'] {
+  flex-wrap: wrap;
+}
+
+.igt-chip-group__items[data-layout='scroll'] {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.igt-chip-group__items[data-layout='scroll']::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Hint / Error ─────────────────────────────────────────── */
+.igt-chip-group__hint {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper);
+  line-height: var(--text-body-sm-line-height);
+}
+
+.igt-chip-group__error {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper-error);
+  line-height: var(--text-body-sm-line-height);
+}

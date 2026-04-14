@@ -1,27 +1,35 @@
-/* ============================================
+/* ============================================================
    IGT Tooltip Component
-   ============================================ */
+   피그마: 5 Overlay > Tooltip
+   variant(basic/rich) × placement(top/bottom/left/right)
+   ============================================================ */
 
 .igt-tooltip-wrap {
   position: relative;
   display: inline-flex;
 }
 
+/* ── Basic Tooltip ────────────────────────────────────────── */
 .igt-tooltip {
   position: absolute;
-  z-index: var(--z-tooltip, 1200);
-  background-color: var(--tooltip-bg);
-  color: var(--tooltip-text);
-  font-size: var(--font-size-xs);
-  line-height: var(--line-height-sm);
-  padding: var(--spacing-1) var(--spacing-2);
-  border-radius: var(--radius-sm);
-  white-space: nowrap;
-  box-shadow: var(--elevation-popover);
+  z-index: var(--z-tooltip);
+  background-color: var(--sys-surface-floating);
+  color: var(--ref-white);
+  font-size: var(--text-body-xs-size, 14px); /* 피그마: body/xs/semibold 14px */
+  font-weight: var(--ref-font-weight-600);
+  line-height: 20px;
+  padding: 6px var(--ref-space-8); /* 피그마: py=6px, px=8px */
+  border-radius: var(--radius-md); /* 8px */
+  border: 1px solid var(--sys-border-neutral-subtle);
+  width: max-content;
+  max-width: 200px; /* 피그마: max-w 200px */
+  white-space: normal;
+  word-break: keep-all;
+  box-shadow: 0px 2px 8px 0px rgba(2, 32, 71, 0.06); /* 피그마: shadow */
   pointer-events: none;
 }
 
-/* Placement positioning */
+/* ── Placement Positioning ────────────────────────────────── */
 .igt-tooltip[data-placement='top'] {
   bottom: calc(100% + 8px);
   left: 50%;
@@ -36,14 +44,18 @@
   right: calc(100% + 8px);
   top: 50%;
   transform: translateY(-50%);
+  white-space: nowrap;
+  max-width: none;
 }
 .igt-tooltip[data-placement='right'] {
   left: calc(100% + 8px);
   top: 50%;
   transform: translateY(-50%);
+  white-space: nowrap;
+  max-width: none;
 }
 
-/* Arrow */
+/* ── Arrow ────────────────────────────────────────────────── */
 .igt-tooltip__arrow {
   position: absolute;
   width: 0;
@@ -55,27 +67,27 @@
   top: 100%;
   left: 50%;
   transform: translateX(-50%);
-  border-top-color: var(--tooltip-bg);
+  border-top-color: var(--sys-surface-floating);
   border-bottom: none;
 }
 .igt-tooltip__arrow[data-placement='bottom'] {
   bottom: 100%;
   left: 50%;
   transform: translateX(-50%);
-  border-bottom-color: var(--tooltip-bg);
+  border-bottom-color: var(--sys-surface-floating);
   border-top: none;
 }
 .igt-tooltip__arrow[data-placement='left'] {
   left: 100%;
   top: 50%;
   transform: translateY(-50%);
-  border-left-color: var(--tooltip-bg);
+  border-left-color: var(--sys-surface-floating);
   border-right: none;
 }
 .igt-tooltip__arrow[data-placement='right'] {
   right: 100%;
   top: 50%;
   transform: translateY(-50%);
-  border-right-color: var(--tooltip-bg);
+  border-right-color: var(--sys-surface-floating);
   border-left: none;
 }

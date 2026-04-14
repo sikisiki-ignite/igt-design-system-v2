@@ -2,15 +2,20 @@ import React from 'react'
 import clsx from 'clsx'
 import './Checkbox.css'
 
-export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type'> {
+export type CheckboxSize = 'sm' | 'md'
+
+export interface CheckboxProps extends Omit<React.InputHTMLAttributes<HTMLInputElement>, 'type' | 'size'> {
   label?: string
   hint?: string
   error?: string
   indeterminate?: boolean
+  size?: CheckboxSize
+  /** 읽기 전용 — 시각적으로 비활성화처럼 보이나 클릭 불가, 값 변경 없음 */
+  readOnly?: boolean
 }
 
 export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
-  ({ label, hint, error, indeterminate = false, disabled, className, id, ...props }, ref) => {
+  ({ label, hint, error, indeterminate = false, size = 'md', disabled, readOnly, className, id, ...props }, ref) => {
     const inputRef = React.useRef<HTMLInputElement>(null)
     const resolvedRef = (ref as React.RefObject<HTMLInputElement>) || inputRef
 
@@ -25,7 +30,9 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
     return (
       <div
         className={clsx('igt-checkbox', className)}
+        data-size={size}
         data-disabled={disabled || undefined}
+        data-readonly={readOnly || undefined}
         data-state={error ? 'error' : undefined}
       >
         <div className="igt-checkbox__control-row">
@@ -36,6 +43,8 @@ export const Checkbox = React.forwardRef<HTMLInputElement, CheckboxProps>(
               id={checkboxId}
               className="igt-checkbox__input"
               disabled={disabled}
+              readOnly={readOnly}
+              aria-readonly={readOnly}
               aria-invalid={!!error}
               {...props}
             />
