@@ -10,7 +10,7 @@
 
 | 카테고리 | 컴포넌트 |
 |---------|---------|
-| 입력 | [Button](#button), [Input](#input), [Select](#select), [Checkbox](#checkbox), [Radio / RadioGroup](#radio--radiogroup), [Switch / SwitchField](#switch--switchfield) |
+| 입력 | [Button](#button), [Input](#input), [Select](#select), [Checkbox](#checkbox), [Radio / RadioGroup](#radio--radiogroup), [Switch / SwitchField](#switch--switchfield), [ChoiceChip / ChoiceChipGroup](#choicechip--choicechipgroup) |
 | 표시 | [Badge](#badge), [CountBadge](#countbadge), [DotBadge](#dotbadge), [Label](#label), [Avatar](#avatar), [Icon](#icon) |
 | 레이아웃 | [Divider](#divider), [Skeleton](#skeleton), [SideNavigation](#sidenavigation) |
 | 오버레이 | [Modal](#modal), [Tooltip](#tooltip), [Toast / ToastContainer](#toast--toastcontainer), [Backdrop](#backdrop) |
@@ -247,6 +247,53 @@ const options = [
 
 ---
 
+## ChoiceChip / ChoiceChipGroup
+
+**언제 쓰나**: 고정된 옵션 목록에서 단일/복수 선택. 옵션이 5개 이하이고 레이블이 짧을 때. Filter Box의 TYPE 2 구현에 사용.
+
+### ChoiceChipGroup Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `selectionType` | `'single' \| 'multiple'` | `'multiple'` | 선택 유형 |
+| `layout` | `'wrap' \| 'scroll'` | `'wrap'` | 줄바꿈 또는 가로 스크롤 |
+| `size` | `'xs' \| 'sm' \| 'md'` | `'md'` | 칩 크기 |
+| `value` | `string[]` | — | controlled 선택값 |
+| `defaultValue` | `string[]` | `[]` | uncontrolled 기본값 |
+| `onChange` | `(value: string[]) => void` | — | 선택 변경 |
+| `label` | `string` | — | 그룹 레이블 |
+| `hint` | `string` | — | 도움말 |
+| `error` | `string` | — | 에러 메시지 |
+| `disabled` | `boolean` | `false` | 전체 비활성화 |
+
+### ChoiceChipGroupItem Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `value` | `string` | — | **(필수)** 이 항목의 값 |
+| `label` | `string` | — | **(필수)** 레이블 |
+| `disabled` | `boolean` | — | 개별 비활성화 |
+
+### 사용 예시
+
+```tsx
+// 단일 선택 (filter에서 TYPE 2)
+<ChoiceChipGroup selectionType="single" value={selected} onChange={(v) => setSelected(v)}>
+  <ChoiceChipGroupItem value="web" label="Web" />
+  <ChoiceChipGroupItem value="app" label="App" />
+  <ChoiceChipGroupItem value="admin" label="Admin" />
+</ChoiceChipGroup>
+
+// 복수 선택
+<ChoiceChipGroup selectionType="multiple" defaultValue={['active']}>
+  <ChoiceChipGroupItem value="active" label="활성" />
+  <ChoiceChipGroupItem value="inactive" label="비활성" />
+  <ChoiceChipGroupItem value="pending" label="대기" />
+</ChoiceChipGroup>
+```
+
+---
+
 ## Badge
 
 **언제 쓰나**: 상태, 카테고리, 레이블을 텍스트 칩으로 표시.
@@ -468,26 +515,63 @@ const options = [
 | `open` | `boolean` | — | **(필수)** 열림 상태 |
 | `onClose` | `() => void` | — | **(필수)** 닫기 핸들러 |
 | `title` | `ReactNode` | — | 모달 제목 |
-| `children` | `ReactNode` | — | **(필수)** 본문 |
-| `footer` | `ReactNode` | — | 하단 영역 (버튼 등) |
-| `size` | `'sm' \| 'md' \| 'lg' \| 'xl'` | `'md'` | 크기 |
+| `subtitle` | `ReactNode` | — | 제목 아래 보조 설명 |
+| `children` | `ReactNode` | — | 본문 |
+| `footer` | `ReactNode` | — | 커스텀 footer (지정 시 footerVariation 무시) |
+| `footerVariation` | `'primary' \| 'neutral' \| 'danger'` | — | 표준 버튼 구성 자동 생성 |
+| `primaryLabel` | `string` | `'확인'` | footerVariation 사용 시 주 버튼 레이블 |
+| `secondaryLabel` | `string` | `'취소'` | footerVariation 사용 시 보조 버튼 레이블 |
+| `onPrimaryAction` | `() => void` | — | 주 버튼 클릭 핸들러 |
+| `onSecondaryAction` | `() => void` | — | 보조 버튼 클릭 핸들러 (없으면 onClose) |
+| `showSecondaryAction` | `boolean` | `true` | 보조 버튼 표시 여부 |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 크기 (360/520/640px) |
 | `closeOnOverlayClick` | `boolean` | `true` | 배경 클릭 시 닫힘 |
 
 ### 사용 예시
 
 ```tsx
+// 커스텀 footer
 <Modal
   open={isOpen}
   onClose={() => setIsOpen(false)}
-  title="삭제 확인"
+  title="사용자 정보 수정"
+  subtitle="변경된 내용은 즉시 반영됩니다."
   footer={
     <>
       <Button tone="secondary" variant="outline" onClick={() => setIsOpen(false)}>취소</Button>
-      <Button tone="danger" onClick={handleDelete}>삭제</Button>
+      <Button onClick={handleSave}>저장</Button>
     </>
   }
 >
-  <p>정말 삭제하시겠습니까? 이 작업은 되돌릴 수 없습니다.</p>
+  <Input label="이름" fullWidth />
+</Modal>
+
+// footerVariation — danger (확인 대화상자)
+<Modal
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="사용자 삭제"
+  subtitle="이 작업은 되돌릴 수 없습니다."
+  size="sm"
+  footerVariation="danger"
+  primaryLabel="삭제"
+  onPrimaryAction={handleDelete}
+>
+  <p>정말로 삭제하시겠습니까?</p>
+</Modal>
+
+// footerVariation — neutral (단순 알림)
+<Modal
+  open={isOpen}
+  onClose={() => setIsOpen(false)}
+  title="알림"
+  size="sm"
+  footerVariation="neutral"
+  primaryLabel="확인"
+  showSecondaryAction={false}
+  onPrimaryAction={() => setIsOpen(false)}
+>
+  <p>처리가 완료되었습니다.</p>
 </Modal>
 ```
 
@@ -753,3 +837,4 @@ import {
 > **업데이트 기록**
 > - 2026-04-14: 초기 작성 (18개 컴포넌트 — Button, Input, Select, Checkbox, Radio, RadioGroup, Switch, SwitchField, Badge, CountBadge, DotBadge, Label, Avatar, Icon, Divider, Skeleton, Modal, Tooltip, Toast, Backdrop, Alert, Table)
 > - 2026-04-14: SideNavigation 추가 (SideNavigation, SideNavigationList, NavItem, NavSectionHeader)
+> - 2026-04-15: Modal props 업데이트 (subtitle, footerVariation, xl size 제거), ChoiceChip / ChoiceChipGroup 추가
