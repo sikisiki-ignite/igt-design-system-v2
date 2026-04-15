@@ -1,7 +1,7 @@
 /* ============================================================
    IGT Modal / Dialog Component
    피그마: 5 Dialog
-   size(sm/md/lg/xl)
+   size(sm/md/lg)
    ============================================================ */
 
 .igt-modal-overlay {
@@ -17,9 +17,9 @@
 
 .igt-modal {
   background-color: var(--modal-bg);
-  border-radius: 20px; /* 피그마: radius 20px */
-  border: 1px solid rgba(0, 27, 55, 0.1); /* 피그마: overlaybase border */
-  box-shadow: var(--elevation-dialog); /* 0px 40px 120px rgba(2,32,71,0.08), ... */
+  border-radius: 20px;
+  border: 1px solid var(--modal-border);
+  box-shadow: var(--elevation-dialog);
   display: flex;
   flex-direction: column;
   max-height: calc(100vh - var(--ref-space-32));
@@ -28,41 +28,42 @@
 }
 
 /* ── Size ─────────────────────────────────────────────────── */
-/* 피그마: sm=320px, md=520px, lg=720px */
-.igt-modal[data-size='sm'] { max-width: 320px; }
+/* 피그마: sm=360px, md=520px, lg=640px */
+.igt-modal[data-size='sm'] { max-width: 360px; }
 .igt-modal[data-size='md'] { max-width: 520px; }
-.igt-modal[data-size='lg'] { max-width: 720px; }
-.igt-modal[data-size='xl'] { max-width: 960px; }
+.igt-modal[data-size='lg'] { max-width: 640px; }
 
 /* ── Header ───────────────────────────────────────────────── */
 .igt-modal__header {
   display: flex;
   align-items: flex-start;
-  padding-top: 20px;
-  padding-left: 24px;
-  padding-right: 16px;
-  padding-bottom: 0;
   flex-shrink: 0;
 }
 
 .igt-modal__header-text {
   flex: 1;
   min-width: 0;
-  padding-right: var(--ref-space-8);
-  padding-bottom: var(--ref-space-8);
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-8);
+  padding: 20px 0 var(--ref-space-8) 24px;
+}
+
+.igt-modal__header-right {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-end;
+  padding: 16px 16px 0 0;
+  flex-shrink: 0;
 }
 
 .igt-modal__title {
-  font-size: 20px; /* 피그마: heading/md/bold 20px */
+  font-size: 20px;
   font-weight: var(--ref-font-weight-700, 700);
   color: var(--modal-title-text);
-  margin: 0 0 var(--ref-space-8);
+  margin: 0;
   line-height: 28px;
-}
-
-.igt-modal[data-size='sm'] .igt-modal__title {
-  font-size: 18px; /* 피그마: heading/sm/bold 18px */
-  line-height: 26px;
+  letter-spacing: -0.1px;
 }
 
 .igt-modal__subtitle {
@@ -71,6 +72,7 @@
   font-weight: var(--ref-font-weight-400);
   color: var(--sys-content-neutral-muted);
   line-height: 22px;
+  letter-spacing: -0.2px;
 }
 
 /* ── Close Button ─────────────────────────────────────────── */
@@ -81,13 +83,12 @@
   width: 32px;
   height: 32px;
   border: none;
-  border-radius: var(--radius-md); /* 8px */
+  border-radius: var(--radius-md, 8px);
   background: transparent;
   color: var(--sys-content-neutral-muted);
   cursor: pointer;
   transition: background-color 0.12s ease;
   flex-shrink: 0;
-  margin-top: -4px; /* align with title top */
 }
 .igt-modal__close:hover {
   background-color: var(--sys-interactive-hover-overlay-neutral);
@@ -105,10 +106,59 @@
 
 /* ── Footer ───────────────────────────────────────────────── */
 .igt-modal__footer {
+  flex-shrink: 0;
+  padding: var(--ref-space-16) 20px 20px;
+}
+
+.igt-modal__footer-inner {
   display: flex;
   align-items: center;
   justify-content: flex-end;
-  gap: var(--ref-space-8); /* 피그마: gap 8px */
-  padding: var(--ref-space-16) 20px 20px; /* 피그마: pt=16, px=20, pb=20 */
-  flex-shrink: 0;
+  gap: var(--ref-space-8);
+}
+
+/* ── Footer Buttons ───────────────────────────────────────── */
+.igt-modal__footer-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  height: 40px;
+  min-width: 88px;
+  padding: 4px 10px;
+  border-radius: 10px;
+  border: 1px solid transparent;
+  font-size: 15px;
+  font-weight: 600;
+  line-height: 20px;
+  letter-spacing: -0.1px;
+  cursor: pointer;
+  transition: background-color 0.12s ease;
+  white-space: nowrap;
+}
+
+.igt-modal__footer-btn--secondary {
+  background-color: var(--btn-secondary-soft-bg);
+  color: var(--btn-secondary-soft-text);
+  border-color: transparent;
+}
+.igt-modal__footer-btn--secondary:hover {
+  background-color: var(--btn-secondary-soft-bg-hover);
+}
+
+.igt-modal__footer-btn--primary {
+  background-color: var(--btn-primary-fill-bg);
+  color: var(--btn-primary-fill-text);
+  border-color: var(--btn-primary-fill-border);
+}
+.igt-modal__footer-btn--primary:hover {
+  background-color: var(--btn-primary-fill-bg-hover);
+}
+
+.igt-modal__footer-btn--danger {
+  background-color: var(--btn-danger-fill-bg);
+  color: var(--btn-danger-fill-text);
+  border-color: transparent;
+}
+.igt-modal__footer-btn--danger:hover {
+  background-color: var(--btn-danger-fill-bg-hover);
 }
