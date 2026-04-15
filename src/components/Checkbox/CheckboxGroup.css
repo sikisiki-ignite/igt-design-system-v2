@@ -1,0 +1,57 @@
+/* ============================================================
+   IGT CheckboxGroup Component
+   ============================================================ */
+
+.igt-checkbox-group {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-4);
+}
+
+/* ── Group label ─────────────────────────────────────────────── */
+.igt-checkbox-group__label {
+  font-size: var(--text-label-md-size);
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-label-md-line-height);
+  color: var(--field-text-label);
+  margin-bottom: var(--ref-space-4);
+}
+
+/* ── Select All + Divider ────────────────────────────────────── */
+.igt-checkbox-group__select-all {
+  margin-bottom: var(--ref-space-2);
+}
+
+.igt-checkbox-group__divider {
+  height: 1px;
+  background-color: var(--sys-border-neutral-subtle);
+  margin: var(--ref-space-4) 0;
+}
+
+/* ── Option list ─────────────────────────────────────────────── */
+.igt-checkbox-group__list {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-4);
+}
+
+.igt-checkbox-group__list--horizontal {
+  flex-direction: row;
+  flex-wrap: wrap;
+  gap: var(--ref-space-8) var(--ref-space-16);
+}
+
+/* ── Hint / Error ────────────────────────────────────────────── */
+.igt-checkbox-group__hint {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper);
+  line-height: var(--text-body-sm-line-height);
+}
+
+.igt-checkbox-group__error {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper-error);
+  line-height: var(--text-body-sm-line-height);
+}

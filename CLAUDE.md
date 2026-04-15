@@ -15,6 +15,19 @@
 
 ---
 
+## ai-guide 업데이트 규칙
+
+> 컴포넌트가 추가되거나 변경되면 **아래 두 문서를 반드시 세트로 업데이트**한다.
+
+| 순서 | 문서 | 내용 |
+|------|------|------|
+| 1 | `ai-guide/component-catalog.md` | 컴포넌트 항목 추가 (props, 사용 예시) |
+| 2 | `ai-guide/usage-patterns.md` | 해당 컴포넌트가 포함되는 조합 패턴 추가 |
+
+catalog만 업데이트하고 patterns를 빠뜨리는 것은 미완료로 간주.
+
+---
+
 ## 컴포넌트 사용 규칙
 
 - UI 구현 시 `ai-guide/component-catalog.md`를 먼저 확인

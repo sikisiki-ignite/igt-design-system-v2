@@ -85,24 +85,20 @@
 }
 
 /* ── Fill style ───────────────────────────────────────────── */
+/* 피그마: 4면 모두 동일한 radius, border transparent, 배경색으로 구분 */
 .igt-field[data-style='fill'] .igt-field__input-wrap {
   background-color: var(--field-fill-bg);
   border: 1px solid transparent;
-  border-bottom: 1px solid var(--sys-border-neutral-subtle);
-  border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-}
-.igt-field[data-size='lg'][data-style='fill'] .igt-field__input-wrap {
-  border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
 .igt-field[data-style='fill']:not([data-disabled]) .igt-field__input-wrap:hover {
-  border-bottom-color: var(--field-fill-border-hover);
+  border-color: var(--field-fill-border-hover);
 }
 .igt-field[data-style='fill'] .igt-field__input-wrap:focus-within {
-  border-bottom-color: var(--field-fill-border-focus);
-  border-bottom-width: 2px;
+  border-color: var(--field-fill-border-focus);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-fill-border-focus);
 }
 .igt-field[data-style='fill'][data-state='error'] .igt-field__input-wrap {
-  border-bottom-color: var(--field-fill-border-error);
+  border-color: var(--field-fill-border-error);
 }
 
 /* ── Disabled ─────────────────────────────────────────────── */
@@ -112,7 +108,7 @@
   cursor: not-allowed;
 }
 .igt-field[data-style='fill'][data-disabled] .igt-field__input-wrap {
-  border-bottom-color: var(--field-outline-border-disabled);
+  border-color: transparent;
 }
 .igt-field[data-disabled] .igt-field__input {
   cursor: not-allowed;
@@ -125,7 +121,7 @@
   cursor: default;
 }
 .igt-field[data-style='fill'][data-readonly] .igt-field__input-wrap {
-  border-bottom-color: var(--field-outline-border-disabled);
+  border-color: transparent;
 }
 .igt-field[data-readonly] .igt-field__input {
   cursor: default;
@@ -192,6 +188,65 @@
   white-space: nowrap;
 }
 
+/* ── Clear button ─────────────────────────────────────────── */
+/* 피그마: ◇ Part/clear — x_circle solid 아이콘
+   sm: container=20px icon=14px hitArea=24px
+   md: container=24px icon=16px hitArea=32px
+   lg: container=28px icon=18px hitArea=36px */
+.igt-field__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--field-icon);
+  flex-shrink: 0;
+  position: relative;
+  transition: color 0.12s ease;
+}
+.igt-field__clear:hover {
+  color: var(--field-text-value);
+}
+.igt-field__clear:active {
+  opacity: 0.7;
+}
+
+/* 사이즈별 컨테이너·아이콘 크기 (피그마 스펙) */
+.igt-field[data-size='sm'] .igt-field__clear {
+  width: 20px;
+  height: 20px;
+}
+.igt-field[data-size='sm'] .igt-field__clear .igt-icon {
+  width: 14px;
+  height: 14px;
+}
+.igt-field[data-size='md'] .igt-field__clear {
+  width: 24px;
+  height: 24px;
+}
+.igt-field[data-size='md'] .igt-field__clear .igt-icon {
+  width: 16px;
+  height: 16px;
+}
+.igt-field[data-size='lg'] .igt-field__clear {
+  width: 28px;
+  height: 28px;
+}
+.igt-field[data-size='lg'] .igt-field__clear .igt-icon {
+  width: 18px;
+  height: 18px;
+}
+
+/* ── Footer (hint/error + count 한 행) ───────────────────────── */
+.igt-field__footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ref-space-8);
+}
+
 /* ── Hint / Error ─────────────────────────────────────────── */
 .igt-field__hint {
   font-size: var(--text-body-sm-size);   /* 15px */
@@ -204,4 +259,18 @@
   font-weight: var(--ref-font-weight-400);
   color: var(--field-text-helper-error);
   line-height: var(--text-body-sm-line-height);
+}
+
+/* ── Character count ──────────────────────────────────────── */
+.igt-field__count {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper);
+  line-height: var(--text-body-sm-line-height);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.igt-field__count--error {
+  color: var(--field-text-helper-error);
 }

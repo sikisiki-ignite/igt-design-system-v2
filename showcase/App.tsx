@@ -4,6 +4,7 @@ import { Button } from '../src/components/Button'
 import { Input } from '../src/components/Input'
 import { Select } from '../src/components/Select'
 import { Checkbox } from '../src/components/Checkbox/Checkbox'
+import { CheckboxGroup } from '../src/components/Checkbox/CheckboxGroup'
 import { Radio } from '../src/components/Checkbox/Radio'
 import { RadioGroup, RadioGroupItem } from '../src/components/Checkbox/RadioGroup'
 import { Alert } from '../src/components/Alert'
@@ -20,8 +21,25 @@ import { Tooltip } from '../src/components/Tooltip'
 import { Icon } from '../src/components/Icon'
 import type { IconName } from '../src/components/Icon'
 import { ChoiceChip, ChoiceChipGroup, ChoiceChipGroupItem } from '../src/components/ChoiceChip'
+import { Pagination } from '../src/components/Pagination'
 import { AppLayout } from '../src/components/AppLayout'
 import { SideNavigation, SideNavigationList, NavItem, NavSectionHeader } from '../src/components/SideNavigation'
+import { TextArea } from '../src/components/TextArea'
+import { Breadcrumb } from '../src/components/Breadcrumb'
+import { Tab } from '../src/components/Tab'
+import { Accordion } from '../src/components/Accordion'
+import { SegmentedControl } from '../src/components/SegmentedControl'
+import { PageIndicator } from '../src/components/PageIndicator'
+import { Popover, PopoverSection } from '../src/components/Popover'
+import { NumberStepper } from '../src/components/NumberStepper'
+import { Rating } from '../src/components/Rating'
+import { Row } from '../src/components/Row'
+import { TextButton } from '../src/components/TextButton'
+import { IconButton } from '../src/components/IconButton'
+import { Link } from '../src/components/Link'
+import { ButtonGroup } from '../src/components/ButtonGroup'
+import { ToggleButton } from '../src/components/ToggleButton'
+import { FloatingButton } from '../src/components/FloatingButton'
 
 /* ---- 아이콘 ---- */
 const SearchIcon = () => (
@@ -82,6 +100,16 @@ const NAV_ITEMS = [
   { id: 'icon', label: 'Icon' },
   { id: 'button', label: 'Button' },
   { id: 'input', label: 'Input' },
+  { id: 'textarea', label: 'TextArea' },
+  { id: 'breadcrumb', label: 'Breadcrumb' },
+  { id: 'tab', label: 'Tab' },
+  { id: 'accordion', label: 'Accordion' },
+  { id: 'segmentedcontrol', label: 'SegmentedControl' },
+  { id: 'pageindicator', label: 'PageIndicator' },
+  { id: 'popover', label: 'Popover' },
+  { id: 'numberstepper', label: 'NumberStepper' },
+  { id: 'rating', label: 'Rating' },
+  { id: 'row', label: 'Row' },
   { id: 'select', label: 'Select' },
   { id: 'checkbox', label: 'Checkbox' },
   { id: 'radio', label: 'Radio / RadioGroup' },
@@ -95,6 +123,7 @@ const NAV_ITEMS = [
   { id: 'skeleton', label: 'Skeleton' },
   { id: 'choicechip', label: 'ChoiceChip' },
   { id: 'table', label: 'Table' },
+  { id: 'pagination', label: 'Pagination' },
   { id: 'modal', label: 'Modal' },
   { id: 'toast', label: 'Toast' },
   { id: 'tooltip', label: 'Tooltip' },
@@ -124,6 +153,47 @@ const SwatchRow = ({ tokens }: { tokens: Array<{ token: string; label?: string }
   </div>
 )
 
+/* ── Pagination Demo 헬퍼 ───────────────────────────────────── */
+function PaginationDemo({
+  total, pageSize, size, variant,
+}: { total: number; pageSize: number; size: 'sm' | 'md'; variant: 'default' | 'minimal' }) {
+  const [page, setPage] = React.useState(1)
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 8 }}>
+      <Pagination total={total} page={page} pageSize={pageSize} size={size} variant={variant} onChange={setPage} />
+      <span style={{ fontSize: 12, color: 'var(--sys-content-neutral-muted)' }}>현재 페이지: {page} / {Math.ceil(total / pageSize)}</span>
+    </div>
+  )
+}
+
+const PAGINATION_DATA = Array.from({ length: 47 }, (_, i) => ({
+  id: i + 1,
+  name: `거래처 ${String(i + 1).padStart(2, '0')}`,
+  region: ['서울', '부산', '대구', '인천', '광주'][i % 5],
+  status: i % 3 === 0 ? '활성' : i % 3 === 1 ? '대기' : '비활성',
+}))
+
+const PAGINATION_COLS = [
+  { key: 'id', header: 'ID', width: 60 },
+  { key: 'name', header: '거래처명' },
+  { key: 'region', header: '지역' },
+  { key: 'status', header: '상태' },
+]
+
+function TableWithPagination() {
+  const [page, setPage] = React.useState(1)
+  const pageSize = 5
+  const sliced = PAGINATION_DATA.slice((page - 1) * pageSize, page * pageSize)
+  return (
+    <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+      <Table columns={PAGINATION_COLS} data={sliced} rowKey="id" bordered />
+      <div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+        <Pagination total={PAGINATION_DATA.length} page={page} pageSize={pageSize} onChange={setPage} />
+      </div>
+    </div>
+  )
+}
+
 export default function App() {
   // hash 기반 라우팅 — #userlist 이면 전체 화면 페이지
   const [hash, setHash] = useState(window.location.hash)
@@ -139,6 +209,8 @@ export default function App() {
 
   const [theme, setTheme] = useState<'light' | 'dark'>('light')
   const [modalOpen, setModalOpen] = useState(false)
+  const [modalDangerOpen, setModalDangerOpen] = useState(false)
+  const [modalNeutralOpen, setModalNeutralOpen] = useState(false)
   const [toasts, setToasts] = useState<{ id: number; type: 'success' | 'error' | 'warning' | 'info'; message: string }[]>([])
   const [activeNav, setActiveNav] = useState('button')
   const [sortKey, setSortKey] = useState<string | undefined>()
@@ -146,6 +218,10 @@ export default function App() {
   const [allChecked, setAllChecked] = useState(false)
   const [someChecked, setSomeChecked] = useState(false)
   const [gender, setGender] = useState('male')
+  const [stepperOutlineMd, setStepperOutlineMd] = useState(1)
+  const [stepperSoftMd, setStepperSoftMd] = useState(3)
+  const [stepperSm, setStepperSm] = useState(0)
+  const [rating, setRating] = useState(3)
 
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light'
@@ -505,6 +581,9 @@ export default function App() {
             <div className="sc-block__label">States &amp; Icon</div>
             <div className="sc-row">
               <Button loading>Loading</Button>
+              <Button loading leadingIcon={<PlusIcon />}>저장 중</Button>
+              <Button loading variant="soft">처리 중</Button>
+              <Button loading iconOnly leadingIcon={<SearchIcon />} variant="outline" />
               <Button disabled>Disabled</Button>
               <Button leadingIcon={<PlusIcon />}>추가</Button>
               <Button leadingIcon={<SearchIcon />} variant="outline">검색</Button>
@@ -548,16 +627,646 @@ export default function App() {
               <Input fieldStyle="fill" label="읽기 전용 (fill)" readOnly value="변경 불가" />
             </div>
           </div>
+
+          <div style={{ marginTop: 16 }}>
+            <div className="sc-block__label" style={{ marginBottom: 12 }}>Clearable</div>
+            <div className="sc-form-grid">
+              <Input label="sm" size="sm" clearable placeholder="입력 후 × 버튼 확인" />
+              <Input label="md" size="md" clearable placeholder="입력 후 × 버튼 확인" />
+              <Input label="lg" size="lg" clearable placeholder="입력 후 × 버튼 확인" />
+              <Input label="prefix + clearable" clearable prefix={<SearchIcon />} placeholder="검색어 입력" />
+            </div>
+          </div>
+
+          <div style={{ marginTop: 16 }}>
+            <div className="sc-block__label" style={{ marginBottom: 12 }}>Character Count</div>
+            <div className="sc-form-grid">
+              <Input label="글자 수만 표시" showCount placeholder="내용을 입력하세요" />
+              <Input label="최대 글자 수 포함" showCount maxLength={50} placeholder="최대 50자" />
+              <Input label="에러 상태" showCount maxLength={20} error="최대 글자 수를 초과했습니다" defaultValue="이 텍스트는 너무 길어요" />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== TEXTAREA ===== */}
+        <section className="sc-section" id="textarea">
+          <h2 className="sc-section__title">TextArea</h2>
+          <p className="sc-section__desc">멀티라인 텍스트 입력. outline/fill × md/lg.</p>
+
+          <div className="sc-form-grid">
+            <TextArea label="outline md" size="md" placeholder="내용을 입력하세요" />
+            <TextArea label="outline lg" size="lg" placeholder="내용을 입력하세요" />
+            <TextArea label="fill md" size="md" fieldStyle="fill" placeholder="내용을 입력하세요" />
+            <TextArea label="fill lg" size="lg" fieldStyle="fill" placeholder="내용을 입력하세요" />
+          </div>
+
+          <div style={{ marginTop: 16 }}>
+            <div className="sc-block__label" style={{ marginBottom: 12 }}>States</div>
+            <div className="sc-form-grid">
+              <TextArea label="에러" error="올바른 내용을 입력해 주세요" defaultValue="잘못된 내용" />
+              <TextArea label="힌트" hint="최대 500자까지 입력할 수 있습니다" />
+              <TextArea label="disabled" disabled placeholder="비활성 상태" />
+              <TextArea label="readOnly" readOnly defaultValue="읽기 전용 텍스트입니다" />
+            </div>
+          </div>
+
+          <div style={{ marginTop: 16 }}>
+            <div className="sc-block__label" style={{ marginBottom: 12 }}>글자 수</div>
+            <div className="sc-form-grid">
+              <TextArea label="글자 수" showCount placeholder="내용을 입력하세요" />
+              <TextArea label="최대 글자 수" showCount maxLength={200} placeholder="최대 200자" />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== BREADCRUMB ===== */}
+        <section className="sc-section" id="breadcrumb">
+          <h2 className="sc-section__title">Breadcrumb</h2>
+          <p className="sc-section__desc">separator(chevron/slash/dot) × leading(none/home).</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
+            <Breadcrumb
+              items={[
+                { label: '페이지' },
+                { label: '페이지' },
+                { label: '페이지' },
+                { label: '현재 페이지' },
+              ]}
+              separator="chevron"
+            />
+            <Breadcrumb
+              items={[
+                { label: '페이지' },
+                { label: '페이지' },
+                { label: '페이지' },
+                { label: '현재 페이지' },
+              ]}
+              separator="slash"
+            />
+            <Breadcrumb
+              items={[
+                { label: '페이지' },
+                { label: '페이지' },
+                { label: '페이지' },
+                { label: '현재 페이지' },
+              ]}
+              separator="dot"
+            />
+            <Breadcrumb
+              items={[
+                { label: '홈' },
+                { label: '목록' },
+                { label: '상세' },
+              ]}
+              separator="chevron"
+              leading="home"
+            />
+          </div>
+        </section>
+
+        {/* ===== TAB ===== */}
+        <section className="sc-section" id="tab">
+          <h2 className="sc-section__title">Tab</h2>
+          <p className="sc-section__desc">distribution(equal/content) × size(sm/md/lg).</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Equal / lg (기본)</div>
+              <Tab
+                items={[
+                  { key: 'all', label: '전체' },
+                  { key: 'active', label: '활성' },
+                  { key: 'ended', label: '종료' },
+                ]}
+                defaultActiveKey="all"
+                size="lg"
+                distribution="equal"
+              />
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Equal / md</div>
+              <Tab
+                items={[
+                  { key: 'a', label: '아이템 1' },
+                  { key: 'b', label: '아이템 2' },
+                  { key: 'c', label: '아이템 3' },
+                  { key: 'd', label: '아이템 4' },
+                ]}
+                defaultActiveKey="a"
+                size="md"
+                distribution="equal"
+              />
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Content / sm</div>
+              <Tab
+                items={[
+                  { key: 'x', label: '회사 정보' },
+                  { key: 'y', label: '계약 현황' },
+                  { key: 'z', label: '정산 내역' },
+                  { key: 'w', label: '담당자' },
+                ]}
+                defaultActiveKey="x"
+                size="sm"
+                distribution="content"
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== ACCORDION ===== */}
+        <section className="sc-section" id="accordion">
+          <h2 className="sc-section__title">Accordion</h2>
+          <p className="sc-section__desc">variation(plain/contained) × size(sm/md/lg).</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 40 }}>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Plain / lg (기본)</div>
+              <Accordion
+                variation="plain"
+                size="lg"
+                items={[
+                  { key: '1', label: '서비스 이용 약관이란 무엇인가요?', content: '서비스 이용 약관은 서비스를 이용하는 모든 사용자가 동의해야 하는 규칙과 조건을 명시한 문서입니다.' },
+                  { key: '2', label: '계정을 삭제하면 데이터가 복구되나요?', content: '계정 삭제 후 30일 이내에는 복구가 가능합니다. 30일이 지나면 모든 데이터가 영구적으로 삭제됩니다.', defaultOpen: true },
+                  { key: '3', label: '결제 수단은 어떤 것을 지원하나요?', content: '신용카드, 체크카드, 계좌이체, 간편결제(카카오페이, 네이버페이) 등을 지원합니다.' },
+                  { key: '4', label: '비활성화된 아이템', content: '이 내용은 표시되지 않습니다.', disabled: true },
+                ]}
+              />
+            </div>
+
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Plain / md</div>
+              <Accordion
+                variation="plain"
+                size="md"
+                items={[
+                  { key: 'a', label: '배송 기간은 얼마나 걸리나요?', content: '일반 배송은 2~3일, 빠른 배송은 익일 도착입니다.' },
+                  { key: 'b', label: '교환 및 반품 정책은 어떻게 되나요?', content: '수령 후 7일 이내에 교환 및 반품이 가능합니다.', defaultOpen: true },
+                  { key: 'c', label: '고객센터 운영 시간은?', content: '평일 오전 9시 ~ 오후 6시 운영합니다. 주말 및 공휴일은 휴무입니다.' },
+                ]}
+              />
+            </div>
+
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Contained / lg</div>
+              <Accordion
+                variation="contained"
+                size="lg"
+                items={[
+                  { key: 'x', label: '프리미엄 플랜 혜택', content: '무제한 프로젝트, 팀원 초대, 우선 고객 지원, 고급 분석 리포트 등의 혜택을 제공합니다.' },
+                  { key: 'y', label: '요금제 변경은 언제 적용되나요?', content: '요금제 변경은 다음 결제 사이클부터 적용됩니다. 현재 사이클에는 변경이 적용되지 않습니다.', defaultOpen: true },
+                  { key: 'z', label: '팀 플랜과 개인 플랜의 차이', content: '팀 플랜은 최대 50명의 팀원을 초대할 수 있으며, 관리자 권한과 팀 대시보드를 제공합니다.' },
+                ]}
+              />
+            </div>
+
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Contained / md</div>
+              <Accordion
+                variation="contained"
+                size="md"
+                allowMultiple={false}
+                items={[
+                  { key: 'p', label: '단일 열기 모드 (allowMultiple=false)', content: '하나를 열면 다른 항목은 자동으로 닫힙니다.' },
+                  { key: 'q', label: '두 번째 항목', content: '이 항목을 클릭하면 위의 항목이 닫힙니다.' },
+                  { key: 'r', label: '세 번째 항목', content: '마지막 항목입니다.' },
+                ]}
+              />
+            </div>
+
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Contained / sm</div>
+              <Accordion
+                variation="contained"
+                size="sm"
+                items={[
+                  { key: 's1', label: '소형 사이즈 아코디언', content: 'sm 사이즈는 공간이 제한된 영역에서 사용합니다.' },
+                  { key: 's2', label: '두 번째 항목', content: '14px 폰트 크기의 소형 아코디언입니다.' },
+                ]}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== SEGMENTED CONTROL ===== */}
+        <section className="sc-section" id="segmentedcontrol">
+          <h2 className="sc-section__title">SegmentedControl</h2>
+          <p className="sc-section__desc">size(sm/md) × width(equal/content).</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Equal / md (기본)</div>
+              <SegmentedControl
+                size="md"
+                width="equal"
+                defaultValue="all"
+                items={[
+                  { key: 'all', label: '전체' },
+                  { key: 'active', label: '활성' },
+                  { key: 'ended', label: '종료' },
+                ]}
+              />
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Equal / md — 4 segments</div>
+              <SegmentedControl
+                size="md"
+                width="equal"
+                defaultValue="a"
+                items={[
+                  { key: 'a', label: '아이템 1' },
+                  { key: 'b', label: '아이템 2' },
+                  { key: 'c', label: '아이템 3' },
+                  { key: 'd', label: '아이템 4' },
+                ]}
+              />
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Equal / sm</div>
+              <SegmentedControl
+                size="sm"
+                width="equal"
+                defaultValue="x"
+                items={[
+                  { key: 'x', label: '월간' },
+                  { key: 'y', label: '주간' },
+                  { key: 'z', label: '일간' },
+                ]}
+              />
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Content / md</div>
+              <SegmentedControl
+                size="md"
+                width="content"
+                defaultValue="p"
+                items={[
+                  { key: 'p', label: '회사 정보' },
+                  { key: 'q', label: '계약 현황' },
+                  { key: 'r', label: '정산 내역' },
+                ]}
+              />
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Content / sm</div>
+              <SegmentedControl
+                size="sm"
+                width="content"
+                defaultValue="s1"
+                items={[
+                  { key: 's1', label: '전체' },
+                  { key: 's2', label: '진행 중' },
+                  { key: 's3', label: '완료' },
+                  { key: 's4', label: '취소' },
+                ]}
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== PAGE INDICATOR ===== */}
+        <section className="sc-section" id="pageindicator">
+          <h2 className="sc-section__title">PageIndicator</h2>
+          <p className="sc-section__desc">size(sm/md/lg) × appearance(default/onImage).</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Size lg — 5 dots</div>
+              <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <PageIndicator key={i} count={5} activeIndex={i} size="lg" />
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Size md — 4 dots</div>
+              <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+                {[0, 1, 2, 3].map((i) => (
+                  <PageIndicator key={i} count={4} activeIndex={i} size="md" />
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Size sm — 3 dots</div>
+              <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap' }}>
+                {[0, 1, 2].map((i) => (
+                  <PageIndicator key={i} count={3} activeIndex={i} size="sm" />
+                ))}
+              </div>
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 12 }}>Appearance: onImage (lg)</div>
+              <div style={{ display: 'flex', gap: 24, background: '#333', padding: '16px 20px', borderRadius: 12 }}>
+                {[0, 1, 2, 3, 4].map((i) => (
+                  <PageIndicator key={i} count={5} activeIndex={i} size="lg" appearance="onImage" />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== POPOVER ===== */}
+        <section className="sc-section" id="popover">
+          <h2 className="sc-section__title">Popover</h2>
+          <p className="sc-section__desc">emphasis(default/inverse) — 정보 안내용 팝오버 컨테이너.</p>
+
+          <div style={{ display: 'flex', gap: 24, flexWrap: 'wrap', alignItems: 'flex-start' }}>
+            <Popover emphasis="default">
+              <PopoverSection title="알림 안내">
+                <ul style={{ paddingLeft: 20, margin: 0 }}>
+                  <li>일부 알림은 지연되어 도착할 수 있어요</li>
+                  <li>설정에서 언제든지 끌 수 있어요</li>
+                  <li>동일한 알림이 반복해서 표시될 수 있어요</li>
+                </ul>
+              </PopoverSection>
+              <PopoverSection title="기능 사용 가이드">
+                <ul style={{ paddingLeft: 20, margin: 0 }}>
+                  <li>필요한 항목을 선택해 작업을 진행할 수 있어요</li>
+                  <li>선택한 항목은 한 번에 처리할 수 있어요</li>
+                </ul>
+              </PopoverSection>
+            </Popover>
+
+            <Popover emphasis="inverse">
+              <PopoverSection title="알림 안내">
+                <ul style={{ paddingLeft: 20, margin: 0 }}>
+                  <li>일부 알림은 지연되어 도착할 수 있어요</li>
+                  <li>설정에서 언제든지 끌 수 있어요</li>
+                  <li>동일한 알림이 반복해서 표시될 수 있어요</li>
+                </ul>
+              </PopoverSection>
+              <PopoverSection title="기능 사용 가이드">
+                <ul style={{ paddingLeft: 20, margin: 0 }}>
+                  <li>필요한 항목을 선택해 작업을 진행할 수 있어요</li>
+                  <li>선택한 항목은 한 번에 처리할 수 있어요</li>
+                </ul>
+              </PopoverSection>
+            </Popover>
+          </div>
+        </section>
+
+        {/* ===== NUMBER STEPPER ===== */}
+        <section className="sc-section" id="numberstepper">
+          <h2 className="sc-section__title">NumberStepper</h2>
+          <p className="sc-section__desc">emphasis(outline/soft) × size(sm/md).</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Outline / md</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <NumberStepper
+                  value={stepperOutlineMd}
+                  onChange={setStepperOutlineMd}
+                  min={0}
+                  max={10}
+                  emphasis="outline"
+                  size="md"
+                />
+                <span style={{ fontSize: 15, color: 'var(--sys-content-neutral-default)' }}>{stepperOutlineMd}</span>
+              </div>
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Soft / md</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <NumberStepper
+                  value={stepperSoftMd}
+                  onChange={setStepperSoftMd}
+                  min={0}
+                  max={10}
+                  emphasis="soft"
+                  size="md"
+                />
+                <span style={{ fontSize: 15, color: 'var(--sys-content-neutral-default)' }}>{stepperSoftMd}</span>
+              </div>
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Outline / sm</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+                <NumberStepper
+                  value={stepperSm}
+                  onChange={setStepperSm}
+                  emphasis="outline"
+                  size="sm"
+                />
+                <span style={{ fontSize: 14, color: 'var(--sys-content-neutral-default)' }}>{stepperSm}</span>
+              </div>
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Disabled</div>
+              <NumberStepper
+                value={5}
+                onChange={() => {}}
+                emphasis="outline"
+                size="md"
+                disabled
+              />
+            </div>
+          </div>
+        </section>
+
+        {/* ===== RATING ===== */}
+        <section className="sc-section" id="rating">
+          <h2 className="sc-section__title">Rating</h2>
+          <p className="sc-section__desc">size(xs/sm/md) × readOnly/interactive.</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', gap: 24 }}>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>Interactive / md</div>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 12 }}>
+                <Rating value={rating} onChange={setRating} size="md" />
+                <span style={{ fontSize: 15, color: 'var(--sys-content-neutral-muted)' }}>{rating} / 5</span>
+              </div>
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>ReadOnly — size md / sm / xs</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 12 }}>
+                <Rating value={4} size="md" readOnly />
+                <Rating value={3} size="sm" readOnly />
+                <Rating value={2} size="xs" readOnly />
+              </div>
+            </div>
+            <div>
+              <div className="sc-block__label" style={{ marginBottom: 8 }}>다양한 값</div>
+              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
+                {[1, 2, 3, 4, 5].map((v) => (
+                  <Rating key={v} value={v} size="sm" readOnly />
+                ))}
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* ===== ROW ===== */}
+        <section className="sc-section" id="row">
+          <h2 className="sc-section__title">Row</h2>
+          <p className="sc-section__desc">리스트 항목용 네비게이션 행.</p>
+
+          <div style={{ display: 'flex', flexDirection: 'column', border: '1px solid var(--sys-border-neutral-subtle)', borderRadius: 12, overflow: 'hidden' }}>
+            <Row label="최선집행기준 설명서" onClick={() => {}} />
+            <Row label="투자 위험 안내" onClick={() => {}} />
+            <Row label="금융소비자보호 안내" onClick={() => {}} />
+            <Row label="개인정보 처리방침" onClick={() => {}} />
+            <Row
+              label="trailing 커스텀"
+              trailing={<span style={{ fontSize: 13, color: 'var(--sys-content-neutral-muted)' }}>보기</span>}
+              onClick={() => {}}
+            />
+            <Row label="chevron 없음" showChevron={false} />
+            <Row label="비활성화된 항목" onClick={() => {}} disabled />
+          </div>
+        </section>
+
+        {/* ===== TEXTBUTTON ===== */}
+        <section className="sc-section" id="textbutton">
+          <h2 className="sc-section__title">TextButton</h2>
+          <p className="sc-section__desc">텍스트 전용 버튼. variant(chevron/plain/underline) × tone × size.</p>
+
+          <div className="sc-row" style={{ gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+            <TextButton variant="plain" tone="accent" size="lg">더 보기</TextButton>
+            <TextButton variant="plain" tone="accent" size="md">더 보기</TextButton>
+            <TextButton variant="plain" tone="accent" size="sm">더 보기</TextButton>
+            <TextButton variant="plain" tone="accent" size="xs">더 보기</TextButton>
+          </div>
+          <div className="sc-row" style={{ gap: 16, flexWrap: 'wrap', alignItems: 'center', marginTop: 8 }}>
+            <TextButton variant="chevron" tone="accent" size="md">전체보기</TextButton>
+            <TextButton variant="chevron" tone="neutral" size="md">전체보기</TextButton>
+            <TextButton variant="chevron" tone="neutralMuted" size="md">전체보기</TextButton>
+            <TextButton variant="chevron" tone="danger" size="md">삭제하기</TextButton>
+          </div>
+          <div className="sc-row" style={{ gap: 16, flexWrap: 'wrap', alignItems: 'center', marginTop: 8 }}>
+            <TextButton variant="underline" tone="accent" size="md">자세히 보기</TextButton>
+            <TextButton variant="underline" tone="neutral" size="md">자세히 보기</TextButton>
+            <TextButton variant="plain" tone="accent" size="md" disabled>비활성화</TextButton>
+          </div>
+        </section>
+
+        {/* ===== ICONBUTTON ===== */}
+        <section className="sc-section" id="iconbutton">
+          <h2 className="sc-section__title">IconButton</h2>
+          <p className="sc-section__desc">아이콘 전용 버튼. variant(soft/outline/ghost) × shape(circle/rounded) × size.</p>
+
+          <div className="sc-row" style={{ gap: 12, flexWrap: 'wrap', alignItems: 'center' }}>
+            <IconButton variant="soft" shape="circle" size="lg" aria-label="설정" icon={<Icon name="setting" size="md" />} />
+            <IconButton variant="soft" shape="circle" size="md" aria-label="설정" icon={<Icon name="setting" size="sm" />} />
+            <IconButton variant="soft" shape="circle" size="sm" aria-label="설정" icon={<Icon name="setting" size="sm" />} />
+            <IconButton variant="soft" shape="circle" size="xs" aria-label="설정" icon={<Icon name="setting" size="xs" />} />
+          </div>
+          <div className="sc-row" style={{ gap: 12, flexWrap: 'wrap', alignItems: 'center', marginTop: 8 }}>
+            <IconButton variant="outline" shape="circle" size="md" aria-label="닫기" icon={<Icon name="x" size="sm" />} />
+            <IconButton variant="ghost" shape="circle" size="md" aria-label="더보기" icon={<Icon name="more_horizontal" size="sm" />} />
+            <IconButton variant="soft" shape="rounded" size="md" aria-label="검색" icon={<Icon name="search" size="sm" />} />
+            <IconButton variant="outline" shape="rounded" size="md" aria-label="필터" icon={<Icon name="filter" size="sm" />} />
+            <IconButton variant="ghost" shape="rounded" size="md" emphasis="subdued" aria-label="편집" icon={<Icon name="write" size="sm" />} />
+          </div>
+          <div className="sc-row" style={{ gap: 12, flexWrap: 'wrap', alignItems: 'center', marginTop: 8 }}>
+            <IconButton variant="soft" shape="circle" size="md" aria-label="비활성" disabled icon={<Icon name="setting" size="sm" />} />
+            <IconButton variant="soft" shape="circle" size="md" aria-label="로딩" loading icon={<Icon name="setting" size="sm" />} />
+          </div>
+        </section>
+
+        {/* ===== LINK ===== */}
+        <section className="sc-section" id="link">
+          <h2 className="sc-section__title">Link</h2>
+          <p className="sc-section__desc">인라인 링크. tone(brand/neutral) × underline(always/auto/none).</p>
+
+          <div className="sc-row" style={{ gap: 16, flexWrap: 'wrap', alignItems: 'center' }}>
+            <Link href="#" tone="brand" underline="always">브랜드 링크 (always)</Link>
+            <Link href="#" tone="brand" underline="auto">브랜드 링크 (auto)</Link>
+            <Link href="#" tone="brand" underline="none">브랜드 링크 (none)</Link>
+          </div>
+          <div className="sc-row" style={{ gap: 16, flexWrap: 'wrap', alignItems: 'center', marginTop: 8 }}>
+            <Link href="#" tone="neutral" underline="always">뉴트럴 링크 (always)</Link>
+            <Link href="#" tone="neutral" underline="auto">뉴트럴 링크 (auto)</Link>
+            <Link href="#" tone="neutral" underline="none">뉴트럴 링크 (none)</Link>
+          </div>
+          <div className="sc-row" style={{ gap: 16, flexWrap: 'wrap', alignItems: 'center', marginTop: 8 }}>
+            <Link tone="brand" disabled>비활성 브랜드</Link>
+            <Link tone="neutral" disabled>비활성 뉴트럴</Link>
+          </div>
+        </section>
+
+        {/* ===== BUTTON GROUP ===== */}
+        <section className="sc-section" id="buttongroup">
+          <h2 className="sc-section__title">ButtonGroup</h2>
+          <p className="sc-section__desc">버튼을 그룹화하는 레이아웃 컨테이너.</p>
+          <div className="sc-row">
+            <ButtonGroup layout="inline" size="md">
+              <Button variant="fill" tone="primary" size="md">저장</Button>
+              <Button variant="outline" tone="secondary" size="md">취소</Button>
+            </ButtonGroup>
+          </div>
+          <div className="sc-row">
+            <ButtonGroup layout="inline" distribution="equal" size="md" style={{ width: 320 }}>
+              <Button variant="fill" tone="primary" size="md">확인</Button>
+              <Button variant="outline" tone="secondary" size="md">취소</Button>
+            </ButtonGroup>
+          </div>
+          <div className="sc-row">
+            <ButtonGroup layout="stack" size="md" style={{ width: 200 }}>
+              <Button variant="fill" tone="primary" size="md">저장</Button>
+              <Button variant="outline" tone="secondary" size="md">취소</Button>
+              <Button variant="ghost" tone="secondary" size="md">돌아가기</Button>
+            </ButtonGroup>
+          </div>
+        </section>
+
+        {/* ===== TOGGLE BUTTON ===== */}
+        <section className="sc-section" id="togglebutton">
+          <h2 className="sc-section__title">ToggleButton</h2>
+          <p className="sc-section__desc">선택/미선택 두 가지 상태를 토글하는 버튼.</p>
+          <div className="sc-row" style={{ gap: 8 }}>
+            <ToggleButton emphasis="onDefault" size="md">미선택</ToggleButton>
+            <ToggleButton emphasis="onDefault" size="md" selected>선택됨</ToggleButton>
+            <ToggleButton emphasis="onDefault" size="sm">Small</ToggleButton>
+            <ToggleButton emphasis="onDefault" size="xs">XSmall</ToggleButton>
+          </div>
+          <div className="sc-row" style={{ gap: 8 }}>
+            <ToggleButton emphasis="onSelect" size="md">미선택</ToggleButton>
+            <ToggleButton emphasis="onSelect" size="md" selected>선택됨</ToggleButton>
+          </div>
+          <div className="sc-row" style={{ gap: 8 }}>
+            <ToggleButton emphasis="onDefault" size="md"
+              leadingIcon={<Icon name="filter" size="sm" />}>필터</ToggleButton>
+            <ToggleButton emphasis="onDefault" size="md" selected
+              leadingIcon={<Icon name="filter" size="sm" />}>필터 ON</ToggleButton>
+            <ToggleButton emphasis="onDefault" size="md" iconOnly
+              leadingIcon={<Icon name="filter" size="sm" />} />
+            <ToggleButton emphasis="onDefault" size="md" disabled>비활성</ToggleButton>
+            <ToggleButton emphasis="onDefault" size="md" loading>로딩</ToggleButton>
+          </div>
+        </section>
+
+        {/* ===== FLOATING BUTTON ===== */}
+        <section className="sc-section" id="floatingbutton">
+          <h2 className="sc-section__title">FloatingButton</h2>
+          <p className="sc-section__desc">플로팅 액션 버튼 (FAB). 화면 위에 부유하는 주요 액션.</p>
+          <div className="sc-row" style={{ gap: 16, alignItems: 'center' }}>
+            <FloatingButton variant="primary" size="sm" icon={<Icon name="add" size="sm" />} aria-label="추가" />
+            <FloatingButton variant="primary" size="md" icon={<Icon name="add" size="md" />} aria-label="추가" />
+            <FloatingButton variant="primary" size="lg" icon={<Icon name="add" size="md" />} aria-label="추가" />
+          </div>
+          <div className="sc-row" style={{ gap: 16, alignItems: 'center' }}>
+            <FloatingButton variant="secondary" size="md" icon={<Icon name="write" size="sm" />} aria-label="편집" />
+            <FloatingButton variant="ghost" size="md" icon={<Icon name="write" size="sm" />} aria-label="편집" />
+          </div>
+          <div className="sc-row" style={{ gap: 16, alignItems: 'center' }}>
+            <FloatingButton variant="primary" shape="extended" size="md" icon={<Icon name="add" size="sm" />} label="추가하기" />
+            <FloatingButton variant="secondary" shape="extended" size="md" icon={<Icon name="write" size="sm" />} label="편집하기" />
+          </div>
+          <div className="sc-row" style={{ gap: 16, alignItems: 'center' }}>
+            <FloatingButton variant="primary" size="md" icon={<Icon name="add" size="sm" />} loading aria-label="로딩" />
+            <FloatingButton variant="primary" size="md" icon={<Icon name="add" size="sm" />} disabled aria-label="비활성" />
+          </div>
         </section>
 
         {/* ===== SELECT ===== */}
         <section className="sc-section" id="select">
           <h2 className="sc-section__title">Select</h2>
-          <p className="sc-section__desc">outline / fill 스타일. placeholder, error, disabled 지원.</p>
+          <p className="sc-section__desc">커스텀 드롭다운. searchable, multi-select 지원.</p>
 
           <div className="sc-form-grid">
             <Select
-              label="상태"
+              label="기본"
               placeholder="선택하세요"
               options={[
                 { value: 'active', label: '활성' },
@@ -566,7 +1275,7 @@ export default function App() {
               ]}
             />
             <Select
-              label="역할"
+              label="기본값 있음"
               options={[
                 { value: 'admin', label: '관리자' },
                 { value: 'operator', label: '운영자' },
@@ -578,7 +1287,7 @@ export default function App() {
               label="오류 상태"
               placeholder="선택하세요"
               error="필수 항목입니다"
-              options={[{ value: '1', label: '옵션 1' }]}
+              options={[{ value: '1', label: '옵션 1' }, { value: '2', label: '옵션 2' }]}
             />
             <Select
               label="비활성"
@@ -586,6 +1295,56 @@ export default function App() {
               options={[{ value: '1', label: '옵션 1' }]}
               defaultValue="1"
             />
+          </div>
+
+          <div style={{ marginTop: 16 }}>
+            <div className="sc-block__label" style={{ marginBottom: 12 }}>Searchable</div>
+            <div className="sc-form-grid">
+              <Select
+                label="검색 가능"
+                searchable
+                placeholder="검색 후 선택"
+                options={[
+                  { value: 'seoul', label: '서울특별시' },
+                  { value: 'busan', label: '부산광역시' },
+                  { value: 'daegu', label: '대구광역시' },
+                  { value: 'incheon', label: '인천광역시' },
+                  { value: 'gwangju', label: '광주광역시' },
+                  { value: 'daejeon', label: '대전광역시' },
+                  { value: 'ulsan', label: '울산광역시' },
+                ]}
+              />
+            </div>
+          </div>
+
+          <div style={{ marginTop: 16 }}>
+            <div className="sc-block__label" style={{ marginBottom: 12 }}>Multi-select</div>
+            <div className="sc-form-grid">
+              <Select
+                label="다중 선택"
+                multiple
+                placeholder="여러 개 선택 가능"
+                options={[
+                  { value: 'read', label: '읽기' },
+                  { value: 'write', label: '쓰기' },
+                  { value: 'delete', label: '삭제' },
+                  { value: 'admin', label: '관리자' },
+                ]}
+              />
+              <Select
+                label="다중 + 검색"
+                multiple
+                searchable
+                placeholder="검색 후 다중 선택"
+                options={[
+                  { value: 'seoul', label: '서울특별시' },
+                  { value: 'busan', label: '부산광역시' },
+                  { value: 'daegu', label: '대구광역시' },
+                  { value: 'incheon', label: '인천광역시' },
+                  { value: 'gwangju', label: '광주광역시' },
+                ]}
+              />
+            </div>
           </div>
         </section>
 
@@ -716,6 +1475,45 @@ export default function App() {
               <Checkbox label="sm 체크박스" size="sm" />
               <Checkbox label="sm indeterminate" size="sm" indeterminate />
               <Checkbox label="sm 비활성" size="sm" disabled />
+            </div>
+          </div>
+
+          <div className="sc-block">
+            <div className="sc-block__label">CheckboxGroup — 전체선택 포함</div>
+            <CheckboxGroup
+              label="권한 설정"
+              selectAll
+              options={[
+                { value: 'read', label: '읽기' },
+                { value: 'write', label: '쓰기' },
+                { value: 'delete', label: '삭제' },
+                { value: 'admin', label: '관리자', disabled: true },
+              ]}
+              defaultValue={['read']}
+            />
+          </div>
+
+          <div className="sc-block">
+            <div className="sc-block__label">CheckboxGroup — 수평 / 오류</div>
+            <div className="sc-col">
+              <CheckboxGroup
+                label="알림 방법"
+                direction="horizontal"
+                options={[
+                  { value: 'email', label: '이메일' },
+                  { value: 'sms', label: 'SMS' },
+                  { value: 'push', label: '푸시' },
+                ]}
+                defaultValue={['email']}
+              />
+              <CheckboxGroup
+                label="필수 동의"
+                options={[
+                  { value: 'terms', label: '이용약관 동의' },
+                  { value: 'privacy', label: '개인정보 수집 동의' },
+                ]}
+                error="필수 항목을 모두 선택해주세요"
+              />
             </div>
           </div>
         </section>
@@ -1150,6 +1948,42 @@ export default function App() {
           </div>
         </section>
 
+        {/* ===== PAGINATION ===== */}
+        <section className="sc-section" id="pagination">
+          <h2 className="sc-section__title">Pagination</h2>
+          <p className="sc-section__desc">페이지 탐색. default(숫자 목록) / minimal(N/총) 두 variant.</p>
+
+          <div className="sc-block">
+            <div className="sc-block__label">default — md (총 100개, pageSize 10)</div>
+            <PaginationDemo total={100} pageSize={10} size="md" variant="default" />
+          </div>
+
+          <div className="sc-block">
+            <div className="sc-block__label">default — sm</div>
+            <PaginationDemo total={100} pageSize={10} size="sm" variant="default" />
+          </div>
+
+          <div className="sc-block">
+            <div className="sc-block__label">minimal — md</div>
+            <PaginationDemo total={80} pageSize={10} size="md" variant="minimal" />
+          </div>
+
+          <div className="sc-block">
+            <div className="sc-block__label">minimal — sm</div>
+            <PaginationDemo total={80} pageSize={10} size="sm" variant="minimal" />
+          </div>
+
+          <div className="sc-block">
+            <div className="sc-block__label">페이지 수 적음 (5페이지) — ellipsis 없음</div>
+            <PaginationDemo total={50} pageSize={10} size="md" variant="default" />
+          </div>
+
+          <div className="sc-block">
+            <div className="sc-block__label">Table + Pagination 연동 예시</div>
+            <TableWithPagination />
+          </div>
+        </section>
+
         {/* ===== MODAL ===== */}
         <section className="sc-section" id="modal">
           <h2 className="sc-section__title">Modal</h2>
@@ -1157,7 +1991,13 @@ export default function App() {
 
           <div className="sc-row">
             <Button onClick={() => setModalOpen(true)} iconLeft={<PlusIcon />}>
-              모달 열기
+              Primary (커스텀 footer)
+            </Button>
+            <Button tone="secondary" variant="outline" onClick={() => setModalNeutralOpen(true)}>
+              Neutral footer
+            </Button>
+            <Button tone="danger" onClick={() => setModalDangerOpen(true)}>
+              Danger footer
             </Button>
           </div>
 
@@ -1165,6 +2005,7 @@ export default function App() {
             open={modalOpen}
             onClose={() => setModalOpen(false)}
             title="사용자 정보 수정"
+            subtitle="변경된 내용은 즉시 반영됩니다."
             size="md"
             footer={
               <>
@@ -1201,6 +2042,35 @@ export default function App() {
               />
             </div>
           </Modal>
+
+          <Modal
+            open={modalNeutralOpen}
+            onClose={() => setModalNeutralOpen(false)}
+            title="알림"
+            subtitle="확인 후 닫아주세요."
+            size="sm"
+            footerVariation="neutral"
+            primaryLabel="확인"
+            showSecondaryAction={false}
+            onPrimaryAction={() => setModalNeutralOpen(false)}
+          >
+            <p>처리가 완료되었습니다.</p>
+          </Modal>
+
+          <Modal
+            open={modalDangerOpen}
+            onClose={() => setModalDangerOpen(false)}
+            title="사용자 삭제"
+            subtitle="이 작업은 되돌릴 수 없습니다."
+            size="sm"
+            footerVariation="danger"
+            primaryLabel="삭제"
+            secondaryLabel="취소"
+            onPrimaryAction={() => { setModalDangerOpen(false); addToast('error') }}
+            onSecondaryAction={() => setModalDangerOpen(false)}
+          >
+            <p>정말로 이 사용자를 삭제하시겠습니까?</p>
+          </Modal>
         </section>
 
         {/* ===== TOAST ===== */}
@@ -1222,26 +2092,65 @@ export default function App() {
               <Badge variant="info" size="sm" style={{ marginRight: 4 }}>i</Badge> Info
             </Button>
           </div>
+
+          <div style={{ marginTop: 16 }}>
+            <div className="sc-block__label" style={{ marginBottom: 12 }}>Action Button</div>
+            <div style={{ display: 'flex', flexDirection: 'column', gap: 8, maxWidth: 360 }}>
+              <Toast
+                type="info"
+                message="새로운 버전이 출시되었습니다."
+                actionLabel="업데이트"
+                onAction={() => alert('업데이트 클릭')}
+                onClose={() => {}}
+                duration={0}
+              />
+              <Toast
+                type="success"
+                title="저장 완료"
+                message="변경 사항이 저장되었습니다."
+                actionLabel="실행 취소"
+                onAction={() => alert('실행 취소 클릭')}
+                onClose={() => {}}
+                duration={0}
+              />
+            </div>
+          </div>
         </section>
 
         {/* ===== TOOLTIP ===== */}
         <section className="sc-section" id="tooltip">
           <h2 className="sc-section__title">Tooltip</h2>
-          <p className="sc-section__desc">호버·포커스로 표시. 4방향 배치.</p>
+          <p className="sc-section__desc">호버·포커스로 표시. 12방향 배치.</p>
 
-          <div className="sc-row" style={{ paddingTop: 16, paddingBottom: 16 }}>
-            <Tooltip content="상단 툴팁" placement="top">
-              <Button variant="outline">Top</Button>
-            </Tooltip>
-            <Tooltip content="하단 툴팁" placement="bottom">
-              <Button variant="outline">Bottom</Button>
-            </Tooltip>
-            <Tooltip content="좌측 툴팁" placement="left">
-              <Button variant="outline">Left</Button>
-            </Tooltip>
-            <Tooltip content="우측 툴팁" placement="right">
-              <Button variant="outline">Right</Button>
-            </Tooltip>
+          {/* 12방향 격자 — 각 셀에 충분한 여백을 줘서 툴팁이 잘려나가지 않도록 */}
+          <div style={{
+            display: 'grid',
+            gridTemplateColumns: 'repeat(3, 1fr)',
+            gap: 8,
+            padding: '60px 120px',
+          }}>
+            {(
+              [
+                'top-start', 'top', 'top-end',
+                'left-start', null, 'right-start',
+                'left', null, 'right',
+                'left-end', null, 'right-end',
+                'bottom-start', 'bottom', 'bottom-end',
+              ] as (string | null)[]
+            ).map((p, i) =>
+              p ? (
+                <div key={p} style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', padding: 16 }}>
+                  <Tooltip content={p} placement={p as Parameters<typeof Tooltip>[0]['placement']} delay={0}>
+                    <Button variant="outline" size="sm">{p}</Button>
+                  </Tooltip>
+                </div>
+              ) : (
+                <div key={i} />
+              )
+            )}
+          </div>
+
+          <div className="sc-row" style={{ paddingTop: 8 }}>
             <Tooltip content="삭제할 수 없습니다" placement="top">
               <span>
                 <Button tone="danger" variant="soft" disabled>비활성 버튼</Button>

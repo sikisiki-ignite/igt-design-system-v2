@@ -1,0 +1,40 @@
+/* ============================================================
+   IGT PageIndicator Component
+   피그마: PageIndicator (2039:89207)
+   size(sm/md/lg) × appearance(default/onImage)
+   ============================================================ */
+
+.igt-page-indicator {
+  display: inline-flex;
+  align-items: center;
+}
+
+.igt-page-indicator--sm { gap: 6px; }
+.igt-page-indicator--md { gap: 8px; }
+.igt-page-indicator--lg { gap: 10px; }
+
+/* ── Dot ──────────────────────────────────────────────────── */
+.igt-page-indicator__dot {
+  display: block;
+  flex-shrink: 0;
+  border-radius: 9999px;
+  background-color: var(--sys-content-neutral-disabledicon, rgba(0, 27, 55, 0.1));
+  transition: background-color 0.15s ease;
+}
+
+.igt-page-indicator--sm .igt-page-indicator__dot { width: 4px; height: 4px; }
+.igt-page-indicator--md .igt-page-indicator__dot { width: 6px; height: 6px; }
+.igt-page-indicator--lg .igt-page-indicator__dot { width: 8px; height: 8px; }
+
+/* ── Active ───────────────────────────────────────────────── */
+.igt-page-indicator--default .igt-page-indicator__dot--active {
+  background-color: var(--sys-content-neutral-strong, #191f28);
+}
+
+.igt-page-indicator--onImage .igt-page-indicator__dot {
+  background-color: rgba(255, 255, 255, 0.4);
+}
+
+.igt-page-indicator--onImage .igt-page-indicator__dot--active {
+  background-color: #fff;
+}

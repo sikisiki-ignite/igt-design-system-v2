@@ -106,15 +106,16 @@
 
 /* ── Footer ───────────────────────────────────────────────── */
 .igt-modal__footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: var(--ref-space-8);
   flex-shrink: 0;
   padding: var(--ref-space-16) 20px 20px;
 }
 
 .igt-modal__footer-inner {
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  gap: var(--ref-space-8);
+  display: contents;
 }
 
 /* ── Footer Buttons ───────────────────────────────────────── */

@@ -1,0 +1,145 @@
+/* ============================================================
+   IGT Pagination Component
+   피그마: 3 Pagination (240:19710)
+   variant(default/minimal) × size(sm/md)
+   ============================================================ */
+
+.igt-pagination {
+  display: inline-flex;
+  align-items: center;
+}
+
+/* ── Size gap ────────────────────────────────────────────────── */
+.igt-pagination[data-size='md'] { gap: 6px; }
+.igt-pagination[data-size='sm'] { gap: 4px; }
+
+/* ── Nav (prev/next) button ──────────────────────────────────── */
+.igt-pagination__nav {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  color: var(--sys-content-neutral-muted);
+  flex-shrink: 0;
+  transition: background-color 0.1s ease, color 0.1s ease;
+  padding: 4px;
+}
+
+.igt-pagination[data-size='md'] .igt-pagination__nav { width: 36px; height: 36px; }
+.igt-pagination[data-size='sm'] .igt-pagination__nav { width: 28px; height: 28px; }
+
+.igt-pagination__nav:hover:not(:disabled) {
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+  color: var(--sys-content-neutral-default);
+}
+.igt-pagination__nav:active:not(:disabled) {
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+}
+.igt-pagination__nav:disabled {
+  color: var(--sys-content-neutral-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Page number button ──────────────────────────────────────── */
+.igt-pagination__page {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  border: none;
+  border-radius: 9999px;
+  cursor: pointer;
+  color: var(--sys-content-neutral-muted);
+  font-weight: var(--ref-font-weight-400);
+  transition: background-color 0.1s ease, color 0.1s ease;
+  flex-shrink: 0;
+  letter-spacing: -0.2px;
+}
+
+/* md: 36px container, font 17px */
+.igt-pagination[data-size='md'] .igt-pagination__page {
+  width: 36px;
+  height: 36px;
+  font-size: 17px;
+  line-height: 24px;
+}
+
+/* sm: 28px container, font 15px */
+.igt-pagination[data-size='sm'] .igt-pagination__page {
+  width: 28px;
+  height: 28px;
+  font-size: var(--text-body-sm-size, 15px);
+  line-height: 22px;
+}
+
+.igt-pagination__page:hover {
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+  color: var(--sys-content-neutral-default);
+}
+.igt-pagination__page:active {
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+}
+
+/* Current page */
+.igt-pagination__page[data-current] {
+  background-color: var(--sys-container-neutral-tint-default);
+  color: var(--sys-content-neutral-default);
+  font-weight: var(--ref-font-weight-600);
+}
+.igt-pagination__page[data-current]:hover {
+  background-color: var(--sys-container-neutral-tint-default);
+}
+
+/* ── Ellipsis ────────────────────────────────────────────────── */
+.igt-pagination__ellipsis {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sys-content-neutral-muted);
+  flex-shrink: 0;
+  user-select: none;
+}
+
+.igt-pagination[data-size='md'] .igt-pagination__ellipsis {
+  width: 36px;
+  height: 36px;
+  font-size: 17px;
+  line-height: 24px;
+}
+
+.igt-pagination[data-size='sm'] .igt-pagination__ellipsis {
+  width: 28px;
+  height: 28px;
+  font-size: 14px;
+  line-height: 20px;
+}
+
+/* ── Minimal variant ─────────────────────────────────────────── */
+.igt-pagination__minimal {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  color: var(--sys-content-neutral-muted);
+  letter-spacing: -0.2px;
+}
+
+.igt-pagination[data-size='md'] .igt-pagination__minimal {
+  font-size: 17px;
+  line-height: 24px;
+}
+.igt-pagination[data-size='sm'] .igt-pagination__minimal {
+  font-size: var(--text-body-sm-size, 15px);
+  line-height: 22px;
+}
+
+.igt-pagination__minimal-current {
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-default);
+}
+.igt-pagination__minimal-sep,
+.igt-pagination__minimal-total {
+  font-weight: var(--ref-font-weight-400);
+}

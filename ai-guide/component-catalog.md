@@ -10,11 +10,13 @@
 
 | 카테고리 | 컴포넌트 |
 |---------|---------|
-| 입력 | [Button](#button), [Input](#input), [Select](#select), [Checkbox / CheckboxGroup](#checkbox--checkboxgroup), [Radio / RadioGroup](#radio--radiogroup), [Switch / SwitchField](#switch--switchfield), [ChoiceChip / ChoiceChipGroup](#choicechip--choicechipgroup) |
-| 표시 | [Badge](#badge), [CountBadge](#countbadge), [DotBadge](#dotbadge), [Label](#label), [Avatar](#avatar), [Icon](#icon) |
-| 레이아웃 | [AppLayout](#applayout), [Divider](#divider), [Skeleton](#skeleton), [SideNavigation](#sidenavigation) |
-| 오버레이 | [Modal](#modal), [Tooltip](#tooltip), [Toast / ToastContainer](#toast--toastcontainer), [Backdrop](#backdrop) |
+| 입력 | [Button](#button), [IconButton](#iconbutton), [TextButton](#textbutton), [FloatingButton](#floatingbutton), [ToggleButton](#togglebutton), [ButtonGroup](#buttongroup), [Input](#input), [TextArea](#textarea), [Select](#select), [NumberStepper](#numberstepper), [Checkbox / CheckboxGroup](#checkbox--checkboxgroup), [Radio / RadioGroup](#radio--radiogroup), [Switch / SwitchField](#switch--switchfield), [ChoiceChip / ChoiceChipGroup](#choicechip--choicechipgroup), [SegmentedControl](#segmentedcontrol), [Rating](#rating) |
+| 표시 | [Badge](#badge), [CountBadge](#countbadge), [DotBadge](#dotbadge), [Label](#label), [Avatar](#avatar), [Icon](#icon), [PageIndicator](#pageindicator) |
+| 레이아웃 | [AppLayout](#applayout), [Divider](#divider), [Row](#row), [Skeleton](#skeleton), [SideNavigation](#sidenavigation) |
+| 탐색 | [Breadcrumb](#breadcrumb), [Tab](#tab), [Link](#link) |
+| 오버레이 | [Modal](#modal), [Tooltip](#tooltip), [Popover](#popover), [Toast / ToastContainer](#toast--toastcontainer), [Backdrop](#backdrop) |
 | 피드백 | [Alert](#alert), [Table](#table), [Pagination](#pagination) |
+| 콘텐츠 | [Accordion](#accordion) |
 
 ---
 
@@ -926,8 +928,489 @@ const [page, setPage] = useState(1)
 
 ---
 
+---
+
+## IconButton
+
+**언제 쓰나**: 아이콘 하나로 동작을 트리거하는 버튼. 툴바, 테이블 행 액션, 닫기 버튼 등. `aria-label` 필수.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `icon` | `ReactNode` | — | **(필수)** 아이콘 |
+| `aria-label` | `string` | — | **(필수)** 접근성 레이블 |
+| `variant` | `'soft' \| 'outline' \| 'ghost'` | `'ghost'` | 스타일 형태 |
+| `shape` | `'circle' \| 'rounded'` | `'circle'` | 형태 |
+| `emphasis` | `'default' \| 'subdued'` | `'default'` | 강도 |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` | 크기 |
+| `loading` | `boolean` | `false` | 로딩 스피너 |
+| `disabled` | `boolean` | — | 비활성화 |
+
+### 사용 예시
+
+```tsx
+<IconButton icon={<Icon name="close" size="sm" />} aria-label="닫기" />
+<IconButton icon={<Icon name="edit" size="sm" />} aria-label="편집" variant="soft" />
+<IconButton icon={<Icon name="trash" size="sm" />} aria-label="삭제" variant="outline" emphasis="subdued" />
+```
+
+---
+
+## TextButton
+
+**언제 쓰나**: 텍스트 형태의 버튼. 링크처럼 보이는 인라인 액션, "더보기" 등. href 제공 시 `<a>`로 렌더.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `variant` | `'plain' \| 'chevron' \| 'underline'` | `'plain'` | 스타일 — `chevron`은 뒤에 화살표 자동 추가 |
+| `tone` | `'accent' \| 'neutral' \| 'neutralMuted' \| 'danger'` | `'accent'` | 색상 의미 |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` | 크기 |
+| `leadingIcon` | `ReactNode` | — | 앞 아이콘 |
+| `href` | `string` | — | 링크 URL (제공 시 `<a>` 렌더) |
+| `disabled` | `boolean` | — | 비활성화 |
+
+### 사용 예시
+
+```tsx
+<TextButton>더보기</TextButton>
+<TextButton variant="chevron" tone="accent">전체 보기</TextButton>
+<TextButton variant="underline" tone="neutral" href="/docs">문서 보기</TextButton>
+<TextButton tone="danger" leadingIcon={<Icon name="trash" size="sm" />}>삭제</TextButton>
+```
+
+---
+
+## FloatingButton
+
+**언제 쓰나**: 화면 고정 위치의 주요 액션 버튼 (FAB). circle(아이콘만) 또는 extended(아이콘+텍스트) 형태.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `icon` | `ReactNode` | — | **(필수)** 아이콘 |
+| `variant` | `'primary' \| 'secondary' \| 'ghost'` | `'primary'` | 색상 형태 |
+| `shape` | `'circle' \| 'extended'` | `'circle'` | 형태 |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 크기 |
+| `label` | `ReactNode` | — | extended 형태에서 아이콘 옆 텍스트 |
+| `loading` | `boolean` | `false` | 로딩 스피너 |
+| `disabled` | `boolean` | — | 비활성화 |
+
+### 사용 예시
+
+```tsx
+// 원형
+<FloatingButton icon={<Icon name="plus" size="md" />} aria-label="추가" />
+
+// 확장형 (아이콘 + 텍스트)
+<FloatingButton shape="extended" icon={<Icon name="plus" size="sm" />} label="새 항목" />
+```
+
+---
+
+## ToggleButton
+
+**언제 쓰나**: 선택/해제가 가능한 버튼. 필터 칩, 뷰 전환 등 on/off 상태를 가지는 버튼.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `selected` | `boolean` | `false` | 선택 상태 |
+| `onSelectedChange` | `(selected: boolean) => void` | — | 토글 콜백 |
+| `emphasis` | `'onDefault' \| 'onSelect'` | `'onDefault'` | `onDefault`: 선택 시 primary fill / `onSelect`: 선택 시 accent soft |
+| `size` | `'xs' \| 'sm' \| 'md'` | `'md'` | 크기 |
+| `iconOnly` | `boolean` | `false` | 아이콘만 표시 |
+| `leadingIcon` | `ReactNode` | — | 앞 아이콘 |
+| `loading` | `boolean` | `false` | 로딩 스피너 |
+| `disabled` | `boolean` | — | 비활성화 |
+
+### 사용 예시
+
+```tsx
+<ToggleButton selected={isActive} onSelectedChange={setIsActive}>활성</ToggleButton>
+<ToggleButton emphasis="onSelect" selected={isGrid} onSelectedChange={setIsGrid} leadingIcon={<Icon name="grid" size="sm" />}>그리드</ToggleButton>
+```
+
+---
+
+## ButtonGroup
+
+**언제 쓰나**: 여러 버튼을 그룹으로 묶어 배치. 레이아웃 래퍼 역할만 함.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `layout` | `'inline' \| 'stack'` | `'inline'` | 가로/세로 배치 |
+| `distribution` | `'content' \| 'equal'` | `'content'` | 버튼 너비 분배 |
+| `size` | `'xs' \| 'sm' \| 'md' \| 'lg'` | `'md'` | 기준 크기 |
+| `children` | `ReactNode` | — | **(필수)** 버튼 목록 |
+
+### 사용 예시
+
+```tsx
+<ButtonGroup>
+  <Button tone="secondary" variant="outline">취소</Button>
+  <Button>저장</Button>
+</ButtonGroup>
+
+// 전체 너비 균등 분배
+<ButtonGroup layout="stack" distribution="equal">
+  <Button variant="outline">이전</Button>
+  <Button>다음</Button>
+</ButtonGroup>
+```
+
+---
+
+## TextArea
+
+**언제 쓰나**: 여러 줄 텍스트 입력. label, 에러, 글자 수 카운터 내장.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `label` | `string` | — | 레이블 |
+| `hint` | `string` | — | 도움말 텍스트 |
+| `error` | `string` | — | 에러 메시지 (있으면 hint 숨김) |
+| `fieldStyle` | `'outline' \| 'fill'` | `'outline'` | 스타일 형태 |
+| `size` | `'md' \| 'lg'` | `'lg'` | 크기 |
+| `fullWidth` | `boolean` | `false` | 너비 100% |
+| `showCount` | `boolean` | `false` | 글자 수 카운터 표시 (maxLength와 함께) |
+| `readOnly` | `boolean` | `false` | 읽기 전용 |
+| `disabled` | `boolean` | — | 비활성화 |
+| + HTML textarea 속성 | | | `value`, `onChange`, `maxLength`, `rows` 등 |
+
+### 사용 예시
+
+```tsx
+<TextArea label="설명" placeholder="내용을 입력하세요" />
+
+// 글자 수 제한 + 카운터
+<TextArea label="메모" maxLength={200} showCount fullWidth />
+
+// 에러 상태
+<TextArea label="사유" error="필수 입력 항목입니다." value={reason} onChange={(e) => setReason(e.target.value)} />
+```
+
+---
+
+## NumberStepper
+
+**언제 쓰나**: 숫자를 + / - 버튼으로 증감. 수량, 페이지 번호 등.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `value` | `number` | — | **(필수)** 현재 값 |
+| `onChange` | `(value: number) => void` | — | **(필수)** 변경 콜백 |
+| `min` | `number` | — | 최솟값 |
+| `max` | `number` | — | 최댓값 |
+| `step` | `number` | `1` | 증감 단위 |
+| `emphasis` | `'outline' \| 'soft'` | `'outline'` | 스타일 |
+| `size` | `'sm' \| 'md'` | `'md'` | 크기 |
+| `disabled` | `boolean` | `false` | 비활성화 |
+
+### 사용 예시
+
+```tsx
+<NumberStepper value={qty} onChange={setQty} min={1} max={99} />
+<NumberStepper value={count} onChange={setCount} step={5} emphasis="soft" />
+```
+
+---
+
+## SegmentedControl
+
+**언제 쓰나**: 2~5개 옵션 중 하나 선택. 뷰 전환, 필터 탭 등 상호 배타적 선택.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `items` | `SegmentItem[]` | — | **(필수)** `{ key, label, disabled? }` 배열 |
+| `value` | `string` | — | controlled 선택값 |
+| `defaultValue` | `string` | — | uncontrolled 기본값 |
+| `onChange` | `(key: string) => void` | — | 선택 변경 |
+| `size` | `'sm' \| 'md'` | `'md'` | 크기 |
+| `width` | `'equal' \| 'content'` | `'equal'` | 세그먼트 너비 분배 |
+
+### 사용 예시
+
+```tsx
+<SegmentedControl
+  items={[
+    { key: 'list', label: '목록' },
+    { key: 'grid', label: '그리드' },
+    { key: 'chart', label: '차트' },
+  ]}
+  value={viewMode}
+  onChange={setViewMode}
+/>
+```
+
+---
+
+## Rating
+
+**언제 쓰나**: 별점 표시 또는 입력. `onChange` 없으면 읽기 전용.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `value` | `number` | — | **(필수)** 현재 점수 |
+| `onChange` | `(value: number) => void` | — | 입력 콜백 (없으면 read-only) |
+| `count` | `number` | `5` | 별 개수 |
+| `size` | `'xs' \| 'sm' \| 'md'` | `'md'` | 크기 |
+| `readOnly` | `boolean` | `false` | 읽기 전용 강제 |
+
+### 사용 예시
+
+```tsx
+// 표시 전용
+<Rating value={4} readOnly />
+
+// 입력
+<Rating value={rating} onChange={setRating} count={5} />
+```
+
+---
+
+## PageIndicator
+
+**언제 쓰나**: 캐러셀, 온보딩 등 현재 페이지 위치를 점으로 표시. 상호작용 없음.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `count` | `number` | — | **(필수)** 전체 페이지 수 |
+| `activeIndex` | `number` | — | **(필수)** 현재 페이지 인덱스 (0-based) |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'md'` | 크기 |
+| `appearance` | `'default' \| 'onImage'` | `'default'` | 배경에 따른 색상 |
+
+### 사용 예시
+
+```tsx
+<PageIndicator count={5} activeIndex={currentStep} />
+<PageIndicator count={3} activeIndex={slide} appearance="onImage" size="sm" />
+```
+
+---
+
+## Breadcrumb
+
+**언제 쓰나**: 현재 페이지의 계층 경로 표시. 페이지 상단에 배치.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `items` | `BreadcrumbItem[]` | — | **(필수)** `{ label, href?, onClick? }` 배열 — 마지막 항목이 현재 페이지 |
+| `separator` | `'chevron' \| 'slash' \| 'dot'` | `'chevron'` | 구분자 형태 |
+| `leading` | `'none' \| 'home'` | `'none'` | 홈 아이콘 표시 여부 |
+
+### 사용 예시
+
+```tsx
+<Breadcrumb
+  items={[
+    { label: '홈', href: '/' },
+    { label: '사용자 관리', href: '/users' },
+    { label: '상세' },
+  ]}
+/>
+
+<Breadcrumb
+  leading="home"
+  separator="slash"
+  items={[
+    { label: '대시보드', onClick: () => navigate('/') },
+    { label: '설정' },
+  ]}
+/>
+```
+
+---
+
+## Tab
+
+**언제 쓰나**: 콘텐츠 영역을 여러 탭으로 구분. 탭 간 전환은 상태로 관리.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `items` | `TabItem[]` | — | **(필수)** `{ key, label, trailing?, disabled? }` 배열 |
+| `activeKey` | `string` | — | controlled 활성 탭 |
+| `defaultActiveKey` | `string` | — | uncontrolled 기본값 |
+| `onChange` | `(key: string) => void` | — | 탭 변경 콜백 |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'lg'` | 크기 |
+| `distribution` | `'equal' \| 'content'` | `'equal'` | 탭 너비 분배 |
+
+### 사용 예시
+
+```tsx
+const tabs = [
+  { key: 'info', label: '기본 정보' },
+  { key: 'history', label: '이력', trailing: <CountBadge count={3} size="sm" /> },
+  { key: 'settings', label: '설정' },
+]
+
+<Tab items={tabs} activeKey={activeTab} onChange={setActiveTab} />
+
+// 탭에 따른 콘텐츠 렌더
+{activeTab === 'info' && <InfoPanel />}
+{activeTab === 'history' && <HistoryPanel />}
+```
+
+---
+
+## Link
+
+**언제 쓰나**: 텍스트 링크. 인라인 네비게이션, 외부 링크.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `tone` | `'brand' \| 'neutral'` | `'brand'` | 색상 |
+| `underline` | `'always' \| 'auto' \| 'none'` | `'always'` | 밑줄 표시 시점 |
+| `disabled` | `boolean` | `false` | 비활성화 (href 제거, 클릭 차단) |
+| + HTML anchor 속성 | | | `href`, `target`, `rel` 등 |
+
+### 사용 예시
+
+```tsx
+<Link href="/users">사용자 목록으로</Link>
+<Link href="https://example.com" target="_blank" tone="neutral" underline="auto">외부 링크</Link>
+```
+
+---
+
+## Row
+
+**언제 쓰나**: 목록에서 단일 행 아이템. 아이콘/아바타 + 텍스트 + 우측 액션 조합. href 또는 onClick에 따라 `<a>` / `<button>` / `<div>` 로 렌더.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `label` | `ReactNode` | — | **(필수)** 주 텍스트 |
+| `leading` | `ReactNode` | — | 좌측 아이콘/아바타 |
+| `trailing` | `ReactNode` | — | 우측 커스텀 요소 |
+| `showChevron` | `boolean` | `true` | trailing 없을 때 chevron 표시 |
+| `href` | `string` | — | 링크 URL |
+| `onClick` | `() => void` | — | 클릭 핸들러 |
+| `disabled` | `boolean` | `false` | 비활성화 |
+
+### 사용 예시
+
+```tsx
+<Row label="사용자 관리" leading={<Icon name="person" size="sm" />} onClick={() => navigate('/users')} />
+<Row label="설정" leading={<Avatar src="/img.jpg" size="sm" />} trailing={<Badge variant="info">새로운</Badge>} href="/settings" />
+```
+
+---
+
+## Popover
+
+**언제 쓰나**: 버튼 클릭 시 나타나는 컨텍스트 패널. 위치 제어는 사용자가 직접 관리. `PopoverSection`으로 내용을 구조화.
+
+### Props (Popover)
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `emphasis` | `'default' \| 'inverse'` | `'default'` | `default`=흰 배경, `inverse`=어두운 배경 |
+| `children` | `ReactNode` | — | 내용 |
+
+### Props (PopoverSection)
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `title` | `ReactNode` | — | 섹션 제목 |
+| `children` | `ReactNode` | — | **(필수)** 섹션 내용 |
+
+### 사용 예시
+
+```tsx
+{isOpen && (
+  <div style={{ position: 'absolute', top: 40, right: 0 }}>
+    <Popover>
+      <PopoverSection title="계정">
+        <TextButton onClick={handleProfile}>프로필 수정</TextButton>
+      </PopoverSection>
+      <PopoverSection>
+        <TextButton tone="danger" onClick={handleLogout}>로그아웃</TextButton>
+      </PopoverSection>
+    </Popover>
+  </div>
+)}
+```
+
+---
+
+## Accordion
+
+**언제 쓰나**: FAQ, 설정 패널 등 접기/펼치기가 필요한 콘텐츠 목록.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `items` | `AccordionItem[]` | — | **(필수)** 아코디언 항목 배열 |
+| `variation` | `'plain' \| 'contained'` | `'plain'` | 스타일 형태 |
+| `size` | `'sm' \| 'md' \| 'lg'` | `'lg'` | 크기 |
+| `allowMultiple` | `boolean` | `true` | 여러 항목 동시 펼침 허용 |
+
+### AccordionItem 정의
+
+```ts
+{
+  key: string
+  label: React.ReactNode    // 헤더 텍스트
+  content: React.ReactNode  // 펼쳐질 내용
+  leading?: React.ReactNode // 헤더 앞 아이콘
+  defaultOpen?: boolean     // 초기 열림 여부
+  disabled?: boolean
+}
+```
+
+### 사용 예시
+
+```tsx
+<Accordion
+  items={[
+    {
+      key: 'faq1',
+      label: '비밀번호를 변경하려면?',
+      content: <p>설정 → 보안 → 비밀번호 변경 메뉴를 이용하세요.</p>,
+      defaultOpen: true,
+    },
+    {
+      key: 'faq2',
+      label: '탈퇴는 어떻게 하나요?',
+      content: <p>고객센터로 문의해 주세요.</p>,
+    },
+  ]}
+/>
+
+// 하나씩만 열리는 FAQ
+<Accordion items={faqItems} allowMultiple={false} variation="contained" />
+```
+
+---
+
 > **업데이트 기록**
-> - 2026-04-14: 초기 작성 (18개 컴포넌트 — Button, Input, Select, Checkbox, Radio, RadioGroup, Switch, SwitchField, Badge, CountBadge, DotBadge, Label, Avatar, Icon, Divider, Skeleton, Modal, Tooltip, Toast, Backdrop, Alert, Table)
-> - 2026-04-14: SideNavigation 추가 (SideNavigation, SideNavigationList, NavItem, NavSectionHeader)
-> - 2026-04-15: Modal props 업데이트 (subtitle, footerVariation, xl size 제거), ChoiceChip / ChoiceChipGroup 추가
-- 2026-04-15: 누락 항목 추가 — AppLayout, CheckboxGroup, Pagination
+> - 2026-04-14: 초기 작성 (Button, Input, Select, Checkbox, Radio, Switch, Badge, CountBadge, DotBadge, Label, Avatar, Icon, Divider, Skeleton, Modal, Tooltip, Toast, Backdrop, Alert, Table)
+> - 2026-04-14: SideNavigation 추가
+> - 2026-04-15: Modal props 업데이트, ChoiceChip / ChoiceChipGroup 추가
+> - 2026-04-15: AppLayout, CheckboxGroup, Pagination 추가
+> - 2026-04-15: 신규 16개 컴포넌트 추가 — IconButton, TextButton, FloatingButton, ToggleButton, ButtonGroup, TextArea, NumberStepper, SegmentedControl, Rating, PageIndicator, Breadcrumb, Tab, Link, Row, Popover, Accordion

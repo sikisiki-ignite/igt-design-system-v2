@@ -1,0 +1,214 @@
+/* ============================================================
+   IGT Accordion Component
+   피그마: Accordion (2144:29990)
+   variation(plain/contained) × size(sm/md/lg)
+   ============================================================ */
+
+.igt-accordion {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+/* contained: 아이템 간 gap */
+.igt-accordion[data-variation='contained'][data-size='sm'] { gap: 6px; }
+.igt-accordion[data-variation='contained'][data-size='md'] { gap: 8px; }
+.igt-accordion[data-variation='contained'][data-size='lg'] { gap: 10px; }
+
+/* ── Item ─────────────────────────────────────────────────── */
+.igt-accordion__item {
+  width: 100%;
+  overflow: hidden;
+}
+
+/* plain: 하단 border */
+.igt-accordion__item--plain {
+  background: transparent;
+  border-bottom: 1px solid var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.1));
+}
+
+/* contained: 배경 + radius */
+.igt-accordion[data-size='sm'] .igt-accordion__item--contained {
+  background-color: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+  border-radius: 10px;
+}
+.igt-accordion[data-size='md'] .igt-accordion__item--contained {
+  background-color: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+  border-radius: 12px;
+}
+.igt-accordion[data-size='lg'] .igt-accordion__item--contained {
+  background-color: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+  border-radius: 16px;
+}
+
+/* ── Disabled ─────────────────────────────────────────────── */
+.igt-accordion__item--disabled {
+  opacity: 0.4;
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.igt-accordion__header {
+  display: flex;
+  align-items: flex-start;
+  width: 100%;
+  background: none;
+  border: none;
+  cursor: pointer;
+  text-align: left;
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  font-family: inherit;
+  transition: background-color 0.12s ease;
+}
+
+.igt-accordion__header:disabled {
+  cursor: not-allowed;
+}
+
+/* plain header padding */
+.igt-accordion[data-size='sm'] .igt-accordion__item--plain .igt-accordion__header {
+  padding: 10px 0;
+  gap: 8px;
+}
+.igt-accordion[data-size='md'] .igt-accordion__item--plain .igt-accordion__header {
+  padding: 12px 1px;
+  gap: 10px;
+}
+.igt-accordion[data-size='lg'] .igt-accordion__item--plain .igt-accordion__header {
+  padding: 16px 2px;
+  gap: 12px;
+}
+
+/* contained header padding */
+.igt-accordion[data-size='sm'] .igt-accordion__item--contained .igt-accordion__header {
+  padding: 10px 12px;
+  gap: 8px;
+}
+.igt-accordion[data-size='md'] .igt-accordion__item--contained .igt-accordion__header {
+  padding: 12px 16px;
+  gap: 10px;
+}
+.igt-accordion[data-size='lg'] .igt-accordion__item--contained .igt-accordion__header {
+  padding: 16px 20px;
+  gap: 12px;
+}
+
+/* ── Label ────────────────────────────────────────────────── */
+.igt-accordion__label {
+  flex: 1;
+  min-width: 0;
+}
+
+/* sm: body/xs 14px regular */
+.igt-accordion[data-size='sm'] .igt-accordion__label {
+  font-size: 14px;
+  font-weight: var(--ref-font-weight-400);
+  line-height: 20px;
+  letter-spacing: -0.2px;
+}
+
+/* md: body/md 16px regular */
+.igt-accordion[data-size='md'] .igt-accordion__label {
+  font-size: 16px;
+  font-weight: var(--ref-font-weight-400);
+  line-height: 24px;
+  letter-spacing: -0.2px;
+}
+
+/* lg: body/lg 17px semibold */
+.igt-accordion[data-size='lg'] .igt-accordion__label {
+  font-size: var(--text-body-lg-size, 17px);
+  font-weight: var(--ref-font-weight-600);
+  line-height: var(--text-body-lg-line-height, 24px);
+  letter-spacing: -0.2px;
+}
+
+/* ── Leading ──────────────────────────────────────────────── */
+.igt-accordion__leading {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.igt-accordion[data-size='sm'] .igt-accordion__leading {
+  width: 16px;
+  height: 20px;
+}
+.igt-accordion[data-size='md'] .igt-accordion__leading {
+  width: 18px;
+  height: 24px;
+}
+.igt-accordion[data-size='lg'] .igt-accordion__leading {
+  width: 20px;
+  height: 24px;
+}
+
+/* ── Chevron ──────────────────────────────────────────────── */
+.igt-accordion__chevron {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  transition: transform 0.2s ease;
+}
+
+.igt-accordion[data-size='sm'] .igt-accordion__chevron {
+  width: 16px;
+  height: 20px;
+}
+.igt-accordion[data-size='md'] .igt-accordion__chevron {
+  width: 18px;
+  height: 24px;
+}
+.igt-accordion[data-size='lg'] .igt-accordion__chevron {
+  width: 20px;
+  height: 24px;
+}
+
+.igt-accordion__item--open .igt-accordion__chevron {
+  transform: rotate(180deg);
+}
+
+/* ── Body ─────────────────────────────────────────────────── */
+.igt-accordion__body {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 0.2s ease;
+}
+
+.igt-accordion__item--open .igt-accordion__body {
+  grid-template-rows: 1fr;
+}
+
+.igt-accordion__content {
+  /* overflow: hidden 이 grid 0fr 트릭의 핵심 — padding 없어야 함 */
+  overflow: hidden;
+}
+
+/* content-inner: 실제 padding + 타이포 스타일 */
+.igt-accordion__content-inner {
+  font-size: var(--text-body-sm-size, 15px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: var(--text-body-sm-line-height, 22px);
+  color: var(--sys-content-neutral-muted, rgba(0, 19, 43, 0.58));
+}
+
+/* plain content-inner padding */
+.igt-accordion[data-size='sm'] .igt-accordion__item--plain .igt-accordion__content-inner {
+  padding: 0 0 10px;
+}
+.igt-accordion[data-size='md'] .igt-accordion__item--plain .igt-accordion__content-inner {
+  padding: 0 1px 12px;
+}
+.igt-accordion[data-size='lg'] .igt-accordion__item--plain .igt-accordion__content-inner {
+  padding: 0 2px 16px;
+}
+
+/* contained content-inner padding */
+.igt-accordion[data-size='sm'] .igt-accordion__item--contained .igt-accordion__content-inner {
+  padding: 0 12px 10px;
+}
+.igt-accordion[data-size='md'] .igt-accordion__item--contained .igt-accordion__content-inner {
+  padding: 0 16px 12px;
+}
+.igt-accordion[data-size='lg'] .igt-accordion__item--contained .igt-accordion__content-inner {
+  padding: 0 20px 16px;
+}

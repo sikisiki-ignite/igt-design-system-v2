@@ -1,7 +1,9 @@
 # IGT Design System — 컴포넌트 검증 체크리스트
 
-> 작성: 2026-04-12  
+> 작성: 2026-04-12 / 최종 수정: 2026-04-15  
 > 모든 컴포넌트는 이 체크리스트를 100% 통과한 후에만 "완료" 선언 가능.
+>
+> **2026-04-15 업데이트**: Accordion `grid-template-rows: 0fr` + padding 버그 사례를 반영해 §D 시각 대조 기준 및 §H 인터랙티브 상태 검증 항목 추가.
 
 ---
 
@@ -59,6 +61,31 @@ print('미정의:', missing if missing else '없음 ✅')
 - [ ] **Light 테마** — showcase에서 light 테마로 전환 후 피그마 라이트 스크린샷과 육안 대조 통과
 - [ ] **Dark 테마** — showcase에서 dark 테마로 전환 후 피그마 다크 스크린샷과 육안 대조 통과
 - [ ] **테마 전환 시 깨짐 없음** — 실시간 테마 전환 시 레이아웃 이상 없음
+
+> **대조 시 주의**: 전체 구도만 보지 말고 **각 상태(닫힘/열림, 활성/비활성)를 Figma와 1:1로 대조**할 것.
+> 예: 아코디언 닫힌 상태에서 콘텐츠가 보이는지, 탭 비활성 상태에서 indicator가 숨겨지는지 등.
+
+### H. 인터랙티브 상태 검증 (해당 컴포넌트)
+
+인터랙션이 있는 컴포넌트(Accordion, Tab, Modal, Tooltip 등)는 아래를 추가로 확인한다.
+
+- [ ] **숨김 상태에서 콘텐츠 높이 = 0** — 닫힌 아이템의 content 영역이 실제로 height:0인지 확인
+  ```bash
+  node scripts/qa-screenshot.mjs [component]
+  # closedContentHeightOk: true 확인
+  ```
+- [ ] **CSS collapse 트릭 사용 시 padding 위치 확인** — `grid-template-rows: 0fr` 또는 `max-height: 0` 사용 시 **padding은 반드시 inner wrapper에**. grid item 자체에 padding이 있으면 collapse가 불완전해짐.
+  ```
+  ✅ 올바른 구조:
+  .body { display: grid; grid-template-rows: 0fr; }
+  .content { overflow: hidden; }          ← padding 없어야 함
+  .content-inner { padding: 0 0 12px; }  ← padding은 여기
+  
+  ❌ 잘못된 구조:
+  .content { overflow: hidden; padding: 0 0 12px; }  ← padding이 collapse를 방해
+  ```
+- [ ] **열린 상태에서 콘텐츠 완전 노출** — 열린 아이템의 content가 잘리지 않고 완전히 보이는지 확인
+- [ ] **전환 애니메이션** — 열기/닫기 시 애니메이션이 자연스럽게 동작하는지 확인
 
 ### E. 코드 품질
 

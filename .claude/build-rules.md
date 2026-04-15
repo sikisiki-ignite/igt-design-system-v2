@@ -20,6 +20,7 @@
 - 컴포넌트 CSS에서 직접 `--ref-*` 또는 hex 사용 금지
 - 컴포넌트 토큰이 없으면 `--sys-*` 참조 허용
 - **예외 — spacing:** `--sys-space-*` 미정의 상태이므로 `--ref-space-*` 직접 참조 허용 (예: `var(--ref-space-8)`). `--sys-space-*` 추가 시 교체할 것
+- 네이밍 규칙 상세: `docs/token-convention.md` 참조
 
 ## 컴포넌트 구조 규칙
 
@@ -35,7 +36,10 @@
 3. TSX + CSS 구현
 4. `docs/verification-checklist.md` 기준으로 검증
 5. `src/index.ts` export 추가
-6. `ai-guide/component-catalog.md` 업데이트
+6. `ai-guide/component-catalog.md` 업데이트 — props, 사용 예시 포함
+7. `ai-guide/usage-patterns.md` 업데이트 — 6번과 반드시 세트, 생략 불가
+
+> **6 → 7은 세트다.** catalog만 업데이트하고 patterns를 빠뜨리면 미완료.
 
 ## 구현 금지 사항
 

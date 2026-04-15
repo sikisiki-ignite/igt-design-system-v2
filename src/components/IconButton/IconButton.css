@@ -1,0 +1,142 @@
+/* ============================================================
+   IGT IconButton Component
+   피그마: IconButton (328:4951)
+   variant × shape × emphasis × size 조합
+   ============================================================ */
+
+.igt-ibtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: transparent;
+  cursor: pointer;
+  padding: 0;
+  font-family: inherit;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.igt-ibtn:focus-visible {
+  outline: 2px solid var(--tbtn-focus-ring);
+  outline-offset: 2px;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+/* Figma: xs=24px, sm=32px, md=36px, lg=40px */
+.igt-ibtn[data-size='xs'] {
+  width: var(--size-comp-height-xs);   /* 24px */
+  height: var(--size-comp-height-xs);
+}
+.igt-ibtn[data-size='xs'] .igt-ibtn__icon { width: 16px; height: 16px; }
+
+.igt-ibtn[data-size='sm'] {
+  width: var(--size-comp-height-sm);   /* 32px */
+  height: var(--size-comp-height-sm);
+}
+.igt-ibtn[data-size='sm'] .igt-ibtn__icon { width: 18px; height: 18px; }
+
+.igt-ibtn[data-size='md'] {
+  width: var(--size-comp-height-md);   /* 36px */
+  height: var(--size-comp-height-md);
+}
+.igt-ibtn[data-size='md'] .igt-ibtn__icon { width: 20px; height: 20px; }
+
+.igt-ibtn[data-size='lg'] {
+  width: var(--size-comp-height-lg);   /* 40px */
+  height: var(--size-comp-height-lg);
+}
+.igt-ibtn[data-size='lg'] .igt-ibtn__icon { width: 22px; height: 22px; }
+
+/* ── Shape ───────────────────────────────────────────────── */
+.igt-ibtn[data-shape='circle'] { border-radius: var(--radius-full); }
+
+.igt-ibtn[data-shape='rounded'][data-size='xs'] { border-radius: var(--radius-sm); }   /* 6px */
+.igt-ibtn[data-shape='rounded'][data-size='sm'] { border-radius: var(--radius-md); }   /* 8px */
+.igt-ibtn[data-shape='rounded'][data-size='md'] { border-radius: var(--radius-lg); }   /* 10px */
+.igt-ibtn[data-shape='rounded'][data-size='lg'] { border-radius: var(--radius-lg); }   /* 10px */
+
+/* ── Icon slot ───────────────────────────────────────────── */
+.igt-ibtn__icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* ── Spinner (loading) ───────────────────────────────────── */
+.igt-ibtn__spinner {
+  display: block;
+  width: 60%;
+  height: 60%;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: igt-ibtn-spin 0.7s linear infinite;
+}
+
+@keyframes igt-ibtn-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Variant: soft ───────────────────────────────────────── */
+.igt-ibtn[data-variant='soft'] {
+  background-color: var(--ibtn-soft-bg);
+}
+.igt-ibtn[data-variant='soft']:hover:not(:disabled) {
+  background-color: var(--ibtn-soft-bg-hover);
+}
+.igt-ibtn[data-variant='soft']:active:not(:disabled) {
+  background-color: var(--ibtn-soft-bg-hover);
+}
+
+/* ── Variant: outline ────────────────────────────────────── */
+.igt-ibtn[data-variant='outline'] {
+  border-color: var(--ibtn-outline-border);
+}
+.igt-ibtn[data-variant='outline']:hover:not(:disabled) {
+  background-color: var(--ibtn-outline-bg-hover);
+  border-color: var(--ibtn-outline-border);
+}
+.igt-ibtn[data-variant='outline']:active:not(:disabled) {
+  background-color: var(--ibtn-outline-bg-hover);
+}
+
+/* ── Variant: ghost ──────────────────────────────────────── */
+.igt-ibtn[data-variant='ghost'] {
+  background-color: transparent;
+}
+.igt-ibtn[data-variant='ghost']:hover:not(:disabled) {
+  background-color: var(--ibtn-ghost-bg-hover);
+}
+.igt-ibtn[data-variant='ghost']:active:not(:disabled) {
+  background-color: var(--ibtn-ghost-bg-hover);
+}
+
+/* ── Emphasis: default / subdued ────────────────────────── */
+.igt-ibtn[data-emphasis='default'] {
+  color: var(--ibtn-icon-default);
+}
+.igt-ibtn[data-emphasis='subdued'] {
+  color: var(--ibtn-icon-subdued);
+}
+
+/* ── Disabled ────────────────────────────────────────────── */
+.igt-ibtn:disabled {
+  color: var(--ibtn-icon-disabled);
+  cursor: not-allowed;
+  background-color: transparent;
+  border-color: transparent;
+  opacity: 0.6;
+}
+.igt-ibtn[data-variant='soft']:disabled {
+  background-color: var(--ibtn-soft-bg);
+  opacity: 0.5;
+}
+.igt-ibtn[data-variant='outline']:disabled {
+  border-color: var(--ibtn-outline-border);
+  opacity: 0.5;
+}

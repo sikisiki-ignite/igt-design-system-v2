@@ -2,7 +2,11 @@ import React, { useState, useRef, useCallback } from 'react'
 import clsx from 'clsx'
 import './Tooltip.css'
 
-export type TooltipPlacement = 'top' | 'bottom' | 'left' | 'right'
+export type TooltipPlacement =
+  | 'top' | 'top-start' | 'top-end'
+  | 'bottom' | 'bottom-start' | 'bottom-end'
+  | 'left' | 'left-start' | 'left-end'
+  | 'right' | 'right-start' | 'right-end'
 
 export interface TooltipProps {
   content: React.ReactNode

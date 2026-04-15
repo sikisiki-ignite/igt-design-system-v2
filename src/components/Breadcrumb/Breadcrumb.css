@@ -1,0 +1,89 @@
+/* ============================================================
+   IGT Breadcrumb Component
+   피그마: 3 Breadcrumb (651:19475)
+   separator(chevron/slash/dot) × leading(none/home)
+   ============================================================ */
+
+.igt-breadcrumb {
+  display: inline-block;
+}
+
+.igt-breadcrumb__list {
+  display: flex;
+  align-items: center;
+  gap: 2px;           /* 피그마: gap 2px */
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex-wrap: wrap;
+}
+
+/* ── Home icon ──────────────────────────────────────────────── */
+.igt-breadcrumb__item--home {
+  display: flex;
+  align-items: center;
+}
+
+.igt-breadcrumb__home-icon {
+  display: inline-flex;
+  align-items: center;
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  width: 16px;
+  height: 16px;
+}
+
+/* ── Items ──────────────────────────────────────────────────── */
+.igt-breadcrumb__item {
+  display: flex;
+  align-items: center;
+}
+
+.igt-breadcrumb__sep-item {
+  display: flex;
+  align-items: center;
+}
+
+/* ── Separator ──────────────────────────────────────────────── */
+.igt-breadcrumb__sep {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  /* chevron / slash: 14px 컨테이너 + py 4px */
+  width: 14px;
+  height: 20px;
+}
+
+/* dot은 더 작은 4px 원 */
+.igt-breadcrumb__sep--dot {
+  width: 14px;
+}
+
+/* ── Labels ─────────────────────────────────────────────────── */
+.igt-breadcrumb__label {
+  font-size: var(--text-label-sm-size, 14px);   /* 14px */
+  line-height: var(--text-label-sm-line-height, 20px);
+  letter-spacing: -0.1px;
+  white-space: nowrap;
+}
+
+/* 이전 페이지 (링크/버튼) */
+.igt-breadcrumb__label--link {
+  font-weight: var(--ref-font-weight-400);
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  text-decoration: none;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  transition: color 0.12s ease;
+}
+.igt-breadcrumb__label--link:hover {
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+}
+
+/* 현재 페이지 (마지막) */
+.igt-breadcrumb__label--current {
+  font-weight: var(--ref-font-weight-500);
+  color: var(--sys-content-neutral-muted, rgba(0, 19, 43, 0.58));
+}

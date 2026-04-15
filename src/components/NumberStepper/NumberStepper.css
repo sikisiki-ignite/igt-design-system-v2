@@ -1,0 +1,86 @@
+/* ============================================================
+   IGT NumberStepper Component
+   피그마: NumberStepper (726:24711)
+   emphasis(outline/soft) × size(sm/md)
+   ============================================================ */
+
+.igt-number-stepper {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  border: 1px solid;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+.igt-number-stepper--md {
+  height: 36px;
+  border-radius: 10px;
+}
+
+.igt-number-stepper--sm {
+  height: 32px;
+  border-radius: 8px;
+}
+
+/* ── Emphasis ─────────────────────────────────────────────── */
+.igt-number-stepper--outline {
+  background-color: transparent;
+  border-color: var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.1));
+}
+
+.igt-number-stepper--soft {
+  background-color: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+  border-color: transparent;
+}
+
+/* ── Disabled ─────────────────────────────────────────────── */
+.igt-number-stepper--disabled {
+  opacity: 0.4;
+}
+
+/* ── Button ───────────────────────────────────────────────── */
+.igt-number-stepper__btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  transition: background-color 0.12s ease;
+}
+
+.igt-number-stepper__btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+.igt-number-stepper__btn:not(:disabled):hover {
+  background-color: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+}
+
+.igt-number-stepper--md .igt-number-stepper__btn {
+  width: 36px;
+  height: 36px;
+  border-radius: 9px;
+}
+
+.igt-number-stepper--sm .igt-number-stepper__btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 7px;
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.igt-number-stepper__divider {
+  display: block;
+  flex-shrink: 0;
+  width: 1px;
+  align-self: stretch;
+  background-color: var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.1));
+}
+
+.igt-number-stepper--soft .igt-number-stepper__divider {
+  background-color: rgba(0, 27, 55, 0.08);
+}

@@ -1,0 +1,136 @@
+/* ============================================================
+   IGT Tab Component
+   피그마: Tab (236:2907)
+   distribution(equal/content) × size(sm/md/lg)
+   ============================================================ */
+
+.igt-tab {
+  display: flex;
+  align-items: stretch;
+  position: relative;
+  overflow: hidden;
+}
+
+/* equal: 각 탭 균등 너비 */
+.igt-tab[data-distribution='equal'] {
+  width: 100%;
+}
+
+/* content: 내용 너비에 맞춤, gap 적용 */
+.igt-tab[data-distribution='content'][data-size='sm'] { gap: 16px; }
+.igt-tab[data-distribution='content'][data-size='md'] { gap: 20px; }
+.igt-tab[data-distribution='content'][data-size='lg'] { gap: 20px; }
+
+/* ── Track (하단 배경 라인) ──────────────────────────────────── */
+.igt-tab__track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.1));
+}
+
+/* ── Tab Item ─────────────────────────────────────────────── */
+.igt-tab__item {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  cursor: pointer;
+  outline: none;
+  white-space: nowrap;
+  color: var(--sys-content-neutral-muted, rgba(0, 19, 43, 0.58));
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-500);
+  transition: color 0.12s ease;
+}
+
+/* equal: flex-1 */
+.igt-tab[data-distribution='equal'] .igt-tab__item {
+  flex: 1;
+  min-width: 0;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+/* sm: py=6px, font=14px */
+.igt-tab[data-size='sm'] .igt-tab__item {
+  padding: 6px 0;
+  font-size: var(--text-label-sm-size, 14px);
+  line-height: var(--text-label-sm-line-height, 20px);
+  gap: 2px;
+}
+
+/* md: height=40px, py=8px, font=15px */
+.igt-tab[data-size='md'] .igt-tab__item {
+  height: 40px;
+  padding: 8px 0;
+  font-size: var(--text-label-md-size, 15px);
+  line-height: var(--text-label-md-line-height, 20px);
+  gap: 3px;
+}
+
+/* lg: height=48px, py=12px, font=17px */
+.igt-tab[data-size='lg'] .igt-tab__item {
+  height: 48px;
+  padding: 12px 0;
+  font-size: var(--text-label-lg-size, 17px);
+  line-height: var(--text-label-lg-line-height, 24px);
+  gap: 4px;
+}
+
+/* ── Active ───────────────────────────────────────────────── */
+.igt-tab__item--active {
+  color: var(--sys-content-neutral-strong, #191f28);
+  font-weight: var(--ref-font-weight-600);
+}
+
+/* ── Disabled ─────────────────────────────────────────────── */
+.igt-tab__item--disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+/* ── Hover ────────────────────────────────────────────────── */
+.igt-tab__item:not(.igt-tab__item--active):not(.igt-tab__item--disabled):hover {
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+}
+
+/* ── Label / Trailing ─────────────────────────────────────── */
+.igt-tab__label {
+  position: relative;
+  z-index: 1;
+}
+
+.igt-tab__trailing {
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Indicator (선택된 탭 하단 2px) ──────────────────────────── */
+.igt-tab__indicator {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background-color: var(--sys-content-neutral-strong, #191f28);
+  border-radius: 9999px;
+  opacity: 0;
+  transition: opacity 0.12s ease;
+}
+
+.igt-tab__item--active .igt-tab__indicator {
+  opacity: 1;
+}
+
+/* ── Focus Ring ───────────────────────────────────────────── */
+.igt-tab__item:focus-visible {
+  outline: 2px solid var(--sys-border-brand-default);
+  outline-offset: -2px;
+  border-radius: 4px;
+}

@@ -17,6 +17,10 @@ export type IconName =
   | 'chevron_right'
   | 'chevron_up_small'
   | 'chevron_down_small'
+  | 'chevron_left_small'
+  | 'chevron_right_small'
+  | 'chevron_double_left'
+  | 'chevron_double_right'
   | 'arrow_up'
   | 'arrow_down'
   | 'arrow_left'
@@ -48,6 +52,7 @@ export type IconName =
   | 'bell'
   | 'bookmark'
   | 'star'
+  | 'star_rounded'
   | 'more_horizontal'
   | 'more_vertical'
   | 'drag_dot'
@@ -95,6 +100,22 @@ export const ICON_PATHS: Record<IconName, IconData> = {
   chevron_down_small: {
     outline:      `<path d="M7 11L12 16L17 11" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
     outline_thin: `<path d="M7 11L12 16L17 11" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  },
+  chevron_left_small: {
+    outline:      `<path d="M13 7L8 12L13 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+    outline_thin: `<path d="M13 7L8 12L13 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  },
+  chevron_right_small: {
+    outline:      `<path d="M11 7L16 12L11 17" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+    outline_thin: `<path d="M11 7L16 12L11 17" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  },
+  chevron_double_left: {
+    outline:      `<path d="M11 5L4 12L11 19M19 5L12 12L19 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+    outline_thin: `<path d="M11 5L4 12L11 19M19 5L12 12L19 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+  },
+  chevron_double_right: {
+    outline:      `<path d="M13 5L20 12L13 19M5 5L12 12L5 19" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
+    outline_thin: `<path d="M13 5L20 12L13 19M5 5L12 12L5 19" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
   },
   arrow_up: {
     outline:      `<path d="M12 19V5M5 12L12 5L19 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" fill="none"/>`,
@@ -223,6 +244,13 @@ export const ICON_PATHS: Record<IconName, IconData> = {
     solid:        `<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" fill="currentColor"/>`,
     outline:      `<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="2" stroke-linejoin="round" fill="none"/>`,
     outline_thin: `<polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/>`,
+  },
+  // 피그마 원본 패스: igt_core_icon_star_rounded (622:37431)
+  // viewBox 0 0 20.7049 19.8389 → 24×24 스케일(1.159) + Y 센터 오프셋(0.50)
+  star_rounded: {
+    solid:        `<g transform="translate(0,0.5) scale(1.159)"><path d="M8.99001 0.87152C9.50937 -0.254303 11.076 -0.289292 11.6609 0.766051L11.7146 0.87152L13.9871 5.80121L19.3797 6.44086C20.6507 6.59156 21.1612 8.16262 20.2215 9.03168L16.2351 12.7172L17.2937 18.0424C17.5432 19.2979 16.2065 20.2692 15.0896 19.644L10.3523 16.9907L5.61501 19.644C4.49812 20.2691 3.16146 19.2978 3.41091 18.0424L4.46853 12.7172L0.483177 9.03168C-0.456204 8.16263 0.0541409 6.5917 1.32497 6.44086L6.71658 5.80121L8.99001 0.87152Z" fill="currentColor"/></g>`,
+    outline:      `<g transform="translate(0,0.5) scale(1.159)"><path d="M8.99001 0.87152C9.50937 -0.254303 11.076 -0.289292 11.6609 0.766051L11.7146 0.87152L13.9871 5.80121L19.3797 6.44086C20.6507 6.59156 21.1612 8.16262 20.2215 9.03168L16.2351 12.7172L17.2937 18.0424C17.5432 19.2979 16.2065 20.2692 15.0896 19.644L10.3523 16.9907L5.61501 19.644C4.49812 20.2691 3.16146 19.2978 3.41091 18.0424L4.46853 12.7172L0.483177 9.03168C-0.456204 8.16263 0.0541409 6.5917 1.32497 6.44086L6.71658 5.80121L8.99001 0.87152Z" stroke="currentColor" stroke-width="1.5" stroke-linejoin="round" fill="none"/></g>`,
+    outline_thin: `<g transform="translate(0,0.5) scale(1.159)"><path d="M8.99001 0.87152C9.50937 -0.254303 11.076 -0.289292 11.6609 0.766051L11.7146 0.87152L13.9871 5.80121L19.3797 6.44086C20.6507 6.59156 21.1612 8.16262 20.2215 9.03168L16.2351 12.7172L17.2937 18.0424C17.5432 19.2979 16.2065 20.2692 15.0896 19.644L10.3523 16.9907L5.61501 19.644C4.49812 20.2691 3.16146 19.2978 3.41091 18.0424L4.46853 12.7172L0.483177 9.03168C-0.456204 8.16263 0.0541409 6.5917 1.32497 6.44086L6.71658 5.80121L8.99001 0.87152Z" stroke="currentColor" stroke-width="1" stroke-linejoin="round" fill="none"/></g>`,
   },
   more_horizontal: {
     solid:        `<circle cx="5" cy="12" r="1.5" fill="currentColor"/><circle cx="12" cy="12" r="1.5" fill="currentColor"/><circle cx="19" cy="12" r="1.5" fill="currentColor"/>`,

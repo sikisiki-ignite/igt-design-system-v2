@@ -60,6 +60,8 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
     const resolvedLeading = leadingIcon ?? iconLeft
     const resolvedTrailing = trailingIcon ?? iconRight
 
+    const isIconOnly = iconOnly || (!children && !!resolvedLeading)
+
     return (
       <button
         ref={ref}
@@ -68,27 +70,26 @@ export const Button = React.forwardRef<HTMLButtonElement, ButtonProps>(
         data-variant={resolvedVariant}
         data-size={size}
         data-loading={loading || undefined}
-        data-icon-only={(iconOnly || (!children && !!resolvedLeading)) || undefined}
+        data-icon-only={isIconOnly || undefined}
         data-full-width={fullWidth || undefined}
         disabled={disabled || loading}
         {...props}
       >
-        {loading ? (
-          <span className="igt-btn__spinner" aria-hidden="true" />
-        ) : (
-          <>
-            {resolvedLeading && (
-              <span className="igt-btn__icon igt-btn__icon--leading" aria-hidden="true">
-                {resolvedLeading}
-              </span>
-            )}
-            {children && <span className="igt-btn__label">{children}</span>}
-            {resolvedTrailing && (
-              <span className="igt-btn__icon igt-btn__icon--trailing" aria-hidden="true">
-                {resolvedTrailing}
-              </span>
-            )}
-          </>
+        {/* leading icon 슬롯: loading 시 spinner로 대체, 라벨은 유지 */}
+        {(loading || resolvedLeading) && (
+          <span className="igt-btn__icon igt-btn__icon--leading" aria-hidden="true">
+            {loading
+              ? <span className="igt-btn__spinner" />
+              : resolvedLeading
+            }
+          </span>
+        )}
+        {children && <span className="igt-btn__label">{children}</span>}
+        {/* loading 중에는 trailing icon 숨김 */}
+        {!loading && resolvedTrailing && (
+          <span className="igt-btn__icon igt-btn__icon--trailing" aria-hidden="true">
+            {resolvedTrailing}
+          </span>
         )}
       </button>
     )

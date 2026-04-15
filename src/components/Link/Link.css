@@ -1,0 +1,72 @@
+/* ============================================================
+   IGT Link Component
+   피그마: Link (2018:24142)
+   tone × underline 조합
+   ============================================================ */
+
+.igt-link {
+  display: inline;
+  font-family: inherit;
+  font-size: inherit;
+  font-weight: var(--ref-font-weight-600);
+  line-height: inherit;
+  letter-spacing: -0.2px;
+  cursor: pointer;
+  text-decoration: none;
+  transition: color 0.12s ease;
+  position: relative;
+}
+
+.igt-link:focus-visible {
+  outline: 2px solid var(--tbtn-focus-ring);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ── Underline ───────────────────────────────────────────── */
+.igt-link[data-underline='always'] {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.igt-link[data-underline='auto']:hover,
+.igt-link[data-underline='auto']:active {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.igt-link[data-underline='none'] {
+  text-decoration: none;
+}
+
+/* ── Tone: brand ─────────────────────────────────────────── */
+.igt-link[data-tone='brand'] {
+  color: var(--link-brand-text);
+}
+.igt-link[data-tone='brand']:hover:not([aria-disabled='true']) {
+  color: var(--link-brand-text-hover);
+}
+.igt-link[data-tone='brand']:active:not([aria-disabled='true']) {
+  color: var(--link-brand-text-pressed);
+}
+.igt-link[data-tone='brand'][aria-disabled='true'] {
+  color: var(--link-brand-text-disabled);
+  cursor: not-allowed;
+  text-decoration: none;
+  pointer-events: none;
+}
+
+/* ── Tone: neutral ───────────────────────────────────────── */
+.igt-link[data-tone='neutral'] {
+  color: var(--link-neutral-text);
+}
+.igt-link[data-tone='neutral']:hover:not([aria-disabled='true']) {
+  color: var(--link-neutral-text-hover);
+}
+.igt-link[data-tone='neutral']:active:not([aria-disabled='true']) {
+  color: var(--link-neutral-text-pressed);
+}
+.igt-link[data-tone='neutral'][aria-disabled='true'] {
+  color: var(--link-neutral-text-disabled);
+  cursor: not-allowed;
+  text-decoration: none;
+  pointer-events: none;
+}

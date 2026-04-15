@@ -1,0 +1,49 @@
+/* ============================================================
+   IGT Rating Component
+   피그마: Rating (730:24228)
+   size(xs/sm/md) × readOnly/interactive
+   ============================================================ */
+
+.igt-rating {
+  display: inline-flex;
+  align-items: center;
+}
+
+.igt-rating--xs { gap: 2px; }
+.igt-rating--sm { gap: 3px; }
+.igt-rating--md { gap: 4px; }
+
+/* ── Star button ──────────────────────────────────────────── */
+.igt-rating__star {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  cursor: default;
+  transition: transform 0.1s ease;
+}
+
+.igt-rating--interactive .igt-rating__star {
+  cursor: pointer;
+}
+
+.igt-rating--interactive .igt-rating__star:hover {
+  transform: scale(1.1);
+}
+
+/* ── Star sizes ───────────────────────────────────────────── */
+.igt-rating--xs .igt-rating__star { width: 24px; height: 24px; }
+.igt-rating--sm .igt-rating__star { width: 28px; height: 28px; }
+.igt-rating--md .igt-rating__star { width: 32px; height: 32px; }
+
+/* ── Colors ───────────────────────────────────────────────── */
+.igt-rating__star--filled {
+  color: var(--ref-yellow-500, #ffc342);
+}
+
+.igt-rating__star--empty {
+  color: var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.1));
+}

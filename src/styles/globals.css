@@ -725,6 +725,64 @@
 }
 
 /* -----------------------------------------------------------------------------
+   Component Tokens — TextButton
+   ----------------------------------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  /* accent */
+  --tbtn-accent-text: var(--sys-content-brand-strong);
+  --tbtn-accent-text-hover: var(--sys-content-brand-strong);
+  --tbtn-accent-text-disabled: var(--sys-content-brand-disabled);
+  /* neutral */
+  --tbtn-neutral-text: var(--sys-content-neutral-default);
+  --tbtn-neutral-text-hover: var(--sys-content-neutral-strong);
+  --tbtn-neutral-text-disabled: var(--sys-content-neutral-disabled);
+  /* neutralMuted */
+  --tbtn-neutral-muted-text: var(--sys-content-neutral-muted);
+  --tbtn-neutral-muted-text-hover: var(--sys-content-neutral-default);
+  --tbtn-neutral-muted-text-disabled: var(--sys-content-neutral-disabled);
+  /* danger */
+  --tbtn-danger-text: var(--sys-content-status-danger-default);
+  --tbtn-danger-text-hover: var(--sys-content-status-danger-strong);
+  --tbtn-danger-text-disabled: var(--sys-content-status-danger-disabled);
+  /* 공통 */
+  --tbtn-bg-hover: var(--sys-interactive-hover-overlay-neutral);
+  --tbtn-focus-ring: var(--sys-interactive-focus-border-accent);
+}
+
+/* -----------------------------------------------------------------------------
+   Component Tokens — IconButton
+   ----------------------------------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  --ibtn-soft-bg: var(--sys-container-neutral-tint-default);
+  --ibtn-soft-bg-hover: var(--sys-container-neutral-tint-strong);
+  --ibtn-outline-border: var(--sys-border-neutral-subtle);
+  --ibtn-outline-bg-hover: var(--sys-container-neutral-tint-default);
+  --ibtn-ghost-bg-hover: var(--sys-interactive-hover-overlay-neutral);
+  --ibtn-icon-default: var(--sys-content-neutral-default);
+  --ibtn-icon-subdued: var(--sys-content-neutral-muted);
+  --ibtn-icon-disabled: var(--sys-content-neutral-disabled-icon);
+}
+
+/* -----------------------------------------------------------------------------
+   Component Tokens — Link
+   ----------------------------------------------------------------------------- */
+:root,
+[data-theme="light"] {
+  /* brand tone */
+  --link-brand-text: var(--sys-content-brand-default);
+  --link-brand-text-hover: var(--sys-content-brand-strong);
+  --link-brand-text-pressed: var(--sys-content-brand-strong);
+  --link-brand-text-disabled: var(--sys-content-brand-disabled);
+  /* neutral tone */
+  --link-neutral-text: var(--sys-content-neutral-muted);
+  --link-neutral-text-hover: var(--sys-content-neutral-default);
+  --link-neutral-text-pressed: var(--sys-content-neutral-strong);
+  --link-neutral-text-disabled: var(--sys-content-neutral-disabled);
+}
+
+/* -----------------------------------------------------------------------------
    Elevation / Shadow
    ----------------------------------------------------------------------------- */
 :root {

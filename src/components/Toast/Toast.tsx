@@ -11,6 +11,10 @@ export interface ToastProps {
   message: React.ReactNode
   duration?: number
   onClose?: () => void
+  /** 액션 버튼 레이블 */
+  actionLabel?: string
+  /** 액션 버튼 클릭 콜백 */
+  onAction?: () => void
   className?: string
 }
 
@@ -47,6 +51,8 @@ export const Toast: React.FC<ToastProps> = ({
   message,
   duration = 4000,
   onClose,
+  actionLabel,
+  onAction,
   className,
 }) => {
   const handleClose = useCallback(() => {
@@ -71,6 +77,15 @@ export const Toast: React.FC<ToastProps> = ({
         {title && <p className="igt-toast__title">{title}</p>}
         <p className="igt-toast__message">{message}</p>
       </div>
+      {actionLabel && (
+        <button
+          type="button"
+          className="igt-toast__action"
+          onClick={() => { onAction?.(); handleClose() }}
+        >
+          {actionLabel}
+        </button>
+      )}
       {onClose && (
         <button className="igt-toast__close" onClick={handleClose} aria-label="닫기" type="button">
           <svg width="16" height="16" viewBox="0 0 16 16" fill="none">

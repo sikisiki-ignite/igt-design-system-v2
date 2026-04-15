@@ -1,0 +1,79 @@
+/* ============================================================
+   IGT Popover Component
+   피그마: Popover (440:14854)
+   emphasis(default/inverse)
+   ============================================================ */
+
+.igt-popover {
+  display: flex;
+  flex-direction: column;
+  max-width: 400px;
+  overflow: hidden;
+  padding: 24px;
+  border-radius: 20px;
+  border: 1px solid;
+  box-shadow:
+    2px 70px 80px 0px rgba(2, 32, 71, 0.02),
+    0px 20px 50px 0px rgba(2, 32, 71, 0.02),
+    0px 10px 40px 0px rgba(2, 32, 71, 0.02);
+}
+
+/* ── Emphasis: default ────────────────────────────────────── */
+.igt-popover--default {
+  background-color: var(--sys-surface-overlay, #fff);
+  border-color: var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.1));
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+}
+
+/* ── Emphasis: inverse ────────────────────────────────────── */
+.igt-popover--inverse {
+  background-color: var(--sys-surface-floating, #191f28);
+  border-color: transparent;
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── Slot ─────────────────────────────────────────────────── */
+.igt-popover__slot {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+/* ── Section ──────────────────────────────────────────────── */
+.igt-popover__section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* ── Section title ────────────────────────────────────────── */
+.igt-popover__section-title {
+  font-size: 14px;
+  font-weight: var(--ref-font-weight-600);
+  line-height: 20px;
+  letter-spacing: -0.2px;
+}
+
+.igt-popover--default .igt-popover__section-title {
+  color: var(--sys-content-neutral-strong, #191f28);
+}
+
+.igt-popover--inverse .igt-popover__section-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+/* ── Section body ─────────────────────────────────────────── */
+.igt-popover__section-body {
+  font-size: 14px;
+  font-weight: var(--ref-font-weight-400);
+  line-height: 22px;
+  letter-spacing: 0;
+}
+
+.igt-popover--default .igt-popover__section-body {
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+}
+
+.igt-popover--inverse .igt-popover__section-body {
+  color: rgba(255, 255, 255, 0.72);
+}

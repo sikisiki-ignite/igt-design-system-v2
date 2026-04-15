@@ -1,0 +1,138 @@
+/* ============================================================
+   IGT TextButton Component
+   피그마: TextButton (268:3654)
+   variant × tone × size 조합
+   ============================================================ */
+
+.igt-tbtn {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ref-space-2);
+  background: transparent;
+  border: none;
+  border-radius: var(--radius-sm); /* 6px */
+  padding: 2px 4px;
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-600);
+  cursor: pointer;
+  white-space: nowrap;
+  text-decoration: none;
+  transition: color 0.12s ease, background-color 0.12s ease;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  position: relative;
+  flex-shrink: 0;
+}
+
+.igt-tbtn:focus-visible {
+  outline: 2px solid var(--tbtn-focus-ring);
+  outline-offset: 2px;
+  border-radius: var(--radius-sm);
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+/* Figma: xs=20px, sm=22px, md=24px, lg=26px (최소 행 높이) */
+.igt-tbtn[data-size='xs'] {
+  font-size: var(--text-label-xs-size);   /* 12px */
+  line-height: var(--text-label-xs-line-height); /* 16px */
+  min-height: 20px;
+  padding: 2px 3px;
+}
+.igt-tbtn[data-size='sm'] {
+  font-size: var(--text-label-sm-size);   /* 14px */
+  line-height: var(--text-label-sm-line-height); /* 20px */
+  min-height: 22px;
+}
+.igt-tbtn[data-size='md'] {
+  font-size: var(--text-label-sm-size);   /* 14px */
+  line-height: var(--text-label-sm-line-height); /* 20px */
+  min-height: 24px;
+}
+.igt-tbtn[data-size='lg'] {
+  font-size: var(--text-label-md-size);   /* 15px */
+  line-height: var(--text-label-md-line-height); /* 22px */
+  min-height: 26px;
+  padding: 2px 4px;
+}
+
+/* ── Icons ───────────────────────────────────────────────── */
+.igt-tbtn__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Underline variant ───────────────────────────────────── */
+.igt-tbtn[data-variant='underline'] .igt-tbtn__label {
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+
+/* ── Tone: accent ────────────────────────────────────────── */
+.igt-tbtn[data-tone='accent'] {
+  color: var(--tbtn-accent-text);
+}
+.igt-tbtn[data-tone='accent']:hover:not(:disabled) {
+  color: var(--tbtn-accent-text-hover);
+  background-color: var(--tbtn-bg-hover);
+}
+.igt-tbtn[data-tone='accent']:active:not(:disabled) {
+  color: var(--tbtn-accent-text-hover);
+  background-color: var(--tbtn-bg-hover);
+}
+.igt-tbtn[data-tone='accent']:disabled {
+  color: var(--tbtn-accent-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Tone: neutral ───────────────────────────────────────── */
+.igt-tbtn[data-tone='neutral'] {
+  color: var(--tbtn-neutral-text);
+}
+.igt-tbtn[data-tone='neutral']:hover:not(:disabled) {
+  color: var(--tbtn-neutral-text-hover);
+  background-color: var(--tbtn-bg-hover);
+}
+.igt-tbtn[data-tone='neutral']:active:not(:disabled) {
+  color: var(--tbtn-neutral-text-hover);
+  background-color: var(--tbtn-bg-hover);
+}
+.igt-tbtn[data-tone='neutral']:disabled {
+  color: var(--tbtn-neutral-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Tone: neutralMuted ──────────────────────────────────── */
+.igt-tbtn[data-tone='neutralMuted'] {
+  color: var(--tbtn-neutral-muted-text);
+}
+.igt-tbtn[data-tone='neutralMuted']:hover:not(:disabled) {
+  color: var(--tbtn-neutral-muted-text-hover);
+  background-color: var(--tbtn-bg-hover);
+}
+.igt-tbtn[data-tone='neutralMuted']:active:not(:disabled) {
+  color: var(--tbtn-neutral-muted-text-hover);
+  background-color: var(--tbtn-bg-hover);
+}
+.igt-tbtn[data-tone='neutralMuted']:disabled {
+  color: var(--tbtn-neutral-muted-text-disabled);
+  cursor: not-allowed;
+}
+
+/* ── Tone: danger ────────────────────────────────────────── */
+.igt-tbtn[data-tone='danger'] {
+  color: var(--tbtn-danger-text);
+}
+.igt-tbtn[data-tone='danger']:hover:not(:disabled) {
+  color: var(--tbtn-danger-text-hover);
+  background-color: var(--sys-interactive-hover-overlay-danger);
+}
+.igt-tbtn[data-tone='danger']:active:not(:disabled) {
+  color: var(--tbtn-danger-text-hover);
+  background-color: var(--sys-interactive-hover-overlay-danger);
+}
+.igt-tbtn[data-tone='danger']:disabled {
+  color: var(--tbtn-danger-text-disabled);
+  cursor: not-allowed;
+}

@@ -1,191 +1,366 @@
 /* ============================================================
    IGT Select Component
-   피그마: 2 TextField > SelectTrigger
-   type(outline/fill/plain) × size(xs/sm/md/lg) × state
+   피그마: SelectItem(280:5073), SelectPopover(556:29571)
    ============================================================ */
 
+/* ── Field wrapper (기존 구조 유지) ──────────────────────────── */
 .igt-select-field {
   display: inline-flex;
   flex-direction: column;
-  gap: var(--ref-space-6); /* 피그마: gap-stack 6px */
+  gap: var(--ref-space-6);
 }
 
 .igt-select-field[data-full-width] {
   width: 100%;
 }
 
-/* ── Label ────────────────────────────────────────────────── */
+/* ── Label ───────────────────────────────────────────────────── */
 .igt-select-field__label {
-  font-size: var(--text-label-md-size);   /* 15px */
+  font-size: var(--text-label-md-size);
   font-weight: var(--ref-font-weight-500);
   line-height: var(--text-label-md-line-height);
   color: var(--field-text-label);
 }
 
-/* ── Input Wrapper ────────────────────────────────────────── */
-.igt-select-field__wrap {
-  position: relative;
+/* ── Trigger ─────────────────────────────────────────────────── */
+.igt-select__trigger {
   display: flex;
   align-items: center;
+  gap: var(--ref-space-4);
+  cursor: pointer;
+  user-select: none;
+  outline: none;
   transition: border-color 0.12s ease, background-color 0.12s ease, box-shadow 0.12s ease;
+  position: relative;
 }
 
-/* ── Size ─────────────────────────────────────────────────── */
-/* xs: h=24, px=8, radius=6 */
-.igt-select-field[data-size='xs'] .igt-select-field__wrap {
-  height: var(--size-comp-height-xs);     /* 24px */
-  padding: 0 var(--size-comp-padding-xs); /* 0 8px */
-  border-radius: var(--radius-sm);        /* 6px */
-}
-.igt-select-field[data-size='xs'] .igt-select-field__select {
+/* Size */
+.igt-select-field[data-size='xs'] .igt-select__trigger {
+  height: var(--size-comp-height-xs);
+  padding: 0 var(--size-comp-padding-xs);
+  border-radius: var(--radius-sm);
   font-size: var(--text-label-xs-size);
-  line-height: var(--text-label-xs-line-height);
 }
-
-/* sm: h=32, px=9, radius=8 */
-.igt-select-field[data-size='sm'] .igt-select-field__wrap {
-  height: var(--size-comp-height-sm);     /* 32px */
-  padding: 0 var(--size-comp-padding-xs); /* 0 8px ≈ 9px */
-  border-radius: var(--radius-md);        /* 8px */
-}
-.igt-select-field[data-size='sm'] .igt-select-field__select {
+.igt-select-field[data-size='sm'] .igt-select__trigger {
+  height: var(--size-comp-height-sm);
+  padding: 0 var(--size-comp-padding-xs);
+  border-radius: var(--radius-md);
   font-size: var(--text-label-sm-size);
-  line-height: var(--text-label-sm-line-height);
 }
-
-/* md: h=36, px=9, radius=10 */
-.igt-select-field[data-size='md'] .igt-select-field__wrap {
-  height: var(--size-comp-height-md);     /* 36px */
-  padding: 0 var(--ref-space-8);          /* 0 8px ≈ 9px */
-  border-radius: var(--radius-lg);        /* 10px */
-}
-.igt-select-field[data-size='md'] .igt-select-field__select {
+.igt-select-field[data-size='md'] .igt-select__trigger {
+  height: var(--size-comp-height-md);
+  padding: 0 var(--ref-space-8);
+  border-radius: var(--radius-lg);
   font-size: var(--text-label-md-size);
-  line-height: var(--text-label-md-line-height);
 }
-
-/* lg: h=40, px=10, radius=12 */
-.igt-select-field[data-size='lg'] .igt-select-field__wrap {
-  height: var(--size-comp-height-lg);     /* 40px */
-  padding: 0 var(--ref-space-8);          /* 0 8px */
-  border-radius: var(--radius-xl);        /* 12px */
-}
-.igt-select-field[data-size='lg'] .igt-select-field__select {
+.igt-select-field[data-size='lg'] .igt-select__trigger {
+  height: var(--size-comp-height-lg);
+  padding: 0 var(--ref-space-8);
+  border-radius: var(--radius-xl);
   font-size: var(--text-label-md-size);
-  line-height: var(--text-label-md-line-height);
 }
 
-/* ── Outline style ────────────────────────────────────────── */
-.igt-select-field[data-style='outline'] .igt-select-field__wrap {
+/* Outline style */
+.igt-select-field[data-style='outline'] .igt-select__trigger {
   background-color: var(--field-outline-bg);
   border: 1px solid var(--field-outline-border);
 }
-.igt-select-field[data-style='outline']:not([data-disabled]) .igt-select-field__wrap:hover {
+.igt-select-field[data-style='outline']:not([data-disabled]) .igt-select__trigger:hover {
   border-color: var(--field-outline-border-hover);
 }
-.igt-select-field[data-style='outline'] .igt-select-field__wrap:focus-within {
+.igt-select-field[data-style='outline'] .igt-select__trigger--open,
+.igt-select-field[data-style='outline'] .igt-select__trigger:focus-visible {
   border-color: var(--field-outline-border-focus);
   box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-focus);
 }
-.igt-select-field[data-style='outline'][data-state='error'] .igt-select-field__wrap {
+.igt-select-field[data-style='outline'][data-state='error'] .igt-select__trigger {
   border-color: var(--field-outline-border-error);
 }
-.igt-select-field[data-style='outline'][data-state='error'] .igt-select-field__wrap:focus-within {
-  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-error);
-}
 
-/* ── Fill style ───────────────────────────────────────────── */
-.igt-select-field[data-style='fill'] .igt-select-field__wrap {
+/* Fill style */
+.igt-select-field[data-style='fill'] .igt-select__trigger {
   background-color: var(--field-fill-bg);
   border: 1px solid transparent;
   border-bottom: 1px solid var(--sys-border-neutral-subtle);
   border-radius: var(--radius-lg) var(--radius-lg) 0 0;
 }
-.igt-select-field[data-size='lg'][data-style='fill'] .igt-select-field__wrap {
+.igt-select-field[data-size='lg'][data-style='fill'] .igt-select__trigger {
   border-radius: var(--radius-xl) var(--radius-xl) 0 0;
 }
-.igt-select-field[data-style='fill']:not([data-disabled]) .igt-select-field__wrap:hover {
+.igt-select-field[data-style='fill']:not([data-disabled]) .igt-select__trigger:hover {
   border-bottom-color: var(--field-fill-border-hover);
 }
-.igt-select-field[data-style='fill'] .igt-select-field__wrap:focus-within {
+.igt-select-field[data-style='fill'] .igt-select__trigger--open {
   border-bottom-color: var(--field-fill-border-focus);
   border-bottom-width: 2px;
 }
-.igt-select-field[data-style='fill'][data-state='error'] .igt-select-field__wrap {
-  border-bottom-color: var(--field-fill-border-error);
+.igt-select-field[data-style='fill'][data-state='error'] .igt-select__trigger {
+  border-bottom-color: var(--field-outline-border-error);
 }
 
-/* ── Plain style ──────────────────────────────────────────── */
-.igt-select-field[data-style='plain'] .igt-select-field__wrap {
+/* Plain style */
+.igt-select-field[data-style='plain'] .igt-select__trigger {
   background-color: transparent;
   border: 1px solid transparent;
 }
-.igt-select-field[data-style='plain']:not([data-disabled]) .igt-select-field__wrap:hover {
+.igt-select-field[data-style='plain']:not([data-disabled]) .igt-select__trigger:hover {
   background-color: var(--sys-interactive-hover-overlay-neutral);
 }
 
-/* ── Disabled ─────────────────────────────────────────────── */
-.igt-select-field[data-disabled] .igt-select-field__wrap {
+/* Disabled */
+.igt-select-field[data-disabled] .igt-select__trigger {
   background-color: var(--field-outline-bg-disabled);
   border-color: var(--field-outline-border-disabled);
   cursor: not-allowed;
-}
-.igt-select-field[data-style='fill'][data-disabled] .igt-select-field__wrap {
-  border-bottom-color: var(--field-outline-border-disabled);
-}
-.igt-select-field[data-disabled] .igt-select-field__select {
-  color: var(--field-text-disabled);
-  cursor: not-allowed;
+  opacity: 0.6;
 }
 
-/* ── Select element ───────────────────────────────────────── */
-.igt-select-field__select {
+/* ── Trigger value / placeholder ─────────────────────────────── */
+.igt-select__value {
   flex: 1;
-  width: 100%;
   min-width: 0;
-  appearance: none;
-  border: none;
-  outline: none;
-  background: transparent;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
   color: var(--field-text-value);
-  font-family: inherit;
-  font-weight: var(--ref-font-weight-600); /* 피그마: semibold */
-  cursor: pointer;
-  padding: 0;
-  /* chevron 아이콘 공간 확보 */
-  padding-right: calc(var(--size-icon-sm) + var(--ref-space-8));
+  font-weight: var(--ref-font-weight-600);
 }
-.igt-select-field__select option {
-  font-weight: var(--ref-font-weight-400);
-}
-
-/* placeholder 컬러 */
-.igt-select-field__select:invalid,
-.igt-select-field__select[data-placeholder] {
+.igt-select__value--placeholder {
   color: var(--field-text-placeholder);
   font-weight: var(--ref-font-weight-400);
 }
 
-/* ── Chevron icon ─────────────────────────────────────────── */
-.igt-select-field__chevron {
-  position: absolute;
-  right: var(--ref-space-8);
+/* ── Chevron ─────────────────────────────────────────────────── */
+.igt-select__chevron {
   display: inline-flex;
   align-items: center;
+  flex-shrink: 0;
   color: var(--field-icon);
-  pointer-events: none;
-  width: var(--size-icon-sm);
-  height: var(--size-icon-sm);
+  transition: transform 0.2s ease;
 }
-.igt-select-field[data-size='xs'] .igt-select-field__chevron {
-  width: var(--size-icon-xs);
-  height: var(--size-icon-xs);
+.igt-select__chevron--open {
+  transform: rotate(180deg);
 }
-.igt-select-field[data-disabled] .igt-select-field__chevron {
+.igt-select-field[data-disabled] .igt-select__chevron {
   color: var(--field-icon-disabled);
 }
 
-/* ── Hint / Error ─────────────────────────────────────────── */
+/* ── Multi chips ─────────────────────────────────────────────── */
+.igt-select__chips {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+  align-items: center;
+}
+
+.igt-select__chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 2px;
+  background-color: var(--sys-container-brand-tint-default, rgba(52, 133, 250, 0.1));
+  color: var(--sys-content-brand-default);
+  border-radius: var(--radius-sm);
+  padding: 0 4px 0 6px;
+  height: 20px;
+  font-size: var(--text-label-xs-size);
+  font-weight: var(--ref-font-weight-600);
+  white-space: nowrap;
+}
+
+.igt-select__chip-remove {
+  display: inline-flex;
+  align-items: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--sys-content-brand-default);
+  opacity: 0.7;
+  line-height: 1;
+}
+.igt-select__chip-remove:hover {
+  opacity: 1;
+}
+
+/* ── Popover (드롭다운 패널) ──────────────────────────────────── */
+/* 피그마: radius=12px, shadow=elevation-popover, bg=white, border=rgba(0,27,55,0.1) */
+.igt-select__popover {
+  background-color: var(--sys-surface-base, #ffffff);
+  border: 1px solid rgba(0, 27, 55, 0.1);
+  border-radius: 12px;
+  box-shadow: var(--elevation-popover);
+  overflow: hidden;
+  overflow-y: auto;
+
+  /* 등장 애니메이션 */
+  animation: igt-select-open 0.15s ease;
+}
+
+@keyframes igt-select-open {
+  from {
+    opacity: 0;
+    transform: translateY(-6px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}
+
+/* md: padding 8px 6px, max-h 320px */
+.igt-select__popover--md {
+  padding: 8px 6px;
+  max-height: 320px;
+}
+
+/* sm: padding 6px, max-h 280px */
+.igt-select__popover--sm {
+  padding: 6px;
+  max-height: 280px;
+}
+
+/* ── Search input ────────────────────────────────────────────── */
+.igt-select__search-wrap {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-6);
+  padding: 6px 8px;
+  margin-bottom: 4px;
+  border-bottom: 1px solid rgba(0, 27, 55, 0.08);
+}
+
+.igt-select__search-icon {
+  color: var(--field-icon);
+  flex-shrink: 0;
+}
+
+.igt-select__search {
+  flex: 1;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: var(--text-label-sm-size);
+  font-family: inherit;
+  color: var(--field-text-value);
+}
+.igt-select__search::placeholder {
+  color: var(--field-text-placeholder);
+}
+
+/* ── Option list ─────────────────────────────────────────────── */
+.igt-select__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+}
+
+.igt-select__empty {
+  padding: 12px;
+  text-align: center;
+  font-size: var(--text-label-sm-size);
+  color: var(--field-text-placeholder);
+}
+
+/* ── Option item ─────────────────────────────────────────────── */
+/* 피그마: normal bg=transparent, hover/pressed bg=rgba(2,32,71,0.05) */
+.igt-select__item {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  outline: none;
+  width: 100%;
+  background-color: transparent;
+  transition: background-color 0.1s ease;
+}
+
+.igt-select__item--md {
+  height: 36px;
+  padding: 8px 12px;
+  gap: 6px;
+  border-radius: 8px;
+}
+
+.igt-select__item--sm {
+  height: 32px;
+  padding: 6px 8px;
+  gap: 4px;
+  border-radius: 6px;
+}
+
+.igt-select__item:hover:not(.igt-select__item--disabled),
+.igt-select__item:focus-visible:not(.igt-select__item--disabled) {
+  background-color: rgba(2, 32, 71, 0.05);
+}
+
+.igt-select__item--disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ── Item label ──────────────────────────────────────────────── */
+.igt-select__item-label {
+  flex: 1;
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  font-weight: var(--ref-font-weight-600);
+  letter-spacing: -0.1px;
+}
+
+/* 비선택: rgba(0,12,30,0.8) */
+.igt-select__item--md .igt-select__item-label {
+  font-size: var(--text-label-md-size);
+  line-height: var(--text-label-md-line-height);
+  color: rgba(0, 12, 30, 0.8);
+}
+.igt-select__item--sm .igt-select__item-label {
+  font-size: var(--text-label-sm-size);
+  line-height: var(--text-label-sm-line-height);
+  color: rgba(0, 12, 30, 0.8);
+}
+
+/* 선택: sys-content-brand-default */
+.igt-select__item--selected .igt-select__item-label {
+  color: var(--sys-content-brand-default);
+}
+
+/* ── Check icon (single select) ──────────────────────────────── */
+.igt-select__item-check {
+  flex-shrink: 0;
+  color: var(--sys-content-brand-default);
+  opacity: 0;
+  transition: opacity 0.1s ease;
+}
+.igt-select__item-check--visible {
+  opacity: 1;
+}
+
+/* ── Checkbox slot (multi select) ────────────────────────────── */
+.igt-select__item-checkbox {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  flex-shrink: 0;
+  border: 1.5px solid var(--sys-border-neutral-default);
+  border-radius: 3px;
+  background-color: transparent;
+  transition: border-color 0.1s ease, background-color 0.1s ease;
+}
+.igt-select__item-checkbox--checked {
+  background-color: var(--sys-container-brand-solid-default);
+  border-color: var(--sys-container-brand-solid-default);
+  color: #ffffff;
+}
+
+/* ── Hint / Error ────────────────────────────────────────────── */
 .igt-select-field__hint {
   font-size: var(--text-body-sm-size);
   font-weight: var(--ref-font-weight-400);

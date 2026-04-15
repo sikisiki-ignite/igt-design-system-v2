@@ -1,0 +1,149 @@
+/* ============================================================
+   IGT FloatingButton (FAB) Component
+   피그마: FloatingButton (502:11152)
+   variant(primary/secondary/ghost) × shape(circle/extended) × size
+   ============================================================ */
+
+.igt-fab {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ref-space-8);
+  border: none;
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-600);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.12s ease, box-shadow 0.12s ease, color 0.12s ease;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+  box-shadow: var(--elevation-floating);
+}
+
+.igt-fab:focus-visible {
+  outline: 2px solid var(--sys-interactive-focus-border-accent);
+  outline-offset: 2px;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+.igt-fab[data-size='sm'] {
+  width: 40px;
+  height: 40px;
+  font-size: var(--text-label-sm-size);
+}
+.igt-fab[data-size='md'] {
+  width: 48px;
+  height: 48px;
+  font-size: var(--text-label-md-size);
+}
+.igt-fab[data-size='lg'] {
+  width: 56px;
+  height: 56px;
+  font-size: var(--text-label-md-size);
+}
+
+/* ── Shape ────────────────────────────────────────────────── */
+.igt-fab[data-shape='circle'] {
+  border-radius: var(--radius-full);
+}
+
+/* extended: pill, width auto */
+.igt-fab[data-shape='extended'] {
+  border-radius: var(--radius-full);
+  width: auto;
+  padding: 0 var(--ref-space-20);
+}
+.igt-fab[data-shape='extended'][data-size='sm'] { height: 40px; }
+.igt-fab[data-shape='extended'][data-size='md'] { height: 48px; }
+.igt-fab[data-shape='extended'][data-size='lg'] { height: 56px; }
+
+/* ── Icon / Label slots ───────────────────────────────────── */
+.igt-fab__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.igt-fab__label {
+  font-weight: var(--ref-font-weight-600);
+}
+
+/* ── Spinner (dot style) ──────────────────────────────────── */
+.igt-fab__spinner {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+.igt-fab__spinner span {
+  display: block;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background-color: currentColor;
+  opacity: 0.4;
+  animation: igt-fab-dot 1.2s infinite ease-in-out;
+}
+.igt-fab__spinner span:nth-child(1) { animation-delay: 0s; }
+.igt-fab__spinner span:nth-child(2) { animation-delay: 0.2s; }
+.igt-fab__spinner span:nth-child(3) { animation-delay: 0.4s; }
+@keyframes igt-fab-dot {
+  0%, 80%, 100% { opacity: 0.3; transform: scale(0.8); }
+  40% { opacity: 1; transform: scale(1); }
+}
+
+/* ══════════════════════════════════════════════════════════
+   Variant: primary (blue fill)
+   ══════════════════════════════════════════════════════════ */
+.igt-fab[data-variant='primary'] {
+  background-color: var(--btn-primary-fill-bg);
+  color: var(--btn-primary-fill-text);
+  border: 1px solid transparent;
+}
+.igt-fab[data-variant='primary']:hover:not(:disabled) {
+  background-color: var(--btn-primary-fill-bg-hover);
+}
+.igt-fab[data-variant='primary']:active:not(:disabled) {
+  background-color: var(--btn-primary-fill-bg-hover);
+  box-shadow: var(--elevation-subtle);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Variant: secondary (neutral dark fill)
+   ══════════════════════════════════════════════════════════ */
+.igt-fab[data-variant='secondary'] {
+  background-color: var(--btn-secondary-fill-bg);
+  color: var(--btn-secondary-fill-text);
+  border: 1px solid transparent;
+}
+.igt-fab[data-variant='secondary']:hover:not(:disabled) {
+  background-color: var(--btn-secondary-fill-bg-hover);
+}
+.igt-fab[data-variant='secondary']:active:not(:disabled) {
+  background-color: var(--btn-secondary-fill-bg-hover);
+  box-shadow: var(--elevation-subtle);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Variant: ghost (white bg, border)
+   ══════════════════════════════════════════════════════════ */
+.igt-fab[data-variant='ghost'] {
+  background-color: var(--sys-background-base);
+  color: var(--sys-content-neutral-default);
+  border: 1px solid var(--sys-border-neutral-subtle);
+}
+.igt-fab[data-variant='ghost']:hover:not(:disabled) {
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+}
+.igt-fab[data-variant='ghost']:active:not(:disabled) {
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+  box-shadow: var(--elevation-subtle);
+}
+
+/* ── Disabled ────────────────────────────────────────────── */
+.igt-fab:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+  box-shadow: none;
+}

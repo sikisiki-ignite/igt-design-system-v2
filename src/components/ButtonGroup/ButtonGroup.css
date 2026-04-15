@@ -1,0 +1,40 @@
+/* ============================================================
+   IGT ButtonGroup Component
+   피그마: ButtonGroup (2141:28032)
+   layout(inline/stack) × distribution(content/equal) × size
+   ============================================================ */
+
+.igt-btn-group {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+/* ── Layout ───────────────────────────────────────────────── */
+.igt-btn-group[data-layout='inline'] {
+  flex-direction: row;
+}
+.igt-btn-group[data-layout='stack'] {
+  flex-direction: column;
+  align-items: stretch;
+  flex-wrap: nowrap;
+}
+
+/* ── Distribution: equal — 자식 Button 균등 분배 ──────────── */
+.igt-btn-group[data-distribution='equal'] {
+  width: 100%;
+}
+.igt-btn-group[data-layout='inline'][data-distribution='equal'] > * {
+  flex: 1 0 0;
+  min-width: 0;
+}
+.igt-btn-group[data-layout='stack'][data-distribution='equal'] > * {
+  width: 100%;
+}
+
+/* ── Gap by size ──────────────────────────────────────────── */
+/* Figma: xs=4px, sm=6px, md=8px, lg=10px */
+.igt-btn-group[data-size='xs'] { gap: var(--ref-space-4); }
+.igt-btn-group[data-size='sm'] { gap: var(--ref-space-6); }
+.igt-btn-group[data-size='md'] { gap: var(--ref-space-8); }
+.igt-btn-group[data-size='lg'] { gap: var(--ref-space-10); }

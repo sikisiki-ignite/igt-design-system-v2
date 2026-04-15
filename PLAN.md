@@ -23,39 +23,37 @@ IGTdesignsystem/    →  지침서 업데이트 + 스킬 구축
 
 ## 작업 순서
 
-### Step 1 — component-catalog.md 작성
-**상태:** ✅ 완료 (2026-04-14)
+### Step 1 — component-catalog.md + usage-patterns.md 작성 (세트)
+**상태:** ✅ 완료 (2026-04-14, 2026-04-15 업데이트)
 
-컴포넌트가 완성될 때마다 목록에 추가.  
-AI가 바이브 코딩 시 "어떤 컴포넌트가 있는지" 파악하는 기준 문서.
+> **⚠️ 두 문서는 항상 세트로 업데이트한다.**  
+> 컴포넌트가 추가/변경될 때 catalog만 업데이트하고 patterns를 빠뜨리면 안 됨.
+
+#### 업데이트 플로우
 
 ```
-ai-guide/component-catalog.md
+새 컴포넌트 완성
+      ↓
+1. ai-guide/component-catalog.md 에 항목 추가
+   - 컴포넌트 이름 / 언제 쓰는지 / props 요약 / 사용 예시
+      ↓
+2. ai-guide/usage-patterns.md 에 조합 패턴 추가
+   - 해당 컴포넌트가 실제로 쓰이는 백오피스 맥락
+   - 단독 사용법이 아니라 다른 컴포넌트와의 조합 패턴
+      ↓
+3. PLAN.md 하단 컴포넌트 현황 테이블 업데이트
 ```
 
-포함 내용:
+#### catalog에 포함할 내용
 - 컴포넌트 이름
 - 언제 쓰는지 (용도)
 - 핵심 props 요약
 - 간단한 사용 예시
 
----
-
-### Step 2 — usage-patterns.md 작성
-**상태:** ✅ 완료 (2026-04-14)
-
-백오피스에서 자주 쓰는 조합 패턴 정리.  
-단순 컴포넌트 나열이 아니라 **"이런 화면은 이렇게 조합해라"** 가이드.
-
-```
-ai-guide/usage-patterns.md
-```
-
-포함 내용:
-- 검색 폼 패턴 (Input + Button + Select)
-- 데이터 테이블 패턴 (Table + Pagination + Badge)
-- 편집 폼 패턴 (Label + Input + Modal)
-- 알림 패턴 (Toast + Alert)
+#### patterns에 포함할 내용
+- 백오피스에서 자주 쓰이는 조합 맥락
+- 단순 컴포넌트 나열이 아닌 **"이런 화면은 이렇게 조합한다"** 형태
+- 각 패턴마다 **규칙** 섹션 포함 (AI가 잘못 구현하는 케이스 방지)
 
 ---
 

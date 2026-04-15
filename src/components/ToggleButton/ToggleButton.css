@@ -1,0 +1,143 @@
+/* ============================================================
+   IGT ToggleButton Component
+   피그마: ActionToggle (2038:77786)
+   emphasis(onDefault/onSelect) × selected × size × state
+   ============================================================ */
+
+.igt-toggle-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ref-space-4);
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-600);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
+  outline: none;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  flex-shrink: 0;
+}
+
+.igt-toggle-btn:focus-visible {
+  outline: 2px solid var(--sys-interactive-focus-border-accent);
+  outline-offset: 2px;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+.igt-toggle-btn[data-size='xs'] {
+  height: var(--size-comp-height-xs);     /* 24px */
+  padding: 0 var(--size-comp-padding-xs); /* 0 8px */
+  font-size: var(--text-label-xs-size);
+  line-height: var(--text-label-xs-line-height);
+  border-radius: var(--radius-sm);        /* 6px */
+}
+.igt-toggle-btn[data-size='sm'] {
+  height: var(--size-comp-height-sm);     /* 32px */
+  padding: 0 var(--size-comp-padding-sm); /* 0 12px */
+  font-size: var(--text-label-sm-size);
+  line-height: var(--text-label-sm-line-height);
+  border-radius: var(--radius-md);        /* 8px */
+}
+.igt-toggle-btn[data-size='md'] {
+  height: var(--size-comp-height-md);     /* 36px */
+  padding: 0 var(--size-comp-padding-md); /* 0 16px */
+  font-size: var(--text-label-md-size);
+  line-height: var(--text-label-md-line-height);
+  border-radius: var(--radius-lg);        /* 10px */
+}
+
+/* icon-only: 정사각형 */
+.igt-toggle-btn[data-icon-only][data-size='xs'] { padding: 0; width: var(--size-comp-height-xs); }
+.igt-toggle-btn[data-icon-only][data-size='sm'] { padding: 0; width: var(--size-comp-height-sm); }
+.igt-toggle-btn[data-icon-only][data-size='md'] { padding: 0; width: var(--size-comp-height-md); }
+
+/* ── Icon / Spinner slot ─────────────────────────────────── */
+.igt-toggle-btn__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.igt-toggle-btn__spinner {
+  display: block;
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  border: 2px solid currentColor;
+  border-top-color: transparent;
+  animation: igt-toggle-spin 0.7s linear infinite;
+}
+@keyframes igt-toggle-spin { to { transform: rotate(360deg); } }
+
+/* ══════════════════════════════════════════════════════════
+   Emphasis: onDefault
+   selected=false → ghost (투명 배경, accent 색상)
+   selected=true  → primary fill (파란 배경, 흰 텍스트)
+   ══════════════════════════════════════════════════════════ */
+
+/* unselected */
+.igt-toggle-btn[data-emphasis='onDefault']:not([data-selected]) {
+  background-color: transparent;
+  color: var(--btn-primary-ghost-text);
+  border-color: transparent;
+}
+.igt-toggle-btn[data-emphasis='onDefault']:not([data-selected]):hover:not(:disabled) {
+  background-color: var(--btn-primary-ghost-bg-hover);
+}
+.igt-toggle-btn[data-emphasis='onDefault']:not([data-selected]):active:not(:disabled) {
+  background-color: var(--btn-primary-ghost-bg-hover);
+}
+
+/* selected */
+.igt-toggle-btn[data-emphasis='onDefault'][data-selected] {
+  background-color: var(--btn-primary-fill-bg);
+  color: var(--btn-primary-fill-text);
+  border-color: transparent;
+}
+.igt-toggle-btn[data-emphasis='onDefault'][data-selected]:hover:not(:disabled) {
+  background-color: var(--btn-primary-fill-bg-hover);
+}
+.igt-toggle-btn[data-emphasis='onDefault'][data-selected]:active:not(:disabled) {
+  background-color: var(--btn-primary-fill-bg-hover);
+}
+
+/* ══════════════════════════════════════════════════════════
+   Emphasis: onSelect
+   selected=false → neutral soft (연한 배경, 중성 텍스트)
+   selected=true  → accent soft (연한 파랑, 파랑 텍스트)
+   ══════════════════════════════════════════════════════════ */
+
+/* unselected */
+.igt-toggle-btn[data-emphasis='onSelect']:not([data-selected]) {
+  background-color: var(--btn-secondary-soft-bg);
+  color: var(--btn-secondary-soft-text);
+  border-color: transparent;
+}
+.igt-toggle-btn[data-emphasis='onSelect']:not([data-selected]):hover:not(:disabled) {
+  background-color: var(--btn-secondary-soft-bg-hover);
+}
+.igt-toggle-btn[data-emphasis='onSelect']:not([data-selected]):active:not(:disabled) {
+  background-color: var(--btn-secondary-soft-bg-hover);
+}
+
+/* selected */
+.igt-toggle-btn[data-emphasis='onSelect'][data-selected] {
+  background-color: var(--btn-primary-soft-bg);
+  color: var(--btn-primary-soft-text);
+  border-color: transparent;
+}
+.igt-toggle-btn[data-emphasis='onSelect'][data-selected]:hover:not(:disabled) {
+  background-color: var(--btn-primary-soft-bg-hover);
+}
+.igt-toggle-btn[data-emphasis='onSelect'][data-selected]:active:not(:disabled) {
+  background-color: var(--btn-primary-soft-bg-hover);
+}
+
+/* ── Disabled ────────────────────────────────────────────── */
+.igt-toggle-btn:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}

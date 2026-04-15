@@ -1,0 +1,186 @@
+/* ============================================================
+   IGT TextArea Component
+   피그마: 2 TextArea (245:84278)
+   variant(outline/fill) × size(md/lg) × state
+   ============================================================ */
+
+.igt-textarea-field {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+}
+
+.igt-textarea-field[data-full-width] {
+  width: 100%;
+}
+
+/* ── Label ─────────────────────────────────────────────────── */
+.igt-textarea-field__label {
+  font-size: var(--text-label-md-size);
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-label-md-line-height);
+  color: var(--field-text-label);
+  transition: color 0.12s ease;
+}
+
+/* focus 시 파란색 */
+.igt-textarea-field:not([data-state='error']):not([data-disabled]):not([data-readonly]):focus-within .igt-textarea-field__label {
+  color: var(--field-outline-border-focus);
+}
+
+/* error 시 빨간색 */
+.igt-textarea-field[data-state='error'] .igt-textarea-field__label {
+  color: var(--field-text-helper-error);
+}
+
+/* ── Wrap ───────────────────────────────────────────────────── */
+.igt-textarea-field__wrap {
+  position: relative;
+  display: flex;
+  transition: border-color 0.12s ease, background-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* ── Size ───────────────────────────────────────────────────── */
+/* md: px=12, py=14, radius=10, font=15px */
+.igt-textarea-field[data-size='md'] .igt-textarea-field__wrap {
+  padding: 14px 12px;
+  border-radius: var(--radius-lg);   /* 10px */
+}
+.igt-textarea-field[data-size='md'] .igt-textarea-field__textarea {
+  font-size: var(--text-body-sm-size);       /* 15px */
+  line-height: var(--text-body-sm-line-height); /* 22px */
+}
+
+/* lg: px=14, py=16, radius=12, font=17px */
+.igt-textarea-field[data-size='lg'] .igt-textarea-field__wrap {
+  padding: 16px 14px;
+  border-radius: var(--radius-xl);   /* 12px */
+}
+.igt-textarea-field[data-size='lg'] .igt-textarea-field__textarea {
+  font-size: var(--text-body-lg-size, 17px);
+  line-height: var(--text-body-lg-line-height, 24px);
+}
+
+/* ── Outline ────────────────────────────────────────────────── */
+.igt-textarea-field[data-style='outline'] .igt-textarea-field__wrap {
+  background-color: var(--field-outline-bg);
+  border: 1px solid var(--field-outline-border);
+}
+.igt-textarea-field[data-style='outline']:not([data-disabled]) .igt-textarea-field__wrap:hover {
+  border-color: var(--field-outline-border-hover);
+}
+.igt-textarea-field[data-style='outline'] .igt-textarea-field__wrap:focus-within {
+  border-color: var(--field-outline-border-focus);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-focus);
+}
+.igt-textarea-field[data-style='outline'][data-state='error'] .igt-textarea-field__wrap {
+  border-color: var(--field-outline-border-error);
+}
+.igt-textarea-field[data-style='outline'][data-state='error'] .igt-textarea-field__wrap:focus-within {
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-error);
+}
+
+/* ── Fill ───────────────────────────────────────────────────── */
+.igt-textarea-field[data-style='fill'] .igt-textarea-field__wrap {
+  background-color: var(--field-fill-bg);
+  border: 1px solid transparent;
+}
+.igt-textarea-field[data-style='fill']:not([data-disabled]) .igt-textarea-field__wrap:hover {
+  border-color: var(--field-fill-border-hover);
+}
+.igt-textarea-field[data-style='fill'] .igt-textarea-field__wrap:focus-within {
+  border-color: var(--field-fill-border-focus);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-fill-border-focus);
+}
+.igt-textarea-field[data-style='fill'][data-state='error'] .igt-textarea-field__wrap {
+  border-color: var(--field-fill-border-error);
+}
+
+/* ── Disabled ───────────────────────────────────────────────── */
+.igt-textarea-field[data-disabled] .igt-textarea-field__wrap {
+  background-color: var(--field-outline-bg-disabled);
+  border-color: var(--field-outline-border-disabled);
+  cursor: not-allowed;
+}
+.igt-textarea-field[data-style='fill'][data-disabled] .igt-textarea-field__wrap {
+  border-color: transparent;
+}
+.igt-textarea-field[data-disabled] .igt-textarea-field__textarea {
+  cursor: not-allowed;
+}
+
+/* ── ReadOnly ───────────────────────────────────────────────── */
+.igt-textarea-field[data-readonly] .igt-textarea-field__wrap {
+  background-color: var(--field-outline-bg-disabled);
+  border-color: var(--field-outline-border-disabled);
+  cursor: default;
+}
+.igt-textarea-field[data-style='fill'][data-readonly] .igt-textarea-field__wrap {
+  border-color: transparent;
+}
+.igt-textarea-field[data-readonly] .igt-textarea-field__wrap:hover {
+  border-color: var(--field-outline-border-disabled);
+}
+.igt-textarea-field[data-readonly] .igt-textarea-field__wrap:focus-within {
+  box-shadow: none;
+  border-color: var(--field-outline-border-disabled);
+}
+.igt-textarea-field[data-readonly] .igt-textarea-field__textarea {
+  cursor: default;
+  color: var(--field-text-value);
+}
+
+/* ── Textarea element ───────────────────────────────────────── */
+.igt-textarea-field__textarea {
+  flex: 1;
+  width: 100%;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  color: var(--field-text-value);
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-400);
+  resize: vertical;
+  min-height: 80px;
+}
+.igt-textarea-field__textarea::placeholder {
+  color: var(--field-text-placeholder);
+  font-weight: var(--ref-font-weight-400);
+}
+.igt-textarea-field[data-disabled] .igt-textarea-field__textarea {
+  color: var(--field-text-disabled);
+}
+
+/* ── Footer ─────────────────────────────────────────────────── */
+.igt-textarea-field__footer {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: var(--ref-space-8);
+}
+
+.igt-textarea-field__hint {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper);
+  line-height: var(--text-body-sm-line-height);
+}
+.igt-textarea-field__error {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper-error);
+  line-height: var(--text-body-sm-line-height);
+}
+.igt-textarea-field__count {
+  font-size: var(--text-body-sm-size);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--field-text-helper);
+  line-height: var(--text-body-sm-line-height);
+  white-space: nowrap;
+  flex-shrink: 0;
+  margin-left: auto;
+}
+.igt-textarea-field__count--error {
+  color: var(--field-text-helper-error);
+}

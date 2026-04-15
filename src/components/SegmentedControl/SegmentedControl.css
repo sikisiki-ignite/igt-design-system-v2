@@ -1,0 +1,109 @@
+/* ============================================================
+   IGT SegmentedControl Component
+   피그마: SegmentedControl (234:50136)
+   size(sm/md) × width(equal/content)
+   ============================================================ */
+
+.igt-segmented {
+  display: inline-flex;
+  align-items: center;
+  overflow: hidden;
+  background-color: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+}
+
+/* equal: 전체 너비 채움 */
+.igt-segmented--equal {
+  width: 100%;
+}
+
+/* content: 내용 기준 너비 */
+.igt-segmented--content {
+  width: auto;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+.igt-segmented--md {
+  height: 36px;
+  gap: 2px;
+  padding: 0 3px;
+  border-radius: 10px;
+}
+
+.igt-segmented--sm {
+  height: 32px;
+  gap: 2px;
+  padding: 0 2px;
+  border-radius: 8px;
+}
+
+/* ── Item ─────────────────────────────────────────────────── */
+.igt-segmented__item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: inherit;
+  white-space: nowrap;
+  border-radius: inherit;
+  color: var(--sys-content-neutral-muted, rgba(0, 19, 43, 0.58));
+  transition: background-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+.igt-segmented__item:disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* equal width: flex:1 */
+.igt-segmented--equal .igt-segmented__item {
+  flex: 1;
+  min-width: 0;
+}
+
+/* md item */
+.igt-segmented--md .igt-segmented__item {
+  height: 30px;
+  padding: 4px 8px;
+  border-radius: 8px;
+}
+
+/* sm item */
+.igt-segmented--sm .igt-segmented__item {
+  height: 28px;
+  padding: 4px 6px;
+  border-radius: 6px;
+}
+
+/* ── Active ───────────────────────────────────────────────── */
+.igt-segmented__item--active {
+  background-color: var(--sys-surface-upper, #fff);
+  box-shadow: 0px 2px 8px 0px rgba(2, 32, 71, 0.06);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+}
+
+/* ── Label ────────────────────────────────────────────────── */
+.igt-segmented__label {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 4px;
+  letter-spacing: -0.1px;
+}
+
+.igt-segmented--md .igt-segmented__label {
+  font-size: var(--text-label-md-size, 15px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: 20px;
+}
+
+.igt-segmented--sm .igt-segmented__label {
+  font-size: var(--text-label-sm-size, 14px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: 20px;
+}
+
+.igt-segmented__item--active .igt-segmented__label {
+  font-weight: var(--ref-font-weight-600);
+}
