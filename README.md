@@ -64,34 +64,90 @@ export default function UserListPage() {
 
 ## 컴포넌트 목록
 
+### 버튼
+
 | 컴포넌트 | 설명 | 주요 props |
 |---------|------|-----------|
-| `Button` | 액션 버튼 | `tone`, `variant`, `size`, `loading`, `leadingIcon`, `trailingIcon`, `iconOnly` |
+| `Button` | 기본 액션 버튼 | `tone`, `variant`, `size`, `loading`, `leadingIcon`, `iconOnly` |
+| `IconButton` | 아이콘 전용 버튼 | `icon`, `aria-label`, `variant`, `shape`, `size` |
+| `TextButton` | 텍스트 링크형 버튼 | `variant`, `tone`, `size`, `leadingIcon`, `href` |
+| `FloatingButton` | 고정 위치 FAB | `icon`, `variant`, `shape`, `size`, `label` |
+| `ToggleButton` | 선택 상태 토글 버튼 | `selected`, `onSelectedChange`, `emphasis`, `size` |
+| `ButtonGroup` | 버튼 묶음 레이아웃 | `layout`, `distribution`, `size` |
+
+### 입력
+
+| 컴포넌트 | 설명 | 주요 props |
+|---------|------|-----------|
 | `Input` | 텍스트 입력 필드 | `label`, `error`, `hint`, `prefix`, `suffix`, `fieldStyle`, `size` |
+| `TextArea` | 여러 줄 텍스트 입력 | `label`, `error`, `hint`, `showCount`, `maxLength`, `size` |
 | `Select` | 드롭다운 선택 | `options`, `label`, `error`, `placeholder`, `fieldStyle`, `size` |
+| `NumberStepper` | 숫자 증감 버튼 | `value`, `onChange`, `min`, `max`, `step`, `size` |
 | `Checkbox` | 체크박스 | `label`, `error`, `indeterminate`, `size` |
+| `CheckboxGroup` | 체크박스 그룹 | `options`, `value`, `onChange`, `selectAll`, `direction` |
 | `Radio` | 라디오 버튼 | `label`, `description`, `error`, `size` |
 | `RadioGroup` | 라디오 그룹 | `label`, `value`, `onChange`, `size` |
 | `RadioGroupItem` | RadioGroup 항목 | `value`, `label`, `description` |
 | `Switch` | 토글 스위치 | `label`, `description`, `size` |
 | `SwitchField` | label 필수 스위치 | `label`, `description`, `size` |
+| `ChoiceChipGroup` | 칩 단일/복수 선택 | `selectionType`, `value`, `onChange`, `size` |
+| `ChoiceChipGroupItem` | ChoiceChipGroup 항목 | `value`, `label` |
+| `SegmentedControl` | 세그먼트 전환 | `items`, `value`, `onChange`, `size`, `width` |
+| `Rating` | 별점 입력/표시 | `value`, `onChange`, `count`, `size`, `readOnly` |
+
+### 표시
+
+| 컴포넌트 | 설명 | 주요 props |
+|---------|------|-----------|
 | `Badge` | 상태 텍스트 칩 | `variant`, `badgeStyle`, `size`, `dot` |
 | `CountBadge` | 숫자 카운트 뱃지 | `count`, `max`, `tone`, `size` |
 | `DotBadge` | 상태 점 뱃지 | `tone`, `size`, `aria-label` |
 | `Label` | 색상 강조 태그 | `color`, `tone`, `size`, `icon` |
 | `Avatar` | 프로필 이미지 | `src`, `fallback`, `size`, `shape`, `status` |
 | `Icon` | SVG 아이콘 | `name`, `variant`, `size`, `label` |
+| `PageIndicator` | 페이지 점 표시 | `count`, `activeIndex`, `size`, `appearance` |
+
+### 레이아웃
+
+| 컴포넌트 | 설명 | 주요 props |
+|---------|------|-----------|
+| `AppLayout` | 전체 페이지 레이아웃 | `topNav`, `sideNav`, `children` |
 | `Divider` | 구분선 | `orientation`, `tone`, `emphasis`, `lineStyle` |
+| `Row` | 목록 행 아이템 | `label`, `leading`, `trailing`, `href`, `onClick` |
 | `SkeletonText` | 텍스트 로딩 자리 | `size`, `width` |
 | `SkeletonRect` | 사각형 로딩 자리 | `size`, `radius`, `width`, `height` |
 | `SkeletonCircle` | 원형 로딩 자리 | `size` |
-| `Table` | 데이터 테이블 | `columns`, `data`, `loading`, `striped`, `onSort`, `onRowClick` |
+
+### 탐색
+
+| 컴포넌트 | 설명 | 주요 props |
+|---------|------|-----------|
+| `Breadcrumb` | 경로 탐색 | `items`, `separator`, `leading` |
+| `Tab` | 탭 전환 | `items`, `activeKey`, `onChange`, `size`, `distribution` |
+| `Link` | 텍스트 링크 | `tone`, `underline`, `disabled`, `href` |
+| `SideNavigation` | 좌측 네비게이션 | `tone`, `size` |
+| `NavItem` | SideNavigation 항목 | `as`, `current`, `depth`, `leadingIcon` |
+| `Pagination` | 페이지 탐색 | `total`, `page`, `onChange`, `pageSize`, `variant` |
+
+### 오버레이
+
+| 컴포넌트 | 설명 | 주요 props |
+|---------|------|-----------|
 | `Modal` | 대화상자 | `open`, `onClose`, `title`, `footer`, `size` |
 | `Tooltip` | 툴팁 | `content`, `placement`, `delay`, `disabled` |
+| `Popover` | 컨텍스트 패널 | `emphasis`, `children` |
+| `PopoverSection` | Popover 섹션 | `title`, `children` |
 | `Toast` | 일시적 알림 | `type`, `title`, `message`, `duration`, `onClose` |
 | `ToastContainer` | Toast 위치 컨테이너 | `position` |
-| `Alert` | 고정 알림 배너 | `type`, `title`, `description`, `dismissible`, `onDismiss` |
 | `Backdrop` | 배경 오버레이 | `tone`, `strength`, `visible` |
+
+### 피드백 / 콘텐츠
+
+| 컴포넌트 | 설명 | 주요 props |
+|---------|------|-----------|
+| `Alert` | 고정 알림 배너 | `type`, `title`, `description`, `dismissible` |
+| `Table` | 데이터 테이블 | `columns`, `data`, `loading`, `striped`, `onSort` |
+| `Accordion` | 접기/펼치기 패널 | `items`, `variation`, `allowMultiple`, `size` |
 
 ---
 
