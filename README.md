@@ -24,6 +24,8 @@ mkdir -p ~/.claude/skills
 cp node_modules/igt-design-system/.claude/skills/backoffice-dev.md ~/.claude/skills/
 ```
 
+> 설치 확인: `ls ~/.claude/skills/backoffice-dev.md` 가 출력되면 정상입니다.
+
 설치 후 Claude Code에서 아래 키워드로 자동 적용됩니다:
 - `igt 디자인 시스템 사용해서 화면 만들어줘`
 - `igt 디자인으로 구현해줘`

@@ -17,7 +17,8 @@
   "files": [
     "dist",
     "ai-guide",
-    "bin"
+    "bin",
+    ".claude/skills"
   ],
   "bin": {
     "igt-init": "./bin/igt-init.js"
