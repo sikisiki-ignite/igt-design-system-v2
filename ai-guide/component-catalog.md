@@ -10,11 +10,11 @@
 
 | 카테고리 | 컴포넌트 |
 |---------|---------|
-| 입력 | [Button](#button), [Input](#input), [Select](#select), [Checkbox](#checkbox), [Radio / RadioGroup](#radio--radiogroup), [Switch / SwitchField](#switch--switchfield), [ChoiceChip / ChoiceChipGroup](#choicechip--choicechipgroup) |
+| 입력 | [Button](#button), [Input](#input), [Select](#select), [Checkbox / CheckboxGroup](#checkbox--checkboxgroup), [Radio / RadioGroup](#radio--radiogroup), [Switch / SwitchField](#switch--switchfield), [ChoiceChip / ChoiceChipGroup](#choicechip--choicechipgroup) |
 | 표시 | [Badge](#badge), [CountBadge](#countbadge), [DotBadge](#dotbadge), [Label](#label), [Avatar](#avatar), [Icon](#icon) |
-| 레이아웃 | [Divider](#divider), [Skeleton](#skeleton), [SideNavigation](#sidenavigation) |
+| 레이아웃 | [AppLayout](#applayout), [Divider](#divider), [Skeleton](#skeleton), [SideNavigation](#sidenavigation) |
 | 오버레이 | [Modal](#modal), [Tooltip](#tooltip), [Toast / ToastContainer](#toast--toastcontainer), [Backdrop](#backdrop) |
-| 피드백 | [Alert](#alert), [Table](#table) |
+| 피드백 | [Alert](#alert), [Table](#table), [Pagination](#pagination) |
 
 ---
 
@@ -137,15 +137,15 @@ const options = [
 
 ---
 
-## Checkbox
+## Checkbox / CheckboxGroup
 
-**언제 쓰나**: 단일 항목 체크, 또는 복수 선택.
+**언제 쓰나**: 단일 항목 체크(`Checkbox`), 또는 옵션 목록 복수 선택(`CheckboxGroup`).
 
-### Props
+### Checkbox Props
 
 | Prop | Type | Default | 설명 |
 |------|------|---------|------|
-| `label` | `string` | — | 체크박스 레이블 |
+| `label` | `string` | — | 레이블 |
 | `hint` | `string` | — | 도움말 |
 | `error` | `string` | — | 에러 메시지 |
 | `indeterminate` | `boolean` | `false` | 중간 선택 상태 |
@@ -154,17 +154,46 @@ const options = [
 | `readOnly` | `boolean` | — | 읽기 전용 |
 | + HTML input 속성 | | | `checked`, `onChange` 등 |
 
+### CheckboxGroup Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `options` | `CheckboxGroupOption[]` | — | **(필수)** `{ value, label, hint?, disabled? }` 배열 |
+| `value` | `string[]` | — | controlled 선택값 |
+| `defaultValue` | `string[]` | `[]` | uncontrolled 기본값 |
+| `onChange` | `(value: string[]) => void` | — | 선택 변경 |
+| `label` | `string` | — | 그룹 제목 |
+| `hint` | `string` | — | 도움말 |
+| `error` | `string` | — | 에러 메시지 |
+| `size` | `'sm' \| 'md'` | `'md'` | 크기 |
+| `selectAll` | `boolean` | `false` | 전체 선택 헤더 표시 |
+| `selectAllLabel` | `string` | `'전체 선택'` | 전체 선택 헤더 레이블 |
+| `direction` | `'vertical' \| 'horizontal'` | `'vertical'` | 나열 방향 |
+| `disabled` | `boolean` | — | 전체 비활성화 |
+| `readOnly` | `boolean` | — | 전체 읽기 전용 |
+
 ### 사용 예시
 
 ```tsx
-// 기본
+// 단일 Checkbox
 <Checkbox label="전체 동의" checked={allChecked} onChange={handleAll} />
-
-// indeterminate (일부 선택)
 <Checkbox label="전체 선택" indeterminate={someChecked} checked={allChecked} onChange={handleAll} />
 
-// 에러
-<Checkbox label="약관 동의" error="필수 항목입니다" />
+// CheckboxGroup (권장)
+<CheckboxGroup
+  label="권한"
+  options={[
+    { value: 'read', label: '조회' },
+    { value: 'write', label: '편집' },
+    { value: 'delete', label: '삭제', hint: '주의 필요' },
+  ]}
+  value={selected}
+  onChange={setSelected}
+  selectAll
+/>
+
+// 가로 나열
+<CheckboxGroup options={options} direction="horizontal" />
 ```
 
 ---
@@ -432,6 +461,38 @@ const options = [
 <Icon name="search" size="sm" />
 <Icon name="check" variant="solid" size="md" label="확인" />
 <Icon name="chevron_right" size="xs" />
+```
+
+---
+
+## AppLayout
+
+**언제 쓰나**: 백오피스 전체 페이지 레이아웃. TopNavigation + SideNavigation + 콘텐츠 영역을 하나로 조합.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `topNav` | `ReactNode` | — | **(필수)** 상단 네비게이션 영역 |
+| `sideNav` | `ReactNode` | — | **(필수)** 좌측 네비게이션 영역 |
+| `children` | `ReactNode` | — | **(필수)** 메인 콘텐츠 |
+
+### 사용 예시
+
+```tsx
+<AppLayout
+  topNav={<TopNavigation ... />}
+  sideNav={
+    <SideNavigation tone="accent">
+      <SideNavigationList>
+        <NavItem as="button" current>대시보드</NavItem>
+        <NavItem as="button">사용자 관리</NavItem>
+      </SideNavigationList>
+    </SideNavigation>
+  }
+>
+  <YourPageContent />
+</AppLayout>
 ```
 
 ---
@@ -834,7 +895,39 @@ import {
 
 ---
 
+## Pagination
+
+**언제 쓰나**: Table 하단 페이지 탐색. 전체 아이템 수와 현재 페이지를 받아 페이지 버튼을 렌더.
+
+### Props
+
+| Prop | Type | Default | 설명 |
+|------|------|---------|------|
+| `total` | `number` | — | **(필수)** 전체 아이템 수 |
+| `page` | `number` | — | **(필수)** 현재 페이지 (1-based) |
+| `onChange` | `(page: number) => void` | — | **(필수)** 페이지 변경 콜백 |
+| `pageSize` | `number` | `10` | 페이지당 아이템 수 |
+| `variant` | `'default' \| 'minimal'` | `'default'` | `default`=번호 버튼, `minimal`=현재/전체 텍스트만 |
+| `size` | `'sm' \| 'md'` | `'md'` | 크기 |
+| `siblingCount` | `number` | `1` | 현재 페이지 양쪽에 표시할 페이지 버튼 수 |
+
+### 사용 예시
+
+```tsx
+// 기본 (Table과 함께)
+const [page, setPage] = useState(1)
+
+<Table columns={columns} data={pagedData} rowKey="id" />
+<Pagination total={totalCount} page={page} pageSize={20} onChange={setPage} />
+
+// minimal — 공간 적을 때
+<Pagination total={500} page={page} onChange={setPage} variant="minimal" size="sm" />
+```
+
+---
+
 > **업데이트 기록**
 > - 2026-04-14: 초기 작성 (18개 컴포넌트 — Button, Input, Select, Checkbox, Radio, RadioGroup, Switch, SwitchField, Badge, CountBadge, DotBadge, Label, Avatar, Icon, Divider, Skeleton, Modal, Tooltip, Toast, Backdrop, Alert, Table)
 > - 2026-04-14: SideNavigation 추가 (SideNavigation, SideNavigationList, NavItem, NavSectionHeader)
 > - 2026-04-15: Modal props 업데이트 (subtitle, footerVariation, xl size 제거), ChoiceChip / ChoiceChipGroup 추가
+- 2026-04-15: 누락 항목 추가 — AppLayout, CheckboxGroup, Pagination
