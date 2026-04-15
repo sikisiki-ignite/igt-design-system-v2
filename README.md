@@ -17,12 +17,18 @@ npm install github:sikisiki-ignite/igt-design-system-v2
 
 ### 2. Claude Code AI 스킬 설치
 
+레포의 `.claude/skills/backoffice-dev.md`를 Claude Code 스킬 디렉토리에 복사합니다.
+
 ```bash
-npx igt-init
+mkdir -p ~/.claude/skills
+cp node_modules/igt-design-system/.claude/skills/backoffice-dev.md ~/.claude/skills/
 ```
 
-실행하면 현재 프로젝트의 `.claude/skills/backoffice-dev.md` 가 설치됩니다.
-설치 후 Claude Code에서 `/backoffice-dev` 로 호출하면 IGT 컴포넌트 규칙이 자동 적용됩니다.
+설치 후 Claude Code에서 아래 키워드로 자동 적용됩니다:
+- `igt 디자인 시스템 사용해서 화면 만들어줘`
+- `igt 디자인으로 구현해줘`
+- `디자인시스템 써서 ...`
+- 또는 `/backoffice-dev` 직접 호출
 
 ---
 
