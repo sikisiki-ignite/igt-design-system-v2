@@ -47,15 +47,15 @@ export const Tab: React.FC<TabProps> = ({
   }
 
   return (
-    <div
-      className={clsx('igt-tab', className)}
-      data-size={size}
-      data-distribution={distribution}
-      role="tablist"
-    >
-      {/* 하단 track 라인 */}
+    <div className={clsx('igt-tab-wrapper', className)} data-size={size}>
+      {/* 하단 track 라인 — 스크롤 밖에 고정 */}
       <div className="igt-tab__track" aria-hidden="true" />
-
+      <div
+        className="igt-tab"
+        data-size={size}
+        data-distribution={distribution}
+        role="tablist"
+      >
       {items.map((item) => {
         const isActive = item.key === activeKey
         return (
@@ -82,6 +82,7 @@ export const Tab: React.FC<TabProps> = ({
           </button>
         )
       })}
+      </div>
     </div>
   )
 }

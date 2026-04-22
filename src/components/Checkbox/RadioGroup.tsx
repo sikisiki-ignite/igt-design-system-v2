@@ -100,6 +100,8 @@ export interface RadioGroupProps {
   error?: string
   /** 크기 — 하위 아이템에 전파 */
   size?: 'sm' | 'md'
+  /** 아이템 나열 방향 */
+  direction?: 'vertical' | 'horizontal'
   /** radio name attribute (접근성, 미입력 시 자동 생성) */
   name?: string
   /** controlled 선택값 */
@@ -122,6 +124,7 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
       hint,
       error,
       size = 'md',
+      direction = 'vertical',
       name,
       value,
       defaultValue,
@@ -161,6 +164,7 @@ export const RadioGroup = React.forwardRef<HTMLDivElement, RadioGroupProps>(
           ref={ref}
           className={clsx('igt-radio-group', className)}
           data-size={size}
+          data-direction={direction}
           data-disabled={disabled || undefined}
           data-readonly={readOnly || undefined}
           data-state={error ? 'error' : undefined}

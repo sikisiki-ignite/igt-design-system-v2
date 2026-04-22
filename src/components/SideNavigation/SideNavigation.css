@@ -10,6 +10,34 @@
   flex-direction: column;
   align-items: stretch;
   width: 220px;
+  transition: width 0.2s ease;
+}
+
+/* ── Collapsed ────────────────────────────────────────────── */
+.igt-side-nav[data-collapsed] {
+  width: 56px;
+}
+
+/* collapsed: 라벨 숨김, 아이콘 중앙 정렬 */
+.igt-side-nav[data-collapsed] .igt-nav-item__label {
+  display: none;
+}
+
+.igt-side-nav[data-collapsed] .igt-nav-item {
+  justify-content: center;
+  padding-left: 0;
+  padding-right: 0;
+}
+
+/* collapsed + depth 들여쓰기 제거 */
+.igt-side-nav[data-collapsed] .igt-nav-item[data-depth='2'],
+.igt-side-nav[data-collapsed] .igt-nav-item[data-depth='3'] {
+  padding-left: 0;
+}
+
+/* collapsed: NavSectionHeader 숨김 */
+.igt-side-nav[data-collapsed] .igt-nav-section-header {
+  display: none;
 }
 
 .igt-side-nav__list {
@@ -61,6 +89,7 @@
   color: var(--nav-item-text-normal);
   font-family: inherit;
   font-weight: var(--ref-font-weight-600);
+  letter-spacing: -0.1px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -166,7 +195,3 @@
   pointer-events: none;
 }
 
-/* ── Focus ────────────────────────────────────────────────── */
-.igt-nav-item:focus-visible {
-  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--sys-border-brand-default);
-}

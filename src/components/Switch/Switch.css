@@ -130,11 +130,7 @@
   left: calc(50% - 13px + 12px); /* 26 - 12 - 2 */
 }
 
-/* Focus ring */
-.igt-switch__input:focus-visible ~ .igt-switch__track {
-  outline: 2px solid var(--sys-border-brand-default);
-  outline-offset: 2px;
-}
+
 
 /* Hover */
 .igt-switch:not([data-disabled]):hover .igt-switch__input:not(:disabled) ~ .igt-switch__track {

@@ -1,0 +1,151 @@
+/* ============================================================
+   IGT InputChip Component
+   피그마: 2146:25765 — InputChip
+   size(xs/sm/md) × variation(neutral/accent) × disabled
+   ============================================================ */
+
+/* ── 컴포넌트 토큰 ──────────────────────────────────────────── */
+.igt-input-chip {
+  --input-chip-bg:        var(--chip-bg);
+  --input-chip-text:      var(--chip-text);
+  --input-chip-remove-bg: transparent;
+}
+
+.igt-input-chip[data-variation='accent'] {
+  --input-chip-bg:   var(--chip-bg-selected);
+  --input-chip-text: var(--chip-text-selected);
+}
+
+.igt-input-chip[data-disabled] {
+  --input-chip-bg:   var(--chip-bg-disabled);
+  --input-chip-text: var(--chip-text-disabled);
+}
+
+/* ── Base ───────────────────────────────────────────────────── */
+.igt-input-chip {
+  display: inline-flex;
+  align-items: center;
+  background-color: var(--input-chip-bg);
+  color: var(--input-chip-text);
+  border: 1px solid transparent;
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-600);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ── Size ───────────────────────────────────────────────────── */
+.igt-input-chip[data-size='xs'] {
+  height: 24px;
+  padding-left: 5px;
+  padding-right: 2px;
+  gap: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.igt-input-chip[data-size='sm'] {
+  height: 32px;
+  padding-left: 8px;
+  padding-right: 5px;
+  gap: 0;
+  border-radius: 8px;
+  font-size: var(--text-label-sm-size);
+  line-height: var(--text-label-sm-line-height);
+  letter-spacing: -0.1px;
+}
+
+.igt-input-chip[data-size='md'] {
+  height: 36px;
+  padding-left: 10px;
+  padding-right: 8px;
+  gap: 0;
+  border-radius: var(--ref-radius-10);
+  font-size: var(--text-label-md-size);
+  line-height: var(--text-label-md-line-height);
+  letter-spacing: -0.1px;
+}
+
+/* neutral md는 radius 10, accent md는 radius 8 */
+.igt-input-chip[data-size='md'][data-variation='accent'] {
+  border-radius: var(--ref-radius-8);
+}
+
+/* ── Leading icon ───────────────────────────────────────────── */
+.igt-input-chip__leading {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 2px;
+}
+
+.igt-input-chip[data-size='xs'] .igt-input-chip__leading { margin-right: 2px; }
+.igt-input-chip[data-size='sm'] .igt-input-chip__leading { margin-right: 2px; }
+.igt-input-chip[data-size='md'] .igt-input-chip__leading { margin-right: 2px; }
+
+/* ── Label ──────────────────────────────────────────────────── */
+.igt-input-chip__label {
+  padding-inline: 4px;
+}
+
+.igt-input-chip[data-size='xs'] .igt-input-chip__label { padding-inline: 3px; }
+.igt-input-chip[data-size='sm'] .igt-input-chip__label { padding-inline: 4px; }
+.igt-input-chip[data-size='md'] .igt-input-chip__label { padding-inline: 6px; }
+
+/* ── Remove button ──────────────────────────────────────────── */
+.igt-input-chip__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: inherit;
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: opacity 0.1s ease, background-color 0.1s ease;
+}
+
+.igt-input-chip__remove:hover {
+  opacity: 1;
+  background-color: rgba(0, 0, 0, 0.06);
+}
+
+.igt-input-chip[data-size='xs'] .igt-input-chip__remove {
+  width: 20px;
+  height: 20px;
+  border-radius: 4px;
+  margin-left: -2px;
+}
+
+.igt-input-chip[data-size='sm'] .igt-input-chip__remove {
+  width: 20px;
+  height: 20px;
+  border-radius: 6px;
+  margin-left: -2px;
+}
+
+.igt-input-chip[data-size='md'] .igt-input-chip__remove {
+  width: 24px;
+  height: 24px;
+  border-radius: 8px;
+  margin-left: -2px;
+}
+
+/* icon 크기 오버라이드 */
+.igt-input-chip[data-size='xs'] .igt-input-chip__remove .igt-icon { width: 12px; height: 12px; font-size: 12px; }
+.igt-input-chip[data-size='sm'] .igt-input-chip__remove .igt-icon { width: 14px; height: 14px; font-size: 14px; }
+.igt-input-chip[data-size='md'] .igt-input-chip__remove .igt-icon { width: 16px; height: 16px; font-size: 16px; }
+
+/* ── Disabled ───────────────────────────────────────────────── */
+.igt-input-chip[data-disabled] {
+  cursor: not-allowed;
+}
+
+.igt-input-chip[data-disabled] .igt-input-chip__remove {
+  cursor: not-allowed;
+  pointer-events: none;
+}

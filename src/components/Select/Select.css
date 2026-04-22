@@ -68,10 +68,8 @@
 .igt-select-field[data-style='outline']:not([data-disabled]) .igt-select__trigger:hover {
   border-color: var(--field-outline-border-hover);
 }
-.igt-select-field[data-style='outline'] .igt-select__trigger--open,
-.igt-select-field[data-style='outline'] .igt-select__trigger:focus-visible {
+.igt-select-field[data-style='outline'] .igt-select__trigger--open {
   border-color: var(--field-outline-border-focus);
-  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-focus);
 }
 .igt-select-field[data-style='outline'][data-state='error'] .igt-select__trigger {
   border-color: var(--field-outline-border-error);
@@ -264,6 +262,50 @@
   text-align: center;
   font-size: var(--text-label-sm-size);
   color: var(--field-text-placeholder);
+}
+
+.igt-select__loading {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 12px;
+  font-size: var(--text-label-sm-size);
+  color: var(--sys-content-neutral-muted);
+}
+
+.igt-select__spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid var(--sys-border-neutral-subtle, rgba(0,27,55,0.1));
+  border-top-color: var(--sys-content-brand-default, #3182f6);
+  border-radius: 50%;
+  animation: igt-select-spin 0.6s linear infinite;
+  flex-shrink: 0;
+}
+
+@keyframes igt-select-spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ── Creatable item ──────────────────────────────────────────── */
+.igt-select__item--create .igt-select__item-create-label {
+  color: var(--sys-content-brand-default, #3182f6);
+  font-weight: var(--ref-font-weight-500);
+}
+
+/* ── Option group label (Figma: SelectItemHeader) ────────────── */
+.igt-select__group-label {
+  list-style: none;
+  padding: 10px 6px 6px;
+  font-size: var(--text-label-xs-size, 13px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: 16px;
+  letter-spacing: 0px;
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  cursor: default;
+  user-select: none;
 }
 
 /* ── Option item ─────────────────────────────────────────────── */

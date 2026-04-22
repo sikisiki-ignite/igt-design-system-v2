@@ -1,0 +1,422 @@
+/* ============================================================
+   IGT DatePicker
+   피그마: DatePickerPanel (15133:96408)
+   ============================================================ */
+
+/* ── DateCalendar Panel ─────────────────────────────────────── */
+.igt-date-calendar {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-10, 10px);
+  background: var(--sys-background-overlay, white);
+  border: 1px solid rgba(0, 27, 55, 0.1);
+  border-radius: 20px;
+  padding: var(--ref-space-12) var(--ref-space-16) var(--ref-space-16);
+  box-shadow: 0px 40px 120px 0px rgba(2, 32, 71, 0.08),
+              0px 20px 60px 0px rgba(2, 32, 71, 0.04);
+  width: 325px;
+  user-select: none;
+}
+
+/* ── Header ─────────────────────────────────────────────────── */
+.igt-date-calendar__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 48px;
+  padding: 0 4px;
+}
+
+.igt-date-calendar__title {
+  flex: 1;
+  text-align: center;
+  font-size: var(--text-body-lg-size, 17px);
+  font-weight: var(--ref-font-weight-600);
+  line-height: 24px;
+  letter-spacing: -0.2px;
+  color: var(--sys-content-neutral-default);
+}
+
+.igt-date-calendar__nav-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 8px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  color: rgba(3, 24, 50, 0.46);
+  transition: background-color 0.12s ease, color 0.12s ease;
+  padding: 0;
+}
+
+.igt-date-calendar__nav-btn:hover {
+  background: var(--sys-container-neutral-tint-default, rgba(0, 19, 43, 0.06));
+  color: var(--sys-content-neutral-default);
+}
+
+.igt-date-calendar__nav-btn:active {
+  background: var(--sys-container-neutral-tint-strong, rgba(0, 19, 43, 0.1));
+}
+
+.igt-date-calendar__nav-btn:disabled {
+  color: var(--sys-content-neutral-disabled);
+  cursor: default;
+  background: transparent;
+}
+
+/* nav 버튼 자리를 유지해 title centering 보장 */
+.igt-date-calendar__nav-placeholder {
+  display: flex;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+}
+
+/* ── Grid ───────────────────────────────────────────────────── */
+.igt-date-calendar__grid {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+/* ── Day header row ─────────────────────────────────────────── */
+.igt-date-calendar__day-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 32px;
+}
+
+.igt-date-calendar__day-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: var(--text-caption-lg-size, 12px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: 16px;
+  letter-spacing: -0.2px;
+  color: var(--sys-content-neutral-muted);
+}
+
+.igt-date-calendar__day-cell--sunday {
+  color: var(--sys-content-status-danger-default);
+}
+
+/* ── Date rows ──────────────────────────────────────────────── */
+.igt-date-calendar__week-row {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  height: 32px;
+}
+
+/* ── Date cell ──────────────────────────────────────────────── */
+.igt-date-calendar__date-cell {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.igt-date-calendar__date-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 32px;
+  height: 32px;
+  border-radius: 999px;
+  border: none;
+  background: transparent;
+  cursor: pointer;
+  font-family: var(--font-family-base, 'IGTSans', -apple-system, sans-serif);
+  font-size: var(--text-body-xs-size, 14px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: 20px;
+  letter-spacing: -0.2px;
+  color: var(--sys-content-neutral-default);
+  transition: background-color 0.12s ease, color 0.12s ease;
+  padding: 0;
+}
+
+.igt-date-calendar__date-btn:hover:not(:disabled) {
+  background: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+}
+
+/* 다른 달 날짜 */
+.igt-date-calendar__date-btn--other-month {
+  color: var(--sys-content-neutral-disabled);
+  cursor: default;
+}
+
+.igt-date-calendar__date-btn--other-month:hover {
+  background: transparent;
+}
+
+/* 오늘 — Figma: 1px 파란 border ring */
+.igt-date-calendar__date-btn--today {
+  border: 1px solid var(--sys-border-brand-default, #3182f6);
+}
+
+/* 선택됨 */
+.igt-date-calendar__date-btn--selected {
+  background: var(--sys-container-brand-solid-default);
+  color: var(--sys-content-on-brand-solid);
+}
+
+.igt-date-calendar__date-btn--selected:hover:not(:disabled) {
+  background: var(--sys-container-brand-solid-default);
+  color: var(--sys-content-on-brand-solid);
+}
+
+/* 범위 선택 — 시작/종료 사이 */
+.igt-date-calendar__date-cell--in-range {
+  background: var(--sys-container-brand-tint-default, rgba(49, 130, 246, 0.08));
+}
+
+.igt-date-calendar__date-cell--range-start {
+  background: linear-gradient(to right, transparent 50%, var(--sys-container-brand-tint-default, rgba(49, 130, 246, 0.08)) 50%);
+}
+
+.igt-date-calendar__date-cell--range-end {
+  background: linear-gradient(to left, transparent 50%, var(--sys-container-brand-tint-default, rgba(49, 130, 246, 0.08)) 50%);
+}
+
+/* 범위 내 날짜 hover도 neutral tint */
+.igt-date-calendar__date-cell--in-range .igt-date-calendar__date-btn:hover {
+  background: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+}
+
+/* ============================================================
+   DatePicker — Input trigger
+   ============================================================ */
+.igt-date-picker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+}
+
+.igt-date-picker[data-full-width] {
+  width: 100%;
+}
+
+.igt-date-picker__label {
+  font-size: var(--text-label-md-size, 15px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: 20px;
+  color: var(--field-text-label);
+}
+
+.igt-date-picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-12);
+  background: var(--field-outline-bg);
+  border: 1px solid var(--field-outline-border);
+  border-radius: 10px;
+  padding: 0 9px;
+  cursor: pointer;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  height: 36px;
+  width: 100%;
+  text-align: left;
+  box-sizing: border-box;
+}
+
+.igt-date-picker__trigger:hover:not(:disabled) {
+  border-color: var(--field-outline-border-hover, var(--sys-border-brand-subtle));
+}
+
+.igt-date-picker__trigger--open {
+  border-color: var(--field-outline-border-focus, var(--sys-border-brand-default));
+  box-shadow: 0 0 0 3px var(--sys-container-brand-tint-default, rgba(49, 130, 246, 0.08));
+}
+
+.igt-date-picker[data-disabled] .igt-date-picker__trigger {
+  cursor: not-allowed;
+  background: var(--field-outline-bg-disabled);
+  border-color: var(--field-outline-border-disabled);
+  opacity: 0.5;
+}
+
+.igt-date-picker__trigger-text {
+  flex: 1;
+  font-size: var(--text-body-sm-size, 15px);
+  font-weight: var(--ref-font-weight-600);
+  line-height: 22px;
+  letter-spacing: -0.2px;
+  color: var(--field-text-value);
+  white-space: nowrap;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  padding: 0 4px; /* Figma: textInsetInline px-[4px] */
+}
+
+/* trailing 아이콘 컨테이너 — Figma md: 24×24, icon 16px(xs) */
+.igt-date-picker__trigger-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--field-icon, var(--sys-content-neutral-subtle));
+}
+
+/* ── Size: lg override ────────────────────────────────────────── */
+.igt-date-picker[data-size="lg"] .igt-date-picker__trigger {
+  height: 40px;
+  border-radius: 12px;
+  padding: 0 10px;
+}
+
+.igt-date-picker[data-size="lg"] .igt-date-picker__trigger-text {
+  font-size: var(--text-body-lg-size, 17px);
+  line-height: 24px;
+}
+
+.igt-date-picker[data-size="lg"] .igt-date-picker__trigger-icon {
+  width: 28px;
+  height: 28px;
+}
+
+.igt-date-picker__hint,
+.igt-date-picker__error {
+  font-size: var(--text-body-sm-size, 15px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: 22px;
+  color: var(--field-text-helper);
+}
+
+.igt-date-picker__error {
+  color: var(--field-text-helper-error);
+}
+
+/* ── Popover 위치 ─────────────────────────────────────────────── */
+.igt-date-picker__popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 1000;
+}
+
+.igt-date-picker__wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* ============================================================
+   DateRangePicker
+   ============================================================ */
+.igt-date-range-picker {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+}
+
+.igt-date-range-picker[data-full-width] {
+  width: 100%;
+}
+
+.igt-date-range-picker__label {
+  font-size: var(--text-label-md-size, 15px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: 20px;
+  color: var(--field-text-label);
+}
+
+.igt-date-range-picker__trigger {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-12);
+  background: var(--field-outline-bg);
+  border: 1px solid var(--field-outline-border);
+  border-radius: 10px;
+  padding: 0 9px;
+  cursor: pointer;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  height: 36px;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.igt-date-range-picker__trigger:hover:not(:disabled) {
+  border-color: var(--field-outline-border-hover, var(--sys-border-brand-subtle));
+}
+
+.igt-date-range-picker__trigger--open {
+  border-color: var(--field-outline-border-focus, var(--sys-border-brand-default));
+  box-shadow: 0 0 0 3px var(--sys-container-brand-tint-default, rgba(49, 130, 246, 0.08));
+}
+
+.igt-date-range-picker[data-disabled] .igt-date-range-picker__trigger {
+  cursor: not-allowed;
+  background: var(--field-outline-bg-disabled);
+  border-color: var(--field-outline-border-disabled);
+  opacity: 0.5;
+}
+
+.igt-date-range-picker__text {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: var(--text-body-sm-size, 15px);
+  font-weight: var(--ref-font-weight-600);
+  line-height: 22px;
+  letter-spacing: -0.2px;
+  color: var(--field-text-value);
+  padding: 0 4px;
+  white-space: nowrap;
+  overflow: hidden;
+}
+
+/* trailing 아이콘 컨테이너 */
+.igt-date-range-picker__trigger-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  flex-shrink: 0;
+  color: var(--field-icon, var(--sys-content-neutral-subtle));
+}
+
+.igt-date-range-picker__text--placeholder {
+  color: var(--field-text-placeholder);
+}
+
+.igt-date-range-picker__separator {
+  color: var(--sys-content-neutral-muted);
+}
+
+.igt-date-range-picker__popover {
+  position: absolute;
+  top: calc(100% + 6px);
+  left: 0;
+  z-index: 1000;
+  display: flex;
+  gap: 24px;
+  background: var(--sys-background-overlay, white);
+  border: 1px solid rgba(0, 27, 55, 0.1);
+  border-radius: 20px;
+  padding: var(--ref-space-12) var(--ref-space-16) var(--ref-space-16);
+  box-shadow: 0px 40px 120px 0px rgba(2, 32, 71, 0.08),
+              0px 20px 60px 0px rgba(2, 32, 71, 0.04);
+}
+
+/* range picker 내 캘린더는 카드 스타일 제거 */
+.igt-date-range-picker__popover .igt-date-calendar {
+  background: transparent;
+  border: none;
+  border-radius: 0;
+  padding: 0;
+  box-shadow: none;
+  width: 293px;
+}
+
+.igt-date-range-picker__wrapper {
+  position: relative;
+  width: 100%;
+}

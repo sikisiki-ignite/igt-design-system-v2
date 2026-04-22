@@ -1,0 +1,215 @@
+/* ============================================================
+   IGT Autocomplete — 자유 입력 + 드롭다운 제안
+   ============================================================ */
+
+.igt-autocomplete {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-4);
+}
+
+.igt-autocomplete--full-width {
+  display: flex;
+  width: 100%;
+}
+
+/* ── Label ───────────────────────────────────────────────── */
+.igt-autocomplete__label {
+  font-size: var(--text-label-sm-size);
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  line-height: 1.4;
+}
+
+/* ── Field wrapper ───────────────────────────────────────── */
+.igt-autocomplete__field {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-4);
+  width: 100%;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+  cursor: text;
+}
+
+/* size */
+.igt-autocomplete__field--sm {
+  height: var(--size-comp-height-sm);
+  padding: 0 var(--ref-space-8);
+  border-radius: var(--radius-md);
+  font-size: var(--text-label-sm-size);
+}
+
+.igt-autocomplete__field--md {
+  height: var(--size-comp-height-md);
+  padding: 0 var(--ref-space-8);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-label-md-size);
+}
+
+.igt-autocomplete__field--lg {
+  height: var(--size-comp-height-lg);
+  padding: 0 var(--ref-space-8);
+  border-radius: var(--radius-xl);
+  font-size: var(--text-body-sm-size);
+}
+
+/* fieldStyle: outline */
+.igt-autocomplete__field--outline {
+  background-color: var(--field-outline-bg);
+  border: 1px solid var(--field-outline-border);
+}
+
+.igt-autocomplete__field--outline:hover:not(.igt-autocomplete__field--disabled) {
+  border-color: var(--field-outline-border-hover);
+}
+
+.igt-autocomplete__field--outline.igt-autocomplete__field--open,
+.igt-autocomplete__field--outline:focus-within {
+  border-color: var(--field-outline-border-focus);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-focus);
+}
+
+.igt-autocomplete__field--outline.igt-autocomplete__field--error {
+  border-color: var(--field-outline-border-error);
+}
+
+.igt-autocomplete__field--outline.igt-autocomplete__field--error:focus-within {
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-error);
+}
+
+/* fieldStyle: fill */
+.igt-autocomplete__field--fill {
+  background-color: var(--field-fill-bg);
+  border: 1px solid transparent;
+}
+
+.igt-autocomplete__field--fill:hover:not(.igt-autocomplete__field--disabled) {
+  border-color: var(--field-fill-border-hover);
+}
+
+.igt-autocomplete__field--fill.igt-autocomplete__field--open,
+.igt-autocomplete__field--fill:focus-within {
+  border-color: var(--field-fill-border-focus);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-fill-border-focus);
+}
+
+/* disabled */
+.igt-autocomplete__field--disabled {
+  cursor: not-allowed;
+  background-color: var(--field-outline-bg-disabled);
+  border-color: var(--field-outline-border-disabled);
+  opacity: 0.6;
+}
+
+/* ── Input ───────────────────────────────────────────────── */
+.igt-autocomplete__input {
+  flex: 1;
+  min-width: 0;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  padding: 0;
+}
+
+.igt-autocomplete__input::placeholder {
+  color: var(--sys-content-neutral-placeholder, rgba(3, 24, 50, 0.3));
+}
+
+.igt-autocomplete__input:disabled {
+  cursor: not-allowed;
+}
+
+/* ── Trailing icons ──────────────────────────────────────── */
+.igt-autocomplete__trailing {
+  display: flex;
+  align-items: center;
+  gap: 2px;
+  flex-shrink: 0;
+}
+
+.igt-autocomplete__clear {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  border-radius: var(--radius-sm);
+  transition: color 0.1s ease;
+}
+
+.igt-autocomplete__clear:hover {
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+}
+
+.igt-autocomplete__chevron {
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  transition: transform 0.15s ease;
+  pointer-events: none;
+}
+
+.igt-autocomplete__chevron--open {
+  transform: rotate(180deg);
+}
+
+/* ── Message ─────────────────────────────────────────────── */
+.igt-autocomplete__message {
+  margin: 0;
+  font-size: var(--text-body-sm-size);
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  line-height: 1.4;
+}
+
+.igt-autocomplete__message--error {
+  color: var(--sys-content-negative-default, #f04452);
+}
+
+/* ── Dropdown ────────────────────────────────────────────── */
+.igt-autocomplete__dropdown {
+  background-color: var(--sys-surface-overlay, #ffffff);
+  border: 1px solid var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.08));
+  border-radius: var(--radius-lg);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+  overflow: hidden;
+  max-height: 280px;
+  overflow-y: auto;
+}
+
+.igt-autocomplete__list {
+  list-style: none;
+  margin: 0;
+  padding: var(--ref-space-4) 0;
+}
+
+.igt-autocomplete__option {
+  padding: var(--ref-space-8) var(--ref-space-12);
+  font-size: var(--text-label-sm-size);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  cursor: pointer;
+  transition: background-color 0.1s ease;
+  line-height: 1.4;
+}
+
+.igt-autocomplete__option--active {
+  background-color: var(--sys-interactive-hover-overlay-neutral, rgba(0, 27, 55, 0.04));
+}
+
+.igt-autocomplete__option--disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+.igt-autocomplete__no-options {
+  padding: var(--ref-space-12) var(--ref-space-12);
+  font-size: var(--text-body-sm-size);
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  text-align: center;
+}

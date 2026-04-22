@@ -25,6 +25,11 @@
   gap: var(--ref-space-4);
 }
 
+.igt-radio-group[data-direction='horizontal'] .igt-radio-group__list {
+  flex-direction: row;
+  gap: var(--ref-space-16);
+}
+
 /* ── Hint / Error ──────────────────────────────────────────── */
 .igt-radio-group__hint,
 .igt-radio-group__error {
@@ -141,10 +146,6 @@
   background-color: var(--checkbox-bg-selected-hover);
 }
 
-/* ── Focus ring ────────────────────────────────────────────── */
-.igt-radio-group-item__input:focus-visible + .igt-radio-group-item__dot {
-  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--sys-border-brand-default);
-}
 
 /* ── Disabled ──────────────────────────────────────────────── */
 .igt-radio-group-item[data-disabled] {

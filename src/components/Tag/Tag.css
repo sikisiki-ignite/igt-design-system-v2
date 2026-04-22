@@ -1,0 +1,83 @@
+/* ============================================================
+   IGT Tag Component — 삭제 가능한 인라인 태그
+   ============================================================ */
+
+.igt-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ref-space-4);
+  border-radius: var(--radius-full);
+  font-weight: var(--ref-font-weight-500);
+  white-space: nowrap;
+  user-select: none;
+  border: 1px solid transparent;
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+.igt-tag[data-size='sm'] {
+  height: 22px;
+  padding: 0 var(--ref-space-8);
+  font-size: var(--text-label-xs-size, 12px);
+  line-height: var(--text-label-xs-line-height, 18px);
+}
+.igt-tag[data-size='md'] {
+  height: 26px;
+  padding: 0 var(--ref-space-8);
+  font-size: var(--text-label-sm-size);
+  line-height: var(--text-label-sm-line-height);
+}
+
+/* ── Tone ─────────────────────────────────────────────────── */
+.igt-tag[data-tone='neutral'] {
+  background-color: var(--sys-surface-raised);
+  color: var(--sys-on-surface);
+  border-color: var(--sys-outline-variant);
+}
+.igt-tag[data-tone='primary'] {
+  background-color: var(--sys-primary-container);
+  color: var(--sys-on-primary-container);
+}
+.igt-tag[data-tone='success'] {
+  background-color: var(--label-success-bg-soft);
+  color: var(--label-success-text-soft);
+}
+.igt-tag[data-tone='warning'] {
+  background-color: var(--label-warning-bg-soft);
+  color: var(--label-warning-text-soft);
+}
+.igt-tag[data-tone='danger'] {
+  background-color: var(--label-danger-bg-soft);
+  color: var(--label-danger-text-soft);
+}
+
+/* ── Disabled ─────────────────────────────────────────────── */
+.igt-tag[data-disabled] {
+  opacity: 0.4;
+  pointer-events: none;
+}
+
+/* ── Icon ─────────────────────────────────────────────────── */
+.igt-tag__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* ── Remove button ────────────────────────────────────────── */
+.igt-tag__remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 0;
+  cursor: pointer;
+  color: currentColor;
+  opacity: 0.6;
+  flex-shrink: 0;
+  transition: opacity 0.12s ease;
+  margin-left: var(--ref-space-2);
+}
+.igt-tag__remove:hover {
+  opacity: 1;
+}

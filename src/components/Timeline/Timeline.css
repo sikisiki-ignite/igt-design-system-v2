@@ -1,0 +1,140 @@
+/* ============================================================
+   IGT Timeline
+   ============================================================ */
+
+.igt-timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+/* ── Item ────────────────────────────────────────────────── */
+.igt-timeline__item {
+  display: flex;
+  gap: var(--ref-space-12);
+  min-height: 48px;
+}
+
+/* ── Aside (dot + line) ──────────────────────────────────── */
+.igt-timeline__aside {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+  width: 24px;
+}
+
+.igt-timeline__dot {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  flex-shrink: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* 아이콘 없는 plain dot */
+.igt-timeline__dot--plain {
+  width: 10px;
+  height: 10px;
+  margin: 7px;
+  border-radius: 50%;
+}
+
+.igt-timeline__item--default .igt-timeline__dot--plain {
+  background-color: var(--sys-container-brand-solid-default, #3182f6);
+}
+
+.igt-timeline__item--success .igt-timeline__dot--plain {
+  background-color: var(--sys-content-positive-default, #00b274);
+}
+
+.igt-timeline__item--warning .igt-timeline__dot--plain {
+  background-color: var(--sys-content-status-warning-default, #f5a623);
+}
+
+.igt-timeline__item--error .igt-timeline__dot--plain {
+  background-color: var(--sys-content-negative-default, #f04452);
+}
+
+.igt-timeline__item--pending .igt-timeline__dot--plain {
+  background-color: transparent;
+  border: 2px solid var(--sys-border-neutral-default, rgba(0, 27, 55, 0.15));
+}
+
+/* 아이콘 있는 dot — 크기 고정, 상태별 색상만 */
+.igt-timeline__dot--icon {
+  width: 24px;
+  height: 24px;
+}
+
+.igt-timeline__item--default .igt-timeline__dot--icon {
+  color: var(--sys-content-brand-default, #3182f6);
+}
+
+.igt-timeline__item--success .igt-timeline__dot--icon {
+  color: var(--sys-content-positive-default, #00b274);
+}
+
+.igt-timeline__item--warning .igt-timeline__dot--icon {
+  color: var(--sys-content-status-warning-default, #f5a623);
+}
+
+.igt-timeline__item--error .igt-timeline__dot--icon {
+  color: var(--sys-content-negative-default, #f04452);
+}
+
+.igt-timeline__item--pending .igt-timeline__dot--icon {
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+}
+
+.igt-timeline__line {
+  flex: 1;
+  width: 2px;
+  background-color: var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.08));
+  margin: var(--ref-space-4) 0;
+  border-radius: 1px;
+}
+
+/* ── Content ─────────────────────────────────────────────── */
+.igt-timeline__content {
+  flex: 1;
+  padding-bottom: var(--ref-space-20);
+}
+
+.igt-timeline__item--last .igt-timeline__content {
+  padding-bottom: 0;
+}
+
+.igt-timeline__header {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: var(--ref-space-8);
+  min-height: 24px;
+}
+
+.igt-timeline__title {
+  font-size: var(--text-label-sm-size);
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  line-height: 1.5;
+}
+
+.igt-timeline__time {
+  flex-shrink: 0;
+  font-size: var(--text-body-xs-size, 11px);
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+}
+
+.igt-timeline__desc {
+  margin-top: var(--ref-space-4);
+  font-size: var(--text-body-sm-size);
+  color: var(--sys-content-neutral-muted, rgba(0, 12, 30, 0.6));
+  line-height: 1.5;
+}

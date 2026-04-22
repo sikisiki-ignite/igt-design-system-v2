@@ -111,10 +111,6 @@
   pointer-events: none;
 }
 
-/* ── Focus Ring ──────────────────────────────────────────── */
-.igt-btn:focus-visible {
-  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--btn-focus-ring);
-}
 
 /* ============================================================
    PRIMARY
@@ -125,7 +121,6 @@
   background-color: var(--btn-primary-fill-bg);
   color: var(--btn-primary-fill-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-brand-default);
 }
 .igt-btn[data-tone='primary'][data-variant='fill']:hover:not(:disabled) {
   background-color: var(--btn-primary-fill-bg-hover);
@@ -139,7 +134,6 @@
   background-color: var(--btn-primary-soft-bg);
   color: var(--btn-primary-soft-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-brand-default);
 }
 .igt-btn[data-tone='primary'][data-variant='soft']:hover:not(:disabled) {
   background-color: var(--btn-primary-soft-bg-hover);
@@ -153,7 +147,6 @@
   background-color: transparent;
   color: var(--btn-primary-outline-text);
   border-color: var(--btn-primary-outline-border);
-  --btn-focus-ring: var(--sys-border-brand-default);
 }
 .igt-btn[data-tone='primary'][data-variant='outline']:hover:not(:disabled) {
   background-color: var(--btn-primary-outline-bg-hover);
@@ -167,7 +160,6 @@
   background-color: transparent;
   color: var(--btn-primary-ghost-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-brand-default);
 }
 .igt-btn[data-tone='primary'][data-variant='ghost']:hover:not(:disabled) {
   background-color: var(--btn-primary-ghost-bg-hover);
@@ -184,7 +176,6 @@
   background-color: var(--btn-secondary-fill-bg);
   color: var(--btn-secondary-fill-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-neutral-default);
 }
 .igt-btn[data-tone='secondary'][data-variant='fill']:hover:not(:disabled) {
   background-color: var(--btn-secondary-fill-bg-hover);
@@ -197,7 +188,6 @@
   background-color: var(--btn-secondary-soft-bg);
   color: var(--btn-secondary-soft-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-neutral-default);
 }
 .igt-btn[data-tone='secondary'][data-variant='soft']:hover:not(:disabled) {
   background-color: var(--btn-secondary-soft-bg-hover);
@@ -210,7 +200,6 @@
   background-color: transparent;
   color: var(--btn-secondary-outline-text);
   border-color: var(--btn-secondary-outline-border);
-  --btn-focus-ring: var(--sys-border-neutral-default);
 }
 .igt-btn[data-tone='secondary'][data-variant='outline']:hover:not(:disabled) {
   background-color: var(--btn-secondary-ghost-bg-hover);
@@ -224,7 +213,6 @@
   background-color: transparent;
   color: var(--btn-secondary-ghost-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-neutral-default);
 }
 .igt-btn[data-tone='secondary'][data-variant='ghost']:hover:not(:disabled) {
   background-color: var(--btn-secondary-ghost-bg-hover);
@@ -241,7 +229,6 @@
   background-color: var(--btn-danger-fill-bg);
   color: var(--btn-danger-fill-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-danger-default);
 }
 .igt-btn[data-tone='danger'][data-variant='fill']:hover:not(:disabled) {
   background-color: var(--btn-danger-fill-bg-hover);
@@ -254,7 +241,6 @@
   background-color: var(--btn-danger-soft-bg);
   color: var(--btn-danger-soft-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-danger-default);
 }
 .igt-btn[data-tone='danger'][data-variant='soft']:hover:not(:disabled) {
   background-color: var(--btn-danger-soft-bg-hover);
@@ -267,7 +253,6 @@
   background-color: transparent;
   color: var(--btn-danger-outline-text);
   border-color: var(--btn-danger-outline-border);
-  --btn-focus-ring: var(--sys-border-danger-default);
 }
 .igt-btn[data-tone='danger'][data-variant='outline']:hover:not(:disabled) {
   background-color: var(--btn-danger-ghost-bg-hover);
@@ -280,7 +265,6 @@
   background-color: transparent;
   color: var(--btn-danger-ghost-text);
   border-color: transparent;
-  --btn-focus-ring: var(--sys-border-danger-default);
 }
 .igt-btn[data-tone='danger'][data-variant='ghost']:hover:not(:disabled) {
   background-color: var(--btn-danger-ghost-bg-hover);

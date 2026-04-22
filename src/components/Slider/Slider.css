@@ -1,0 +1,125 @@
+/* ============================================================
+   IGT Slider Component
+   피그마: 2 Slider (514:36027)
+   input[type=range] 커스텀 스타일
+   ============================================================ */
+
+.igt-slider {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ref-space-8);
+  width: 100%;
+}
+
+.igt-slider__icon {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  color: var(--sys-content-neutral-subtle);
+}
+
+/* ── Track wrapper ────────────────────────────────────────── */
+.igt-slider__track {
+  flex: 1 0 0;
+  min-width: 0;
+  position: relative;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}
+
+/* ── Native input ─────────────────────────────────────────── */
+.igt-slider__input {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 100%;
+  height: 4px;
+  border-radius: 99px;
+  background: transparent;
+  outline: none;
+  cursor: pointer;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
+}
+
+/* Fill + Rail via background gradient (동적으로 JS에서 적용) */
+.igt-slider__input {
+  background: linear-gradient(
+    to right,
+    var(--sys-container-brand-solid-default) var(--slider-fill, 0%),
+    var(--sys-container-neutral-tint-default) var(--slider-fill, 0%)
+  );
+}
+
+/* ── Webkit thumb ─────────────────────────────────────────── */
+.igt-slider__input::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow:
+    0px 12px 24px 0px rgba(2, 32, 71, 0.04),
+    0px 6px 16px 0px rgba(2, 32, 71, 0.06);
+  cursor: pointer;
+  transition: transform 0.1s ease;
+  border: none;
+}
+
+.igt-slider__input::-webkit-slider-thumb:hover {
+  transform: scale(1.1);
+}
+
+.igt-slider__input::-webkit-slider-thumb:active {
+  transform: scale(0.95);
+}
+
+/* ── Firefox thumb ────────────────────────────────────────── */
+.igt-slider__input::-moz-range-thumb {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background-color: white;
+  box-shadow:
+    0px 12px 24px 0px rgba(2, 32, 71, 0.04),
+    0px 6px 16px 0px rgba(2, 32, 71, 0.06);
+  cursor: pointer;
+  border: none;
+  transition: transform 0.1s ease;
+}
+
+.igt-slider__input::-moz-range-thumb:hover {
+  transform: scale(1.1);
+}
+
+/* Firefox track */
+.igt-slider__input::-moz-range-track {
+  height: 4px;
+  border-radius: 99px;
+  background: var(--sys-container-neutral-tint-default);
+}
+
+.igt-slider__input::-moz-range-progress {
+  height: 4px;
+  border-radius: 99px;
+  background: var(--sys-container-brand-solid-default);
+}
+
+/* ── Disabled ─────────────────────────────────────────────── */
+.igt-slider__input:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.igt-slider__input:disabled::-webkit-slider-thumb {
+  cursor: not-allowed;
+  transform: none;
+}
+
+.igt-slider__input:disabled::-moz-range-thumb {
+  cursor: not-allowed;
+  transform: none;
+}

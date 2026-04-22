@@ -1,0 +1,33 @@
+/* ============================================================
+   IGT InputChipGroup Component
+   피그마: 2146:26735 — InputChipGroup
+   wrap / scroll 레이아웃
+   ============================================================ */
+
+.igt-input-chip-group {
+  display: flex;
+  align-items: flex-start;
+}
+
+/* ── Wrap (기본) ────────────────────────────────────────────── */
+.igt-input-chip-group[data-layout='wrap'] {
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+/* ── Scroll ─────────────────────────────────────────────────── */
+.igt-input-chip-group[data-layout='scroll'] {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  overflow-y: hidden;
+  /* 스크롤바 숨김 */
+  scrollbar-width: none;
+}
+.igt-input-chip-group[data-layout='scroll']::-webkit-scrollbar {
+  display: none;
+}
+
+/* ── Gap by size ────────────────────────────────────────────── */
+.igt-input-chip-group[data-size='xs'] { gap: var(--ref-space-4); }
+.igt-input-chip-group[data-size='sm'] { gap: var(--ref-space-6); }
+.igt-input-chip-group[data-size='md'] { gap: var(--ref-space-8); }

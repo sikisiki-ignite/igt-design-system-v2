@@ -1,0 +1,92 @@
+/* ============================================================
+   IGT TreeView
+   ============================================================ */
+
+.igt-tree,
+.igt-tree__children {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Node row ────────────────────────────────────────────── */
+.igt-tree__node {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-4);
+  height: 32px;
+  padding-right: var(--ref-space-8);
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  user-select: none;
+  transition: background-color 0.1s ease;
+  outline: none;
+}
+
+.igt-tree__node:hover:not(.igt-tree__node--disabled) {
+  background-color: var(--sys-interactive-hover-overlay-neutral, rgba(0, 27, 55, 0.04));
+}
+
+.igt-tree__node:focus-visible {
+  box-shadow: 0 0 0 2px var(--sys-border-brand-default, #3182f6);
+}
+
+.igt-tree__node--selected {
+  background-color: var(--sys-container-brand-tint-default, rgba(52, 133, 250, 0.08));
+  color: var(--sys-content-brand-default, #3182f6);
+}
+
+.igt-tree__node--selected:hover {
+  background-color: var(--sys-container-brand-tint-strong, rgba(52, 133, 250, 0.12));
+}
+
+.igt-tree__node--disabled {
+  cursor: not-allowed;
+  opacity: 0.4;
+}
+
+/* ── Toggle (chevron) ────────────────────────────────────── */
+.igt-tree__toggle {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 16px;
+  height: 16px;
+  flex-shrink: 0;
+}
+
+.igt-tree__chevron {
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  transition: transform 0.15s ease;
+}
+
+.igt-tree__chevron--open {
+  transform: rotate(90deg);
+}
+
+/* ── Icon ────────────────────────────────────────────────── */
+.igt-tree__icon {
+  flex-shrink: 0;
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+}
+
+.igt-tree__node--selected .igt-tree__icon {
+  color: var(--sys-content-brand-default, #3182f6);
+}
+
+/* ── Label ───────────────────────────────────────────────── */
+.igt-tree__label {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--text-label-sm-size);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  line-height: 1.4;
+}
+
+.igt-tree__node--selected .igt-tree__label {
+  color: var(--sys-content-brand-default, #3182f6);
+  font-weight: var(--ref-font-weight-600);
+}

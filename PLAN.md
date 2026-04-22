@@ -94,6 +94,38 @@ ai-guide/ 문서들을 참조하는 스킬 파일 작성.
 
 ---
 
+### Step 6 — UI 패턴 문서 보강 (patterns/)
+**상태:** 🔄 진행 중 (2026-04-15 시작)
+
+`ai-guide/patterns/` 하위에 화면 단위 패턴 문서를 추가한다.  
+component-catalog가 컴포넌트 단위라면, patterns는 **화면/섹션 단위 조합 규칙**이다.
+
+#### 완료된 패턴 문서
+
+| 파일 | 내용 | 상태 |
+|-----|-----|-----|
+| `filter-box.md` | 백오피스 필터 박스 레이아웃 규칙, 6가지 필터 타입 | ✅ |
+| `listing-page.md` | 리스팅 페이지 전체 구조 (헤더→필터→태그행→테이블→페이지네이션) | ✅ |
+| `app-layout-lnb.md` | AppLayout + SideNavigation 올바른 조합, Figma 실측치, 금지 패턴 | ✅ |
+
+#### 추가 예정 패턴 문서
+
+| 파일 | 내용 | 상태 |
+|-----|-----|-----|
+| `detail-page.md` | 상세 페이지 구조 (헤더 + 섹션 + 하단 액션) | ⬜ |
+| `form-page.md` | 등록/수정 폼 레이아웃, 유효성 처리 패턴 | ⬜ |
+| `modal-form.md` | 모달 내 폼 조합 패턴 | ⬜ |
+
+#### 계기
+탁송 관리 화면(showcase/DeliveryManagementPage) 구현 중 발견된 3가지 버그:
+- LNB 여백 비대칭 (AppLayout + SideNavigation 조합 오류)
+- 필터 영역 임의 구현 (filter-box.md 미참조)
+- Pagination props 불일치
+
+버그 상세: `igt-ai-studio_v2/docs/bug-report-delivery-page.md` 참조
+
+---
+
 ## 현재 컴포넌트 현황
 
 > `igt-ai-studio_v2/` 에서 완성된 컴포넌트 목록. 업데이트 시 여기도 동기화.

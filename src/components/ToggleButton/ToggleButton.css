@@ -8,10 +8,11 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: var(--ref-space-4);
+  gap: var(--ref-space-6);
   border: 1px solid transparent;
   font-family: inherit;
   font-weight: var(--ref-font-weight-600);
+  letter-spacing: -0.1px;
   cursor: pointer;
   white-space: nowrap;
   transition: background-color 0.12s ease, border-color 0.12s ease, color 0.12s ease;
@@ -21,10 +22,6 @@
   flex-shrink: 0;
 }
 
-.igt-toggle-btn:focus-visible {
-  outline: 2px solid var(--sys-interactive-focus-border-accent);
-  outline-offset: 2px;
-}
 
 /* ── Size ─────────────────────────────────────────────────── */
 .igt-toggle-btn[data-size='xs'] {
@@ -74,34 +71,34 @@
 
 /* ══════════════════════════════════════════════════════════
    Emphasis: onDefault
-   selected=false → ghost (투명 배경, accent 색상)
-   selected=true  → primary fill (파란 배경, 흰 텍스트)
+   selected=false → primary fill (파란 배경, 흰 텍스트 — "팔로우" CTA)
+   selected=true  → secondary soft (muted 배경 — "팔로잉" 완료 상태)
    ══════════════════════════════════════════════════════════ */
 
-/* unselected */
+/* unselected: 사용자가 아직 행동하지 않은 상태 → 강한 CTA */
 .igt-toggle-btn[data-emphasis='onDefault']:not([data-selected]) {
-  background-color: transparent;
-  color: var(--btn-primary-ghost-text);
-  border-color: transparent;
-}
-.igt-toggle-btn[data-emphasis='onDefault']:not([data-selected]):hover:not(:disabled) {
-  background-color: var(--btn-primary-ghost-bg-hover);
-}
-.igt-toggle-btn[data-emphasis='onDefault']:not([data-selected]):active:not(:disabled) {
-  background-color: var(--btn-primary-ghost-bg-hover);
-}
-
-/* selected */
-.igt-toggle-btn[data-emphasis='onDefault'][data-selected] {
   background-color: var(--btn-primary-fill-bg);
   color: var(--btn-primary-fill-text);
   border-color: transparent;
 }
-.igt-toggle-btn[data-emphasis='onDefault'][data-selected]:hover:not(:disabled) {
+.igt-toggle-btn[data-emphasis='onDefault']:not([data-selected]):hover:not(:disabled) {
   background-color: var(--btn-primary-fill-bg-hover);
 }
-.igt-toggle-btn[data-emphasis='onDefault'][data-selected]:active:not(:disabled) {
+.igt-toggle-btn[data-emphasis='onDefault']:not([data-selected]):active:not(:disabled) {
   background-color: var(--btn-primary-fill-bg-hover);
+}
+
+/* selected: 행동 완료 상태 → muted soft */
+.igt-toggle-btn[data-emphasis='onDefault'][data-selected] {
+  background-color: var(--btn-secondary-soft-bg);
+  color: var(--btn-secondary-soft-text);
+  border-color: transparent;
+}
+.igt-toggle-btn[data-emphasis='onDefault'][data-selected]:hover:not(:disabled) {
+  background-color: var(--btn-secondary-soft-bg-hover);
+}
+.igt-toggle-btn[data-emphasis='onDefault'][data-selected]:active:not(:disabled) {
+  background-color: var(--btn-secondary-soft-bg-hover);
 }
 
 /* ══════════════════════════════════════════════════════════

@@ -1,0 +1,102 @@
+/* ============================================================
+   IGT FilterChip Component
+   피그마: 2146:22989 — FilterChip
+   size(xs/sm/md) × selected × disabled
+   ============================================================ */
+
+.igt-filter-chip {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid transparent;
+  background-color: var(--chip-bg);
+  color: var(--chip-text);
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-600);
+  white-space: nowrap;
+  cursor: pointer;
+  flex-shrink: 0;
+  transition: background-color 0.12s ease;
+}
+
+/* ── Size ───────────────────────────────────────────────────── */
+.igt-filter-chip[data-size='xs'] {
+  height: 24px;
+  padding-inline: 8px;
+  gap: 0;
+  border-radius: 6px;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.igt-filter-chip[data-size='sm'] {
+  height: 32px;
+  padding-inline: 8px;
+  gap: 0;
+  border-radius: var(--ref-radius-8);
+  font-size: var(--text-label-sm-size);
+  line-height: var(--text-label-sm-line-height);
+  letter-spacing: -0.1px;
+}
+
+.igt-filter-chip[data-size='md'] {
+  height: 36px;
+  padding-inline: 10px;
+  gap: 0;
+  border-radius: var(--ref-radius-10);
+  font-size: var(--text-label-md-size);
+  line-height: var(--text-label-md-line-height);
+  letter-spacing: -0.1px;
+}
+
+/* ── Label wrap ─────────────────────────────────────────────── */
+.igt-filter-chip__label-wrap {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-inline: 6px;
+}
+
+.igt-filter-chip[data-size='xs'] .igt-filter-chip__label-wrap { padding-inline: 3px; }
+.igt-filter-chip[data-size='sm'] .igt-filter-chip__label-wrap { padding-inline: 4px; }
+
+/* ── Leading / Trailing ────────────────────────────────────── */
+.igt-filter-chip__leading,
+.igt-filter-chip__trailing {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.igt-filter-chip__trailing {
+  margin-left: -2px;
+}
+
+/* ── Value (선택 시 accent색) ───────────────────────────────── */
+.igt-filter-chip__dot,
+.igt-filter-chip__value {
+  color: inherit;
+}
+
+/* ── Hover ──────────────────────────────────────────────────── */
+.igt-filter-chip:not(:disabled):not([data-selected]):hover {
+  background-color: var(--chip-bg-hover);
+}
+
+.igt-filter-chip[data-selected]:not(:disabled):hover {
+  background-color: var(--chip-bg-selected-hover);
+}
+
+/* ── Selected ───────────────────────────────────────────────── */
+.igt-filter-chip[data-selected] {
+  background-color: var(--chip-bg-selected);
+  color: var(--chip-text-selected);
+}
+
+/* ── Disabled ───────────────────────────────────────────────── */
+.igt-filter-chip:disabled {
+  background-color: var(--chip-bg-disabled);
+  color: var(--chip-text-disabled);
+  cursor: not-allowed;
+}

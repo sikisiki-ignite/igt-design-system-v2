@@ -1,0 +1,179 @@
+/* ============================================================
+   IGT TagInput — 태그 생성 입력 필드
+   ============================================================ */
+
+.igt-tag-input {
+  display: inline-flex;
+  flex-direction: column;
+  gap: var(--ref-space-4);
+}
+
+.igt-tag-input--full-width {
+  display: flex;
+  width: 100%;
+}
+
+/* ── Label ───────────────────────────────────────────────── */
+.igt-tag-input__label {
+  font-size: var(--text-label-sm-size);
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  line-height: 1.4;
+}
+
+/* ── Field wrapper ───────────────────────────────────────── */
+.igt-tag-input__field {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: var(--ref-space-4);
+  width: 100%;
+  min-height: var(--size-comp-height-md);
+  cursor: text;
+  transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* size */
+.igt-tag-input__field--sm {
+  min-height: var(--size-comp-height-sm);
+  padding: var(--ref-space-4) var(--ref-space-8);
+  border-radius: var(--radius-md);
+  font-size: var(--text-label-sm-size);
+}
+
+.igt-tag-input__field--md {
+  min-height: var(--size-comp-height-md);
+  padding: var(--ref-space-6) var(--ref-space-8);
+  border-radius: var(--radius-lg);
+  font-size: var(--text-label-md-size);
+}
+
+.igt-tag-input__field--lg {
+  min-height: var(--size-comp-height-lg);
+  padding: var(--ref-space-8) var(--ref-space-8);
+  border-radius: var(--radius-xl);
+  font-size: var(--text-body-sm-size);
+}
+
+/* fieldStyle: outline */
+.igt-tag-input__field--outline {
+  background-color: var(--field-outline-bg);
+  border: 1px solid var(--field-outline-border);
+}
+
+.igt-tag-input__field--outline:hover:not(.igt-tag-input__field--disabled) {
+  border-color: var(--field-outline-border-hover);
+}
+
+.igt-tag-input__field--outline.igt-tag-input__field--focused {
+  border-color: var(--field-outline-border-focus);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-focus);
+}
+
+.igt-tag-input__field--outline.igt-tag-input__field--error {
+  border-color: var(--field-outline-border-error);
+}
+
+.igt-tag-input__field--outline.igt-tag-input__field--error.igt-tag-input__field--focused {
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-error);
+}
+
+/* fieldStyle: fill */
+.igt-tag-input__field--fill {
+  background-color: var(--field-fill-bg);
+  border: 1px solid transparent;
+}
+
+.igt-tag-input__field--fill:hover:not(.igt-tag-input__field--disabled) {
+  border-color: var(--field-fill-border-hover);
+}
+
+.igt-tag-input__field--fill.igt-tag-input__field--focused {
+  border-color: var(--field-fill-border-focus);
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-fill-border-focus);
+}
+
+/* disabled */
+.igt-tag-input__field--disabled {
+  cursor: not-allowed;
+  background-color: var(--field-outline-bg-disabled);
+  border-color: var(--field-outline-border-disabled);
+  opacity: 0.6;
+}
+
+/* ── Tag chip ────────────────────────────────────────────── */
+.igt-tag-input__tag {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ref-space-2);
+  height: 22px;
+  padding: 0 var(--ref-space-6) 0 var(--ref-space-8);
+  border-radius: var(--radius-full, 999px);
+  background-color: var(--sys-container-neutral-tint-default, rgba(0, 19, 43, 0.08));
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  font-size: var(--text-label-xs-size, 12px);
+  font-weight: var(--ref-font-weight-500);
+  white-space: nowrap;
+  max-width: 200px;
+}
+
+.igt-tag-input__tag-label {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.igt-tag-input__tag-remove {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 14px;
+  height: 14px;
+  border: none;
+  background: none;
+  padding: 0;
+  cursor: pointer;
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  border-radius: 50%;
+  transition: color 0.1s ease, background-color 0.1s ease;
+  flex-shrink: 0;
+}
+
+.igt-tag-input__tag-remove:hover {
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  background-color: rgba(0, 0, 0, 0.08);
+}
+
+/* ── Input ───────────────────────────────────────────────── */
+.igt-tag-input__input {
+  flex: 1;
+  min-width: 80px;
+  border: none;
+  outline: none;
+  background: transparent;
+  font-family: inherit;
+  font-size: inherit;
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  padding: 0;
+  line-height: 1.4;
+}
+
+.igt-tag-input__input::placeholder {
+  color: var(--sys-content-neutral-placeholder, rgba(3, 24, 50, 0.3));
+}
+
+.igt-tag-input__input:disabled {
+  cursor: not-allowed;
+}
+
+/* ── Message ─────────────────────────────────────────────── */
+.igt-tag-input__message {
+  margin: 0;
+  font-size: var(--text-body-sm-size);
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  line-height: 1.4;
+}
+
+.igt-tag-input__message--error {
+  color: var(--sys-content-negative-default, #f04452);
+}

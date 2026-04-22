@@ -272,7 +272,7 @@
 
 ```tsx
 // 아이콘 버튼에 label 없음
-<Button iconOnly leadingIcon={<Icon name="trash" size="sm" />} />
+<Button iconOnly leadingIcon={<Icon name="delete" size="sm" />} />
 // ← 스크린 리더가 버튼 목적을 알 수 없음
 
 // 상태 dot에 aria-label 없음
@@ -290,7 +290,7 @@
 // 아이콘 버튼에 aria-label 추가
 <Button
   iconOnly
-  leadingIcon={<Icon name="trash" size="sm" />}
+  leadingIcon={<Icon name="delete" size="sm" />}
   aria-label="삭제"
 />
 

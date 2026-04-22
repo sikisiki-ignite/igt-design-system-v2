@@ -1,0 +1,223 @@
+/* ============================================================
+   IGT Stepper Component
+   orientation(horizontal/vertical) × size(sm/md)
+   ============================================================ */
+
+.igt-stepper {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+}
+
+/* ── Horizontal ───────────────────────────────────────────── */
+.igt-stepper[data-orientation='horizontal'] {
+  flex-direction: row;
+  align-items: flex-start;
+}
+
+/* step: flex:1, 원을 중앙에 두기 위해 position relative */
+.igt-stepper[data-orientation='horizontal'] .igt-stepper__step {
+  flex: 1;
+  position: relative;
+}
+
+/* item: 원 + 텍스트를 세로로, 중앙 정렬 */
+.igt-stepper[data-orientation='horizontal'] .igt-stepper__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ref-space-8);
+}
+
+.igt-stepper[data-orientation='horizontal'] .igt-stepper__indicator {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* 커넥터: 현재 step 원 우측 끝 → 다음 step 원 좌측 끝 */
+/* md: 원 반지름 16px, 마진 8px → left: calc(50% + 24px), right: calc(-50% + 24px) */
+.igt-stepper[data-orientation='horizontal'] .igt-stepper__connector {
+  position: absolute;
+  top: 16px; /* md: 원 높이 32px / 2 */
+  left: calc(50% + 24px);
+  right: calc(-50% + 24px);
+  height: 1px;
+  background-color: var(--sys-border-neutral-subtle);
+}
+
+.igt-stepper[data-orientation='horizontal'][data-size='sm'] .igt-stepper__connector {
+  top: 12px; /* sm: 원 높이 24px / 2 */
+  left: calc(50% + 20px);
+  right: calc(-50% + 20px);
+}
+
+.igt-stepper[data-orientation='horizontal'] .igt-stepper__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* ── Vertical ─────────────────────────────────────────────── */
+.igt-stepper[data-orientation='vertical'] {
+  flex-direction: column;
+}
+
+.igt-stepper[data-orientation='vertical'] .igt-stepper__step {
+  position: relative;
+}
+
+/* step 간격 — 마지막 제외 */
+.igt-stepper[data-orientation='vertical'] .igt-stepper__step:not(:last-child) {
+  padding-bottom: var(--ref-space-24);
+}
+
+.igt-stepper[data-orientation='vertical'] .igt-stepper__item {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--ref-space-12);
+}
+
+.igt-stepper[data-orientation='vertical'] .igt-stepper__indicator {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+/* 커넥터: step 기준 absolute — circle 바텀부터 step 바텀까지 */
+.igt-stepper[data-orientation='vertical'] .igt-stepper__connector {
+  position: absolute;
+  left: 16px; /* md: circle 32px / 2 */
+  top: 32px;  /* md: circle 높이 */
+  bottom: 0;
+  width: 1px;
+  transform: translateX(-50%);
+  background-color: var(--sys-border-neutral-subtle);
+}
+
+.igt-stepper[data-orientation='vertical'][data-size='sm'] .igt-stepper__connector {
+  left: 12px; /* sm: circle 24px / 2 */
+  top: 24px;  /* sm: circle 높이 */
+}
+
+/* ── Circle ────────────────────────────────────────────────── */
+.igt-stepper__circle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  flex-shrink: 0;
+  font-weight: var(--ref-font-weight-600);
+  transition: background-color 0.15s ease, border-color 0.15s ease, color 0.15s ease;
+}
+
+/* Size */
+.igt-stepper[data-size='sm'] .igt-stepper__circle {
+  width: 24px;
+  height: 24px;
+  font-size: 12px;
+}
+.igt-stepper[data-size='md'] .igt-stepper__circle {
+  width: 32px;
+  height: 32px;
+  font-size: 14px;
+}
+
+/* Status */
+.igt-stepper__step[data-status='upcoming'] .igt-stepper__circle {
+  background-color: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+  color: var(--sys-content-neutral-muted);
+  border: 1.5px solid var(--sys-border-neutral-subtle);
+}
+
+.igt-stepper__step[data-status='current'] .igt-stepper__circle {
+  background-color: var(--sys-content-brand-default, #3485fa);
+  color: #fff;
+  border: 1.5px solid var(--sys-content-brand-default, #3485fa);
+}
+
+.igt-stepper__step[data-status='completed'] .igt-stepper__circle {
+  background-color: var(--sys-content-brand-default, #3485fa);
+  color: #fff;
+  border: 1.5px solid var(--sys-content-brand-default, #3485fa);
+}
+
+.igt-stepper__step[data-status='error'] .igt-stepper__circle {
+  background-color: var(--sys-content-danger-default, #ef4444);
+  color: #fff;
+  border: 1.5px solid var(--sys-content-danger-default, #ef4444);
+}
+
+/* Connector: completed → fill color */
+.igt-stepper__step[data-status='completed'] .igt-stepper__connector {
+  background-color: var(--sys-content-brand-default, #3485fa);
+}
+
+/* ── Clickable ────────────────────────────────────────────── */
+.igt-stepper__item--clickable {
+  cursor: pointer;
+}
+.igt-stepper__item--clickable:hover .igt-stepper__circle {
+  opacity: 0.85;
+}
+
+/* ── Content ──────────────────────────────────────────────── */
+.igt-stepper__content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  min-width: 0;
+}
+
+/* vertical: label-row를 circle과 같은 높이로 고정 → label 항상 원 중앙에 정렬 */
+.igt-stepper[data-orientation='vertical'] .igt-stepper__label-row {
+  display: flex;
+  align-items: center;
+}
+.igt-stepper[data-orientation='vertical'][data-size='md'] .igt-stepper__label-row {
+  height: 32px; /* circle md 높이와 동일 */
+}
+.igt-stepper[data-orientation='vertical'][data-size='sm'] .igt-stepper__label-row {
+  height: 24px; /* circle sm 높이와 동일 */
+}
+
+/* horizontal에서는 label-row 불필요 */
+.igt-stepper[data-orientation='horizontal'] .igt-stepper__label-row {
+  display: contents;
+}
+
+.igt-stepper__label {
+  font-size: var(--text-label-sm-size, 14px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-label-sm-line-height, 20px);
+  color: var(--sys-content-neutral-muted);
+  white-space: nowrap;
+}
+
+.igt-stepper__step[data-status='current'] .igt-stepper__label {
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-strong);
+}
+
+.igt-stepper__step[data-status='completed'] .igt-stepper__label {
+  color: var(--sys-content-neutral-default);
+}
+
+.igt-stepper__step[data-status='error'] .igt-stepper__label {
+  color: var(--sys-content-danger-default, #ef4444);
+}
+
+.igt-stepper__description {
+  font-size: var(--text-caption-md-size, 12px);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--sys-content-neutral-muted);
+  line-height: var(--text-caption-md-line-height, 18px);
+}
+
+.igt-stepper__number {
+  font-variant-numeric: tabular-nums;
+}

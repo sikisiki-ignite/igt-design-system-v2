@@ -1,0 +1,174 @@
+/* ============================================================
+   IGT Drawer Component
+   피그마: 5 Drawer (15116:37905)
+   placement(left/right) × size(sm/md/lg)
+   ============================================================ */
+
+/* ── Overlay (backdrop) ───────────────────────────────────── */
+.igt-drawer-overlay {
+  position: fixed;
+  inset: 0;
+  background-color: var(--drawer-backdrop);
+  z-index: var(--z-modal);
+  display: flex;
+  align-items: stretch;
+}
+
+.igt-drawer-overlay--right {
+  justify-content: flex-end;
+}
+
+.igt-drawer-overlay--left {
+  justify-content: flex-start;
+}
+
+/* ── Drawer Panel ─────────────────────────────────────────── */
+.igt-drawer {
+  background-color: var(--drawer-bg);
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  overflow: hidden;
+  box-shadow: var(--elevation-dialog);
+}
+
+/* Size — 피그마 기준: sm=360, md=480, lg=640 */
+.igt-drawer[data-size='sm'] { width: 360px; }
+.igt-drawer[data-size='md'] { width: 480px; }
+.igt-drawer[data-size='lg'] { width: 640px; }
+
+/* Border */
+.igt-drawer[data-placement='right'] {
+  border-left: 1px solid var(--drawer-border);
+}
+.igt-drawer[data-placement='left'] {
+  border-right: 1px solid var(--drawer-border);
+}
+
+/* ── Header ───────────────────────────────────────────────── */
+.igt-drawer__header {
+  display: flex;
+  align-items: flex-start;
+  padding: var(--ref-space-24) var(--ref-space-24) var(--ref-space-20);
+  gap: var(--ref-space-12);
+  flex-shrink: 0;
+}
+
+.igt-drawer__header-content {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+}
+
+.igt-drawer__title {
+  font-size: var(--heading-sm-semibold-fontSize, 18px);
+  font-weight: var(--ref-font-weight-600);
+  line-height: var(--heading-sm-semibold-lineHeight, 26px);
+  letter-spacing: -0.1px;
+  color: var(--drawer-title-text);
+  margin: 0;
+}
+
+.igt-drawer__description {
+  font-size: var(--text-body-xs-size);
+  font-weight: var(--ref-font-weight-400);
+  line-height: var(--text-body-xs-line-height);
+  letter-spacing: -0.2px;
+  color: var(--drawer-desc-text);
+  margin: 0;
+}
+
+.igt-drawer__close {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  padding: var(--ref-space-4);
+  background: none;
+  border: none;
+  outline: none;
+  box-shadow: none;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  /* Figma: 아이콘 이미지 baked-in 회색 → SVG currentColor로 동일 톤 적용 */
+  color: var(--sys-content-neutral-subtle);
+  flex-shrink: 0;
+  transition: background-color 0.12s ease;
+}
+.igt-drawer__close:hover {
+  /* Figma hover: rgba(2,32,71,0.05) = --sys-interactive-hover-overlay-neutral */
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+}
+.igt-drawer__close:focus-visible {
+  outline: 2px solid var(--sys-border-focus);
+  outline-offset: 2px;
+}
+
+/* ── Body ─────────────────────────────────────────────────── */
+.igt-drawer__body {
+  flex: 1;
+  overflow-y: auto;
+  padding: var(--ref-space-24) var(--ref-space-24) var(--ref-space-20);
+}
+
+/* ── Footer ───────────────────────────────────────────────── */
+.igt-drawer__footer {
+  flex-shrink: 0;
+  position: relative;
+  padding: var(--ref-space-16) var(--ref-space-24) var(--ref-space-24);
+}
+
+/* Figma: Divider는 absolute top:0, px-24px inset → 버튼 영역 너비만큼만 선이 그어짐 */
+.igt-drawer__footer::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: var(--ref-space-24);
+  right: var(--ref-space-24);
+  height: 1px;
+  background-color: var(--drawer-border);
+}
+
+.igt-drawer__footer-inner {
+  display: flex;
+  gap: var(--ref-space-8);
+}
+
+/* inlineEnd: 버튼이 동일 너비로 공간 채움 (Figma: flex-[1_0_0]) */
+.igt-drawer__footer-inner--inlineEnd .igt-drawer__footer-actions {
+  display: flex;
+  flex: 1;
+  gap: var(--ref-space-8);
+}
+/* fullWidth(width:100%) 대신 flex:1로 동일 너비 분할 */
+.igt-drawer__footer-inner--inlineEnd .igt-drawer__footer-actions .igt-btn {
+  flex: 1;
+  width: auto;
+}
+
+/* stack: 세로 쌓기 */
+.igt-drawer__footer-inner--stack {
+  flex-direction: column;
+}
+.igt-drawer__footer-inner--stack .igt-drawer__footer-actions {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-8);
+  width: 100%;
+}
+
+/* between: 좌측 danger ghost + 우측 flex-1 actions */
+.igt-drawer__footer-inner--between {
+  align-items: center;
+}
+.igt-drawer__footer-inner--between .igt-drawer__footer-actions {
+  display: flex;
+  flex: 1;
+  justify-content: flex-end;
+  gap: var(--ref-space-8);
+}

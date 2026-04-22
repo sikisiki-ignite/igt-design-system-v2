@@ -10,6 +10,8 @@ export interface SideNavigationProps extends React.HTMLAttributes<HTMLElement> {
   tone?: SideNavigationTone
   /** 크기 — NavItem에 상속됨. default: 'md' */
   size?: SideNavigationSize
+  /** 접힘 상태 — true이면 라벨 숨김, 아이콘만 표시. default: false */
+  collapsed?: boolean
   /** 컨테이너 태그. default: 'nav' */
   as?: 'nav' | 'div' | 'aside'
   children: React.ReactNode
@@ -18,6 +20,7 @@ export interface SideNavigationProps extends React.HTMLAttributes<HTMLElement> {
 export const SideNavigation: React.FC<SideNavigationProps> = ({
   tone = 'neutral',
   size = 'md',
+  collapsed = false,
   as: Tag = 'nav',
   children,
   className,
@@ -28,6 +31,7 @@ export const SideNavigation: React.FC<SideNavigationProps> = ({
       className={clsx('igt-side-nav', className)}
       data-tone={tone}
       data-size={size}
+      data-collapsed={collapsed || undefined}
       {...props}
     >
       {children}

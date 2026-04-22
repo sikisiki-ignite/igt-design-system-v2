@@ -21,6 +21,10 @@ export interface PaginationProps {
   pageSize?: number
   /** 페이지 변경 콜백 */
   onChange: (page: number) => void
+  /** 페이지당 행 수 선택 옵션. 지정 시 우측에 Select UI 표시 */
+  pageSizeOptions?: number[]
+  /** 페이지당 행 수 변경 콜백 */
+  onPageSizeChange?: (pageSize: number) => void
   size?: PaginationSize
   variant?: PaginationVariant
   /** 현재 페이지 양쪽에 표시할 페이지 버튼 수 */
@@ -74,6 +78,8 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
       page,
       pageSize = 10,
       onChange,
+      pageSizeOptions,
+      onPageSizeChange,
       size = 'md',
       variant = 'default',
       siblingCount = 1,
@@ -151,6 +157,23 @@ export const Pagination = React.forwardRef<HTMLDivElement, PaginationProps>(
         >
           <Icon name={size === 'sm' ? 'chevron_right_small' : 'chevron_right'} size={size === 'sm' ? 'sm' : 'md'} />
         </button>
+
+        {/* 페이지당 행 수 */}
+        {pageSizeOptions && onPageSizeChange && (
+          <select
+            className="igt-pagination__page-size"
+            value={pageSize}
+            onChange={(e) => {
+              onPageSizeChange(Number(e.target.value))
+              onChange(1)
+            }}
+            aria-label="페이지당 행 수"
+          >
+            {pageSizeOptions.map((opt) => (
+              <option key={opt} value={opt}>{opt}개씩</option>
+            ))}
+          </select>
+        )}
       </div>
     )
   }

@@ -53,7 +53,7 @@
 ```
 구성: Select(카테고리) + Input(검색어 입력)
 Select: width shrink, placeholder="카테고리명"
-Input: flex-1, hasLabel=false, hasMessage=false, prefix/suffix 없음
+Input: flex-1, label 없음, hint/error 없음, prefix/suffix 없음
 ```
 
 **사용 예:** 딜러 번호 검색, 사용자 이름 검색
@@ -90,16 +90,15 @@ placeholder="Select"
 ---
 
 ### TYPE 4 — multi-select-with-chips
-드롭다운 복수 선택. 선택된 항목을 chip으로 표시.
+드롭다운 복수 선택. 선택된 항목을 InputChip으로 표시.
 
 ```
-⚠️ InputChip 컴포넌트 미구현 — 구현 전까지 아래 대안 사용:
-  - Badge(variant="soft") + 삭제 버튼 조합
-  - 또는 선택값을 Select placeholder에 쉼표 구분 텍스트로 표시
+구성:
+  Select (multiple, w-full)
+  InputChip 목록 (flex-wrap, gap: 8px, size="sm", onRemove 연결)
 
-목표 구성 (InputChip 구현 후):
-  Select (w-full)
-  InputChip 목록 (flex-wrap, gap: 8px, size="sm", 삭제 버튼 포함)
+InputChip 사용 방법:
+  <InputChip label={item.label} value={item.value} onRemove={(val) => removeSelected(val)} size="sm" />
 ```
 
 **사용 예:** Group 복수 선택
@@ -126,15 +125,28 @@ placeholder="Select"
 날짜 범위 선택.
 
 ```
-⚠️ DateField 컴포넌트 미구현 — 구현 전까지 아래 대안 사용:
-  - Input × 2 (시작일 / 종료일) + "~" 구분 텍스트
+구성:
+  Select(날짜 기준) — Updated date / Created date 등 (선택적)
+  DateRangePicker — 시작일 ~ 종료일 한 번에 선택
 
-목표 구성 (DateField 구현 후):
-  Select(날짜 기준) — Updated date / Created date 등
-  DateField (시작일 ~ 종료일)
-  날짜 포맷: YYYY.MM.DD ~ YYYY.MM.DD
-  trailing: calendar icon
-  구분자: "~" (color: var(--sys-content-neutral-subtle))
+날짜 포맷: YYYY . MM . DD ~ YYYY . MM . DD (컴포넌트 내장)
+trailing: calendar icon (컴포넌트 내장)
+```
+
+```tsx
+// 단독 기간 선택
+<DateRangePicker
+  label="조회 기간"
+  value={dateRange}
+  onChange={setDateRange}
+  fullWidth
+/>
+
+// 기준 Select + DateRangePicker 조합
+<SearchboxGroup label="등록일">
+  <Select options={dateTypeOptions} value={dateType} onChange={(v) => setDateType(v as string)} />
+  <DateRangePicker value={dateRange} onChange={setDateRange} />
+</SearchboxGroup>
 ```
 
 **사용 예:** 업데이트 날짜 범위 지정
@@ -145,15 +157,16 @@ placeholder="Select"
 
 | 컴포넌트 | 주요 Props | 비고 |
 |----------|-----------|------|
-| `Input` | size="md", hasLabel, hasMessage | 필터에서는 hasLabel=false, hasMessage=false |
-| `Select` | size="md", placeholder | flex-1 or 고정폭 |
-| `ChoiceChipGroup` | selectionType("single"/"multiple"), size | 그룹 단위 사용 권장 |
-| `ChoiceChipGroupItem` | value, label | ChoiceChipGroup 내부에서 사용 |
-| `Button` | variant("fill"/"outline"), size="md", leadingIcon | Search=fill+leadingIcon, Reset=outline |
-| `Divider` | emphasis="default", inset="none", orientation="horizontal" | 버튼 영역 구분선 |
-| `InputChip` | — | **미구현** |
-| `Radio` | — | **미구현** |
-| `DateField` | — | **미구현** |
+| `Input` | `size="md"` | 필터에서는 `label` 없음, `hint`/`error` 없음 |
+| `Select` | `size="md"`, `placeholder`, `multiple` | flex-1 or 고정폭 |
+| `ChoiceChipGroup` | `selectionType("single"/"multiple")`, `size` | 그룹 단위 사용 권장 |
+| `ChoiceChipGroupItem` | `value`, `label` | ChoiceChipGroup 내부에서 사용 |
+| `InputChip` | `label`, `value`, `size="sm"`, `onRemove` | TYPE 4에서 선택 항목 표시 |
+| `Button` | `variant("fill"/"outline")`, `size="md"`, `leadingIcon` | Search=fill+leadingIcon, Reset=outline |
+| `Divider` | `emphasis="default"`, `inset="none"`, `orientation="horizontal"` | 버튼 영역 구분선 |
+| `Radio` | — | **미구현** — ChoiceChipGroup으로 대체 |
+| `DatePicker` | `label`, `value`, `onChange`, `fullWidth` | 단일 날짜 선택 |
+| `DateRangePicker` | `label`, `value: DateRange`, `onChange`, `fullWidth` | TYPE 6 기간 선택 |
 
 ---
 

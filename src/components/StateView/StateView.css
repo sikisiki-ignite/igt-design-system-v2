@@ -1,0 +1,75 @@
+/* ============================================================
+   IGT StateView Component
+   피그마: 4 StateView (2254:77581)
+   variant: error | empty
+   ============================================================ */
+
+.igt-state-view {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ref-space-20);
+  width: 100%;
+}
+
+/* ── Icon ─────────────────────────────────────────────────── */
+.igt-state-view__icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  color: var(--sys-content-neutral-subtle);
+}
+
+/* error: warning 삼각형 — 내부 여백 있어 40px로 확대해도 visual ~34px */
+.igt-state-view[data-variant='error'] .igt-state-view__icon .igt-icon {
+  width: 40px;
+  height: 40px;
+}
+
+/* empty: document icon — path가 viewBox를 꽉 채우므로 Figma inset 기준 30px로 맞춤 */
+.igt-state-view[data-variant='empty'] .igt-state-view__icon .igt-icon {
+  width: 30px;
+  height: 30px;
+}
+
+/* ── Text block ───────────────────────────────────────────── */
+.igt-state-view__text {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+}
+
+.igt-state-view__headline {
+  width: 100%;
+  text-align: center;
+  color: var(--sys-content-neutral-strong);
+  font-size: var(--text-heading-md-size);
+  line-height: var(--text-heading-md-line-height);
+  font-weight: var(--ref-font-weight-600);
+  letter-spacing: -0.1px;
+}
+
+.igt-state-view__body {
+  width: 100%;
+  text-align: center;
+  color: var(--sys-content-neutral-muted);
+  font-size: var(--text-body-sm-size);
+  line-height: var(--text-body-sm-line-height);
+  font-weight: var(--ref-font-weight-400);
+  letter-spacing: -0.2px;
+  padding-top: 2px;
+}
+
+/* ── Action ───────────────────────────────────────────────── */
+.igt-state-view__action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-inline: var(--ref-space-10);
+  width: 100%;
+}

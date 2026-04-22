@@ -13,11 +13,29 @@ export interface SelectOption {
   disabled?: boolean
 }
 
+export interface SelectOptionGroup {
+  /** 그룹 헤더 레이블 */
+  group: string
+  options: SelectOption[]
+}
+
+export type SelectOptionOrGroup = SelectOption | SelectOptionGroup
+
+function isGroup(item: SelectOptionOrGroup): item is SelectOptionGroup {
+  return 'group' in item
+}
+
+/** options 배열에서 모든 SelectOption을 flat하게 추출 */
+function flattenOptions(items: SelectOptionOrGroup[]): SelectOption[] {
+  return items.flatMap((item) => (isGroup(item) ? item.options : [item]))
+}
+
 interface SelectBaseProps {
   label?: string
   hint?: string
   error?: string
-  options: SelectOption[]
+  /** SelectOption 배열 또는 SelectOptionGroup 배열(그룹 헤더 포함) 혼합 가능 */
+  options: SelectOptionOrGroup[]
   placeholder?: string
   fieldStyle?: SelectFieldStyle
   size?: SelectSize
@@ -25,6 +43,14 @@ interface SelectBaseProps {
   disabled?: boolean
   /** 드롭다운 내 검색 입력 활성화 */
   searchable?: boolean
+  /** 옵션 로딩 중 상태 — 드롭다운에 spinner 표시 */
+  loading?: boolean
+  /** 로딩 중 표시 텍스트 */
+  loadingText?: string
+  /** 검색어가 기존 옵션에 없을 때 "직접 입력" 옵션 추가 */
+  creatable?: boolean
+  /** creatable 옵션 생성 시 콜백 */
+  onCreateOption?: (value: string) => void
   className?: string
   id?: string
 }
@@ -62,6 +88,10 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       fullWidth = false,
       disabled = false,
       searchable = false,
+      loading = false,
+      loadingText = '불러오는 중...',
+      creatable = false,
+      onCreateOption,
       className,
       id,
     } = props
@@ -166,13 +196,45 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       props.onChange?.(next)
     }
 
-    // ── filtered options ─────────────────────────────────────
-    const filtered = searchable && search
-      ? options.filter((o) => o.label.toLowerCase().includes(search.toLowerCase()))
+    // ── flat 옵션 (value 조회·선택에 사용) ──────────────────────
+    const allOptions = flattenOptions(options)
+
+    // ── filtered options (그룹 구조 유지, 검색 시 매칭 옵션만) ──
+    const filtered: SelectOptionOrGroup[] = searchable && search
+      ? options.reduce<SelectOptionOrGroup[]>((acc, item) => {
+          if (isGroup(item)) {
+            const matched = item.options.filter((o) =>
+              o.label.toLowerCase().includes(search.toLowerCase())
+            )
+            if (matched.length > 0) acc.push({ group: item.group, options: matched })
+          } else if (item.label.toLowerCase().includes(search.toLowerCase())) {
+            acc.push(item)
+          }
+          return acc
+        }, [])
       : options
 
+    // ── creatable: 검색어가 기존 옵션에 없을 때 생성 옵션 표시 ──
+    const showCreateOption = creatable && searchable && search.trim() !== '' &&
+      !allOptions.some((o) => o.label.toLowerCase() === search.trim().toLowerCase())
+
+    const handleCreateOption = () => {
+      const newValue = search.trim()
+      onCreateOption?.(newValue)
+      if (!isMultiple(props)) {
+        if (!isControlled) setInternalSelected([newValue])
+        ;(props as SelectSingleProps).onChange?.(newValue)
+        setOpen(false)
+      } else {
+        const next = [...selected, newValue]
+        if (!isControlled) setInternalSelected(next)
+        props.onChange?.(next)
+      }
+      setSearch('')
+    }
+
     // ── display value ────────────────────────────────────────
-    const selectedOptions = options.filter((o) => selected.includes(o.value))
+    const selectedOptions = allOptions.filter((o) => selected.includes(o.value))
     const hasValue = selected.length > 0
 
     // 피그마 SelectItem size: md=36px, sm=32px
@@ -204,6 +266,45 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
       </span>
     )
 
+    // ── option 단일 아이템 렌더러 ────────────────────────────────
+    const renderOption = (opt: SelectOption) => {
+      const isSelected = selected.includes(opt.value)
+      return (
+        <li
+          key={opt.value}
+          role="option"
+          aria-selected={isSelected}
+          aria-disabled={opt.disabled}
+          className={clsx(
+            'igt-select__item',
+            `igt-select__item--${itemSize}`,
+            isSelected && 'igt-select__item--selected',
+            opt.disabled && 'igt-select__item--disabled',
+          )}
+          onClick={() => !opt.disabled && toggleOption(opt.value)}
+          onKeyDown={(e) => e.key === 'Enter' && !opt.disabled && toggleOption(opt.value)}
+          tabIndex={opt.disabled ? -1 : 0}
+        >
+          {isMultiple(props) && (
+            <span
+              className={clsx('igt-select__item-checkbox', isSelected && 'igt-select__item-checkbox--checked')}
+              aria-hidden="true"
+            >
+              {isSelected && <Icon name="check" size="xs" />}
+            </span>
+          )}
+          <span className="igt-select__item-label">{opt.label}</span>
+          {!isMultiple(props) && (
+            <Icon
+              name="check"
+              size={itemSize === 'md' ? 'sm' : 'xs'}
+              className={clsx('igt-select__item-check', isSelected && 'igt-select__item-check--visible')}
+            />
+          )}
+        </li>
+      )
+    }
+
     // ── dropdown portal ──────────────────────────────────────
     const dropdown = open ? createPortal(
       <div
@@ -228,45 +329,42 @@ export const Select = React.forwardRef<HTMLDivElement, SelectProps>(
           </div>
         )}
         <ul className="igt-select__list">
-          {filtered.length === 0 ? (
+          {loading ? (
+            <li className="igt-select__loading">
+              <span className="igt-select__spinner" />
+              {loadingText}
+            </li>
+          ) : filtered.length === 0 ? (
             <li className="igt-select__empty">검색 결과가 없습니다</li>
-          ) : filtered.map((opt) => {
-            const isSelected = selected.includes(opt.value)
-            return (
+          ) : (
+            <>
+            {showCreateOption && (
               <li
-                key={opt.value}
+                className={clsx('igt-select__item', `igt-select__item--${itemSize}`, 'igt-select__item--create')}
+                onClick={handleCreateOption}
+                onKeyDown={(e) => e.key === 'Enter' && handleCreateOption()}
+                tabIndex={0}
                 role="option"
-                aria-selected={isSelected}
-                aria-disabled={opt.disabled}
-                className={clsx(
-                  'igt-select__item',
-                  `igt-select__item--${itemSize}`,
-                  isSelected && 'igt-select__item--selected',
-                  opt.disabled && 'igt-select__item--disabled',
-                )}
-                onClick={() => !opt.disabled && toggleOption(opt.value)}
-                onKeyDown={(e) => e.key === 'Enter' && !opt.disabled && toggleOption(opt.value)}
-                tabIndex={opt.disabled ? -1 : 0}
+                aria-selected={false}
               >
-                {isMultiple(props) && (
-                  <span
-                    className={clsx('igt-select__item-checkbox', isSelected && 'igt-select__item-checkbox--checked')}
-                    aria-hidden="true"
-                  >
-                    {isSelected && <Icon name="check" size="xs" />}
-                  </span>
-                )}
-                <span className="igt-select__item-label">{opt.label}</span>
-                {!isMultiple(props) && (
-                  <Icon
-                    name="check"
-                    size={itemSize === 'md' ? 'sm' : 'xs'}
-                    className={clsx('igt-select__item-check', isSelected && 'igt-select__item-check--visible')}
-                  />
-                )}
+                <span className="igt-select__item-create-label">"{search.trim()}" 추가</span>
               </li>
-            )
+            )}
+            {filtered.map((item, idx) => {
+            if (isGroup(item)) {
+              return (
+                <React.Fragment key={`group-${idx}`}>
+                  <li className="igt-select__group-label" role="presentation">
+                    {item.group}
+                  </li>
+                  {item.options.map((opt) => renderOption(opt))}
+                </React.Fragment>
+              )
+            }
+            return renderOption(item)
           })}
+            </>
+          )}
         </ul>
       </div>,
       document.body

@@ -687,6 +687,18 @@
   --modal-backdrop: var(--sys-overlay-backdrop-dark-default);
   --modal-title-text: var(--sys-content-neutral-strong);
   --modal-body-text: var(--sys-content-neutral-default);
+
+  /* Drawer — 색상만 component 토큰으로 정의, 사이즈/간격은 CSS에서 직접 처리 */
+  --drawer-bg: var(--sys-surface-overlay);
+  --drawer-backdrop: var(--sys-overlay-backdrop-dark-default);
+  --drawer-title-text: var(--sys-content-neutral-strong);
+  --drawer-desc-text: var(--ref-grey-opacity-700); /* Figma sys/content/neutral/muted = 70%, 우리 sys-muted = 58% 불일치로 ref 직접 참조 */
+  --drawer-border: var(--sys-border-neutral-subtle);
+}
+
+/* ref 직접 참조 토큰 다크모드 오버라이드 — 반드시 :root 블록 뒤에 위치 */
+[data-theme="dark"] {
+  --drawer-desc-text: var(--sys-content-neutral-muted); /* dark: #f8f8ffab (~67% 밝은 색) */
 }
 
 /* -----------------------------------------------------------------------------
@@ -745,9 +757,6 @@
   --tbtn-danger-text: var(--sys-content-status-danger-default);
   --tbtn-danger-text-hover: var(--sys-content-status-danger-strong);
   --tbtn-danger-text-disabled: var(--sys-content-status-danger-disabled);
-  /* 공통 */
-  --tbtn-bg-hover: var(--sys-interactive-hover-overlay-neutral);
-  --tbtn-focus-ring: var(--sys-interactive-focus-border-accent);
 }
 
 /* -----------------------------------------------------------------------------

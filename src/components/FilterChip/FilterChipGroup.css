@@ -1,0 +1,24 @@
+/* ============================================================
+   IGT FilterChipGroup Component
+   ============================================================ */
+
+.igt-filter-chip-group {
+  display: flex;
+  align-items: flex-start;
+}
+
+.igt-filter-chip-group[data-layout='wrap'] {
+  flex-wrap: wrap;
+  align-content: flex-start;
+}
+
+.igt-filter-chip-group[data-layout='scroll'] {
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  scrollbar-width: none;
+}
+.igt-filter-chip-group[data-layout='scroll']::-webkit-scrollbar { display: none; }
+
+.igt-filter-chip-group[data-size='xs'] { gap: var(--ref-space-4); }
+.igt-filter-chip-group[data-size='sm'] { gap: var(--ref-space-6); }
+.igt-filter-chip-group[data-size='md'] { gap: var(--ref-space-8); }

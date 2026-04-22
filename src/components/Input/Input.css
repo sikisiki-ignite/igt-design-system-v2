@@ -239,6 +239,23 @@
   height: 18px;
 }
 
+/* ── Password Toggle button ───────────────────────────────────── */
+.igt-field__password-toggle {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: none;
+  border: none;
+  padding: 2px;
+  cursor: pointer;
+  color: var(--field-icon);
+  flex-shrink: 0;
+  transition: color 0.12s ease;
+}
+.igt-field__password-toggle:hover {
+  color: var(--field-text-value);
+}
+
 /* ── Footer (hint/error + count 한 행) ───────────────────────── */
 .igt-field__footer {
   display: flex;

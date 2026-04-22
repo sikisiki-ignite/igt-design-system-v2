@@ -1,0 +1,119 @@
+/* ============================================================
+   IGT FormLayout / FormSection / FormItem Component
+   백오피스 폼 레이아웃 구조
+   ============================================================ */
+
+/* ── FormLayout ───────────────────────────────────────────── */
+.igt-form-layout {
+  display: flex;
+  flex-direction: column;
+}
+
+.igt-form-layout[data-gap='sm'] { gap: var(--ref-space-12); }
+.igt-form-layout[data-gap='md'] { gap: var(--ref-space-20); }
+.igt-form-layout[data-gap='lg'] { gap: var(--ref-space-28); }
+
+/* ── FormSection ──────────────────────────────────────────── */
+.igt-form-section {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-16);
+  padding: var(--ref-space-24);
+  background-color: var(--sys-background-base);
+  border: 1px solid var(--sys-border-neutral-weak);
+  border-radius: var(--ref-radius-12);
+}
+
+.igt-form-section__header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-4);
+  padding-bottom: var(--ref-space-16);
+  border-bottom: 1px solid var(--sys-border-neutral-weak);
+}
+
+.igt-form-section__title {
+  margin: 0;
+  font-size: 16px;
+  font-weight: var(--ref-font-weight-600);
+  line-height: 24px;
+  letter-spacing: -0.3px;
+  color: var(--sys-content-neutral-strong);
+}
+
+.igt-form-section__description {
+  margin: 0;
+  font-size: var(--text-body-xs-size);
+  font-weight: var(--ref-font-weight-400);
+  line-height: var(--text-body-xs-line-height);
+  letter-spacing: -0.2px;
+  color: var(--sys-content-neutral-muted);
+}
+
+.igt-form-section__body {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-20);
+}
+
+/* ── FormItem ─────────────────────────────────────────────── */
+.igt-form-item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+}
+
+/* 수평 layout 시: 레이블과 컨트롤을 가로로 배치 */
+.igt-form-layout[data-layout='horizontal'] .igt-form-item {
+  flex-direction: row;
+  align-items: flex-start;
+  gap: var(--ref-space-8);
+}
+
+.igt-form-layout[data-layout='horizontal'] .igt-form-item__label {
+  padding-top: 9px; /* input md 높이 기준 세로 정렬 */
+  min-width: 120px;
+}
+
+.igt-form-item__label {
+  font-size: var(--text-body-xs-size);
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-body-xs-line-height);
+  letter-spacing: -0.2px;
+  color: var(--sys-content-neutral-default);
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-2);
+}
+
+.igt-form-item__required {
+  color: var(--sys-content-status-danger-default);
+  font-size: 13px;
+  line-height: 1;
+}
+
+.igt-form-item__control {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-4);
+  flex: 1;
+  min-width: 0;
+}
+
+.igt-form-item__hint {
+  margin: 0;
+  font-size: 13px;
+  font-weight: var(--ref-font-weight-400);
+  line-height: 18px;
+  letter-spacing: -0.1px;
+  color: var(--sys-content-neutral-muted);
+}
+
+.igt-form-item__error {
+  margin: 0;
+  font-size: 13px;
+  font-weight: var(--ref-font-weight-400);
+  line-height: 18px;
+  letter-spacing: -0.1px;
+  color: var(--sys-content-status-danger-default);
+}

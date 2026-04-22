@@ -17,11 +17,6 @@
   position: relative;
 }
 
-.igt-link:focus-visible {
-  outline: 2px solid var(--tbtn-focus-ring);
-  outline-offset: 2px;
-  border-radius: 4px;
-}
 
 /* ── Underline ───────────────────────────────────────────── */
 .igt-link[data-underline='always'] {

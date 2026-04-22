@@ -1,0 +1,112 @@
+/* ============================================================
+   IGT DataList Component
+   레이블-값 쌍 목록
+   layout(horizontal/vertical) × size(sm/md)
+   ============================================================ */
+
+.igt-data-list {
+  display: grid;
+  margin: 0;
+  padding: 0;
+}
+
+/* ── Columns (horizontal 레이아웃에서 사용) ──────────────────── */
+.igt-data-list[data-layout='horizontal'][data-columns='1'] {
+  grid-template-columns: 1fr;
+}
+.igt-data-list[data-layout='horizontal'][data-columns='2'] {
+  grid-template-columns: repeat(2, 1fr);
+}
+.igt-data-list[data-layout='horizontal'][data-columns='3'] {
+  grid-template-columns: repeat(3, 1fr);
+}
+
+/* ── Vertical layout ──────────────────────────────────────── */
+.igt-data-list[data-layout='vertical'] {
+  grid-template-columns: 1fr;
+}
+
+/* ── Item ─────────────────────────────────────────────────── */
+.igt-data-list__item {
+  display: flex;
+  min-width: 0;
+}
+
+.igt-data-list__item[data-full-width] {
+  grid-column: 1 / -1;
+}
+
+/* horizontal: 레이블 고정 너비, 값 왼쪽 정렬 */
+.igt-data-list[data-layout='horizontal'] .igt-data-list__item {
+  flex-direction: row;
+  align-items: baseline;
+}
+
+/* vertical: 레이블 위, 값 아래 */
+.igt-data-list[data-layout='vertical'] .igt-data-list__item {
+  flex-direction: column;
+  gap: var(--ref-space-4);
+}
+
+/* ── Divider ──────────────────────────────────────────────── */
+.igt-data-list[data-divider] .igt-data-list__item {
+  border-bottom: 1px solid var(--sys-border-neutral-weak);
+}
+
+/* ── Size ─────────────────────────────────────────────────── */
+.igt-data-list[data-size='sm'] .igt-data-list__item {
+  padding: var(--ref-space-8) 0;
+  gap: var(--ref-space-12);
+}
+.igt-data-list[data-size='md'] .igt-data-list__item {
+  padding: var(--ref-space-12) 0;
+  gap: var(--ref-space-16);
+}
+
+/* vertical: 레이블-값 사이 gap은 항상 4px */
+.igt-data-list[data-layout='vertical'][data-size='sm'] .igt-data-list__item,
+.igt-data-list[data-layout='vertical'][data-size='md'] .igt-data-list__item {
+  gap: var(--ref-space-4);
+}
+
+/* ── Label (dt) ───────────────────────────────────────────── */
+.igt-data-list__label {
+  color: var(--sys-content-neutral-muted);
+  flex-shrink: 0;
+}
+
+.igt-data-list[data-layout='horizontal'] .igt-data-list__label {
+  width: 120px;
+  min-width: 80px;
+}
+
+.igt-data-list[data-size='sm'] .igt-data-list__label {
+  font-size: var(--text-caption-md-size, 12px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-caption-md-line-height, 18px);
+}
+.igt-data-list[data-size='md'] .igt-data-list__label {
+  font-size: var(--text-label-sm-size, 14px);
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-label-sm-line-height, 20px);
+}
+
+/* ── Value (dd) ───────────────────────────────────────────── */
+.igt-data-list__value {
+  margin: 0;
+  flex: 1;
+  min-width: 0;
+  word-break: break-word;
+  color: var(--sys-content-neutral-default);
+}
+
+.igt-data-list[data-size='sm'] .igt-data-list__value {
+  font-size: var(--text-caption-md-size, 12px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: var(--text-caption-md-line-height, 18px);
+}
+.igt-data-list[data-size='md'] .igt-data-list__value {
+  font-size: var(--text-label-sm-size, 14px);
+  font-weight: var(--ref-font-weight-400);
+  line-height: var(--text-label-sm-line-height, 20px);
+}

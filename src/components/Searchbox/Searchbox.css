@@ -1,0 +1,111 @@
+/* ============================================================
+   IGT Searchbox Component
+   피그마: 15129:24684 — Searchbox
+   독립 패널형 복합 검색 폼
+   ============================================================ */
+
+.igt-searchbox {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-16);
+  padding: var(--ref-space-24);
+  background-color: var(--sys-background-subtle);
+  border-radius: var(--ref-radius-12);
+}
+
+/* ── 그리드 ───────────────────────────────────────────────── */
+.igt-searchbox__grid {
+  display: grid;
+  gap: var(--ref-space-20) 60px;
+}
+
+.igt-searchbox[data-columns='1'] .igt-searchbox__grid { grid-template-columns: 1fr; }
+.igt-searchbox[data-columns='2'] .igt-searchbox__grid { grid-template-columns: repeat(2, 1fr); }
+.igt-searchbox[data-columns='3'] .igt-searchbox__grid { grid-template-columns: repeat(3, 1fr); }
+.igt-searchbox[data-columns='4'] .igt-searchbox__grid { grid-template-columns: repeat(4, 1fr); }
+
+/* ── SearchboxGroup ───────────────────────────────────────── */
+.igt-searchbox-group {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+  min-width: 0;
+}
+
+.igt-searchbox-group__label {
+  font-size: var(--text-body-xs-size);   /* 14px */
+  font-weight: var(--ref-font-weight-500);
+  line-height: var(--text-body-xs-line-height); /* 20px */
+  letter-spacing: -0.1px;
+  color: var(--sys-content-neutral-default);
+  white-space: nowrap;
+}
+
+/* inline: 컨트롤들을 가로로 나열 (기본) */
+.igt-searchbox-group__content {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-8);
+}
+
+/* inline 모드에서 Input은 남은 공간 채움 */
+.igt-searchbox-group__content .igt-field {
+  flex: 1;
+  min-width: 0;
+}
+
+/* Select 단독일 때: full width */
+.igt-searchbox-group__content:has(.igt-select-field):not(:has(.igt-field)) .igt-select-field {
+  width: 100%;
+}
+.igt-searchbox-group__content:has(.igt-select-field):not(:has(.igt-field)) .igt-select-field .igt-select__trigger {
+  width: 100%;
+}
+
+/* Select + Input 조합일 때만: Select는 콘텐츠 너비에 맞춰 가변, 최대 260px */
+.igt-searchbox-group__content:has(.igt-select-field):has(.igt-field) .igt-select-field {
+  flex: 0 0 auto;
+  max-width: 260px;
+  min-width: 0;
+}
+.igt-searchbox-group__content:has(.igt-select-field):has(.igt-field) .igt-select-field .igt-select__trigger {
+  width: max-content;
+  max-width: 260px;
+}
+.igt-searchbox-group__content:has(.igt-select-field):has(.igt-field) .igt-select-field .igt-select__value {
+  flex: none;
+}
+
+/* block: Select 아래 chip/tag 목록이 세로로 쌓이는 경우 */
+.igt-searchbox-group__content--block {
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--ref-space-8);
+}
+
+/* block 모드에서 Select/Input은 full width */
+.igt-searchbox-group__content--block .igt-select-field,
+.igt-searchbox-group__content--block .igt-field {
+  width: 100%;
+}
+
+.igt-searchbox-group__content--block .igt-searchbox-group__chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ref-space-8);
+}
+
+/* ── 하단 Divider + 액션 ──────────────────────────────────── */
+.igt-searchbox__divider {
+  width: 100%;
+  height: 1px;
+  background-color: var(--sys-border-neutral-weak);
+}
+
+.igt-searchbox__actions {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ref-space-8);
+}

@@ -14,6 +14,7 @@
   padding: 2px 4px;
   font-family: inherit;
   font-weight: var(--ref-font-weight-600);
+  letter-spacing: -0.1px;
   cursor: pointer;
   white-space: nowrap;
   text-decoration: none;
@@ -25,11 +26,6 @@
   flex-shrink: 0;
 }
 
-.igt-tbtn:focus-visible {
-  outline: 2px solid var(--tbtn-focus-ring);
-  outline-offset: 2px;
-  border-radius: var(--radius-sm);
-}
 
 /* ── Size ─────────────────────────────────────────────────── */
 /* Figma: xs=20px, sm=22px, md=24px, lg=26px (최소 행 높이) */
@@ -75,11 +71,11 @@
 }
 .igt-tbtn[data-tone='accent']:hover:not(:disabled) {
   color: var(--tbtn-accent-text-hover);
-  background-color: var(--tbtn-bg-hover);
+  background-color: var(--sys-container-brand-tint-default);
 }
 .igt-tbtn[data-tone='accent']:active:not(:disabled) {
   color: var(--tbtn-accent-text-hover);
-  background-color: var(--tbtn-bg-hover);
+  background-color: var(--sys-container-brand-tint-default);
 }
 .igt-tbtn[data-tone='accent']:disabled {
   color: var(--tbtn-accent-text-disabled);
@@ -92,11 +88,11 @@
 }
 .igt-tbtn[data-tone='neutral']:hover:not(:disabled) {
   color: var(--tbtn-neutral-text-hover);
-  background-color: var(--tbtn-bg-hover);
+  background-color: var(--sys-interactive-hover-overlay-neutral);
 }
 .igt-tbtn[data-tone='neutral']:active:not(:disabled) {
   color: var(--tbtn-neutral-text-hover);
-  background-color: var(--tbtn-bg-hover);
+  background-color: var(--sys-interactive-hover-overlay-neutral);
 }
 .igt-tbtn[data-tone='neutral']:disabled {
   color: var(--tbtn-neutral-text-disabled);
@@ -109,11 +105,11 @@
 }
 .igt-tbtn[data-tone='neutralMuted']:hover:not(:disabled) {
   color: var(--tbtn-neutral-muted-text-hover);
-  background-color: var(--tbtn-bg-hover);
+  background-color: var(--sys-interactive-hover-overlay-neutral);
 }
 .igt-tbtn[data-tone='neutralMuted']:active:not(:disabled) {
   color: var(--tbtn-neutral-muted-text-hover);
-  background-color: var(--tbtn-bg-hover);
+  background-color: var(--sys-interactive-hover-overlay-neutral);
 }
 .igt-tbtn[data-tone='neutralMuted']:disabled {
   color: var(--tbtn-neutral-muted-text-disabled);

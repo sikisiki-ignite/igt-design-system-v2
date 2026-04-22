@@ -1,0 +1,71 @@
+/* ============================================================
+   IGT MetaChip Component
+   피그마: 2287:28130 — MetaChip
+   pill 모양(radius 9999px), 표시 전용
+   size(xs/sm/md)
+   ============================================================ */
+
+.igt-meta-chip {
+  display: inline-flex;
+  align-items: center;
+  border: 1px solid transparent;
+  background-color: var(--chip-bg);
+  color: var(--chip-text);
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-600);
+  white-space: nowrap;
+  flex-shrink: 0;
+  border-radius: 9999px;
+}
+
+/* ── Size ───────────────────────────────────────────────────── */
+.igt-meta-chip[data-size='xs'] {
+  height: 24px;
+  padding-inline: 8px;
+  gap: 0;
+  font-size: 12px;
+  line-height: 16px;
+  letter-spacing: 0;
+}
+
+.igt-meta-chip[data-size='sm'] {
+  height: 32px;
+  padding-inline: 8px;
+  gap: 0;
+  font-size: var(--text-label-sm-size);
+  line-height: var(--text-label-sm-line-height);
+  letter-spacing: -0.1px;
+}
+
+.igt-meta-chip[data-size='md'] {
+  height: 36px;
+  padding-inline: 10px;
+  gap: 0;
+  font-size: var(--text-label-md-size);
+  line-height: var(--text-label-md-line-height);
+  letter-spacing: -0.1px;
+}
+
+/* ── Leading ────────────────────────────────────────────────── */
+.igt-meta-chip__leading {
+  display: inline-flex;
+  align-items: center;
+  flex-shrink: 0;
+  margin-right: 2px;
+}
+
+/* ── Content (label + value) ────────────────────────────────── */
+.igt-meta-chip__content {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  padding-inline: 6px;
+}
+
+.igt-meta-chip[data-size='xs'] .igt-meta-chip__content { padding-inline: 3px; }
+.igt-meta-chip[data-size='sm'] .igt-meta-chip__content { padding-inline: 4px; }
+
+/* ── Value — brand color ────────────────────────────────────── */
+.igt-meta-chip__value {
+  color: var(--sys-content-brand-default);
+}

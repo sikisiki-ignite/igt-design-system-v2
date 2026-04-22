@@ -4,11 +4,36 @@
    distribution(equal/content) × size(sm/md/lg)
    ============================================================ */
 
+/* ── Wrapper (track 고정 컨테이너) ───────────────────────────── */
+.igt-tab-wrapper {
+  position: relative;
+  width: 100%;
+}
+
+/* ── Track (하단 배경 라인 — wrapper에 고정) ─────────────────── */
+.igt-tab__track {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: 1px;
+  background-color: var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.1));
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Tab (스크롤 컨테이너) ────────────────────────────────────── */
 .igt-tab {
   display: flex;
   align-items: stretch;
-  position: relative;
-  overflow: hidden;
+  overflow-x: auto;
+  overflow-y: visible;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.igt-tab::-webkit-scrollbar {
+  display: none;
 }
 
 /* equal: 각 탭 균등 너비 */
@@ -20,16 +45,6 @@
 .igt-tab[data-distribution='content'][data-size='sm'] { gap: 16px; }
 .igt-tab[data-distribution='content'][data-size='md'] { gap: 20px; }
 .igt-tab[data-distribution='content'][data-size='lg'] { gap: 20px; }
-
-/* ── Track (하단 배경 라인) ──────────────────────────────────── */
-.igt-tab__track {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  right: 0;
-  height: 1px;
-  background-color: var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.1));
-}
 
 /* ── Tab Item ─────────────────────────────────────────────── */
 .igt-tab__item {
@@ -128,9 +143,3 @@
   opacity: 1;
 }
 
-/* ── Focus Ring ───────────────────────────────────────────── */
-.igt-tab__item:focus-visible {
-  outline: 2px solid var(--sys-border-brand-default);
-  outline-offset: -2px;
-  border-radius: 4px;
-}

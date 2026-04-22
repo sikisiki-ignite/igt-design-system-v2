@@ -1,0 +1,66 @@
+/* ============================================================
+   IGT PageHeader Component
+   백오피스 페이지 제목 + 액션 버튼 영역
+   ============================================================ */
+
+.igt-page-header {
+  width: 100%;
+  padding: 0;
+  background-color: var(--sys-background-base);
+}
+
+
+/* ── Main row ─────────────────────────────────────────────── */
+.igt-page-header__main {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-12);
+  min-height: 40px;
+}
+
+.igt-page-header__leading {
+  display: flex;
+  align-items: center;
+  flex-shrink: 0;
+}
+
+.igt-page-header__title-wrap {
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-2);
+}
+
+.igt-page-header__title {
+  margin: 0;
+  font-size: 20px;
+  font-weight: var(--ref-font-weight-700);
+  line-height: 28px;
+  letter-spacing: -0.4px;
+  color: var(--sys-content-neutral-strong);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.igt-page-header__subtitle {
+  margin: 0;
+  font-size: var(--text-body-xs-size);
+  font-weight: var(--ref-font-weight-400);
+  line-height: var(--text-body-xs-line-height);
+  letter-spacing: -0.2px;
+  color: var(--sys-content-neutral-muted);
+}
+
+.igt-page-header__actions {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-8);
+  flex-shrink: 0;
+}
+
+/* ── Footer (Breadcrumb / Tab) ───────────────────────────── */
+.igt-page-header__footer {
+  margin-top: var(--ref-space-12);
+}

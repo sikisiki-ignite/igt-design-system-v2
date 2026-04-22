@@ -1,0 +1,270 @@
+/* ============================================================
+   IGT FileUpload — 선개발 (디자인 미정)
+   FileUploadButton / Dropzone / FileList / ImageUpload
+   ============================================================ */
+
+/* ── FileUploadButton ────────────────────────────────────────── */
+.igt-file-upload-btn {
+  display: inline-flex;
+}
+
+.igt-file-upload-btn__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.igt-file-upload-btn__trigger {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--ref-space-6);
+  height: var(--size-comp-height-md);
+  padding: 0 var(--ref-space-12);
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--sys-border-neutral-default, rgba(0, 27, 55, 0.15));
+  background-color: var(--sys-surface-base, #ffffff);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  font-size: var(--text-label-md-size);
+  font-weight: var(--ref-font-weight-600);
+  font-family: inherit;
+  cursor: pointer;
+  transition: background-color 0.12s ease, border-color 0.12s ease;
+}
+
+.igt-file-upload-btn__trigger:hover:not(:disabled) {
+  background-color: var(--sys-interactive-hover-overlay-neutral, rgba(0, 27, 55, 0.04));
+}
+
+.igt-file-upload-btn__trigger:disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+/* ── Dropzone ────────────────────────────────────────────────── */
+.igt-dropzone {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 160px;
+  border: 2px dashed var(--sys-border-neutral-default, rgba(0, 27, 55, 0.15));
+  border-radius: var(--radius-xl);
+  background-color: var(--sys-surface-grouped-default, rgba(0, 27, 55, 0.02));
+  cursor: pointer;
+  transition: border-color 0.15s ease, background-color 0.15s ease;
+  outline: none;
+}
+
+.igt-dropzone:hover:not(.igt-dropzone--disabled),
+.igt-dropzone:focus-visible:not(.igt-dropzone--disabled) {
+  border-color: var(--sys-border-brand-default, #3182f6);
+  background-color: var(--sys-container-brand-tint-default, rgba(52, 133, 250, 0.04));
+}
+
+.igt-dropzone--dragging {
+  border-color: var(--sys-border-brand-default, #3182f6);
+  background-color: var(--sys-container-brand-tint-default, rgba(52, 133, 250, 0.08));
+}
+
+.igt-dropzone--disabled {
+  cursor: not-allowed;
+  opacity: 0.45;
+}
+
+.igt-dropzone__input {
+  position: absolute;
+  width: 0;
+  height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+
+.igt-dropzone__content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: var(--ref-space-8);
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+}
+
+.igt-dropzone__label {
+  font-size: var(--text-label-md-size);
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+}
+
+.igt-dropzone__hint {
+  font-size: var(--text-body-sm-size);
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+}
+
+/* ── FileList ────────────────────────────────────────────────── */
+.igt-file-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  border: 1px solid var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.08));
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  background-color: var(--sys-surface-base, #ffffff);
+}
+
+.igt-file-list__item {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+  padding: var(--ref-space-10) var(--ref-space-12);
+  border-bottom: 1px solid var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.08));
+  background-color: transparent;
+  transition: background-color 0.1s ease;
+}
+
+.igt-file-list__item:last-child {
+  border-bottom: none;
+}
+
+.igt-file-list__item:hover {
+  background-color: var(--sys-interactive-hover-overlay-neutral, rgba(0, 27, 55, 0.04));
+}
+
+.igt-file-list__item--error {
+  background-color: rgba(240, 68, 82, 0.04);
+}
+
+.igt-file-list__item--error:hover {
+  background-color: rgba(240, 68, 82, 0.07);
+}
+
+.igt-file-list__row {
+  display: flex;
+  align-items: center;
+  gap: var(--ref-space-8);
+}
+
+.igt-file-list__icon {
+  flex-shrink: 0;
+  color: var(--sys-content-brand-default, #3182f6);
+}
+
+.igt-file-list__name {
+  flex: 1;
+  min-width: 0;
+  font-size: var(--text-label-sm-size);
+  font-weight: var(--ref-font-weight-500);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.igt-file-list__size {
+  flex-shrink: 0;
+  font-size: var(--text-body-sm-size);
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+}
+
+.igt-file-list__progress-wrap {
+  height: 3px;
+  border-radius: 99px;
+  background-color: var(--sys-container-neutral-tint-default, rgba(0, 19, 43, 0.08));
+  overflow: hidden;
+}
+
+.igt-file-list__progress-bar {
+  height: 100%;
+  border-radius: 99px;
+  background-color: var(--sys-container-brand-solid-default, #3182f6);
+  transition: width 0.2s ease;
+}
+
+.igt-file-list__error {
+  font-size: var(--text-body-sm-size);
+  color: var(--sys-content-negative-default, #f04452);
+  padding-left: calc(16px + var(--ref-space-8));
+}
+
+.igt-file-list__remove {
+  flex-shrink: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 28px;
+  height: 28px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  border-radius: var(--radius-sm);
+  padding: 0;
+  transition: color 0.1s ease, background-color 0.1s ease;
+}
+
+.igt-file-list__remove:hover {
+  color: var(--sys-content-negative-default, #f04452);
+  background-color: rgba(240, 68, 82, 0.06);
+}
+
+/* ── ImageUpload ─────────────────────────────────────────────── */
+.igt-image-upload__grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: var(--ref-space-8);
+}
+
+.igt-image-upload__preview {
+  position: relative;
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  border: 1px solid var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.08));
+}
+
+.igt-image-upload__img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+.igt-image-upload__remove {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 18px;
+  height: 18px;
+  border: none;
+  background-color: rgba(0, 0, 0, 0.5);
+  color: #ffffff;
+  border-radius: 50%;
+  cursor: pointer;
+  padding: 0;
+}
+
+.igt-image-upload__add {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--ref-space-4);
+  width: 80px;
+  height: 80px;
+  border-radius: var(--radius-lg);
+  border: 2px dashed var(--sys-border-neutral-default, rgba(0, 27, 55, 0.15));
+  background-color: var(--sys-surface-grouped-default, rgba(0, 27, 55, 0.02));
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  font-size: var(--text-body-xs-size, 11px);
+  font-family: inherit;
+  cursor: pointer;
+  transition: border-color 0.12s ease, background-color 0.12s ease;
+}
+
+.igt-image-upload__add:hover {
+  border-color: var(--sys-border-brand-default, #3182f6);
+  color: var(--sys-content-brand-default, #3182f6);
+}

@@ -1,0 +1,101 @@
+/* ============================================================
+   IGT SplitButton Component
+   ============================================================ */
+
+.igt-split-btn {
+  position: relative;
+  display: inline-flex;
+  flex-shrink: 0;
+}
+
+/* ── main: 우측 radius 제거, box-shadow로 구분선 표현 ──────── */
+.igt-split-btn__main {
+  border-top-right-radius: 0 !important;
+  border-bottom-right-radius: 0 !important;
+  position: relative;
+  z-index: 1;
+}
+
+/* fill: box-shadow 우측 선 (반투명 흰색) */
+.igt-split-btn__main[data-variant='fill'][data-tone='primary'] {
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.25) !important;
+}
+.igt-split-btn__main[data-variant='fill'][data-tone='secondary'] {
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.2) !important;
+}
+.igt-split-btn__main[data-variant='fill'][data-tone='danger'] {
+  box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.25) !important;
+}
+
+/* outline: main right border만 남기고 trigger left border 제거 */
+.igt-split-btn__main[data-variant='outline'],
+.igt-split-btn__main[data-variant='ghost'],
+.igt-split-btn__main[data-variant='soft'] {
+  box-shadow: none !important;
+}
+
+/* ── trigger: 좌측 radius 제거 ──────────────────────────── */
+.igt-split-btn__trigger {
+  border-top-left-radius: 0 !important;
+  border-bottom-left-radius: 0 !important;
+  padding-left: 10px !important;
+  padding-right: 10px !important;
+}
+
+/* outline/ghost/soft: trigger left border 제거 (main right border가 구분선 역할) */
+.igt-split-btn__trigger[data-variant='outline'],
+.igt-split-btn__trigger[data-variant='ghost'],
+.igt-split-btn__trigger[data-variant='soft'] {
+  border-left: none !important;
+}
+
+/* fill: trigger left border 제거 (main box-shadow가 구분선 역할) */
+.igt-split-btn__trigger[data-variant='fill'] {
+  border-left: none !important;
+}
+
+/* ── Dropdown Menu ────────────────────────────────────────── */
+.igt-split-btn__menu {
+  position: absolute;
+  top: calc(100% + 4px);
+  right: 0;
+  min-width: 160px;
+  background-color: var(--sys-surface-default, #fff);
+  border: 1px solid var(--sys-border-neutral-subtle);
+  border-radius: var(--ref-radius-8);
+  box-shadow: 0 4px 16px rgba(0, 20, 50, 0.12);
+  list-style: none;
+  margin: 0;
+  padding: var(--ref-space-4);
+  z-index: 200;
+}
+
+.igt-split-btn__menu-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  padding: var(--ref-space-8) var(--ref-space-12);
+  background: none;
+  border: none;
+  border-radius: var(--ref-radius-6);
+  font-family: inherit;
+  font-size: var(--text-label-sm-size, 14px);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--sys-content-neutral-default);
+  cursor: pointer;
+  text-align: left;
+  transition: background-color 0.1s ease;
+}
+
+.igt-split-btn__menu-item:hover:not(:disabled) {
+  background-color: var(--sys-interactive-hover-overlay-neutral);
+}
+
+.igt-split-btn__menu-item[data-danger] {
+  color: var(--sys-content-danger-default, #ef4444);
+}
+
+.igt-split-btn__menu-item:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}

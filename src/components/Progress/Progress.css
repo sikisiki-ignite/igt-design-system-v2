@@ -1,0 +1,78 @@
+/* ============================================================
+   IGT Progress Component
+   선형 진행바 — size(xs/sm/md) × tone(primary/success/warning/danger)
+   ============================================================ */
+
+.igt-progress-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: var(--ref-space-6);
+  width: 100%;
+}
+
+/* ── Header (label + value) ──────────────────────────────── */
+.igt-progress__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.igt-progress__label {
+  font-size: var(--text-label-sm-size, 14px);
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-default);
+  line-height: var(--text-label-sm-line-height, 20px);
+}
+
+.igt-progress__value {
+  font-size: var(--text-caption-md-size, 12px);
+  font-weight: var(--ref-font-weight-400);
+  color: var(--sys-content-neutral-muted);
+  line-height: var(--text-caption-md-line-height, 18px);
+}
+
+/* ── Track ────────────────────────────────────────────────── */
+.igt-progress {
+  width: 100%;
+  background-color: var(--sys-container-neutral-tint-default, rgba(2, 32, 71, 0.05));
+  border-radius: 9999px;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Size */
+.igt-progress[data-size='xs'] { height: 2px; }
+.igt-progress[data-size='sm'] { height: 4px; }
+.igt-progress[data-size='md'] { height: 8px; }
+
+/* ── Bar ──────────────────────────────────────────────────── */
+.igt-progress__bar {
+  height: 100%;
+  border-radius: 9999px;
+  transition: width 0.3s ease;
+}
+
+/* Tone */
+.igt-progress[data-tone='primary'] .igt-progress__bar {
+  background-color: var(--sys-content-brand-default, #3485fa);
+}
+.igt-progress[data-tone='success'] .igt-progress__bar {
+  background-color: var(--sys-content-success-default, #22c55e);
+}
+.igt-progress[data-tone='warning'] .igt-progress__bar {
+  background-color: var(--sys-content-warning-default, #f59e0b);
+}
+.igt-progress[data-tone='danger'] .igt-progress__bar {
+  background-color: var(--sys-content-danger-default, #ef4444);
+}
+
+/* ── Indeterminate ────────────────────────────────────────── */
+.igt-progress[data-indeterminate] .igt-progress__bar {
+  width: 40%;
+  animation: igt-progress-indeterminate 1.4s ease infinite;
+}
+
+@keyframes igt-progress-indeterminate {
+  0%   { transform: translateX(-100%); }
+  100% { transform: translateX(350%); }
+}

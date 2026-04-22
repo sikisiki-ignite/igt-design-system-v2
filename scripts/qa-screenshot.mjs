@@ -68,6 +68,10 @@ const COMPONENTS = [
   'buttongroup',
   'togglebutton',
   'floatingbutton',
+  'topnavigation',
+  'slider',
+  'stateview',
+  'drawer',
 ];
 
 async function isServerRunning() {

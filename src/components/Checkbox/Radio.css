@@ -119,10 +119,6 @@
   background-color: var(--checkbox-bg-selected-hover);
 }
 
-/* ── Focus Ring ───────────────────────────────────────────── */
-.igt-radio__input:focus-visible + .igt-radio__dot {
-  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--sys-border-brand-default);
-}
 
 /* ── Disabled ─────────────────────────────────────────────── */
 .igt-radio[data-disabled] .igt-radio__input {

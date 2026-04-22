@@ -32,20 +32,16 @@
 }
 
 .igt-table__th {
-  padding: 8px var(--ref-space-20); /* 피그마: default(md) header py=8px */
+  padding: 10px var(--ref-space-20); /* 피그마: th 기본 py=10px → 높이 40px */
   font-weight: 600;
   font-size: var(--text-body-xs-size); /* 14px */
-  line-height: var(--text-body-xs-line-height);
+  line-height: var(--text-body-xs-line-height); /* 20px */
   letter-spacing: -0.2px;
   color: var(--table-header-text);
-  border-bottom: 1px solid var(--table-border);
+  border-bottom: 1px solid var(--sys-border-neutral-weak);
   white-space: nowrap;
   user-select: none;
 }
-
-/* Table size variants */
-.igt-table[data-size='sm'] .igt-table__th { padding-top: 4px; padding-bottom: 4px; }
-.igt-table[data-size='lg'] .igt-table__th { padding-top: 12px; padding-bottom: 12px; }
 
 .igt-table__th--sortable {
   cursor: pointer;
@@ -68,7 +64,7 @@
 
 /* Body */
 .igt-table__td {
-  padding: 8px var(--ref-space-20); /* 피그마: default(md) body py=8px */
+  padding: 14px var(--ref-space-20); /* 피그마: td md = 48px 높이 */
   font-weight: 400;
   font-size: var(--text-body-xs-size); /* 14px */
   line-height: var(--text-body-xs-line-height);
@@ -78,8 +74,11 @@
   vertical-align: middle;
 }
 
-.igt-table[data-size='sm'] .igt-table__td { padding-top: 4px; padding-bottom: 4px; }
-.igt-table[data-size='lg'] .igt-table__td { padding-top: 12px; padding-bottom: 12px; }
+/* size 변형 */
+/* td sm: 40px 높이 → py 10px */
+.igt-table[data-size='sm'] .igt-table__td { padding-top: 10px; padding-bottom: 10px; }
+/* td lg: 56px 높이 → py 18px */
+.igt-table[data-size='lg'] .igt-table__td { padding-top: 18px; padding-bottom: 18px; }
 
 .igt-table__row:last-child .igt-table__td {
   border-bottom: none;
@@ -98,6 +97,32 @@
 
 .igt-table__row--selected {
   background-color: var(--table-row-selected-bg);
+}
+
+/* ── Checkbox column ────────────────────────────────────────── */
+.igt-table__th--check,
+.igt-table__td--check {
+  width: 44px;
+  min-width: 44px;
+  padding: 0 var(--ref-space-4) 0 var(--ref-space-8);
+  vertical-align: middle;
+}
+
+/* 체크박스 셀 내 igt-checkbox 컴포넌트 — 행 높이에 영향 없도록 */
+.igt-table__th--check .igt-checkbox,
+.igt-table__td--check .igt-checkbox {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
+.igt-table__checkbox {
+  width: 16px;
+  height: 16px;
+  cursor: pointer;
+  accent-color: var(--sys-interactive-primary-default, #2563eb);
+  vertical-align: middle;
 }
 
 /* Loading */
@@ -122,4 +147,67 @@
   text-align: center;
   color: var(--sys-content-neutral-muted);
   font-size: var(--text-label-sm-size);
+}
+
+/* ── Expandable rows ─────────────────────────────────────── */
+.igt-table__th--expand,
+.igt-table__td--expand {
+  width: 40px;
+  padding: 0 var(--ref-space-8);
+}
+
+.igt-table__expand-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 20px;
+  height: 20px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  color: var(--sys-content-neutral-subtle, rgba(3, 24, 50, 0.46));
+  border-radius: var(--radius-sm);
+  padding: 0;
+  transition: color 0.1s ease, transform 0.15s ease;
+}
+
+.igt-table__expand-btn:hover {
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+}
+
+.igt-table__expand-btn--open {
+  transform: rotate(90deg);
+}
+
+.igt-table__row--expanded > .igt-table__td {
+  background-color: var(--sys-container-neutral-tint-default, rgba(0, 19, 43, 0.03));
+}
+
+.igt-table__expanded-row > .igt-table__expanded-cell {
+  padding: var(--ref-space-12) var(--ref-space-16);
+  background-color: var(--sys-surface-grouped-default, rgba(0, 27, 55, 0.02));
+  border-bottom: 1px solid var(--sys-border-neutral-subtle, rgba(0, 27, 55, 0.08));
+}
+
+/* ── Inline editing ──────────────────────────────────────── */
+.igt-table__td--editable {
+  cursor: pointer;
+}
+
+.igt-table__td--editable:hover {
+  background-color: var(--sys-interactive-hover-overlay-neutral, rgba(0, 27, 55, 0.03));
+}
+
+.igt-table__cell-input {
+  width: 100%;
+  height: 28px;
+  padding: 0 var(--ref-space-6);
+  border: 1px solid var(--field-outline-border-focus, #3182f6);
+  border-radius: var(--radius-sm);
+  background-color: var(--sys-surface-base, #ffffff);
+  font-family: inherit;
+  font-size: var(--text-label-sm-size);
+  color: var(--sys-content-neutral-default, rgba(0, 12, 30, 0.8));
+  outline: none;
+  box-shadow: 0 0 0 2px var(--sys-surface-base), 0 0 0 4px var(--field-outline-border-focus, #3182f6);
 }

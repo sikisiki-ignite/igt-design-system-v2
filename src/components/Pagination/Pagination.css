@@ -23,6 +23,7 @@
   border-radius: 9999px;
   cursor: pointer;
   color: var(--sys-content-neutral-muted);
+  font-family: inherit;
   flex-shrink: 0;
   transition: background-color 0.1s ease, color 0.1s ease;
   padding: 4px;
@@ -53,6 +54,7 @@
   border-radius: 9999px;
   cursor: pointer;
   color: var(--sys-content-neutral-muted);
+  font-family: inherit;
   font-weight: var(--ref-font-weight-400);
   transition: background-color 0.1s ease, color 0.1s ease;
   flex-shrink: 0;
@@ -115,6 +117,39 @@
   height: 28px;
   font-size: 14px;
   line-height: 20px;
+}
+
+/* ── Page size select ────────────────────────────────────────── */
+.igt-pagination__page-size {
+  appearance: none;
+  background-color: transparent;
+  border: 1px solid var(--sys-border-neutral-subtle);
+  border-radius: var(--ref-radius-6);
+  color: var(--sys-content-neutral-muted);
+  cursor: pointer;
+  font-family: inherit;
+  font-weight: var(--ref-font-weight-400);
+  outline: none;
+  transition: border-color 0.1s ease, color 0.1s ease;
+  margin-left: 8px;
+}
+
+.igt-pagination__page-size:hover,
+.igt-pagination__page-size:focus {
+  border-color: var(--sys-border-neutral-default);
+  color: var(--sys-content-neutral-default);
+}
+
+.igt-pagination[data-size='md'] .igt-pagination__page-size {
+  height: 36px;
+  padding: 0 8px;
+  font-size: 15px;
+}
+
+.igt-pagination[data-size='sm'] .igt-pagination__page-size {
+  height: 28px;
+  padding: 0 6px;
+  font-size: var(--text-body-sm-size, 14px);
 }
 
 /* ── Minimal variant ─────────────────────────────────────────── */
