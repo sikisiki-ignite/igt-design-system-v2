@@ -39,13 +39,16 @@ Card.displayName = 'Card'
 
 /* ── Card subcomponents ────────────────────────────────────── */
 
-export interface CardHeaderProps extends React.HTMLAttributes<HTMLDivElement> {
+export interface CardHeaderProps {
   title?: React.ReactNode
   description?: React.ReactNode
+  children?: React.ReactNode
+  className?: string
+  style?: React.CSSProperties
 }
 
-export const CardHeader: React.FC<CardHeaderProps> = ({ title, description, children, className, ...props }) => (
-  <div className={clsx('igt-card__header', className)} {...props}>
+export const CardHeader: React.FC<CardHeaderProps> = ({ title, description, children, className, style }) => (
+  <div className={clsx('igt-card__header', className)} style={style}>
     {title && <div className="igt-card__header-title">{title}</div>}
     {description && <div className="igt-card__header-description">{description}</div>}
     {children}
