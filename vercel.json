@@ -1,5 +1,4 @@
 {
   "buildCommand": "npm run build:showcase",
-  "outputDirectory": "dist-showcase",
-  "installCommand": "npm install --ignore-scripts"
+  "outputDirectory": "dist-showcase"
 }
