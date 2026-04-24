@@ -5,6 +5,7 @@ import { resolve } from 'path'
 export default defineConfig({
   plugins: [react()],
   root: 'prototypes',
+  base: '/prototypes/',
   build: {
     outDir: '../dist-showcase/prototypes',
     emptyOutDir: false,
