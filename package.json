@@ -27,7 +27,7 @@
     "build": "vite build && tsc --emitDeclarationOnly --declaration --outDir dist",
     "dev": "vite build --watch",
     "showcase": "vite --config vite.config.showcase.ts",
-    "build:showcase": "vite build --config vite.config.showcase.ts",
+    "build:showcase": "vite build --config vite.config.showcase.ts && vite build --config vite.config.prototypes-build.ts",
     "prototypes": "vite --config vite.config.prototypes.ts"
   },
   "peerDependencies": {

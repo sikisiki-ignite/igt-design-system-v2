@@ -1,0 +1,38 @@
+.finance-content {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.finance-kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.finance-table-toolbar {
+  display: flex;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.finance-record-count {
+  font-size: var(--ref-font-size-14);
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-default);
+}
+
+.finance-amount-pos {
+  color: var(--sys-content-status-success-default);
+  font-weight: var(--ref-font-weight-600);
+}
+
+.finance-amount-neg {
+  color: var(--sys-content-status-danger-default);
+  font-weight: var(--ref-font-weight-600);
+}
+
+.finance-pagination {
+  display: flex;
+  justify-content: center;
+}

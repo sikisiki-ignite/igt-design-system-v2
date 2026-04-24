@@ -1,0 +1,88 @@
+/* AppLayout content 내부 세로 레이아웃 — padding은 AppLayout이 담당(50px) */
+.sbc__page {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* KPI 4열 그리드 */
+.sbc__kpi-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+/* 검색 카드 */
+.sbc__search-card {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px 24px;
+  background: var(--sys-surface-default);
+  border: 1px solid var(--sys-border-neutral-default);
+  border-radius: var(--radius-lg);
+}
+
+/* 최근 검색어 ON/OFF 토글 행 */
+.sbc__search-settings {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+/* 입력창 + 버튼 행 */
+.sbc__search-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+/* GAP 1 시연 — 빈 최근 검색어 안내 (드롭다운 내부 표시 불가로 외부 표시) */
+.sbc__recent-notice {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--sys-content-neutral-muted);
+  font-size: var(--ref-font-size-12);
+}
+
+/* 테이블 영역 */
+.sbc__table-section {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+/* 테이블 상단 툴바 */
+.sbc__table-toolbar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+/* 결과 건수 */
+.sbc__record-count {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--sys-content-neutral-muted);
+  font-size: var(--ref-font-size-13);
+}
+
+/* 검색 키워드 강조 */
+.sbc__kw {
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-strong);
+}
+
+/* 페이지네이션 */
+.sbc__pagination {
+  display: flex;
+  justify-content: center;
+}
+
+/* renderOption 하이라이트 (Autocomplete renderOption prop 사용) */
+.sbc__highlight {
+  font-weight: var(--ref-font-weight-700);
+  color: var(--sys-content-primary-default);
+}

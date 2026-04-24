@@ -1,0 +1,167 @@
+/* ── Root Layout ── */
+.qa-root {
+  min-height: 100vh;
+  background: var(--sys-color-background-base);
+}
+
+/* ── Header ── */
+.qa-header {
+  background: var(--sys-color-background-surface);
+  border-bottom: 1px solid var(--sys-color-border-default);
+  padding: 24px 40px;
+}
+.qa-title {
+  font-size: var(--ref-font-size-2xl);
+  font-weight: var(--ref-font-weight-semibold);
+  color: var(--sys-color-text-primary);
+  margin: 0 0 4px;
+}
+.qa-subtitle {
+  font-size: var(--ref-font-size-sm);
+  color: var(--sys-color-text-secondary);
+  margin: 0;
+}
+
+/* ── Body ── */
+.qa-body {
+  padding: 32px 40px;
+  display: flex;
+  flex-direction: column;
+  gap: 32px;
+  max-width: 900px;
+}
+
+/* ── Section ── */
+.qa-section {
+  display: flex;
+  flex-direction: column;
+  gap: 0;
+  border: 1px solid var(--sys-color-border-default);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+}
+
+.qa-section-header {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px 24px;
+  background: var(--sys-color-background-subtle);
+  border-bottom: 1px solid var(--sys-color-border-default);
+}
+.qa-section-no {
+  font-size: var(--ref-font-size-xs);
+  font-weight: var(--ref-font-weight-semibold);
+  color: var(--sys-color-text-inverse);
+  background: var(--sys-color-text-primary);
+  border-radius: var(--radius-sm);
+  padding: 2px 8px;
+  flex-shrink: 0;
+  line-height: 20px;
+}
+.qa-section-title {
+  font-size: var(--ref-font-size-md);
+  font-weight: var(--ref-font-weight-semibold);
+  color: var(--sys-color-text-primary);
+  margin: 0 0 2px;
+}
+.qa-section-desc {
+  font-size: var(--ref-font-size-xs);
+  color: var(--sys-color-text-secondary);
+  margin: 0;
+}
+
+/* ── Case Group ── */
+.qa-case-group {
+  display: flex;
+  flex-direction: column;
+  background: var(--sys-color-background-surface);
+}
+.qa-case-group--vertical .qa-case-row {
+  align-items: flex-start;
+  padding: 16px 24px;
+}
+.qa-case-group--vertical .qa-case-trigger {
+  width: 100%;
+}
+
+/* ── Case Row ── */
+.qa-case-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 12px 24px;
+  border-bottom: 1px solid var(--sys-color-border-subtle);
+}
+.qa-case-row:last-child {
+  border-bottom: none;
+}
+.qa-case-id {
+  font-size: var(--ref-font-size-xs);
+  font-family: monospace;
+  color: var(--sys-color-text-tertiary);
+  width: 52px;
+  flex-shrink: 0;
+}
+.qa-case-label {
+  font-size: var(--ref-font-size-sm);
+  color: var(--sys-color-text-primary);
+  flex: 1;
+  min-width: 0;
+}
+.qa-case-trigger {
+  flex-shrink: 0;
+}
+
+/* ── Alert Note ── */
+.qa-alert-note {
+  padding: 16px 24px 0;
+  background: var(--sys-color-background-surface);
+}
+
+/* ── Modal body text ── */
+.qa-modal-body-text {
+  font-size: var(--ref-font-size-sm);
+  color: var(--sys-color-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+.qa-modal-no-footer-body {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+/* ── Modal custom footer ── */
+.qa-modal-custom-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  padding: 0 4px;
+}
+.qa-modal-custom-footer-right {
+  display: flex;
+  gap: 8px;
+}
+
+/* ── Drawer body text ── */
+.qa-drawer-body-text {
+  font-size: var(--ref-font-size-sm);
+  color: var(--sys-color-text-secondary);
+  margin: 0;
+  line-height: 1.6;
+}
+
+/* ── Drawer custom footer ── */
+.qa-drawer-custom-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+}
+
+/* ── Popover preview ── */
+.qa-popover-preview {
+  width: 280px;
+}

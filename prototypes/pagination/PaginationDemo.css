@@ -1,0 +1,92 @@
+/* ── 루트 ─────────────────────────────────────────────────── */
+.demo-root {
+  min-height: 100vh;
+  background: var(--sys-surface-subtle);
+  font-family: var(--ref-font-family-sans, -apple-system, BlinkMacSystemFont, sans-serif);
+}
+
+.demo-main {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  padding: 24px 40px 48px;
+  max-width: 1200px;
+}
+
+/* ── Card 서브 컴포넌트 패딩 오버라이드 ─────────────────────── */
+.demo-root .igt-card__header {
+  padding: 24px 24px 0;
+  margin-bottom: 0;
+}
+
+.demo-root .igt-card__footer {
+  display: flex;
+  justify-content: center;
+  padding: 16px 24px;
+  margin-top: 0;
+  border-top: 1px solid var(--sys-border-neutral-default);
+}
+
+/* 테이블이 없는 CardBody (StateView 등)에만 패딩 적용 */
+.demo-root .igt-card__body.demo-body-padded {
+  padding: 20px 24px 24px;
+}
+
+/* ── 완료 메시지 ─────────────────────────────────────────────── */
+.demo-loadmore-done {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--sys-content-status-positive);
+  font-size: var(--ref-font-size-14, 14px);
+}
+
+/* ── variant 쇼케이스 ────────────────────────────────────────── */
+.demo-variant-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-variant-row {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  padding: 16px 24px;
+}
+
+.demo-variant-label {
+  width: 110px;
+  flex-shrink: 0;
+  font-size: var(--ref-font-size-13, 13px);
+  color: var(--sys-content-neutral-muted);
+}
+
+/* ── 갭 분석 ─────────────────────────────────────────────────── */
+.demo-gap-list {
+  display: flex;
+  flex-direction: column;
+}
+
+.demo-gap-row {
+  display: flex;
+  align-items: flex-start;
+  gap: 12px;
+  padding: 14px 24px;
+}
+
+.demo-gap-content {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.demo-gap-title {
+  font-size: var(--ref-font-size-14, 14px);
+  font-weight: var(--ref-font-weight-600);
+  color: var(--sys-content-neutral-default);
+}
+
+.demo-gap-desc {
+  font-size: var(--ref-font-size-13, 13px);
+  color: var(--sys-content-neutral-muted);
+}

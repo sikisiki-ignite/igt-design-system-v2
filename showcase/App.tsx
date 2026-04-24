@@ -266,6 +266,19 @@ const NAV_SECTIONS = [
       { id: 'accordion', label: 'Accordion' },
     ],
   },
+  {
+    label: 'Prototypes',
+    items: [
+      { id: 'prototypes', label: '샘플 화면 목록' },
+    ],
+  },
+]
+
+const PROTOTYPE_PAGES = [
+  { slug: 'pagination', title: '페이지네이션', desc: 'Pagination 컴포넌트 동작 검증' },
+  { slug: 'popup-qa', title: '팝업 디자인 QA', desc: 'Modal·Drawer·Popover 패턴 QA' },
+  { slug: 'searchbar-case', title: '케이스 관리', desc: 'Searchbox 검색바 스킬 검증 화면' },
+  { slug: 'searchbar-finance', title: '재무 관리', desc: '재무 목록 + 검색 프로토타입' },
 ]
 
 /* ---- Color Token Swatch ---- */
@@ -3968,6 +3981,48 @@ function Showcase() {
           <div className="sc-block" style={{ marginTop: 24 }}>
             <div className="sc-block__label">ImageUpload (#48) — 이미지 프리뷰</div>
             <ImageUploadShowcase />
+          </div>
+        </section>
+
+        {/* ── Prototypes ──────────────────────────────── */}
+        <section id="prototypes" className="sc-section">
+          <h2 className="sc-section__title">Prototypes</h2>
+          <p className="sc-section__desc">IGT 디자인시스템 컴포넌트로 구현한 샘플 화면 모음. 새 탭에서 열립니다.</p>
+          <div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(220px, 1fr))', gap: 16, marginTop: 16 }}>
+            {PROTOTYPE_PAGES.map((p) => (
+              <a
+                key={p.slug}
+                href={`/prototypes/${p.slug}/`}
+                target="_blank"
+                rel="noopener noreferrer"
+                style={{
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 8,
+                  padding: '20px 20px 18px',
+                  borderRadius: 10,
+                  border: '1px solid var(--sys-border-neutral-subtle)',
+                  background: 'var(--sys-bg-surface)',
+                  textDecoration: 'none',
+                  color: 'inherit',
+                  transition: 'box-shadow 0.15s, border-color 0.15s',
+                }}
+                onMouseEnter={(e) => {
+                  const el = e.currentTarget as HTMLAnchorElement
+                  el.style.boxShadow = '0 4px 16px rgba(3,24,50,0.10)'
+                  el.style.borderColor = 'var(--sys-border-neutral-default)'
+                }}
+                onMouseLeave={(e) => {
+                  const el = e.currentTarget as HTMLAnchorElement
+                  el.style.boxShadow = 'none'
+                  el.style.borderColor = 'var(--sys-border-neutral-subtle)'
+                }}
+              >
+                <div style={{ fontSize: 15, fontWeight: 600, color: 'var(--sys-text-primary)' }}>{p.title}</div>
+                <div style={{ fontSize: 13, color: 'var(--sys-text-tertiary)', lineHeight: 1.5 }}>{p.desc}</div>
+                <div style={{ marginTop: 4, fontSize: 12, color: 'var(--sys-text-brand)', fontWeight: 500 }}>열기 →</div>
+              </a>
+            ))}
           </div>
         </section>
 
