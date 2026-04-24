@@ -1,4 +1,5 @@
 {
   "buildCommand": "npm run build:showcase",
-  "outputDirectory": "dist-showcase"
+  "outputDirectory": "dist-showcase",
+  "installCommand": "npm install --legacy-peer-deps"
 }
