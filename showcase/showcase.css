@@ -40,9 +40,18 @@ body {
   color: var(--sys-content-brand-default);
 }
 
+.sc-sidebar__section-label {
+  padding: 12px 20px 4px;
+  font-size: 10px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  color: var(--sys-content-neutral-subtle);
+}
+
 .sc-sidebar__nav a {
   display: block;
-  padding: 8px 20px;
+  padding: 6px 20px;
   font-size: 13px;
   color: var(--sys-content-neutral-muted);
   text-decoration: none;

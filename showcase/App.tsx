@@ -145,54 +145,127 @@ const ICON_LIST: IconName[] = [
   'circle', 'triangle',
 ]
 
-const NAV_ITEMS = [
-  { id: 'colors', label: 'Color Tokens' },
-  { id: 'typography', label: 'Typography' },
-  { id: 'icon', label: 'Icon' },
-  { id: 'button', label: 'Button' },
-  { id: 'input', label: 'Input' },
-  { id: 'textarea', label: 'TextArea' },
-  { id: 'breadcrumb', label: 'Breadcrumb' },
-  { id: 'tab', label: 'Tab' },
-  { id: 'accordion', label: 'Accordion' },
-  { id: 'segmentedcontrol', label: 'SegmentedControl' },
-  { id: 'pageindicator', label: 'PageIndicator' },
-  { id: 'popover', label: 'Popover' },
-  { id: 'numberstepper', label: 'NumberStepper' },
-  { id: 'rating', label: 'Rating' },
-  { id: 'row', label: 'Row' },
-  { id: 'select', label: 'Select' },
-  { id: 'autocomplete', label: 'Autocomplete' },
-  { id: 'taginput', label: 'TagInput' },
-  { id: 'checkbox', label: 'Checkbox' },
-  { id: 'radio', label: 'Radio / RadioGroup' },
-  { id: 'switch', label: 'Switch' },
-  { id: 'badge', label: 'Badge' },
-  { id: 'countbadge', label: 'CountBadge / DotBadge' },
-  { id: 'label', label: 'Label' },
-  { id: 'avatar', label: 'Avatar' },
-  { id: 'divider', label: 'Divider' },
-  { id: 'alert', label: 'Alert' },
-  { id: 'skeleton', label: 'Skeleton' },
-  { id: 'choicechip', label: 'ChoiceChip' },
-  { id: 'inputchip', label: 'InputChip' },
-  { id: 'actionchip', label: 'ActionChip' },
-  { id: 'filterchip', label: 'FilterChip' },
-  { id: 'metachip', label: 'MetaChip' },
-  { id: 'table', label: 'Table' },
-  { id: 'timeline', label: 'Timeline' },
-  { id: 'treeview', label: 'TreeView' },
-  { id: 'pagination', label: 'Pagination' },
-  { id: 'modal', label: 'Modal' },
-  { id: 'toast', label: 'Toast' },
-  { id: 'tooltip', label: 'Tooltip' },
-  { id: 'applayout', label: 'AppLayout' },
-  { id: 'sidenavigation', label: 'SideNavigation' },
-  { id: 'topnavigation', label: 'TopNavigation' },
-  { id: 'slider', label: 'Slider' },
-  { id: 'range-slider', label: 'RangeSlider' },
-  { id: 'stateview', label: 'StateView' },
-  { id: 'file-upload', label: 'FileUpload' },
+const NAV_SECTIONS = [
+  {
+    label: 'Foundation',
+    items: [
+      { id: 'colors', label: 'Color Tokens' },
+      { id: 'typography', label: 'Typography' },
+    ],
+  },
+  {
+    label: 'Buttons',
+    items: [
+      { id: 'button', label: 'Button' },
+      { id: 'iconbutton', label: 'IconButton' },
+      { id: 'textbutton', label: 'TextButton' },
+      { id: 'floatingbutton', label: 'FloatingButton' },
+      { id: 'togglebutton', label: 'ToggleButton' },
+      { id: 'buttongroup', label: 'ButtonGroup' },
+      { id: 'dropdownbutton', label: 'DropdownButton' },
+      { id: 'splitbutton', label: 'SplitButton' },
+      { id: 'link', label: 'Link' },
+    ],
+  },
+  {
+    label: 'Inputs',
+    items: [
+      { id: 'input', label: 'Input' },
+      { id: 'textarea', label: 'TextArea' },
+      { id: 'select', label: 'Select' },
+      { id: 'autocomplete', label: 'Autocomplete' },
+      { id: 'searchbox', label: 'Searchbox' },
+      { id: 'numberstepper', label: 'NumberStepper' },
+      { id: 'slider', label: 'Slider' },
+      { id: 'range-slider', label: 'RangeSlider' },
+      { id: 'datepicker', label: 'DatePicker' },
+      { id: 'file-upload', label: 'FileUpload' },
+    ],
+  },
+  {
+    label: 'Selection',
+    items: [
+      { id: 'checkbox', label: 'Checkbox' },
+      { id: 'switch', label: 'Switch' },
+      { id: 'rating', label: 'Rating' },
+      { id: 'segmentedcontrol', label: 'SegmentedControl' },
+      { id: 'taginput', label: 'TagInput' },
+      { id: 'filterbar', label: 'FilterBar' },
+      { id: 'radio', label: 'Radio / RadioGroup' },
+    ],
+  },
+  {
+    label: 'Chips',
+    items: [
+      { id: 'actionchip', label: 'ActionChip' },
+      { id: 'choicechip', label: 'ChoiceChip' },
+      { id: 'filterchip', label: 'FilterChip' },
+      { id: 'inputchip', label: 'InputChip' },
+      { id: 'metachip', label: 'MetaChip' },
+    ],
+  },
+  {
+    label: 'Overlay',
+    items: [
+      { id: 'modal', label: 'Modal' },
+      { id: 'drawer', label: 'Drawer' },
+      { id: 'popover', label: 'Popover' },
+      { id: 'tooltip', label: 'Tooltip' },
+    ],
+  },
+  {
+    label: 'Navigation',
+    items: [
+      { id: 'tab', label: 'Tab' },
+      { id: 'breadcrumb', label: 'Breadcrumb' },
+      { id: 'pagination', label: 'Pagination' },
+      { id: 'sidenavigation', label: 'SideNavigation' },
+      { id: 'topnavigation', label: 'TopNavigation' },
+    ],
+  },
+  {
+    label: 'Layout',
+    items: [
+      { id: 'applayout', label: 'AppLayout' },
+      { id: 'formlayout', label: 'FormLayout' },
+      { id: 'pageheader', label: 'PageHeader' },
+      { id: 'row', label: 'Row' },
+      { id: 'card', label: 'Card' },
+      { id: 'divider', label: 'Divider' },
+    ],
+  },
+  {
+    label: 'Display',
+    items: [
+      { id: 'avatar', label: 'Avatar' },
+      { id: 'badge', label: 'Badge' },
+      { id: 'label', label: 'Label' },
+      { id: 'icon', label: 'Icon' },
+      { id: 'progress', label: 'Progress' },
+      { id: 'skeleton', label: 'Skeleton' },
+      { id: 'stateview', label: 'StateView' },
+      { id: 'timeline', label: 'Timeline' },
+      { id: 'pageindicator', label: 'PageIndicator' },
+      { id: 'countbadge', label: 'CountBadge / DotBadge' },
+    ],
+  },
+  {
+    label: 'Table / Data',
+    items: [
+      { id: 'table', label: 'Table' },
+      { id: 'datalist', label: 'DataList' },
+      { id: 'treeview', label: 'TreeView' },
+    ],
+  },
+  {
+    label: 'Feedback',
+    items: [
+      { id: 'alert', label: 'Alert' },
+      { id: 'toast', label: 'Toast' },
+      { id: 'stepper', label: 'Stepper' },
+      { id: 'accordion', label: 'Accordion' },
+    ],
+  },
 ]
 
 /* ---- Color Token Swatch ---- */
@@ -662,15 +735,20 @@ function Showcase() {
       <aside className="sc-sidebar">
         <div className="sc-sidebar__logo">IGT <span>DS</span> v2</div>
         <nav className="sc-sidebar__nav">
-{NAV_ITEMS.map((item) => (
-            <a
-              key={item.id}
-              href={`#${item.id}`}
-              className={activeNav === item.id ? 'active' : ''}
-              onClick={(e) => { e.preventDefault(); scrollTo(item.id) }}
-            >
-              {item.label}
-            </a>
+          {NAV_SECTIONS.map((section) => (
+            <React.Fragment key={section.label}>
+              <div className="sc-sidebar__section-label">{section.label}</div>
+              {section.items.map((item) => (
+                <a
+                  key={item.id}
+                  href={`#${item.id}`}
+                  className={activeNav === item.id ? 'active' : ''}
+                  onClick={(e) => { e.preventDefault(); scrollTo(item.id) }}
+                >
+                  {item.label}
+                </a>
+              ))}
+            </React.Fragment>
           ))}
         </nav>
         <div className="sc-theme-toggle">
@@ -3614,28 +3692,25 @@ function Showcase() {
           <div style={{ border: '1px solid var(--sys-border-neutral-default)', borderRadius: 8, overflow: 'hidden', height: 400, resize: 'horizontal', minWidth: 400 }}>
             <AppLayout
               topNav={
-                <div style={{ height: '100%', background: 'var(--sys-surface-base)', borderBottom: '1px solid var(--sys-border-neutral-default)', display: 'flex', alignItems: 'center', padding: '0 24px', gap: 12 }}>
-                  <div style={{ width: 80, height: 20, background: 'var(--sys-container-neutral-tint-default)', borderRadius: 4 }} />
-                  <div style={{ flex: 1 }} />
-                  <div style={{ width: 32, height: 32, borderRadius: '50%', background: 'var(--sys-container-neutral-tint-strong)' }} />
-                </div>
+                <TopNavigation
+                  brand="ignite"
+                  trailing="userActions"
+                  onAvatarClick={() => {}}
+                  onNotificationClick={() => {}}
+                  onSettingsClick={() => {}}
+                />
               }
               sideNav={
-                <div style={{ padding: '16px 0', display: 'flex', flexDirection: 'column', gap: 4 }}>
-                  {['대시보드', '회사 관리', '계약 관리', '정산 관리', '설정'].map((item, i) => (
-                    <div key={item} style={{
-                      padding: '10px 24px',
-                      background: i === 0 ? 'var(--sys-container-neutral-tint-default)' : 'transparent',
-                      fontSize: 14,
-                      color: i === 0 ? 'var(--sys-content-neutral-strong)' : 'var(--sys-content-neutral-muted)',
-                      cursor: 'pointer',
-                      borderRadius: 6,
-                      margin: '0 8px',
-                    }}>
-                      {item}
-                    </div>
-                  ))}
-                </div>
+                <SideNavigation tone="accent">
+                  <SideNavigationList>
+                    <NavSectionHeader>메뉴</NavSectionHeader>
+                    <NavItem as="button" tone="accent" current leadingIcon={<Icon name="home" size="sm" />} onClick={() => {}}>대시보드</NavItem>
+                    <NavItem as="button" tone="accent" leadingIcon={<Icon name="person" size="sm" />} onClick={() => {}}>회사 관리</NavItem>
+                    <NavItem as="button" tone="accent" leadingIcon={<Icon name="receipt_long" size="sm" />} onClick={() => {}}>계약 관리</NavItem>
+                    <NavSectionHeader>설정</NavSectionHeader>
+                    <NavItem as="button" tone="accent" leadingIcon={<Icon name="setting" size="sm" />} onClick={() => {}}>환경 설정</NavItem>
+                  </SideNavigationList>
+                </SideNavigation>
               }
             >
               <div style={{ display: 'flex', flexDirection: 'column', gap: 16 }}>
